@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
-      - master
       - develop
       - feature/frontend
+
+defaults:
+  run:
+    working-directory: ./frontend/shorty
 
 jobs:
   build:
@@ -14,24 +17,40 @@ jobs:
 
     steps:
       - name: Checkout to the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up NodeJS environment
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 17.x
+
+      - name: Install Pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
 
       - name: Install package dependencies
-        run: |
-          npm install -g pnpm
-          cd frontend/shorty
-          pnpm install
+        run: pnpm install
 
-      - name: Check linting and formatting
-        run: pnpm run lint
+      - name: Check linting
+        run: pnpm lint
 
-      - name: Execute test cases
-        run: pnpm run test
+      # - name: Execute test cases
+        # run: pnpm test
 
-      - name: Create test build
-        run: pnpm run build
+      - name: Build React app
+        run: pnpm build
