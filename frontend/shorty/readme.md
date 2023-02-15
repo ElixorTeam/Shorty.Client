@@ -1,27 +1,27 @@
-# Запуск приложения
+# Run app
 
-1. Устанавливаем [NodeJS](https://nodejs.org/en/download/)
+1. Download [NodeJS](https://nodejs.org/en/download/)
 
-2. Устанавливаем pnpm в терминале
+2. Install pnpm in the terminal
 
 ```
 npm install -g pnpm
 ```
 
-3. В терминале заходим в папку frontend/shorty
+3. Go to the folder frontend/shorty through terminal
 
 ```
 cd frontend/shorty
 ```
 
-4. Скачиваем все пакеты
+4. Install all dependencies
 
 ```
 pnpm install
 ```
 
-5. Для запуска в режиме разработчика используем start,
-а для продакшена build
+5. To run in developer mode use `start`,
+and for production use `build`
 
 ```
 pnpm start
