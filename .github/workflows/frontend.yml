@@ -1,0 +1,37 @@
+name: Front_CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - feature/frontend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the repository
+        uses: actions/checkout@v2
+
+      - name: Set up NodeJS environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install package dependencies
+        run: |
+          npm install -g pnpm
+          cd frontend/shorty
+          pnpm install
+
+      - name: Check linting and formatting
+        run: pnpm run lint
+
+      - name: Execute test cases
+        run: pnpm run test
+
+      - name: Create test build
+        run: pnpm run build
