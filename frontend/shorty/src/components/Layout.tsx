@@ -26,7 +26,7 @@ const Layout = ({children}: {children: any}) => {
       htmlElement.classList.remove("dark");
       localStorage.theme = "light";
     }
-  }, [isDarkTheme])
+  }, [isDarkTheme, htmlElement])
 
   return (
     <div className="bg-white dark:bg-[#23212e]">
@@ -34,7 +34,7 @@ const Layout = ({children}: {children: any}) => {
 
         <header className="h-20 px-10 flex items-center justify-between">
 
-          <a className="font-extrabold text-2xl text-black dark:text-white" href="#">Shorty</a>
+          <a className="font-extrabold text-2xl text-black dark:text-white" href="./App#">Shorty</a>
 
           <nav className="flex items-center flex-row">
             <ul className="inline-flex space-x-10 items-center">
@@ -58,7 +58,7 @@ const Layout = ({children}: {children: any}) => {
               </li>
 
               <li className="flex items-center">
-                <a className="uppercase text-black dark:text-white" href="#">Log in / Sign up</a>
+                <a className="uppercase text-black dark:text-white" href="./App#">Log in / Sign up</a>
               </li>
 
             </ul>
