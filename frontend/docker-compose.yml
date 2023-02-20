@@ -1,0 +1,8 @@
+# I use only for frontend development
+version: "3"
+services:
+  react-app-dev:
+    container_name: shorty_front_dev
+    build: ./shorty
+    ports:
+      - "3000:3000"
