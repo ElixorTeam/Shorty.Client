@@ -6,4 +6,4 @@ RUN npm i -g pnpm
 RUN pnpm i
 
 COPY . .
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "dev", "--host"]

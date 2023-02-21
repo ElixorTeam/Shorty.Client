@@ -1,7 +1,7 @@
 version: "3"
 services:
   react-app:
-    container_name: shorty_front
-    build: ./frontend/shorty
+    container_name: react-prod
+    build: ./frontend/react-app
     ports:
       - "80:3000"
