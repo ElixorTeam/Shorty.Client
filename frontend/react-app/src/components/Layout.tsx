@@ -40,7 +40,6 @@ function Layout({ children }: { children: React.ReactNode }) {
           >
             Shorty
           </a>
-
           <nav className="flex items-center flex-row">
             <ul className="inline-flex space-x-10 items-center">
               <li className="flex items-center">
@@ -49,7 +48,6 @@ function Layout({ children }: { children: React.ReactNode }) {
                   onToggle={() => setTheme(!isDarkTheme)}
                 />
               </li>
-
               <li className="flex items-center">
                 <div className="flex cursor-pointer">
                   <svg
@@ -82,7 +80,6 @@ function Layout({ children }: { children: React.ReactNode }) {
                   </svg>
                 </div>
               </li>
-
               <li className="flex items-center">
                 <a className="uppercase text-black dark:text-white" href="/">
                   Log in / Sign up
@@ -91,7 +88,6 @@ function Layout({ children }: { children: React.ReactNode }) {
             </ul>
           </nav>
         </header>
-
         <main className="flex items-center justify-center">{children}</main>
       </div>
     </div>
