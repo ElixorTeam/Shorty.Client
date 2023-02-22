@@ -1,8 +1,8 @@
-# I use only for frontend development
+# use only for frontend development
 version: "3"
 services:
   react-app-dev:
-    container_name: shorty_front_dev
-    build: ./shorty
+    container_name: shorty-react-dev
+    build: ./react-app
     ports:
       - "3000:3000"

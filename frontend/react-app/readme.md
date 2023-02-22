@@ -5,25 +5,25 @@
 2. Install pnpm in the terminal
 
 ```
-npm install -g pnpm
+npm i -g pnpm
 ```
 
-3. Go to the folder frontend/shorty through terminal
+3. Go to the directory frontend/shorty through terminal
 
 ```
-cd frontend/shorty
+cd frontend/react-app
 ```
 
 4. Install all dependencies
 
 ```
-pnpm install
+pnpm i
 ```
 
-5. To run in developer mode use `start`,
+5. To run in developer mode use `dev`,
 and for production use `build`
 
 ```
-pnpm start
+pnpm dev
 pnpm build
 ```
