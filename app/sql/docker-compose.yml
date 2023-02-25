@@ -1,0 +1,42 @@
+# I use only for sql development
+version: "3"
+services:
+  postregress-dev:
+    container_name: postregress-dev
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/etc/pg_data/:/var/lib/postgresql/data/pgdata"
+    env_file:
+      - .env
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=50"
+      - "-c"
+      - "work_mem=16MB"
+      - "-c"
+      - "maintenance_work_mem=256MB"
+      - "-c"
+      - "random_page_cost=1.1"
+      - "-c"
+      - "temp_file_limit=256MB"
+      - "-c"
+      - "log_min_duration_statement=200ms"
+      - "-c"
+      - "idle_in_transaction_session_timeout=10s"
+      - "-c"
+      - "lock_timeout=1s"
+      - "-c"
+      - "statement_timeout=60s"
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: "1G"
+volumes:
+  postgres-db:
+    driver: local
