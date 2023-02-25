@@ -7,9 +7,6 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      gridTemplateRows: {
-        'layout': 'auto 1fr auto',
-      },
     },
   },
   plugins: [],
