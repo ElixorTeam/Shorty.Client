@@ -5,6 +5,25 @@ function App() {
   return (
     <Layout>
       <div className="flex flex-col-reverse items-center gap-y-10 sm:justify-between md:mx-20 md:w-full md:flex-row lg:mx-40">
+        <div className="invisible absolute inset-0 md:visible">
+          <div className="relative h-screen w-full max-w-screen-2xl overflow-hidden">
+            <img
+              className="absolute left-[40%] top-[10%] z-0 h-36 w-36 blur-md"
+              src={sphere}
+              alt=""
+            />
+            <img
+              className="absolute left-10 top-[80%] z-0 h-80 w-80 blur-md"
+              src={sphere}
+              alt=""
+            />
+            <img
+              className="absolute left-[90%] top-[-20%] z-0 h-96 w-96 blur-md"
+              src={sphere}
+              alt=""
+            />
+          </div>
+        </div>
         <div className="flex w-[300px] flex-col items-center text-center sm:w-[350px] md:block md:text-left lg:w-[450px]">
           <p
             className="bg-gradient-to-r from-black to-gray-600 bg-clip-text pb-4 text-4xl font-bold
