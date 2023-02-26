@@ -27,7 +27,7 @@ docker-compose up
 
 ##  👇 Maybe helpful
 1) [Backend](App/Backend/README.md)
-2) [Database](App/Database/REAME.md)
+2) [Database](App/Database/README.md)
 3) [Frontend](App/Frontend/README.md)
 
 
