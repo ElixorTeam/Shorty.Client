@@ -26,9 +26,9 @@ docker-compose up
 ```
 
 ##  👇 Maybe helpful
-1) [SQL](app/sql/REAME.md)
-2) [BACK](app/backend/README.md)
-3) [FRONT](app/frontend/README.md)
+1) [SQL](App/Sql/REAME.md)
+2) [BACK](Backend/README.md)
+3) [FRONT](App/Frontend/README.md)
 
 
 ## 🚑 Support 
