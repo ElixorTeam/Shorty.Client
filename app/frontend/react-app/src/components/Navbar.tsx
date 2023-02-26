@@ -56,7 +56,7 @@ function Navbar({
               onClick={() => setIsOpenAuth(!isOpenAuth)}
             >
               {isAboveSmallScreens ? (
-                <UserIcon className="h-5 w-5 text-black" />
+                <UserIcon className="h-5 w-5 text-black dark:text-white" />
               ) : (
                 'Log In / Sign Up'
               )}

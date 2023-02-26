@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 
-function Layout({ children }: { children: React.ReactNode }) {
+function Layout() {
   const htmlElement = document.documentElement;
   const [isDarkTheme, setTheme] = useState<boolean>(
     localStorage.theme === 'dark'
@@ -39,7 +40,9 @@ function Layout({ children }: { children: React.ReactNode }) {
           isDarkTheme={isDarkTheme}
           setTheme={() => setTheme(!isDarkTheme)}
         />
-        <main className="flex items-center justify-center">{children}</main>
+        <main className="flex items-center justify-center">
+          <Outlet />
+        </main>
       </div>
     </div>
   );
