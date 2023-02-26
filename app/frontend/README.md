@@ -21,7 +21,7 @@ pnpm i
 ```
 
 5. To run in developer mode use `dev`,
-and for production use `build`
+   and for production use `build`
 
 ```
 pnpm dev

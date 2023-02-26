@@ -3,6 +3,6 @@ version: "3"
 services:
   react-app-dev:
     container_name: react-dev
-    build: ./react-app
+    build: react-app
     ports:
       - "3000:3000"
