@@ -1,29 +1,23 @@
-# Run app
-
+# Frontend guide
 1. Download [NodeJS](https://nodejs.org/en/download/)
-
-2. Install pnpm in the terminal
-
-```
+2. Install pnpm:
+```bash
 npm i -g pnpm
 ```
-
-3. Go to the directory frontend/shorty through terminal
-
+3. Go to:
+```bash
+cd App/Frontend/ReactClient
 ```
-cd frontend/react-app
-```
-
-4. Install all dependencies
-
-```
+4. Install all dependencies:
+```bash
 pnpm i
 ```
-
-5. To run in developer mode use `dev`,
-   and for production use `build`
-
-```
+5. Run in dev mode:
+```bash
 pnpm dev
+```
+6. Run in prod mode:
+```bash
 pnpm build
 ```
+[GO BACK](../../README.md)

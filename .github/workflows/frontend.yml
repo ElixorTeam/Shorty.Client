@@ -9,7 +9,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./app/frontend/react-app
+    working-directory: ./App/Frontend/ReactClient
 
 jobs:
   build:

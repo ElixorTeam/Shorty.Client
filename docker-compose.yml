@@ -2,6 +2,6 @@ version: "3"
 services:
   react-app:
     container_name: react-prod
-    build: App/Frontend/react-app
+    build: App/Frontend/ReactClient
     ports:
       - "80:3000"
