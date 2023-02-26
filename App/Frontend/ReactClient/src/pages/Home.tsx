@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import sphere from '@/assets/sphere.png';
 
 function Home() {
@@ -37,15 +38,17 @@ function Home() {
             className="absolute inset-0 mt-4 h-10 w-44 rounded-3xl bg-gradient-to-tr from-indigo-300 to-pink-300 opacity-90
                blur-md dark:opacity-30 md:h-14 md:w-64"
           />
-          <button
-            type="button"
-            className="w-50 relative mt-4 h-10 w-44 rounded-3xl bg-gradient-to-tr from-indigo-300 to-pink-300 transition-all hover:scale-105 active:scale-95 sm:h-11
-              sm:w-52 md:h-14 md:w-64"
-          >
-            <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
-              Try right now
-            </p>
-          </button>
+          <NavLink to="/link">
+            <button
+              type="button"
+              className="w-50 relative mt-4 h-10 w-44 rounded-3xl bg-gradient-to-tr from-indigo-300 to-pink-300 transition-all hover:scale-105 active:scale-95 sm:h-11
+                sm:w-52 md:h-14 md:w-64"
+            >
+              <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
+                Try right now
+              </p>
+            </button>
+          </NavLink>
         </div>
       </div>
       <div className="flex w-2/6 items-center md:block md:w-1/4">
