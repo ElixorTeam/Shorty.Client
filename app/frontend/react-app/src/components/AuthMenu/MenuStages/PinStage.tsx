@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuState from '../../../shared/MenuState';
+import MenuState from '@/shared/MenuState';
 
 function PinStage({
   setActiveMenu,

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ReactComponent as GoogleIcon } from '../../../assets/google-icon.svg';
-import { ReactComponent as GithubIcon } from '../../../assets/github-icon.svg';
-import MenuState from '../../../shared/MenuState';
+import { ReactComponent as GoogleIcon } from '@/assets/google-icon.svg';
+import { ReactComponent as GithubIcon } from '@/assets/github-icon.svg';
+import MenuState from '@/shared/MenuState';
 
 function AuthStage({
   setActiveMenu,

@@ -8,10 +8,10 @@
 npm i -g pnpm
 ```
 
-3. Go to the directory frontend/shorty through terminal
+3. Go to the directory app/frontend/react-app through terminal
 
 ```
-cd frontend/react-app
+cd app/frontend/react-app
 ```
 
 4. Install all dependencies

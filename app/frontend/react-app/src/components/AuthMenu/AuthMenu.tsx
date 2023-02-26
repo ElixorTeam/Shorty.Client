@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MenuState from '../../shared/MenuState';
+import MenuState from '@/shared/MenuState';
 import AuthStage from './MenuStages/AuthStage';
 import PinStage from './MenuStages/PinStage';
 import ProfileStage from './MenuStages/ProfileStage';
