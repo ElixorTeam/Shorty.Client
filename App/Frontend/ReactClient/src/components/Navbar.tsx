@@ -31,17 +31,13 @@ function Navbar({
       <nav className="flex flex-row items-center">
         <ul className="inline-flex items-center space-x-5 md:space-x-8">
           <li className="flex items-center">
-            {isDarkTheme ? (
-              <MoonIcon
-                className="h-5 w-5 text-white transition hover:scale-105 active:scale-95"
-                onClick={setTheme}
-              />
-            ) : (
-              <SunIcon
-                className="h-5 w-5 text-black transition hover:scale-105 active:scale-95"
-                onClick={setTheme}
-              />
-            )}
+            <button type="button" onClick={setTheme}>
+              {isDarkTheme ? (
+                <MoonIcon className="h-5 w-5 text-white transition hover:scale-105 active:scale-95" />
+              ) : (
+                <SunIcon className="h-5 w-5 text-black transition hover:scale-105 active:scale-95" />
+              )}
+            </button>
           </li>
           <li className="flex items-center">
             <div className="flex cursor-pointer">

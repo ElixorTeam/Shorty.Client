@@ -5,9 +5,9 @@ function Home() {
   return (
     <div className="flex flex-col-reverse items-center gap-y-10 sm:justify-between md:mx-20 md:w-full md:flex-row lg:mx-40">
       <div className="invisible absolute inset-0 md:visible">
-        <div className="relative h-screen w-full max-w-screen-2xl overflow-hidden">
+        <div className="relative h-screen w-full max-w-screen-2xl overflow-hidden selection:bg-transparent">
           <img
-            className="absolute left-[40%] top-[10%] z-0 h-36 w-36 blur-md"
+            className="absolute left-[40%] top-[10%] z-0 h-36 w-36 outline-none blur-md"
             src={sphere}
             alt=""
           />
@@ -57,7 +57,7 @@ function Home() {
             className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2
                bg-purple-400 opacity-40 blur-3xl"
           />
-          <img className="" src={sphere} alt="img" />
+          <img className="selection:bg-transparent" src={sphere} alt="img" />
         </div>
       </div>
     </div>

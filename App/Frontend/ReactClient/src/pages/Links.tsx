@@ -62,15 +62,15 @@ function Links() {
         <div className="mb-4 flex h-9 flex-row-reverse">
           <button
             type="button"
-            className="h-full w-40 rounded-xl bg-gradient-to-tr from-indigo-300 to-pink-300"
+            className="h-full w-40 rounded-xl bg-gradient-to-tr from-indigo-300 to-pink-300 transition hover:scale-105 active:scale-95"
           >
             <p className="text-white">Add new</p>
           </button>
           <div className="mr-2 flex flex-row items-center">
-            <p className="mr-2 text-gray-400">Sort by</p>
-            <div className=" flex flex-row items-center">
-              <p className="text-white">Most used</p>
-              <ChevronDownIcon className="h-5 w-5 pt-1 text-white" />
+            <p className="mr-2 text-gray-500">Sort by</p>
+            <div className="flex cursor-pointer flex-row items-center text-gray-200 hover:text-white">
+              <p>Most used</p>
+              <ChevronDownIcon className="h-5 w-5 pt-1" />
             </div>
           </div>
         </div>
@@ -117,6 +117,15 @@ function Links() {
               views={4245}
             />
           </tbody>
+        </table>
+        <table className="w-full border-collapse text-black dark:text-white">
+          <thead className="text-left shadow-sm">
+            <tr>
+              <th className="h-12 w-full rounded-l-md bg-gray-200 pl-4 text-center dark:bg-[#2a2633]">
+                <p>Page 1</p>
+              </th>
+            </tr>
+          </thead>
         </table>
       </div>
     </div>
