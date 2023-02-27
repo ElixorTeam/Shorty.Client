@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import sphere from '@/assets/sphere.png';
 
 function Home() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col-reverse items-center gap-y-10 sm:justify-between md:mx-20 md:w-full md:flex-row lg:mx-40">
       <div className="invisible absolute inset-0 md:visible">
@@ -23,15 +25,15 @@ function Home() {
           />
         </div>
       </div>
-      <div className="flex w-[300px] flex-col items-center text-center sm:w-[350px] md:block md:text-left lg:w-[450px]">
+      <div className="flex w-[300px] flex-col items-center text-center sm:w-[350px] md:block md:text-left lg:w-[470px]">
         <p
           className="bg-gradient-to-r from-black to-gray-600 bg-clip-text pb-4 text-4xl font-bold
            text-transparent dark:from-white dark:to-indigo-300 sm:text-5xl lg:text-6xl"
         >
-          Let’s short your links together
+          {t('welcomeTitle')}
         </p>
         <p className="text-base font-light text-gray-600 dark:text-gray-400 sm:text-lg lg:text-2xl">
-          Leave the idea that links should be long
+          {t('welcomeSubtext')}
         </p>
         <div className="relative">
           <div
@@ -45,7 +47,7 @@ function Home() {
                 sm:w-52 md:h-14 md:w-64"
             >
               <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
-                Try right now
+                {t('buttonTryRightNow')}
               </p>
             </button>
           </NavLink>

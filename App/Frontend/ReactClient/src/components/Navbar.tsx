@@ -1,14 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import {
-  ChevronDownIcon,
-  LanguageIcon,
-  MoonIcon,
-  SunIcon,
-  UserIcon,
-} from '@heroicons/react/24/solid';
+import { MoonIcon, SunIcon, UserIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
 import useMediaQuery from './useMediaQuery';
 import AuthMenu from './AuthMenu/AuthMenu';
+import LanguageSwitcher from './LanguageChanger';
 
 function Navbar({
   isDarkTheme,
@@ -40,10 +35,11 @@ function Navbar({
             </button>
           </li>
           <li className="flex items-center">
-            <div className="flex cursor-pointer">
-              <LanguageIcon className="h-5 w-5 text-black dark:text-white" />
-              <ChevronDownIcon className="mt-0.5 h-4 w-4 text-black dark:text-white" />
-            </div>
+            <LanguageSwitcher />
+            {/* <button type="button" className="flex cursor-pointer"> */}
+            {/*  <LanguageIcon className="h-5 w-5 text-black dark:text-white" /> */}
+            {/* <ChevronDownIcon className="mt-0.5 h-4 w-4 text-black dark:text-white" /> */}
+            {/* </button> */}
           </li>
           <li className="flex items-center">
             <button
