@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { MoonIcon, SunIcon, UserIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useMediaQuery from './useMediaQuery';
 import AuthMenu from './AuthMenu/AuthMenu';
 import LanguageSwitcher from './LanguageChanger';
@@ -14,6 +15,7 @@ function Navbar({
 }) {
   const isAboveSmallScreens = useMediaQuery('(max-width: 640px)');
   const [isOpenAuth, setIsOpenAuth] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   return (
     <header className="z-40 flex h-20 items-center justify-between px-10">
@@ -37,7 +39,7 @@ function Navbar({
           <li className="flex items-center">
             <LanguageSwitcher />
             {/* <button type="button" className="flex cursor-pointer"> */}
-            {/*  <LanguageIcon className="h-5 w-5 text-black dark:text-white" /> */}
+            {/* <LanguageIcon className="h-5 w-5 text-black dark:text-white" /> */}
             {/* <ChevronDownIcon className="mt-0.5 h-4 w-4 text-black dark:text-white" /> */}
             {/* </button> */}
           </li>
@@ -50,7 +52,7 @@ function Navbar({
               {isAboveSmallScreens ? (
                 <UserIcon className="h-5 w-5 text-black dark:text-white" />
               ) : (
-                'Log In / Sign Up'
+                t('login')
               )}
             </button>
             {isOpenAuth ? <AuthMenu /> : ''}

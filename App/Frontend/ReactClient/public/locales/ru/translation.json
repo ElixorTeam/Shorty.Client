@@ -1,5 +1,18 @@
 {
   "welcomeTitle": "Давай сделаем ссылки короче",
   "welcomeSubtext": "Забудь длинные ссылки навсегда",
-  "buttonTryRightNow": "Попробовать"
+  "buttonTryRightNow": "Попробовать",
+  "buttonAdd": "Добавить",
+  "login": "Войти / Регистрация",
+  "tableKeyViewed": "Популярные",
+  "tableKeyAdded": "Последние",
+  "tableColOriginal": "Оригинальная ссылка",
+  "tableColShort": "Короткая ссылка",
+  "tableColDate": "Дата создания",
+  "tableColViews": "Просмотры",
+  "sidebarLink": "Ссылки",
+  "sidebarAnalytics": "Аналитика",
+  "sidebarNotifications": "Уведомления",
+  "sidebarSettings": "Настройки",
+  "sortBy": "Сортировать по"
 }

@@ -1,18 +1,11 @@
-import { NavLink } from 'react-router-dom';
 import {
   PencilSquareIcon,
   ChartBarIcon,
   TrashIcon,
-  ChevronDownIcon,
 } from '@heroicons/react/24/solid';
-
-function CustomLink({ name, link }: { name: string; link: string }) {
-  return (
-    <NavLink to={link}>
-      <li className="hover:text-[#c19bff]">{name}</li>
-    </NavLink>
-  );
-}
+import { useTranslation } from 'react-i18next';
+import { ChangeEvent, useCallback, useState } from 'react';
+import Sidebar from '@/components/Sidebar';
 
 function LinkItem({
   original,
@@ -45,18 +38,24 @@ function LinkItem({
   );
 }
 
+const enum TableKeyEnum {
+  Viewed = 'viewed',
+  Last = 'last',
+}
+
 function Links() {
+  const { t } = useTranslation();
+  const [tableKey, setTableKey] = useState<TableKeyEnum>(TableKeyEnum.Viewed);
+
+  const handleTableKey = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    const lang = e.target.value as TableKeyEnum;
+    setTableKey(lang);
+  }, []);
+
   return (
     <div className="grid h-full w-full grid-cols-[200px_1fr] px-10 pt-8">
       <div className="flex">
-        <nav>
-          <ul className="flex flex-col space-y-2 text-xl text-black dark:text-white">
-            <CustomLink name="Link" link="/link" />
-            <CustomLink name="Analytics" link="/analytics" />
-            <CustomLink name="Notification" link="/notification" />
-            <CustomLink name="Settings" link="/settings" />
-          </ul>
-        </nav>
+        <Sidebar />
       </div>
       <div>
         <div className="mb-4 flex h-9 flex-row-reverse">
@@ -64,14 +63,22 @@ function Links() {
             type="button"
             className="h-full w-40 rounded-xl bg-gradient-to-tr from-indigo-300 to-pink-300 transition hover:scale-105 active:scale-95"
           >
-            <p className="text-white">Add new</p>
+            <p className="uppercase text-white">{t('buttonAdd')}</p>
           </button>
           <div className="mr-2 flex flex-row items-center">
-            <p className="mr-2 text-gray-500">Sort by</p>
-            <div className="flex cursor-pointer flex-row items-center text-gray-200 hover:text-white">
-              <p>Most used</p>
-              <ChevronDownIcon className="h-5 w-5 pt-1" />
-            </div>
+            <p className="mr-2 text-gray-500">{t('sortBy')}</p>
+            <select
+              value={tableKey}
+              onChange={handleTableKey}
+              className="bg-white/[.0] text-black dark:text-white"
+            >
+              <option value="viewed">{t('tableKeyViewed')}</option>
+              <option value="last">{t('tableKeyAdded')}</option>
+            </select>
+            {/* <div className="flex cursor-pointer flex-row items-center text-gray-200 hover:text-white"> */}
+            {/*  */}
+            {/*  /!* <ChevronDownIcon className="h-5 w-5 pt-1" /> *!/ */}
+            {/* </div> */}
           </div>
         </div>
         <table className="w-full border-collapse text-black dark:text-white">
@@ -81,19 +88,19 @@ function Links() {
                 <input type="checkbox" />
               </th>
               <th className="h-10 w-[40%] bg-gray-200 dark:bg-[#2a2633]">
-                Original link
+                {t('tableColOriginal')}
               </th>
               <th className="h-10 w-[20%] bg-gray-200 dark:bg-[#2a2633]">
-                Short link
+                {t('tableColShort')}
               </th>
               <th className="h-10 w-[15%] bg-gray-200 dark:bg-[#2a2633]">
-                Create date
+                {t('tableColDate')}
               </th>
               <th className="h-10 w-[10%] bg-gray-200 dark:bg-[#2a2633]">
-                Views
+                {t('tableColViews')}
               </th>
               <th className="h-10 w-[10%] rounded-r-md bg-gray-200 pr-2 dark:bg-[#2a2633]">
-                Tools
+                <span />
               </th>
             </tr>
           </thead>
