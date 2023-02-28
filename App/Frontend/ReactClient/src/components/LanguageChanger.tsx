@@ -22,11 +22,11 @@ function LanguageSwitcher() {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block">
       <div>
         <button
           type="button"
-          className="flex items-center text-black dark:text-white"
+          className="flex items-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
           <LanguageIcon className="h-5 w-5" />
@@ -34,15 +34,15 @@ function LanguageSwitcher() {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 w-28 rounded-md bg-white py-1 shadow-lg ring-1 ring-black/[.10] dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]">
+        <div className="absolute right-0 z-10 mt-2 w-28 rounded-md bg-white py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]">
           {languageOptions.map((option) => (
             <button
               key={option.value}
               type="button"
               className={`${
                 option.value === i18n.language
-                  ? 'bg-gray-100 text-black dark:bg-[#36343d] dark:text-white'
-                  : 'text-gray-700 backdrop-blur-xl hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-[#2e2c35]'
+                  ? 'bg-gray-100 text-black dark:bg-white/[.10] dark:text-white'
+                  : 'text-gray-700 backdrop-blur-xl hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[.05]'
               } block w-full px-4 py-2 text-left text-sm leading-5`}
               onClick={() => handleLanguageSelect(option)}
             >

@@ -7,16 +7,16 @@ function ProfileStage({
   setActiveMenu: (state: MenuState) => void;
 }) {
   return (
-    <>
+    <div className="m-2 flex w-60 flex-col items-center">
       <p className="uppercase text-black dark:text-white">Profile Stage</p>
       <button
         type="button"
         className="serviceIcon bg-white"
         onClick={() => setActiveMenu(MenuState.auth)}
       >
-        <p className="mb-[2px] text-black">Google</p>
+        <p className="mb-[2px] text-black">First stage</p>
       </button>
-    </>
+    </div>
   );
 }
 
