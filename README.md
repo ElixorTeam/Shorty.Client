@@ -5,16 +5,15 @@ This web application **make your URL shorter**, provides usage statistics and et
 
 ## 💻 Tech Stack
 - **Backend:**
-    - Java
+    - [Java](https://www.java.com)
     - [Spring](https://spring.io/)
     - [Gradle](https://gradle.org/)
     - [PostgreSQL](https://www.postgresql.org/)
 - **Frontend:**
-    - TypeScript
+    - [TypeScript](https://www.typescriptlang.org/) + [SWC](https://swc.rs/)
+    - [Vite](https://vitejs.dev/)
     - [React](https://reactjs.org/)
     - [Tailwind](https://tailwindcss.com/)
-    - [ChartJs](https://www.chartjs.org/)
-    - [Pnpm](https://pnpm.js.org/)
 - **Tools:**
     - [Docker](https://www.docker.com/)
   
