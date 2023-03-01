@@ -10,10 +10,11 @@
   "tableColShort": "Short link",
   "tableColDate": "Create date",
   "tableColViews": "Views",
-  "sidebarLink": "Link",
+  "sidebarLink": "Links",
   "sidebarAnalytics": "Analytics",
   "sidebarNotifications": "Notification",
   "sidebarSettings": "Settings",
   "sortBy": "Sort by",
-  "logout": "Log out"
+  "logout": "Log out",
+  "menu": "Menu"
 }

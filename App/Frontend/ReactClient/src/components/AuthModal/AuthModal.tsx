@@ -12,6 +12,11 @@ function AuthModal() {
   const [activeMenu, setActiveMenu] = useState<MenuState>(MenuState.auth);
   const isAboveSmallScreens = useMediaQuery('(max-width: 640px)');
   const { t } = useTranslation();
+  const handleLogText = () => {
+    if (activeMenu === MenuState.profile) return t('menu');
+    return t('login');
+  };
+
   const stages = [
     {
       component: AuthStage,
@@ -36,12 +41,12 @@ function AuthModal() {
           {isAboveSmallScreens ? (
             <UserIcon className="h-5 w-5 text-black dark:text-white" />
           ) : (
-            t('login')
+            handleLogText()
           )}
         </button>
       </div>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 rounded-lg bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.70] dark:ring-white/[.20]">
+        <div className="absolute right-0 z-10 mt-2 rounded-xl bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.70] dark:ring-white/[.20]">
           <CurrentComponent
             setActiveMenu={(state: MenuState) => setActiveMenu(state)}
           />

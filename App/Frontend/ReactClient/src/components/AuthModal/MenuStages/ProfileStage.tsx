@@ -9,11 +9,12 @@ function ProfileStage({
   setActiveMenu: (state: MenuState) => void;
 }) {
   const { t } = useTranslation();
+  const handleClick = () => {
+    window.location.replace('https://bobbyhadz.com');
+  };
   const linkButtons: { id: number; label: string; link: string }[] = [
-    { id: 1, label: t('sidebarLink'), link: '/link' },
-    { id: 2, label: t('sidebarAnalytics'), link: '/analytics' },
-    { id: 3, label: t('sidebarNotifications'), link: '/notifications' },
-    { id: 4, label: t('sidebarSettings'), link: '/settings' },
+    { id: 1, label: 'Profile', link: '/link' },
+    { id: 2, label: 'Support', link: '/support' },
   ];
   return (
     <div className="w-32">
@@ -28,6 +29,16 @@ function ProfileStage({
           </button>
         </NavLink>
       ))}
+      <button
+        type="button"
+        className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-50
+           hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[.05]"
+        onClick={() => {
+          window.location.replace('https://github.com/BaggerFast/Shorty');
+        }}
+      >
+        API docs
+      </button>
       <button
         type="button"
         className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-50

@@ -1,42 +1,8 @@
-import {
-  PencilSquareIcon,
-  ChartBarIcon,
-  TrashIcon,
-} from '@heroicons/react/24/solid';
 import { useTranslation } from 'react-i18next';
 import { ChangeEvent, useCallback, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
-
-function LinkItem({
-  original,
-  link,
-  date,
-  views,
-}: {
-  original: string;
-  link: string;
-  date: string;
-  views: number;
-}) {
-  return (
-    <tr>
-      <td className="h-10 pl-4">
-        <input type="checkbox" />
-      </td>
-      <td>{original}</td>
-      <td>{link}</td>
-      <td>{date}</td>
-      <td>{views}</td>
-      <td>
-        <div className="align-center flex flex-row items-center text-neutral-200 dark:text-white/[.10]">
-          <PencilSquareIcon className="h-5 w-5 transition hover:text-neutral-800 dark:hover:text-white" />
-          <ChartBarIcon className="h-5 w-5 transition hover:text-neutral-800 dark:hover:text-white" />
-          <TrashIcon className="h-5 w-5 transition hover:text-neutral-800 dark:hover:text-white" />
-        </div>
-      </td>
-    </tr>
-  );
-}
+import TableLinks from '@/components/TableLinks';
+import { LinksTableDataType } from '@/shared/TableTypes';
 
 const enum TableKeyEnum {
   Viewed = 'viewed',
@@ -46,11 +12,17 @@ const enum TableKeyEnum {
 function Links() {
   const { t } = useTranslation();
   const [tableKey, setTableKey] = useState<TableKeyEnum>(TableKeyEnum.Viewed);
-
   const handleTableKey = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value as TableKeyEnum;
     setTableKey(lang);
   }, []);
+  const testData: LinksTableDataType[] = Array(14).fill({
+    id: 1,
+    original: 'youtube.com',
+    short: 'yb.co',
+    date: '20.01.23',
+    views: 420,
+  });
 
   return (
     <div className="grid h-full w-full grid-cols-[200px_1fr] px-10 pt-8">
@@ -77,59 +49,7 @@ function Links() {
             </select>
           </div>
         </div>
-        <table className="w-full border-collapse text-black dark:text-white">
-          <thead className="text-left shadow-sm">
-            <tr>
-              <th className="h-10 w-[5%] rounded-l-md bg-gray-100 pl-4 dark:bg-[#2a2633]">
-                <input type="checkbox" />
-              </th>
-              <th className="h-10 w-[40%] bg-gray-100 dark:bg-[#2a2633]">
-                {t('tableColOriginal')}
-              </th>
-              <th className="h-10 w-[20%] bg-gray-100 dark:bg-[#2a2633]">
-                {t('tableColShort')}
-              </th>
-              <th className="h-10 w-[15%] bg-gray-100 dark:bg-[#2a2633]">
-                {t('tableColDate')}
-              </th>
-              <th className="h-10 w-[10%] bg-gray-100 dark:bg-[#2a2633]">
-                {t('tableColViews')}
-              </th>
-              <th className="h-10 w-[10%] rounded-r-md bg-gray-100 pr-2 dark:bg-[#2a2633]">
-                <span />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <LinkItem
-              original="youtube.com"
-              link="yb.cm"
-              date="26.02.23"
-              views={4245}
-            />
-            <LinkItem
-              original="youtube.com"
-              link="yb.cm"
-              date="26.02.23"
-              views={4245}
-            />
-            <LinkItem
-              original="youtube.com"
-              link="yb.cm"
-              date="26.02.23"
-              views={4245}
-            />
-          </tbody>
-        </table>
-        <table className="w-full border-collapse text-black dark:text-white">
-          <thead className="text-left shadow-sm">
-            <tr>
-              <th className="h-10 w-full rounded-l-md bg-gray-100 pl-4 text-center dark:bg-[#2a2633]">
-                <p>Page 1</p>
-              </th>
-            </tr>
-          </thead>
-        </table>
+        <TableLinks data={testData} />
       </div>
     </div>
   );

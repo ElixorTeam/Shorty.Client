@@ -15,8 +15,8 @@ function Sidebar() {
     <nav>
       <ul className="flex flex-col space-y-2 text-xl text-black dark:text-white">
         <CustomLink name={t('sidebarLink')} link="/link" />
-        <CustomLink name={t('sidebarAnalytics')} link="/analytics" />
-        <CustomLink name={t('sidebarNotifications')} link="/notification" />
+        <CustomLink name={t('buttonAdd')} link="/create" />
+        <CustomLink name="QR Codes" link="/qrcodes" />
         <CustomLink name={t('sidebarSettings')} link="/settings" />
       </ul>
     </nav>

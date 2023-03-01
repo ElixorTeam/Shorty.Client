@@ -25,7 +25,7 @@ function Home() {
           />
         </div>
       </div>
-      <div className="z-10 flex w-[300px] flex-col items-center text-center sm:w-[350px] md:block md:text-left lg:w-[470px]">
+      <div className="z-10 flex w-[300px] flex-col items-center text-center sm:w-[370px] md:block md:text-left lg:w-[470px]">
         <p
           className="bg-gradient-to-r from-black to-gray-600 bg-clip-text pb-4 text-4xl font-bold
            text-transparent dark:from-white dark:to-indigo-300 sm:text-5xl lg:text-6xl"
