@@ -14,5 +14,6 @@
   "sidebarAnalytics": "Analytics",
   "sidebarNotifications": "Notification",
   "sidebarSettings": "Settings",
-  "sortBy": "Sort by"
+  "sortBy": "Sort by",
+  "logout": "Log out"
 }

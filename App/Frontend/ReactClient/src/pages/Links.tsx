@@ -28,10 +28,10 @@ function LinkItem({
       <td>{date}</td>
       <td>{views}</td>
       <td>
-        <div className="align-center flex flex-row items-center">
-          <PencilSquareIcon className="h-5 w-5" />
-          <ChartBarIcon className="h-5 w-5" />
-          <TrashIcon className="h-5 w-5" />
+        <div className="align-center flex flex-row items-center text-neutral-200 dark:text-white/[.10]">
+          <PencilSquareIcon className="h-5 w-5 transition hover:text-neutral-800 dark:hover:text-white" />
+          <ChartBarIcon className="h-5 w-5 transition hover:text-neutral-800 dark:hover:text-white" />
+          <TrashIcon className="h-5 w-5 transition hover:text-neutral-800 dark:hover:text-white" />
         </div>
       </td>
     </tr>
@@ -75,31 +75,27 @@ function Links() {
               <option value="viewed">{t('tableKeyViewed')}</option>
               <option value="last">{t('tableKeyAdded')}</option>
             </select>
-            {/* <div className="flex cursor-pointer flex-row items-center text-gray-200 hover:text-white"> */}
-            {/*  */}
-            {/*  /!* <ChevronDownIcon className="h-5 w-5 pt-1" /> *!/ */}
-            {/* </div> */}
           </div>
         </div>
         <table className="w-full border-collapse text-black dark:text-white">
           <thead className="text-left shadow-sm">
             <tr>
-              <th className="h-12 w-[5%] rounded-l-md bg-gray-200 pl-4 dark:bg-[#2a2633]">
+              <th className="h-10 w-[5%] rounded-l-md bg-gray-100 pl-4 dark:bg-[#2a2633]">
                 <input type="checkbox" />
               </th>
-              <th className="h-10 w-[40%] bg-gray-200 dark:bg-[#2a2633]">
+              <th className="h-10 w-[40%] bg-gray-100 dark:bg-[#2a2633]">
                 {t('tableColOriginal')}
               </th>
-              <th className="h-10 w-[20%] bg-gray-200 dark:bg-[#2a2633]">
+              <th className="h-10 w-[20%] bg-gray-100 dark:bg-[#2a2633]">
                 {t('tableColShort')}
               </th>
-              <th className="h-10 w-[15%] bg-gray-200 dark:bg-[#2a2633]">
+              <th className="h-10 w-[15%] bg-gray-100 dark:bg-[#2a2633]">
                 {t('tableColDate')}
               </th>
-              <th className="h-10 w-[10%] bg-gray-200 dark:bg-[#2a2633]">
+              <th className="h-10 w-[10%] bg-gray-100 dark:bg-[#2a2633]">
                 {t('tableColViews')}
               </th>
-              <th className="h-10 w-[10%] rounded-r-md bg-gray-200 pr-2 dark:bg-[#2a2633]">
+              <th className="h-10 w-[10%] rounded-r-md bg-gray-100 pr-2 dark:bg-[#2a2633]">
                 <span />
               </th>
             </tr>
@@ -128,7 +124,7 @@ function Links() {
         <table className="w-full border-collapse text-black dark:text-white">
           <thead className="text-left shadow-sm">
             <tr>
-              <th className="h-12 w-full rounded-l-md bg-gray-200 pl-4 text-center dark:bg-[#2a2633]">
+              <th className="h-10 w-full rounded-l-md bg-gray-100 pl-4 text-center dark:bg-[#2a2633]">
                 <p>Page 1</p>
               </th>
             </tr>

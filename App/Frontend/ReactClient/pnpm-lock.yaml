@@ -30,6 +30,7 @@ specifiers:
   react-dom: ^18.2.0
   react-i18next: ^12.2.0
   react-modal: ^3.16.1
+  react-pin-field: ^3.1.3
   react-router-dom: ^6.8.2
   sharp: ^0.31.3
   svgo: ^3.0.2
@@ -72,6 +73,7 @@ devDependencies:
   prettier: 2.8.4
   prettier-plugin-tailwindcss: 0.2.3_prettier@2.8.4
   react-modal: 3.16.1_biqbaboplfbrettd7655fr4n2y
+  react-pin-field: 3.1.3_biqbaboplfbrettd7655fr4n2y
   sharp: 0.31.3
   svgo: 3.0.2
   tailwindcss: 3.2.7_postcss@8.4.21
@@ -3232,6 +3234,17 @@ packages:
       warning: 4.0.3
     dev: true
 
+  /react-pin-field/3.1.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-QxE2Qy1dqV3KewIHTWY21gz+WHELtJFTNKaHhqhKa5ECrvl5iLWWF14w2AV1Su640rQtfSKhLxercnjKozFmdg==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-use-bireducer: 1.1.1_biqbaboplfbrettd7655fr4n2y
+    dev: true
+
   /react-router-dom/6.8.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-N/oAF1Shd7g4tWy+75IIufCGsHBqT74tnzHQhbiUTYILYF0Blk65cg+HPZqwC+6SqEyx033nKqU7by38v3lBZg==}
     engines: {node: '>=14'}
@@ -3254,6 +3267,16 @@ packages:
       '@remix-run/router': 1.3.3
       react: 18.2.0
     dev: false
+
+  /react-use-bireducer/1.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-FysDYTxA9TQnzt4HURQBvB2FdFqyNytjIGzvzj3qv7YlOkcDnkJQPNlzcC7RbfDiepxdtbxCgovvLGm/DHjzUA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: true
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UserIcon } from '@heroicons/react/24/solid';
 import useMediaQuery from '@/components/useMediaQuery';
-import MenuState from '@/shared/MenuState';
+import { MenuState, menuStateNumb } from '@/shared/MenuState';
 import AuthStage from './MenuStages/AuthStage';
 import PinStage from './MenuStages/PinStage';
 import ProfileStage from './MenuStages/ProfileStage';
@@ -12,6 +12,19 @@ function AuthModal() {
   const [activeMenu, setActiveMenu] = useState<MenuState>(MenuState.auth);
   const isAboveSmallScreens = useMediaQuery('(max-width: 640px)');
   const { t } = useTranslation();
+  const stages = [
+    {
+      component: AuthStage,
+    },
+    {
+      component: PinStage,
+    },
+    {
+      component: ProfileStage,
+    },
+  ];
+  const CurrentComponent = stages[menuStateNumb[activeMenu]].component;
+
   return (
     <div className="relative inline-block">
       <div>
@@ -29,27 +42,9 @@ function AuthModal() {
       </div>
       {isOpen && (
         <div className="absolute right-0 z-10 mt-2 rounded-lg bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.70] dark:ring-white/[.20]">
-          {activeMenu === MenuState.auth ? (
-            <AuthStage
-              setActiveMenu={(state: MenuState) => setActiveMenu(state)}
-            />
-          ) : (
-            ''
-          )}
-          {activeMenu === MenuState.pin ? (
-            <PinStage
-              setActiveMenu={(state: MenuState) => setActiveMenu(state)}
-            />
-          ) : (
-            ''
-          )}
-          {activeMenu === MenuState.profile ? (
-            <ProfileStage
-              setActiveMenu={(state: MenuState) => setActiveMenu(state)}
-            />
-          ) : (
-            ''
-          )}
+          <CurrentComponent
+            setActiveMenu={(state: MenuState) => setActiveMenu(state)}
+          />
         </div>
       )}
     </div>

@@ -7,5 +7,5 @@
 }
 
 .pincode_item {
-  @apply w-10 h-10 text-center rounded-lg bg-black/[.05] dark:bg-black/[.10];
+  @apply w-8 h-10 text-center rounded-lg bg-black/[.05] dark:bg-black/[.20] shadow-sm;
 }

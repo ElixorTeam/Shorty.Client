@@ -1,81 +1,33 @@
-import React, { useRef } from 'react';
-import MenuState from '@/shared/MenuState';
+import { PinField } from 'react-pin-field';
+import React from 'react';
+import { MenuState } from '@/shared/MenuState';
 
 function PinStage({
   setActiveMenu,
 }: {
   setActiveMenu: (state: MenuState) => void;
 }) {
-  const inputsRef = useRef<Array<HTMLInputElement>>([]);
-  const handleInputKeyUp = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const currentInput = event.target as HTMLInputElement;
-    const currentInputValue = currentInput.value;
-    const currentInputLength = currentInputValue.length;
-    if (currentInputLength === currentInput.maxLength) {
-      if (index < inputsRef.current.length - 1) {
-        inputsRef.current[index + 1].focus();
-      }
-    }
-  };
   return (
     <div className="m-2 flex w-60 flex-col items-center">
-      <p className="uppercase text-black dark:text-white ">Pin Stage</p>
-      <div className="flex gap-x-2.5 py-6">
-        <input
-          className="pincode_item"
-          ref={(el) => el && (inputsRef.current[0] = el)}
-          type="text"
-          pattern="[0-9]*"
-          maxLength={1}
-          required
-          onKeyUp={(event) => handleInputKeyUp(event, 0)}
-        />
-        <input
-          className="pincode_item"
-          ref={(el) => el && (inputsRef.current[1] = el)}
-          type="text"
-          pattern="[0-9]*"
-          maxLength={1}
-          required
-          onKeyUp={(event) => handleInputKeyUp(event, 1)}
-        />
-        <input
-          className="pincode_item"
-          ref={(el) => el && (inputsRef.current[2] = el)}
-          type="text"
-          maxLength={1}
-          pattern="[0-9]*"
-          required
-          onKeyUp={(event) => handleInputKeyUp(event, 2)}
-        />
-        <input
-          className="pincode_item"
-          ref={(el) => el && (inputsRef.current[3] = el)}
-          type="text"
-          pattern="[0-9]*"
-          maxLength={1}
-          required
-          onKeyUp={(event) => handleInputKeyUp(event, 3)}
-        />
-        <input
-          className="pincode_item"
-          ref={(el) => el && (inputsRef.current[4] = el)}
-          type="text"
-          maxLength={1}
-          pattern="[0-9]*"
-          required
-          onKeyUp={(event) => handleInputKeyUp(event, 4)}
+      <p className="uppercase text-black dark:text-white ">Enter pin code</p>
+      <p className="px-5 pt-1 text-sm text-gray-400">
+        The PIN code has been sent to your email. Click here to resend.
+      </p>
+      <div className="flex gap-x-2.5 py-4">
+        <PinField
+          length={5}
+          validate="0123456789"
+          inputMode="numeric"
+          autoFocus
+          className="h-10 w-8 rounded-md bg-black/[.05] text-center text-lg shadow-sm dark:bg-black/[.30] dark:text-white"
         />
       </div>
       <button
-        type="button"
-        className="serviceIcon bg-white"
+        type="submit"
         onClick={() => setActiveMenu(MenuState.profile)}
+        className="my-2 h-[34px] w-11/12 rounded-xl bg-gradient-to-tr from-indigo-300 to-pink-300 shadow-md"
       >
-        <p className="mb-[2px] text-black">Next Stage</p>
+        <p className="text-white">Send PIN code</p>
       </button>
     </div>
   );

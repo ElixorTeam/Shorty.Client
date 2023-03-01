@@ -42,7 +42,7 @@ function LanguageSwitcher() {
               className={`${
                 option.value === i18n.language
                   ? 'bg-gray-100 text-black dark:bg-white/[.10] dark:text-white'
-                  : 'text-gray-700 backdrop-blur-xl hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[.05]'
+                  : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[.05]'
               } block w-full px-4 py-2 text-left text-sm leading-5`}
               onClick={() => handleLanguageSelect(option)}
             >
