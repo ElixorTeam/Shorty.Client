@@ -20,7 +20,7 @@ function Navbar({
   return (
     <header
       className={`sticky top-0 z-40 flex justify-center px-5 ${
-        isToggleSideBar ? 'ring-1 ring-gray-400/[.20]' : ''
+        isToggleSideBar ? 'ring-0 ring-gray-400/[.20]' : ''
       } backdrop-blur-md`}
     >
       <div className="flex h-16 w-full max-w-screen-xl items-center justify-between">
@@ -31,7 +31,7 @@ function Navbar({
           Shorty
         </NavLink>
         <nav className="flex flex-row items-center">
-          <ul className="inline-flex items-center space-x-5 md:space-x-8">
+          <ul className="inline-flex items-center space-x-2 md:space-x-4">
             <NavbarItem>
               <button type="button" onClick={setTheme}>
                 {isDarkTheme ? (

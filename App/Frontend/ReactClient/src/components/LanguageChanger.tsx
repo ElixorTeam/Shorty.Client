@@ -22,19 +22,25 @@ function LanguageSwitcher() {
   };
 
   return (
-    <div className="relative inline-block">
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <div>
         <button
           type="button"
-          className="flex items-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
-          onClick={() => setIsOpen(!isOpen)}
+          className="mx-auto flex h-10 w-16 items-center justify-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
         >
           <LanguageIcon className="h-5 w-5" />
           <ChevronDownIcon className="h-3 w-3" />
         </button>
       </div>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 w-28 rounded-md bg-white py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]">
+        <div
+          className="absolute right-0 z-10 w-28 rounded-md bg-white py-1 shadow-lg ring-1 ring-black/[.10]
+           backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]"
+        >
           {languageOptions.map((option) => (
             <button
               key={option.value}

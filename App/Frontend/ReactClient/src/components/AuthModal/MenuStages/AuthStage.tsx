@@ -9,7 +9,7 @@ function AuthStage({
   setActiveMenu: (state: MenuState) => void;
 }) {
   return (
-    <div className="m-2 flex w-60 flex-col items-center">
+    <div className="m-2 flex w-60 flex-col items-center pb-2">
       <p className="uppercase text-black dark:text-white ">Log in / Sign Up</p>
       <form
         className="flex w-full flex-col items-center"

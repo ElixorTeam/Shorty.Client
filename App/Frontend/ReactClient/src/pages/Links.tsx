@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { ChangeEvent, useCallback, useState } from 'react';
+import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 type TestDataType = {
-  id: number;
   title: string;
   link: string;
   date: string;
@@ -21,7 +21,6 @@ function Links() {
     setTableKey(lang);
   }, []);
   const testData: TestDataType[] = Array(20).fill({
-    id: 1,
     title: 'Unique link',
     link: 'sh0.ty/1f43',
     date: '21.03.23',
@@ -52,6 +51,7 @@ function Links() {
           </div>
         </div>
         {testData.map((item) => (
+          // eslint-disable-next-line react/jsx-key
           <button
             type="button"
             className="flex h-24 w-full items-center border-b-[1px] border-gray-400/[.40] px-10 text-left"
@@ -67,7 +67,24 @@ function Links() {
         ))}
       </div>
       <div className="ring-100 h-[calc(100vh-64px)] overflow-y-auto py-10 px-28 ring-gray-400/[.20]">
-        <p className="text-4xl font-bold">Unique title</p>
+        <div className="flex flex-row items-center justify-between">
+          <p className="text-4xl font-bold">Unique title</p>
+          <div className="flex flex-row items-center space-x-4">
+            <button
+              type="button"
+              className="transition hover:scale-105 active:scale-95"
+            >
+              <TrashIcon className="h-6 w-6 text-red-700" />
+            </button>
+            <button
+              type="button"
+              className="transition hover:scale-105 active:scale-95"
+            >
+              <PencilIcon className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
         <p className="text-md">Created 21 March 2023 5:20PM</p>
         <p className="pt-5 text-2xl font-bold text-blue-400">sh0.ty/f712</p>
         <p className="pt-5 text-2xl font-bold">QR Code</p>

@@ -3,13 +3,13 @@ import Switch from '@/components/Switch/Switch';
 function Create() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event);
   };
+
   return (
     <div className="flex justify-center px-8 pt-8 text-left">
-      <form onSubmit={handleSubmit} className="w-3/4">
+      <form onSubmit={handleSubmit} className="w-2/3">
         <p className="text-4xl font-bold dark:text-white">Create new link</p>
-        <div className="pt-5 text-left">
+        <div className="pt-8 text-left">
           <label htmlFor="destination" className="flex flex-col text-lg">
             Destination:
             <input
@@ -18,7 +18,7 @@ function Create() {
             />
           </label>
         </div>
-        <div className="pt-5 text-left">
+        <div className="pt-8 text-left">
           <label htmlFor="title" className="flex flex-col text-lg">
             Title (optional):
             <input
@@ -27,7 +27,7 @@ function Create() {
             />
           </label>
         </div>
-        <div className="pt-5 text-left">
+        <div className="pt-8 text-left">
           <label htmlFor="title" className="flex flex-col text-lg">
             Custom short link (optional):
             <div className="mt-2 flex flex-row items-center space-x-5">

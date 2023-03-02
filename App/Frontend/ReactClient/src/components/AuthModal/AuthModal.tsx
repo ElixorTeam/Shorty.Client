@@ -31,12 +31,15 @@ function AuthModal() {
   const CurrentComponent = stages[menuStateNumb[activeMenu]].component;
 
   return (
-    <div className="relative inline-block">
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <div>
         <button
           type="button"
-          className="flex items-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
-          onClick={() => setIsOpen(!isOpen)}
+          className="flex h-10 items-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
         >
           {isAboveSmallScreens ? (
             <UserIcon className="h-5 w-5 text-black dark:text-white" />
@@ -46,7 +49,10 @@ function AuthModal() {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 rounded-xl bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]">
+        <div
+          className="absolute right-0 z-10 rounded-xl bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10]
+         backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]"
+        >
           <CurrentComponent
             setActiveMenu={(state: MenuState) => setActiveMenu(state)}
           />

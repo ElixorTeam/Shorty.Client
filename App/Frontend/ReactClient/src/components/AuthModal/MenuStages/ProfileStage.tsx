@@ -9,9 +9,6 @@ function ProfileStage({
   setActiveMenu: (state: MenuState) => void;
 }) {
   const { t } = useTranslation();
-  const handleClick = () => {
-    window.location.replace('https://bobbyhadz.com');
-  };
   const linkButtons: { id: number; label: string; link: string }[] = [
     { id: 1, label: 'Profile', link: '/settings' },
     { id: 2, label: 'Support', link: '/support' },
