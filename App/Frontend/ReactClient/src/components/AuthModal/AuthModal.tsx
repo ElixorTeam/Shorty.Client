@@ -46,7 +46,7 @@ function AuthModal() {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 rounded-xl bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.70] dark:ring-white/[.20]">
+        <div className="absolute right-0 z-10 mt-2 rounded-xl bg-white/[.70] py-1 shadow-lg ring-1 ring-black/[.10] backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]">
           <CurrentComponent
             setActiveMenu={(state: MenuState) => setActiveMenu(state)}
           />

@@ -14,7 +14,8 @@
   "sidebarAnalytics": "Аналитика",
   "sidebarNotifications": "Уведомления",
   "sidebarSettings": "Настройки",
-  "sortBy": "Сортировать по",
+  "sortBy": "Сортировка",
   "logout": "Выйти",
-  "menu": "Меню"
+  "menu": "Меню",
+  "QRCodes": "QR Коды"
 }

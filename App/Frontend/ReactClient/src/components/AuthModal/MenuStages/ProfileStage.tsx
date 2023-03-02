@@ -13,7 +13,7 @@ function ProfileStage({
     window.location.replace('https://bobbyhadz.com');
   };
   const linkButtons: { id: number; label: string; link: string }[] = [
-    { id: 1, label: 'Profile', link: '/link' },
+    { id: 1, label: 'Profile', link: '/settings' },
     { id: 2, label: 'Support', link: '/support' },
   ];
   return (
