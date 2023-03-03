@@ -26,11 +26,16 @@ function Links() {
     date: '21.03.23',
   });
   return (
-    <div className="grid h-full w-full grid-cols-[300px_1fr] overflow-y-auto">
-      <div className="h-[calc(100vh-64px)] overflow-y-auto bg-black/[.03]">
-        <div className="flex h-16 w-full items-center border-b-[1px] border-gray-400/[.60] px-10 shadow-sm dark:bg-white/[.05]">
+    <div className="mt-8 grid h-full w-full grid-cols-[300px_1fr] overflow-y-auto">
+      <div
+        className="h-[calc(100vh-64px-80px)] min-h-[calc(100vh-64px-80px)] bg-black/[.03]
+         shadow-[inset_12px_0px_10px_-10px_rgba(0,0,0,0.05),_inset_0px_12px_10px_-10px_rgba(0,0,0,0.05),_inset_-12px_0px_10px_-10px_rgba(0,0,0,0.05),_inset_0px_-12px_10px_-10px_rgba(0,0,0,0.05)] overflow-y-hidden scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-200 scrollbar-thumb-rounded-md hover:overflow-y-auto dark:scrollbar-track-black/[.10] dark:scrollbar-thumb-black/[.20]"
+      >
+        <div className="sticky top-0 flex h-16 w-full items-center border-b-[1px] border-gray-400/[.20] bg-white/[.80] px-10 shadow-sm backdrop-blur-md dark:bg-white/[.05]">
           <div className="mr-2 flex flex-row items-center">
-            <p className="mr-2 text-gray-500">{t('sortBy')}</p>
+            <p className="mr-2 text-gray-700 dark:text-gray-400">
+              {t('sortBy')}
+            </p>
             <select
               value={tableKey}
               onChange={handleTableKey}
@@ -54,7 +59,7 @@ function Links() {
           // eslint-disable-next-line react/jsx-key
           <button
             type="button"
-            className="flex h-24 w-full items-center border-b-[1px] border-gray-400/[.40] px-10 text-left"
+            className="flex h-24 w-full items-center border-b-[1px] border-gray-400/[.20] px-10 text-left"
           >
             <div className="flex w-full flex-col">
               <p className="font-semibold">{item.title}</p>

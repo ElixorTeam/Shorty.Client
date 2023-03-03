@@ -34,6 +34,7 @@ specifiers:
   react-router-dom: ^6.8.2
   sharp: ^0.31.3
   svgo: ^3.0.2
+  tailwind-scrollbar: ^2.1.0
   tailwindcss: ^3.2.7
   typescript: ^4.9.5
   vite: ^4.1.4
@@ -76,6 +77,7 @@ devDependencies:
   react-pin-field: 3.1.3_biqbaboplfbrettd7655fr4n2y
   sharp: 0.31.3
   svgo: 3.0.2
+  tailwind-scrollbar: 2.1.0_tailwindcss@3.2.7
   tailwindcss: 3.2.7_postcss@8.4.21
   typescript: 4.9.5
   vite: 4.1.4_@types+node@18.14.3
@@ -3563,6 +3565,15 @@ packages:
       css-tree: 2.3.1
       csso: 5.0.5
       picocolors: 1.0.0
+    dev: true
+
+  /tailwind-scrollbar/2.1.0_tailwindcss@3.2.7:
+    resolution: {integrity: sha512-zpvY5mDs0130YzYjZKBiDaw32rygxk5RyJ4KmeHjGnwkvbjm/PszON1m4Bbt2DkMRIXlXsfNevykAESgURN4KA==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: 3.2.7_postcss@8.4.21
     dev: true
 
   /tailwindcss/3.2.7_postcss@8.4.21:
