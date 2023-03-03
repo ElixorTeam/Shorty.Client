@@ -15,7 +15,7 @@ function QRCodes() {
     date: '21.03.23',
   });
   return (
-    <div className="mt-8 flex h-full w-full flex-col space-y-2 overflow-y-auto pb-8">
+    <div className="mt-2 flex h-full w-full flex-col space-y-2 overflow-y-auto pb-8">
       {testData.map((item) => (
         // eslint-disable-next-line react/jsx-key
         <div className="flex h-40 w-full flex-row items-center space-x-5 rounded-md bg-black/[.05] shadow-sm dark:bg-black/[.20]">

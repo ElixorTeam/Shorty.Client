@@ -45,7 +45,7 @@ function Layout({ isToggleSideBar }: { isToggleSideBar: boolean }) {
         <main className="mx-auto h-[calc(100vh-64px)] max-w-screen-xl">
           {isToggleSideBar ? (
             <div className="grid h-full w-full grid-cols-[200px_1fr] border-r-[0px] border-gray-400/[.40]">
-              <div className="sticky flex border-r-[0px] border-gray-400/[.20] pt-8">
+              <div className="sticky flex border-r-[0px] border-gray-400/[.20] pt-2">
                 <Sidebar />
               </div>
               <Outlet />

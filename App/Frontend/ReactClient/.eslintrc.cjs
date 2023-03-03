@@ -30,6 +30,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'tailwindcss/no-custom-classname': 0,
     'jsx-a11y/label-has-for': 0,
-    'import/extensions': 0
+    'import/extensions': 0,
+    'react/jsx-props-no-spreading': 0
   }
 }
