@@ -20,8 +20,8 @@ function Navbar({
   return (
     <header
       className={`sticky top-0 z-40 flex justify-center px-5 ${
-        isToggleSideBar ? 'ring-0 ring-gray-400/[.20]' : ''
-      } backdrop-blur-md`}
+        isToggleSideBar && 'ring-0 ring-gray-400/[.20]'
+      }`}
     >
       <div className="flex h-16 w-full max-w-screen-xl items-center justify-between">
         <NavLink

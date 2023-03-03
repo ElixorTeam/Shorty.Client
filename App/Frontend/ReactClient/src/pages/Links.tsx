@@ -35,7 +35,7 @@ function Links() {
         <div className="flex w-full flex-row items-center space-x-2">
           <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
           <input
-            placeholder="Search link"
+            placeholder={t('linksTableSearch') as string}
             className="w-full placeholder:text-lg focus:outline-none dark:bg-black/[.0]"
           />
         </div>
@@ -54,15 +54,15 @@ function Links() {
           >
             <div className="mr-2 flex flex-row items-center">
               <p className="mr-2 text-gray-700 dark:text-gray-400">
-                {t('sortBy')}
+                {t('linksTableSortBy')}
               </p>
               <select
                 value={tableKey}
                 onChange={handleTableKey}
                 className="bg-white/[.0] text-black dark:text-white"
               >
-                <option value="viewed">{t('tableKeyViewed')}</option>
-                <option value="last">{t('tableKeyAdded')}</option>
+                <option value="viewed">{t('linksTableKeyViewed')}</option>
+                <option value="last">{t('linksTableKeyLastAdded')}</option>
               </select>
             </div>
           </div>
@@ -116,9 +116,11 @@ function Links() {
             </div>
           </div>
 
-          <p className="text-md">Created 21 March 2023 5:20PM</p>
+          <p className="text-md">
+            {t('linksTableCreated')} 21 March 2023 5:20PM
+          </p>
           <p className="pt-5 text-2xl font-bold text-blue-400">sh0.ty/f712</p>
-          <p className="pt-5 text-2xl font-bold">QR Code</p>
+          <p className="pt-5 text-2xl font-bold">{t('linksTableQRCode')}</p>
           <img
             src="http://qrcoder.ru/code/?https%3A%2F%2Fgithub.com%2FBaggerFast%2FShorty&4&0"
             alt="qr code"

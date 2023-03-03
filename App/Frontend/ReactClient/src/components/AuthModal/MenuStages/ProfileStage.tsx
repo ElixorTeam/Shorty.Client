@@ -10,8 +10,8 @@ function ProfileStage({
 }) {
   const { t } = useTranslation();
   const linkButtons: { id: number; label: string; link: string }[] = [
-    { id: 1, label: 'Profile', link: '/settings' },
-    { id: 2, label: 'Support', link: '/support' },
+    { id: 1, label: t('profileProfile'), link: '/settings' },
+    { id: 2, label: t('profileSupport'), link: '/support' },
   ];
   return (
     <div className="w-32">
@@ -34,7 +34,7 @@ function ProfileStage({
           window.location.replace('https://github.com/BaggerFast/Shorty');
         }}
       >
-        API docs
+        API
       </button>
       <button
         type="button"
@@ -42,7 +42,7 @@ function ProfileStage({
            hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[.05]"
         onClick={() => setActiveMenu(MenuState.auth)}
       >
-        {t('logout')}
+        {t('profileLogOut')}
       </button>
     </div>
   );

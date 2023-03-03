@@ -30,10 +30,10 @@ function Home() {
           className="bg-gradient-to-r from-black to-gray-600 bg-clip-text pb-4 text-4xl font-bold
            text-transparent dark:from-white dark:to-indigo-300 sm:text-5xl lg:text-6xl"
         >
-          {t('welcomeTitle')}
+          {t('homeWelcomeTitle')}
         </p>
         <p className="text-base font-light text-gray-600 dark:text-gray-400 sm:text-lg lg:text-2xl">
-          {t('welcomeSubtext')}
+          {t('homeWelcomeSubtext')}
         </p>
         <div className="relative">
           <div
@@ -47,7 +47,7 @@ function Home() {
                 sm:w-52 md:h-14 md:w-64"
             >
               <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
-                {t('buttonTryRightNow')}
+                {t('homeWelcomeTryRightNow')}
               </p>
             </button>
           </NavLink>

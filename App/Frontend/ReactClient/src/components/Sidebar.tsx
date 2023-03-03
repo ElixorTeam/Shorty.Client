@@ -31,17 +31,17 @@ function Sidebar() {
               type="button"
               className="h-6 w-32 rounded-md bg-gradient-to-tr from-purple-600 to-pink-400"
             >
-              <p className="text-base text-white">{t('buttonAdd')}</p>
+              <p className="text-base text-white">{t('sideBarAdd')}</p>
             </button>
           </NavLink>
         </li>
-        <CustomLink name={t('sidebarLink')} link="/link">
+        <CustomLink name={t('sideBarLinks')} link="/link">
           <LinkIcon className="h-4 w-4" />
         </CustomLink>
-        <CustomLink name={t('QRCodes')} link="/qrcodes">
+        <CustomLink name={t('sideBarQRCodes')} link="/qrcodes">
           <QrCodeIcon className="h-4 w-4" />
         </CustomLink>
-        <CustomLink name={t('sidebarSettings')} link="/settings">
+        <CustomLink name={t('sideBarSettings')} link="/settings">
           <Cog6ToothIcon className="h-4 w-4" />
         </CustomLink>
       </ul>

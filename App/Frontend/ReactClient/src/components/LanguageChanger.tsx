@@ -30,6 +30,7 @@ function LanguageSwitcher() {
       <div>
         <button
           type="button"
+          onClick={() => setIsOpen(true)}
           className="mx-auto flex h-10 w-16 items-center justify-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
         >
           <LanguageIcon className="h-5 w-5" />

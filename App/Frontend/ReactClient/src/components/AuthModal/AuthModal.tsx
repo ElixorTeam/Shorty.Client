@@ -13,8 +13,8 @@ function AuthModal() {
   const isAboveSmallScreens = useMediaQuery('(max-width: 640px)');
   const { t } = useTranslation();
   const handleLogText = () => {
-    if (activeMenu === MenuState.profile) return t('menu');
-    return t('login');
+    if (activeMenu === MenuState.profile) return t('navBarMenu');
+    return t('navBarLogin');
   };
 
   const stages = [
@@ -39,6 +39,7 @@ function AuthModal() {
       <div>
         <button
           type="button"
+          onClick={() => setIsOpen(true)}
           className="flex h-10 items-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
         >
           {isAboveSmallScreens ? (
