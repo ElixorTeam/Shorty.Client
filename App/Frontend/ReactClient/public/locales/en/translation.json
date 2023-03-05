@@ -33,5 +33,6 @@
   "createCustom": "Custom short end",
   "createURLCustomPattern": "Incorrect input",
   "createQRCode": "Generate QR Code",
-  "createSubmit": "Submit"
+  "createSubmit": "Submit",
+  "inputRequired": "This field is required"
 }

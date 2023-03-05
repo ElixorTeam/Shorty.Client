@@ -1,8 +1,50 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { ReactComponent as GoogleIcon } from '@/assets/google-icon.svg';
+import { ReactComponent as GithubIcon } from '@/assets/github-icon.svg';
+
 function Auth() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = () => console.log('something');
+  const { t } = useTranslation();
   return (
-    <div className="text-center text-white">
-      <p>Auth page</p>
-    </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className=" h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center gap-10 rounded-lg border-[1px] border-gray-400/[.20] p-32"
+    >
+      <p className=" text-4xl font-bold dark:text-white">{t('navBarLogin')}</p>
+      <div className="w-2/3">
+        <input
+          type="email"
+          {...register('email', { required: true })}
+          placeholder="example@gmal.com"
+          className="h-10 w-full rounded p-5 text-lg text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white"
+        />
+        {errors.email && <p className="text-red-700">{t('inputRequired')}</p>}
+      </div>
+      <button
+        type="submit"
+        className="h-10 w-2/3 rounded-md bg-gradient-to-tr from-purple-600 to-pink-400 text-lg font-semibold text-white"
+      >
+        {t('authEnterSubmit')}
+      </button>
+      <p>{t('authOrWith')}</p>
+      <div className="mt-2 flex w-11/12 flex-row justify-between space-x-4">
+        <button type="button" className="serviceIcon bg-white">
+          <GoogleIcon className="h-5 w-5" />
+          <p className="mb-[2px] text-black">Google</p>
+        </button>
+        <button type="button" className="serviceIcon bg-neutral-800">
+          <GithubIcon className="h-5 w-5 fill-white" />
+          <p className="text-white">GitHub</p>
+        </button>
+      </div>
+    </form>
   );
 }
 

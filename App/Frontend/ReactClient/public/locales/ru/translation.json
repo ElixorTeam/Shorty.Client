@@ -33,5 +33,6 @@
   "createCustom": "Уникальная концовка ссылки",
   "createURLCustomPattern": "Неверный ввод",
   "createQRCode": "Сгенерировать QR Код",
-  "createSubmit": "Подтвердить"
+  "createSubmit": "Подтвердить",
+  "inputRequired": "Это поле обязательно"
 }
