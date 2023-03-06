@@ -47,7 +47,7 @@ function Home() {
                 sm:w-52 md:h-14 md:w-64"
             >
               <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
-                {t('homeWelcomeTryRightNow')}
+                {t('homeButtonTryRightNow')}
               </p>
             </button>
           </NavLink>
