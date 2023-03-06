@@ -20,10 +20,12 @@ function AuthStage({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className=" h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center gap-10 rounded-lg border-[1px] border-gray-400/[.20] p-32"
+      className=" h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center  rounded-lg border-[1px] border-gray-400/[.20] p-32"
     >
-      <p className=" text-4xl font-bold dark:text-white">{t('navBarLogin')}</p>
-      <div className="w-2/3">
+      <p className=" mb-10 text-4xl font-bold dark:text-white">
+        {t('navBarLogin')}
+      </p>
+      <div className="mb-10 w-2/3">
         <input
           type="email"
           {...register('email', { required: true })}
@@ -38,7 +40,7 @@ function AuthStage({
       >
         {t('authEnterSubmit')}
       </button>
-      <p>{t('authOrWith')}</p>
+      <p className="my-3">{t('authOrWith')}</p>
       <div className="mt-2 flex w-11/12 flex-row justify-between space-x-4">
         <button type="button" className="serviceIcon bg-white">
           <GoogleIcon className="h-5 w-5" />
