@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.serviceIcon {
+  @apply flex h-[34px] w-1/2 flex-row items-center justify-center space-x-1.5 rounded-xl shadow-md;
+}
+
+.pincode_item {
+  @apply w-8 h-10 text-center rounded-lg bg-black/[.05] dark:bg-black/[.20] shadow-sm;
+}
