@@ -1,16 +1,21 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { AuthState } from '@/shared/AuthState';
 import { ReactComponent as GoogleIcon } from '@/assets/google-icon.svg';
 import { ReactComponent as GithubIcon } from '@/assets/github-icon.svg';
 
-function Auth() {
+function AuthStage({
+  setActiveMenu,
+}: {
+  setActiveMenu: (state: AuthState) => void;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = () => console.log('something');
+  const onSubmit = () => setActiveMenu(AuthState.pin);
   const { t } = useTranslation();
   return (
     <form
@@ -48,4 +53,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default AuthStage;

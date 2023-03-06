@@ -34,5 +34,6 @@
   "createURLCustomPattern": "Неверный ввод",
   "createQRCode": "Сгенерировать QR Код",
   "createSubmit": "Подтвердить",
-  "inputRequired": "Это поле обязательно"
+  "inputRequired": "Это поле обязательно",
+  "homeWelcomeTryRightNow": "Попробуй сейчас"
 }
