@@ -34,5 +34,6 @@
   "createURLCustomPattern": "Incorrect input",
   "createQRCode": "Generate QR Code",
   "createSubmit": "Submit",
-  "inputRequired": "This field is required"
+  "inputRequired": "This field is required",
+  "homeWelcomeTryRightNow": "Try right now"
 }

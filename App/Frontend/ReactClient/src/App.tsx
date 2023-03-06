@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import Links from './pages/Links';
 import Error from './pages/Error';
 import Create from './pages/Create';
-import Auth from './pages/Auth';
+import Auth from './pages/AuthPage/Auth';
 import Support from './pages/Support';
 import QRCodes from './pages/QRCodes';
 import Settings from './pages/Settings';
