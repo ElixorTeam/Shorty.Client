@@ -1,7 +1,8 @@
+# use only for frontend development
 version: "3"
 services:
-  react-app:
-    container_name: react-prod
-    build: App/Frontend/ReactClient
+  react-app-dev:
+    container_name: ShortyReactClient
+    build: ReactClient
     ports:
-      - "80:3000"
+      - "3000:3000"

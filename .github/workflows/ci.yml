@@ -1,15 +1,14 @@
-name: Front_CI
+name: CI
 
 on:
   push:
     branches:
       - main
       - develop
-      - feature/frontend
 
 defaults:
   run:
-    working-directory: ./App/Frontend/ReactClient
+    working-directory: ReactClient
 
 jobs:
   build:

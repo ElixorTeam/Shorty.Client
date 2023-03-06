@@ -1,34 +1,26 @@
-# Shorty
+# ShortyWebClient
 
 ## Overview
-This web application **make your URL shorter**, provides usage statistics and etc.
+This is React client application for **[Shorty Api](https://github.com/Bagger-sTeam/ShortyRestApi)**
 
 ## 💻 Tech Stack
-- **Backend:**
-    - [Java](https://www.java.com)
-    - [Spring](https://spring.io/)
-    - [Gradle](https://gradle.org/)
-    - [PostgreSQL](https://www.postgresql.org/)
-- **Frontend:**
-    - [TypeScript](https://www.typescriptlang.org/) + [SWC](https://swc.rs/)
-    - [Vite](https://vitejs.dev/)
-    - [React](https://reactjs.org/)
-    - [Tailwind](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [SWC](https://swc.rs/)
+- [React](https://reactjs.org/)
+- [Tailwind](https://tailwindcss.com/)
 - **Tools:**
-    - [Docker](https://www.docker.com/)
+  - [Docker](https://www.docker.com/)
   
 ## 💾 Installation 
-1) Create **.env** from [.env_example](.env_example)
-2) Full installation by **docker-compose**
+1) [Quick install](QUICK_START.md)
+2) Install by **docker-compose**
 ```bash
 docker-compose up
 ```
 
 ##  👇 Maybe helpful
-1) [Backend](App/Backend/README.md)
-2) [Database](App/Database/README.md)
-3) [Frontend](App/Frontend/README.md)
-
+- [ShortyApi](https://github.com/Bagger-sTeam/ShortyRestApi)
 
 ## 🚑 Support 
 Please click the `star` button, if this tool was helpful to you.

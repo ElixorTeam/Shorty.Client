@@ -1,8 +1,0 @@
-# use only for frontend development
-version: "3"
-services:
-  react-app-dev:
-    container_name: react-dev
-    build: ReactClient
-    ports:
-      - "3000:3000"

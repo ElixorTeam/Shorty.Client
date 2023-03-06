@@ -1,4 +1,4 @@
-# Frontend guide
+# Quick Start
 1. Download [NodeJS](https://nodejs.org/en/download/)
 2. Install pnpm:
 ```bash
@@ -20,4 +20,4 @@ pnpm dev
 ```bash
 pnpm build
 ```
-[GO BACK](../../README.md)
+[GO BACK](README.md)
