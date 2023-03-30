@@ -12,7 +12,7 @@ function PinStage({
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    <div className="h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center  rounded-lg border-[1px] border-gray-400/[.20] p-32">
+    <div className="h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center rounded-lg p-32">
       <p className="mb-10 text-4xl font-bold dark:text-white">
         {t('authPinCode')}
       </p>
@@ -30,7 +30,7 @@ function PinStage({
       </div>
       <button
         type="submit"
-        onClick={() => navigate('../link')}
+        onClick={() => navigate('../links')}
         className="my-2 h-[34px] w-6/12 rounded-xl bg-gradient-to-tr from-indigo-300 to-pink-300 shadow-md"
       >
         <p className="text-white">{t('authEnterPinCode')}</p>

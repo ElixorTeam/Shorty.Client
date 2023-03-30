@@ -6,7 +6,6 @@ type FormInputs = {
   destination: string;
   title: string;
   custom: string;
-  qrcode: boolean;
 };
 
 function Create() {
@@ -22,14 +21,17 @@ function Create() {
   };
   const { t } = useTranslation();
   return (
-    <div className="flex justify-center px-8 pt-2 text-left">
-      <form onSubmit={handleSubmit(onSubmit)} className="w-2/3">
-        <p className="text-4xl font-bold dark:text-white">
+    <div className="flex justify-center px-8 pt-8 text-left">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-[300px] md:w-[500px]"
+      >
+        <p className="text-2xl font-bold dark:text-white">
           {t('createPageTitle')}
         </p>
         <div className="pt-8 text-left">
           <label htmlFor="destination" className="flex flex-col text-lg">
-            {t('createURL')}:
+            {t('createURL')}
             <input
               type="text"
               {...register('destination', {
@@ -37,7 +39,7 @@ function Create() {
                 pattern:
                   /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??#?)?)/,
               })}
-              className={`mt-2 h-10 rounded px-2 text-lg text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white
+              className={`mt-2 h-8 w-72 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white md:w-full
               ${
                 errors.destination &&
                 'border-2 border-red-500 focus:outline-none'
@@ -53,11 +55,11 @@ function Create() {
         </div>
         <div className="pt-8 text-left">
           <label htmlFor="title" className="flex flex-col text-lg">
-            {t('createTitle')} ({t('createOptional')}):
+            {t('createTitle')} ({t('createOptional')})
             <input
               type="text"
               {...register('title')}
-              className="mt-2 h-10 rounded px-2 text-lg text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white"
+              className="mt-2 h-8 w-72 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white md:w-full"
             />
           </label>
         </div>
@@ -65,8 +67,8 @@ function Create() {
           <label htmlFor="custom" className="flex flex-col text-lg">
             {t('createCustom')} ({t('createOptional')}):
             <div className="mt-2 flex flex-row items-center space-x-5">
-              <div className="flex h-10 w-32 items-center justify-center rounded ring-1 ring-gray-400/[.40] dark:bg-black/[.20]">
-                <p className="text-lg text-gray-700 ">sh0.ty</p>
+              <div className="flex h-8 w-24 items-center justify-center rounded ring-1 ring-gray-400/[.40] dark:bg-black/[.20]">
+                <p className="text-gray-700">sh0.ty</p>
               </div>
               <p className="text-2xl">/</p>
               <input
@@ -74,7 +76,7 @@ function Create() {
                 {...register('custom', {
                   pattern: /^[a-zA-Z0-9]+$/,
                 })}
-                className={`h-10 rounded px-2 text-lg text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white ${
+                className={`h-8 w-36 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white ${
                   errors.custom && 'border-2 border-red-500 focus:outline-none'
                 }`}
               />
@@ -86,15 +88,12 @@ function Create() {
             </div>
           </label>
         </div>
-        <div className="mt-8 flex flex-row items-center">
-          <input type="checkbox" {...register('qrcode')} />
-          <p className="pl-4">{t('createQRCode')}</p>
-        </div>
         <button
           type="submit"
-          className="mt-8 h-8 w-32 rounded-md bg-gradient-to-tr from-purple-600 to-pink-400 text-white"
+          className="mb-10 mt-8 h-7 w-32 rounded-xl bg-blue-300 text-white shadow-xl shadow-blue-200 transition-all
+          hover:scale-105 dark:shadow-blue-200/[.1]"
         >
-          {t('createSubmit')}
+          Создать
         </button>
       </form>
     </div>

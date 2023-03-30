@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 
@@ -15,11 +15,28 @@ const languageOptions: LanguageOption[] = [
 function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { i18n } = useTranslation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleLanguageSelect = (option: LanguageOption) => {
     i18n.changeLanguage(option.value).then(() => i18n.reloadResources());
     setIsOpen(false);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
@@ -31,7 +48,7 @@ function LanguageSwitcher() {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="mx-auto flex h-10 w-16 items-center justify-center text-black transition hover:scale-105 active:scale-95 dark:text-white"
+          className="mx-auto flex h-10 w-16 items-center justify-center transition hover:scale-105 active:scale-95 dark:text-white"
         >
           <LanguageIcon className="h-5 w-5" />
           <ChevronDownIcon className="h-3 w-3" />
@@ -39,6 +56,7 @@ function LanguageSwitcher() {
       </div>
       {isOpen && (
         <div
+          ref={dropdownRef}
           className="absolute right-0 z-10 w-28 rounded-md bg-white py-1 shadow-lg ring-1 ring-black/[.10]
            backdrop-blur-md dark:bg-[#2a2633]/[.80] dark:ring-white/[.20]"
         >

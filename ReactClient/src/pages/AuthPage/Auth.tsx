@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { AuthState, authStateNumb } from '@/shared/AuthState';
-import AuthStage from '@/pages/AuthPage/AuthStage';
-import PinStage from '@/pages/AuthPage/PinStage';
+import AuthStage from './AuthStage';
+import PinStage from './PinStage';
 
 function Auth() {
   const [activeMenu, setActiveMenu] = useState<AuthState>(AuthState.auth);

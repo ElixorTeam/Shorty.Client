@@ -20,7 +20,7 @@ function AuthStage({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className=" h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center  rounded-lg border-[1px] border-gray-400/[.20] p-32"
+      className=" h-100 m-auto flex h-max w-2/3 flex-col items-center justify-center  rounded-lg p-32"
     >
       <p className=" mb-10 text-4xl font-bold dark:text-white">
         {t('navBarLogin')}
