@@ -1,0 +1,36 @@
+{
+    "app": {
+        "headerSearch": "Поиск",
+        "navbarCreate": "Добавить",
+        "navbarLinks": "Ссылки",
+        "navbarSettings": "Настройки",
+        "windowTitle": "Подробности ссылки",
+        "windowDate": "Создана",
+        "windowQR": "QR Код",
+        "sortKeyViewed": "Популярные",
+        "sortKeyLast": "Последние",
+        "sortLabel": "Сортировка"
+    },
+    "home" : {
+        "title": "Давай сделаем ссылки короче",
+        "description": "Ссылки не обязаны быть длинными",
+        "btnText": "Попробовать",
+        "headerAuth": "Войти / Регистрация"
+    },
+    "auth": {
+        "pinTitle": "Введите PIN код",
+        "pinDescription": "ПИН код был отправлен вам на почту. Нажмите, чтобы повторить.",
+        "pinSubmit": "Отправить"
+    },
+    "create": {
+        "formTitle": "Создать ссылку",
+        "urlLabel": "URL ссылка",
+        "urlErrorRequired": "URl обязателен",
+        "urlErrorPattern": "Неправильная URL ссылка",
+        "titleLabel": "Название",
+        "customLabel": "Уникальная ссылка",
+        "customErrorPattern": "Некорректное имя",
+        "submitButton": "Создать",
+        "labelOptional": "Необязательно"
+    }
+}

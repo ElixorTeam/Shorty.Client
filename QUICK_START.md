@@ -6,7 +6,7 @@ npm i -g pnpm
 ```
 3. Go to:
 ```bash
-cd ReactClient
+cd react-client
 ```
 4. Install all dependencies:
 ```bash
