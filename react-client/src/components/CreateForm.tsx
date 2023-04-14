@@ -1,11 +1,31 @@
 'use client'
+
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
+import useSWRMutation from 'swr/mutation'
 
 type FormInputs = {
-  destination: string
   title: string
-  custom: string
+  ref: string
+}
+
+type SendDataType = {
+  title: string
+  ref: string
+  active: boolean
+}
+
+const url = 'http://localhost:8082/linkshortener/links/create'
+
+async function sendRequest(url: string, { arg }: { arg: SendDataType }) {
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(arg),
+    headers: {
+      'Content-Type': 'application/json; charset=utf8',
+      'Access-Control-Allow-Origin': '*'
+    }
+  })
 }
 
 export default function CreateForm({
@@ -21,9 +41,15 @@ export default function CreateForm({
 
   const router = useRouter()
 
-  const onSubmit = (data: FormInputs) => {
-    const newData = JSON.stringify(data)
-    console.log(newData)
+  const { trigger, isMutating } = useSWRMutation(url, sendRequest)
+
+  const onSubmit = async (formInput: FormInputs) => {
+    const dataToSend = {
+      ref: formInput.ref,
+      title: formInput.title,
+      active: true
+    }
+    trigger(dataToSend)
     router.push('/links')
   }
 
@@ -41,24 +67,21 @@ export default function CreateForm({
             {translate['urlLabel']}
             <input
               type="text"
-              {...register('destination', {
+              {...register('ref', {
                 required: true,
                 pattern:
                   /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??#?)?)/
               })}
               className={`mt-2 h-8 w-72 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white md:w-full
-              ${
-                errors.destination &&
-                'border-2 border-red-500 focus:outline-none'
-              }`}
+              ${errors.ref && 'border-2 border-red-500 focus:outline-none'}`}
             />
           </label>
-          {errors.destination?.type === 'required' && (
+          {errors.ref?.type === 'required' && (
             <span className="text-red-500">
               {translate['urlErrorRequired']}
             </span>
           )}
-          {errors.destination?.type === 'pattern' && (
+          {errors.ref?.type === 'pattern' && (
             <span className="text-red-500">{translate['urlErrorPattern']}</span>
           )}
         </div>
@@ -73,29 +96,29 @@ export default function CreateForm({
           </label>
         </div>
         <div className="pt-8 text-left">
-          <label htmlFor="custom" className="flex flex-col text-lg">
-            {translate['customLabel']} ({translate['labelOptional']})
-            <div className="mt-2 flex flex-row items-center space-x-5">
-              <div className="flex h-8 w-24 items-center justify-center rounded ring-1 ring-gray-400/[.40] dark:bg-black/[.20]">
-                <p className="text-gray-700">sh0.ty</p>
-              </div>
-              <p className="text-2xl">/</p>
-              <input
-                type="text"
-                {...register('custom', {
-                  pattern: /^[a-zA-Z0-9]+$/
-                })}
-                className={`h-8 w-36 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white ${
-                  errors.custom && 'border-2 border-red-500 focus:outline-none'
-                }`}
-              />
-              {errors.custom?.type === 'pattern' && (
-                <span className="text-red-500">
-                  {translate['customErrorPattern']}
-                </span>
-              )}
-            </div>
-          </label>
+          {/*<label htmlFor="custom" className="flex flex-col text-lg">*/}
+          {/*  {translate['customLabel']} ({translate['labelOptional']})*/}
+          {/*  <div className="mt-2 flex flex-row items-center space-x-5">*/}
+          {/*    <div className="flex h-8 w-24 items-center justify-center rounded ring-1 ring-gray-400/[.40] dark:bg-black/[.20]">*/}
+          {/*      <p className="text-gray-700">sh0.ty</p>*/}
+          {/*    </div>*/}
+          {/*    <p className="text-2xl">/</p>*/}
+          {/*    <input*/}
+          {/*      type="text"*/}
+          {/*      {...register('custom', {*/}
+          {/*        pattern: /^[a-zA-Z0-9]+$/*/}
+          {/*      })}*/}
+          {/*      className={`h-8 w-36 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white ${*/}
+          {/*        errors.custom && 'border-2 border-red-500 focus:outline-none'*/}
+          {/*      }`}*/}
+          {/*    />*/}
+          {/*    {errors.custom?.type === 'pattern' && (*/}
+          {/*      <span className="text-red-500">*/}
+          {/*        {translate['customErrorPattern']}*/}
+          {/*      </span>*/}
+          {/*    )}*/}
+          {/*  </div>*/}
+          {/*</label>*/}
         </div>
         <button
           type="submit"

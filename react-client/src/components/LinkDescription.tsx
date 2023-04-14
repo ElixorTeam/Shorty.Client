@@ -1,5 +1,7 @@
-import { LinkDataType } from '../shared/LinkDataType'
+import { LinkRecordType } from '@/shared/LinkRecordType'
 import { PencilIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import convertDate from '@/shared/converDate'
+import LinkGenerator from '@/components/LinkGenerator'
 
 export default function LinkDescription({
   translate,
@@ -7,7 +9,7 @@ export default function LinkDescription({
   hideLink
 }: {
   translate: { [key: string]: string }
-  linkData: LinkDataType
+  linkData: LinkRecordType
   hideLink: () => void
 }) {
   const data = linkData
@@ -38,10 +40,12 @@ export default function LinkDescription({
           </div>
         </div>
         <p>
-          {translate['windowDate']} {data.date}
+          {translate['windowDate']} {convertDate(data.createDt)}
         </p>
-        <p className="pt-5 text-2xl font-bold text-blue-400">{data.link}</p>
-        <p className="pt-5 text-2xl font-bold">{translate['windowQR']}</p>
+        <a href={data.ref} className="pt-5 text-2xl font-bold text-blue-400">
+          {data.ref}
+        </a>
+        <LinkGenerator translate={translate} hrefLink={data.ref} />
       </div>
     </>
   )

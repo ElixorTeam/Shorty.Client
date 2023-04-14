@@ -1,45 +1,33 @@
 'use client'
-import LinkDescription from '@/components/LinkDescription'
-import { LinkDataType } from '@/shared/LinkDataType'
 import { useState } from 'react'
 import ListLinkHeader from './ListLinkHeader'
+import { LinkRecordType } from '@/shared/LinkRecordType'
+import LinkDescription from '@/components/LinkDescription'
+import convertDate from '@/shared/converDate'
 
 export default function LinksApp({
-  translate
+  translate,
+  linkData
 }: {
   translate: { [key: string]: string }
+  linkData: LinkRecordType[]
 }) {
-  const [selectedLink, setSelectedLink] = useState<LinkDataType | null>(null)
+  const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
   const hideLink = () => {
     setSelectedLink(null)
   }
-
-  const linksData: LinkDataType[] = [
-    {
-      id: 1,
-      title: 'Unique link 1',
-      link: 'sh0.ty/1f43',
-      date: '21.03.23'
-    },
-    {
-      id: 2,
-      title: 'Unique link 2',
-      link: 'sh0.ty/1f44',
-      date: '22.03.23'
-    }
-  ]
   return (
     <div className="sm:grid sm:grid-cols-[200px_1fr] md:grid-cols-[300px_1fr]">
       <div className="z-30 h-[calc(100vh-64px)] overflow-y-hidden shadow-[8px_0px_10px_0px_rgba(0,0,0,0.02)] scrollbar-thin hover:overflow-y-auto dark:shadow-[8px_0px_10px_0px_rgba(0,0,0,0.1)]">
         <ListLinkHeader translate={translate} />
-        {linksData.map(item => (
+        {linkData.map((item: LinkRecordType) => (
           <button
-            key={item.id}
+            key={item.uid}
             type="button"
             className={`${
               selectedLink
                 ? `${
-                    selectedLink.id === item.id
+                    selectedLink.uid === item.uid
                       ? 'bg-sky-200 dark:text-black'
                       : 'bg-slate-100 dark:bg-[#1f1e29]'
                   }`
@@ -50,8 +38,8 @@ export default function LinksApp({
             <div className="flex w-full flex-col">
               <p className="font-semibold">{item.title}</p>
               <div className="flex w-40 justify-between text-xs text-gray-600">
-                <p>{item.link}</p>
-                <p>{item.date}</p>
+                <p>{item.ref}</p>
+                <p>{convertDate(item.createDt)}</p>
               </div>
             </div>
           </button>

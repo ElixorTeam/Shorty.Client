@@ -3,20 +3,18 @@ import createIntlMiddleware from 'next-intl/middleware'
 export default createIntlMiddleware({
   locales: ['en', 'ru'],
   defaultLocale: 'en',
-
-  routing: {
-    type: 'domain',
-    domains: [
-      {
-        domain: 'en.localhost',
-        locale: 'en'
-      },
-      {
-        domain: 'ru.localhost',
-        locale: 'ru'
-      }
-    ]
-  }
+  domains: [
+    {
+      domain: 'en.localhost',
+      defaultLocale: 'en',
+      locales: ['en']
+    },
+    {
+      domain: 'ru.localhost',
+      defaultLocale: 'ru',
+      locales: ['ru']
+    }
+  ]
 })
 
 export const config = {
