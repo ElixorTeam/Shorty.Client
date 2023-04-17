@@ -1,18 +1,8 @@
 import LinksApp from '@/components/LinksApp'
-import { getTranslations } from 'next-intl/server'
-import { LinkRecordType } from '@/shared/LinkRecordType'
+import { useTranslations } from 'next-intl'
 
-async function getData() {
-  const res = await fetch('http://localhost:8082/linkshortener/links/')
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  return res.json()
-}
-
-export default async function Links() {
-  const data = (await getData()) as LinkRecordType[]
-  const t = await getTranslations('app')
+export default function Links() {
+  const t = useTranslations('app')
   const translation = {
     windowTitle: t('windowTitle'),
     windowDate: t('windowDate'),
@@ -21,5 +11,5 @@ export default async function Links() {
     sortKeyLast: t('sortKeyLast'),
     sortLabel: t('sortLabel')
   }
-  return <LinksApp linkData={data} translate={translation} />
+  return <LinksApp translate={translation} />
 }

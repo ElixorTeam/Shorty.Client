@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
 import useSWRMutation from 'swr/mutation'
+import { useEffect } from 'react'
 
 type FormInputs = {
   title: string
@@ -15,15 +16,14 @@ type SendDataType = {
   active: boolean
 }
 
-const url = 'http://localhost:8082/linkshortener/links/create'
+const url = 'http://localhost:8082/linkshortener/api/create'
 
 async function sendRequest(url: string, { arg }: { arg: SendDataType }) {
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(arg),
     headers: {
-      'Content-Type': 'application/json; charset=utf8',
-      'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json'
     }
   })
 }
@@ -50,6 +50,7 @@ export default function CreateForm({
       active: true
     }
     trigger(dataToSend)
+    router.prefetch('/links')
     router.push('/links')
   }
 
