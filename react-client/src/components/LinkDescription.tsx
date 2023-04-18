@@ -1,9 +1,7 @@
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { TrashIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import convertDate from '@/shared/converDate'
+import convertDate from '@/shared/convertDate'
 import LinkGenerator from '@/components/LinkGenerator'
-
-const url = 'http://localhost:8082/linkshortener/api/delete/'
 
 export default function LinkDescription({
   translate,
@@ -15,10 +13,7 @@ export default function LinkDescription({
   hideLink: () => void
 }) {
   const removeLink = () => {
-    fetch(url + linkData.uid, { method: 'DELETE' })
-      .then(resp => resp.json())
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+    // deleteLink(linkData.uid).then(r => console.log('Completed'))
     hideLink()
   }
   return (

@@ -3,19 +3,16 @@ import { useState } from 'react'
 import ListLinkHeader from './ListLinkHeader'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import LinkDescription from '@/components/LinkDescription'
-import convertDate from '@/shared/converDate'
-import useSWR, { Fetcher } from 'swr'
+import convertDate from '@/shared/convertDate'
 import { useRouter } from 'next-intl/client'
-
-const fetcher: Fetcher<LinkRecordType[]> = (url: string) =>
-  fetch('http://localhost:8082/linkshortener/api' + url).then(res => res.json())
+import { useGetLinks } from '@/shared/fetcher'
 
 export default function LinksApp({
   translate
 }: {
   translate: { [key: string]: string }
 }) {
-  const { data, error, isLoading } = useSWR('/', fetcher)
+  const { data, error, isLoading } = useGetLinks()
   const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
   const router = useRouter()
   const hideLink = () => {
@@ -25,6 +22,7 @@ export default function LinksApp({
     <div className="sm:grid sm:grid-cols-[200px_1fr] md:grid-cols-[300px_1fr]">
       <div className="z-30 h-[calc(100vh-64px)] overflow-y-hidden shadow-[8px_0px_10px_0px_rgba(0,0,0,0.02)] scrollbar-thin hover:overflow-y-auto dark:shadow-[8px_0px_10px_0px_rgba(0,0,0,0.1)]">
         <ListLinkHeader translate={translate} />
+
         {data?.map((item: LinkRecordType) => (
           <button
             key={item.uid}

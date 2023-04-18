@@ -29,8 +29,8 @@ export default function LoginPage({
   const handlePin = (pin: string) => {
     console.log(`Email: ${email}, Pin: ${pin}`)
   }
-
   return isPinForm ? (
+    // @ts-ignore
     <PinForm onSubmit={handlePin} translate={translate} />
   ) : (
     <EmailForm onSubmit={handleEmail} translate={translate} />

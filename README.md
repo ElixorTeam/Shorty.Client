@@ -1,6 +1,6 @@
 # ShortyWebClient
 [![CodeFactor](https://www.codefactor.io/repository/github/bagger-steam/shortyreactclient/badge)](https://www.codefactor.io/repository/github/bagger-steam/shortyreactclient)
-[![CI](https://github.com/Bagger-sTeam/ShortyReactClient/workflows/CI/badge.svg?)
+![CI](https://github.com/Bagger-sTeam/ShortyReactClient/workflows/CI/badge.svg?)
 
 ## Overview
 This is React client application for **[Shorty Api](https://github.com/Bagger-sTeam/ShortyRestApi)**

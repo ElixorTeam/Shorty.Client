@@ -18,7 +18,7 @@ type SendDataType = {
 
 const url = 'http://localhost:8082/linkshortener/api/create'
 
-async function sendRequest(url: string, { arg }: { arg: SendDataType }) {
+function sendRequest(url: string, { arg }: { arg: SendDataType }) {
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(arg),
