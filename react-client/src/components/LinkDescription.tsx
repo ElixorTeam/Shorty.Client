@@ -12,6 +12,7 @@ export default function LinkDescription({
   linkData: LinkRecordType
   hideLink: () => void
 }) {
+  const shortURL = 'http://localhost:3031/' + linkData.refRoute
   const removeLink = () => {
     // deleteLink(linkData.uid).then(r => console.log('Completed'))
     hideLink()
@@ -52,6 +53,12 @@ export default function LinkDescription({
         >
           {linkData.ref}
         </a>
+        <div>
+          <p>Short link:</p>
+          <a href={shortURL} className="pt-5 text-2xl font-bold text-blue-400">
+            {shortURL}
+          </a>
+        </div>
         <LinkGenerator translate={translate} hrefLink={linkData.ref} />
       </div>
     </>

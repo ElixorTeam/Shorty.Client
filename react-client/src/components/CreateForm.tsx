@@ -16,7 +16,7 @@ type SendDataType = {
   active: boolean
 }
 
-const url = 'http://localhost:8082/linkshortener/api/create'
+const url = 'http://localhost:8082/shorty/api/links/'
 
 function sendRequest(url: string, { arg }: { arg: SendDataType }) {
   return fetch(url, {

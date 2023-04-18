@@ -1,5 +1,5 @@
-import {useParams} from "react-router-dom";
-import {LinkRecordType} from "./shared/LinkRecordType";
+import { useParams } from "react-router-dom";
+import { LinkRecordType } from "./shared/LinkRecordType";
 
 export const apiURL = 'http://localhost:8082/shorty/api'
 
