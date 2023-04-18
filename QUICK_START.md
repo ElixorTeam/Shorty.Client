@@ -20,4 +20,4 @@ pnpm dev
 ```bash
 pnpm build
 ```
-[GO BACK](README.md)
+[Go back](README.md)
