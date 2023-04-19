@@ -4,17 +4,21 @@ import ListLinkHeader from './ListLinkHeader'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import LinkDescription from '@/components/LinkDescription'
 import convertDate from '@/shared/convertDate'
-import { useRouter } from 'next-intl/client'
-import { useGetLinks } from '@/shared/fetcher'
+import useSWR from 'swr'
+import { apiURL } from '@/shared/fetcher'
+import ky from 'ky'
+
+const fetcher = async (url: string): Promise<LinkRecordType[]> => {
+  return await ky.get(url).json()
+}
 
 export default function LinksApp({
   translate
 }: {
   translate: { [key: string]: string }
 }) {
-  const { data, error, isLoading } = useGetLinks()
+  const { data } = useSWR(`${apiURL}/links/`, fetcher)
   const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
-  const router = useRouter()
   const hideLink = () => {
     setSelectedLink(null)
   }

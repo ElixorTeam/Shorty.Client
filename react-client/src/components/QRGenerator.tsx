@@ -1,7 +1,7 @@
 'use client'
 import { useQRCode } from 'next-qrcode'
 
-export default function LinkGenerator({
+export default function QRGenerator({
   translate,
   hrefLink
 }: {

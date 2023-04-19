@@ -1,31 +1,12 @@
 'use client'
-
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
-import useSWRMutation from 'swr/mutation'
-import { useEffect } from 'react'
+import { apiURL } from '@/shared/fetcher'
+import ky from 'ky'
 
 type FormInputs = {
   title: string
   ref: string
-}
-
-type SendDataType = {
-  title: string
-  ref: string
-  active: boolean
-}
-
-const url = 'http://localhost:8082/shorty/api/links/'
-
-function sendRequest(url: string, { arg }: { arg: SendDataType }) {
-  return fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(arg),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
 }
 
 export default function CreateForm({
@@ -41,15 +22,13 @@ export default function CreateForm({
 
   const router = useRouter()
 
-  const { trigger, isMutating } = useSWRMutation(url, sendRequest)
-
   const onSubmit = async (formInput: FormInputs) => {
-    const dataToSend = {
+    const formData = {
       ref: formInput.ref,
       title: formInput.title,
       active: true
     }
-    trigger(dataToSend)
+    await ky.post(`${apiURL}/links/`, { json: formData })
     router.prefetch('/links')
     router.push('/links')
   }

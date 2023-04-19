@@ -1,7 +1,9 @@
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { TrashIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import convertDate from '@/shared/convertDate'
-import LinkGenerator from '@/components/LinkGenerator'
+import QRGenerator from '@/components/QRGenerator'
+import ky from 'ky'
+import { apiURL } from '@/shared/fetcher'
 
 export default function LinkDescription({
   translate,
@@ -13,8 +15,8 @@ export default function LinkDescription({
   hideLink: () => void
 }) {
   const shortURL = 'http://localhost:3031/' + linkData.refRoute
-  const removeLink = () => {
-    // deleteLink(linkData.uid).then(r => console.log('Completed'))
+  const removeLink = async () => {
+    await ky.delete(`${apiURL}/links/${linkData.uid}`)
     hideLink()
   }
   return (
@@ -59,7 +61,7 @@ export default function LinkDescription({
             {shortURL}
           </a>
         </div>
-        <LinkGenerator translate={translate} hrefLink={linkData.ref} />
+        <QRGenerator translate={translate} hrefLink={shortURL} />
       </div>
     </>
   )
