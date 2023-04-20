@@ -15,18 +15,14 @@ const fetcher = async (url: string): Promise<LinkRecordType[]> => {
 export default function LinksApp({
   translate
 }: {
-  translate: { [key: string]: string }
+  translate: { [_: string]: string }
 }) {
-  const { data } = useSWR(`${apiURL}/links/`, fetcher)
+  const { data, mutate } = useSWR(`${apiURL}/links/`, fetcher)
   const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
-  const hideLink = () => {
-    setSelectedLink(null)
-  }
   return (
     <div className="sm:grid sm:grid-cols-[200px_1fr] md:grid-cols-[300px_1fr]">
       <div className="z-30 h-[calc(100vh-64px)] overflow-y-hidden shadow-[8px_0px_10px_0px_rgba(0,0,0,0.02)] scrollbar-thin hover:overflow-y-auto dark:shadow-[8px_0px_10px_0px_rgba(0,0,0,0.1)]">
         <ListLinkHeader translate={translate} />
-
         {data?.map((item: LinkRecordType) => (
           <button
             key={item.uid}
@@ -61,11 +57,10 @@ export default function LinksApp({
           <LinkDescription
             translate={translate}
             linkData={selectedLink}
-            hideLink={() => hideLink()}
+            reloadLinks={() => mutate().then()}
+            hideLink={() => setSelectedLink(null)}
           />
-        ) : (
-          ''
-        )}
+        ) : null}
       </div>
     </div>
   )

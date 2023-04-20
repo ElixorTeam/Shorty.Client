@@ -8,15 +8,18 @@ import { apiURL } from '@/shared/fetcher'
 export default function LinkDescription({
   translate,
   linkData,
-  hideLink
+  hideLink,
+  reloadLinks
 }: {
-  translate: { [key: string]: string }
+  translate: { [_: string]: string }
   linkData: LinkRecordType
   hideLink: () => void
+  reloadLinks: () => void
 }) {
   const shortURL = 'http://localhost:3031/' + linkData.refRoute
   const removeLink = async () => {
     await ky.delete(`${apiURL}/links/${linkData.uid}`)
+    reloadLinks()
     hideLink()
   }
   return (
@@ -50,6 +53,7 @@ export default function LinkDescription({
           {translate['windowDate']} {convertDate(linkData.createDt)}
         </p>
         <a
+          target="_blank"
           href={linkData.ref}
           className="pt-5 text-2xl font-bold text-blue-400"
         >
@@ -57,7 +61,11 @@ export default function LinkDescription({
         </a>
         <div>
           <p>Short link:</p>
-          <a href={shortURL} className="pt-5 text-2xl font-bold text-blue-400">
+          <a
+            target="_blank"
+            href={shortURL}
+            className="pt-5 text-2xl font-bold text-blue-400"
+          >
             {shortURL}
           </a>
         </div>
