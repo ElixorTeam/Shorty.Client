@@ -1,0 +1,38 @@
+.gridContainer {
+    display: grid;
+    gap: 5px;
+    grid-template-areas:
+    "A A A A   A A A A   C C C C"
+    "B B B B   B B B B   D D D D"
+    "B B B B   B B B B   D D D D";
+}
+
+.linkHeader{
+    grid-area: A;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.linkBody{
+    grid-area: B;
+}
+
+.linkDate{
+    grid-area: C;
+    font-size: 12px;
+    align-self: center;
+}
+
+.descriptionHeader {
+    overflow: hidden;
+    white-space: nowrap;
+}
+@media(max-width: 700px) {
+    .gridContainer {
+        grid-template-areas:
+            "A A A A   A A A A"
+            "B B B B   B B B B"
+            "B B B B   B B B B"
+            "C C C C   C C C C";
+    }
+}

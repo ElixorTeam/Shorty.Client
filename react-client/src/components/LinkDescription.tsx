@@ -4,6 +4,7 @@ import convertDate from '@/shared/convertDate'
 import QRGenerator from '@/components/QRGenerator'
 import ky from 'ky'
 import { apiURL } from '@/shared/fetcher'
+import './LinkStyle.css'
 
 export default function LinkDescription({
   translate,
@@ -25,7 +26,7 @@ export default function LinkDescription({
   return (
     <>
       <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] dark:bg-[#23212e] dark:shadow-[0px_8px_10px_0px_rgba(0,0,0,0.1)] sm:hidden">
-        <p className="text-lg font-bold">{translate['windowTitle']}</p>
+        <p className="text-lg font-bold ">{translate['windowTitle']}</p>
         <button type="button" onClick={hideLink}>
           <XMarkIcon className="h-6 w-6 dark:text-white" />
         </button>

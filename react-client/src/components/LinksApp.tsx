@@ -7,7 +7,7 @@ import convertDate from '@/shared/convertDate'
 import useSWR from 'swr'
 import { apiURL } from '@/shared/fetcher'
 import ky from 'ky'
-
+import './LinkStyle.css'
 const fetcher = async (url: string): Promise<LinkRecordType[]> => {
   return await ky.get(url).json()
 }
@@ -38,12 +38,12 @@ export default function LinksApp({
             } flex h-24 w-full items-center px-5 text-left md:px-10`}
             onClick={() => setSelectedLink(item)}
           >
-            <div className="flex w-full flex-col">
-              <p className="font-semibold">{item.title}</p>
-              <div className="flex w-40 justify-between text-xs text-gray-600">
+            <div className="gridContainer w-full">
+              <p className="linkHeader font-semibold">{item.title}</p>
+              <div className="linkBody flex w-40 justify-between text-xs text-gray-600">
                 <p>{item.ref}</p>
-                <p>{convertDate(item.createDt)}</p>
               </div>
+              <p className={'linkDate'}>{convertDate(item.createDt)}</p>
             </div>
           </button>
         ))}
