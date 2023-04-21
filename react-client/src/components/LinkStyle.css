@@ -15,7 +15,10 @@
 }
 
 .linkBody{
-    grid-area: B;
+  height: 30px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  grid-area: B;
 }
 
 .linkDate{
