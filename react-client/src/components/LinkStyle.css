@@ -11,6 +11,7 @@
     grid-area: A;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .linkBody{
@@ -27,7 +28,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
-@media(max-width: 700px) {
+@media(max-width: 768px) {
     .gridContainer {
         grid-template-areas:
             "A A A A   A A A A"

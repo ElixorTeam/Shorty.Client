@@ -1,5 +1,5 @@
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import { TrashIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import {PencilIcon, TrashIcon, XMarkIcon} from '@heroicons/react/24/solid'
 import convertDate from '@/shared/convertDate'
 import QRGenerator from '@/components/QRGenerator'
 import ky from 'ky'
@@ -42,12 +42,12 @@ export default function LinkDescription({
             >
               <TrashIcon className="h-6 w-6 text-red-700" />
             </button>
-            {/*<button*/}
-            {/*  type="button"*/}
-            {/*  className="transition hover:scale-105 active:scale-95"*/}
-            {/*>*/}
-            {/*  <PencilIcon className="h-5 w-5" />*/}
-            {/*</button>*/}
+            <button
+              type="button"
+              className="transition hover:scale-105 active:scale-95"
+            >
+              <PencilIcon className="h-5 w-5" />
+            </button>
           </div>
         </div>
         <p>

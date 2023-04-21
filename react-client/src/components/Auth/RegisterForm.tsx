@@ -6,13 +6,15 @@ import { useRouter } from 'next-intl/client'
 type FormData = {
   email: string
   password: string
+  confirmPassword: string
 }
 
-export default function AuthForm() {
+export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm<FormData>()
   const router = useRouter()
   const onSubmit = (data: FormData) => {
@@ -23,12 +25,12 @@ export default function AuthForm() {
     <div className="flex h-[calc(100vh-64px)] flex-col justify-center align-middle">
       <div>
         <p className="mb-2 text-center text-4xl font-bold dark:text-white">
-          Log in to your account
+          Create new account
         </p>
         <p className="mb-2 text-center">
-          If you do not have account, than{' '}
-          <Link href="/register" className="text-sky-300">
-            create new
+          If you have account, than{' '}
+          <Link href={'/auth'} className="text-sky-300">
+            login in
           </Link>
         </p>
 
@@ -88,23 +90,41 @@ export default function AuthForm() {
               <span className="text-red-500">Doesnt consist to pattern</span>
             )}
           </div>
+          <div className="my-2 flex w-3/4 flex-col justify-center">
+            <label
+              htmlFor="password"
+              className="flex w-full flex-col justify-center text-lg"
+            >
+              Confirm Password
+              <input
+                id="confirmPassword"
+                type="password"
+                {...register('confirmPassword', {
+                  required: true,
+                  validate: value => {
+                    const { password } = getValues()
+                    return password === value || 'Passwords should match'
+                  }
+                })}
+                placeholder="********"
+                className={`mt-2 h-8 w-full rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white
+              ${
+                errors.confirmPassword &&
+                'border-2 border-red-500 focus:outline-none'
+              }`}
+              />
+            </label>
+            {errors.confirmPassword && (
+              <span className="text-red-500">
+                {errors.confirmPassword.message}
+              </span>
+            )}
+          </div>
           <button
             type="submit"
             className="mb-2 mt-6 h-10 w-[300px] rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition hover:scale-105 dark:shadow-blue-200/[.1]"
           >
-            <p className="text-lg font-semibold text-white">Enter via e-mail</p>
-          </button>
-          <button
-            type="button"
-            className="my-2 h-10 w-[300px] rounded-lg bg-white shadow-md transition hover:scale-105"
-          >
-            <p className="mb-[2px] text-black">Enter via Google</p>
-          </button>
-          <button
-            type="button"
-            className="my-2 h-10 w-[300px] rounded-lg bg-neutral-800 shadow-md transition hover:scale-105"
-          >
-            <p className="text-white">Enter via GitHub</p>
+            <p className="text-lg font-semibold text-white">Create account</p>
           </button>
         </form>
       </div>

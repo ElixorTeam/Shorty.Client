@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
 import { apiURL } from '@/shared/fetcher'
 import ky from 'ky'
+import { useState } from 'react'
 
 type FormInputs = {
   title: string
@@ -12,8 +13,9 @@ type FormInputs = {
 export default function CreateForm({
   translate
 }: {
-  translate: { [key: string]: string }
+  translate: { [_: string]: string }
 }) {
+  const [requestError, setRequestError] = useState<string | null>(null)
   const {
     register,
     handleSubmit,
@@ -28,7 +30,14 @@ export default function CreateForm({
       title: formInput.title,
       active: true
     }
-    await ky.post(`${apiURL}/links/`, { json: formData })
+    try {
+      await ky.post(`${apiURL}/links/`, { json: formData })
+    } catch (err: any) {
+      const errResponse: { msg: string } = await err.response?.json?.()
+      const errMsg = errResponse ? errResponse.msg : err.message
+      setRequestError(errMsg)
+      return
+    }
     router.prefetch('/links')
     router.push('/links')
   }
@@ -42,8 +51,11 @@ export default function CreateForm({
         <p className="text-2xl font-bold dark:text-white">
           {translate['formTitle']}
         </p>
+        {requestError ? (
+          <p className="mt-4 text-red-500">{requestError}</p>
+        ) : null}
         <div className="pt-8 text-left">
-          <label htmlFor="destination" className="flex flex-col text-lg">
+          <label htmlFor="ref" className="flex flex-col text-lg">
             {translate['urlLabel']}
             <input
               type="text"

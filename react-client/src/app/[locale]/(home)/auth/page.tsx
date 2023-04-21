@@ -8,5 +8,5 @@ export default function Auth() {
     pinDescription: t('pinDescription'),
     pinSubmit: t('pinSubmit')
   }
-  return <AuthForm translate={translation} />
+  return <AuthForm />
 }
