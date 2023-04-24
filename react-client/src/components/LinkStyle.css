@@ -40,3 +40,9 @@
             "C C C C   C C C C";
     }
 }
+
+.loadingStyles {
+  position: absolute;
+  top:46%;
+  left:46%;
+}
