@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { LinkRecordType } from "./shared/LinkRecordType";
 import useSWR from "swr";
 
-export const apiURL = 'http://localhost:8082/shorty/api'
+const apiURL = 'http://localhost:8082/shorty/api'
 
 const getLinkByUUID = async(ref: string) => {
     return await fetch(`${apiURL}/links/route_ref/${ref}`)
@@ -22,7 +22,7 @@ export default function App() {
         console.log(error)
         return <p>Error</p>
     }
-    if (!data) return null
+    if (!data) return <p>Error</p>
     window.location.assign(data.ref)
     return <p>Redirecting...</p>
 }
