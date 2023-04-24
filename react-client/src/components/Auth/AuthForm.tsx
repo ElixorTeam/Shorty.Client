@@ -2,6 +2,8 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'next-intl'
 import { useRouter } from 'next-intl/client'
+import GoogleIcon from '@/assets/google-icon.svg'
+import GithubIcon from '@/assets/github-icon.svg'
 
 type FormData = {
   email: string
@@ -96,15 +98,21 @@ export default function AuthForm() {
           </button>
           <button
             type="button"
-            className="my-2 h-10 w-[300px] rounded-lg bg-white shadow-md transition hover:scale-105"
+            className="my-2 h-10 w-[300px] justify-center rounded-lg bg-white align-middle shadow-md transition hover:scale-105"
           >
-            <p className="mb-[2px] text-black">Enter via Google</p>
+            <div className="flex justify-center gap-2">
+              <GoogleIcon className="h-6 w-6" />
+              <p className="text-black">Enter via Google</p>
+            </div>
           </button>
           <button
             type="button"
             className="my-2 h-10 w-[300px] rounded-lg bg-neutral-800 shadow-md transition hover:scale-105"
           >
-            <p className="text-white">Enter via GitHub</p>
+            <div className="flex justify-center gap-2">
+              <GithubIcon className="h-7 w-7 fill-white" />
+              <p className="text-white">Enter via GitHub</p>
+            </div>
           </button>
         </form>
       </div>

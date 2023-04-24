@@ -1,5 +1,5 @@
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import {PencilIcon, TrashIcon, XMarkIcon} from '@heroicons/react/24/solid'
+import { PencilIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import convertDate from '@/shared/convertDate'
 import QRGenerator from '@/components/QRGenerator'
 import ky from 'ky'

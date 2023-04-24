@@ -1,7 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form'
-import GoogleIcon from '@/public/google-icon.svg'
-import GithubIcon from '@/public/github-icon.svg'
+import GoogleIcon from '@/assets/google-icon.svg'
+import GithubIcon from '@/assets/github-icon.svg'
 
 type FormData = {
   email: string
