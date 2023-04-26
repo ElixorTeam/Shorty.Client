@@ -8,9 +8,8 @@ import useSWR from 'swr'
 import { apiURL } from '@/shared/fetcher'
 import ky from 'ky'
 import './LinkStyle.css'
-const fetcher = async (url: string): Promise<LinkRecordType[]> => {
-  return await ky.get(url).json()
-}
+const fetcher = async (url: string): Promise<LinkRecordType[]> =>
+  await ky.get(url).json()
 
 export default function LinksApp({
   translate
@@ -48,12 +47,16 @@ export default function LinksApp({
             } flex h-24 w-full items-center px-5 text-left md:px-10`}
             onClick={() => setSelectedLink(item)}
           >
-            <div className="gridContainer w-full">
-              <p className="linkHeader font-semibold">{item.title}</p>
-              <div className="linkBody flex w-40 justify-between text-xs text-gray-600">
-                <p>{item.ref}</p>
+            <div className="linkContainer grid w-full gap-1">
+              <p className="linkHeader line-clamp-1 font-semibold">
+                {item.title}
+              </p>
+              <div className="linkBody flex w-40 justify-between">
+                <p className="line-clamp-2 text-xs text-gray-600">{item.ref}</p>
               </div>
-              <p className={'linkDate'}>{convertDate(item.createDt)}</p>
+              <p className="linkDate self-center text-xs">
+                {convertDate(item.createDt)}
+              </p>
             </div>
           </button>
         ))}
@@ -61,7 +64,7 @@ export default function LinksApp({
       <div
         className={`${
           selectedLink ? 'block' : 'hidden'
-        } absolute left-0 top-0 z-[60] h-[calc(100vh-64px)] w-screen sm:static sm:z-30 sm:h-full sm:w-full sm:p-3 md:p-6`}
+        } absolute left-0 top-0 z-[60] h-[calc(100vh-64px)] w-screen overflow-hidden sm:static sm:z-30 sm:h-full sm:w-full sm:p-3 md:p-6`}
       >
         {selectedLink ? (
           <LinkDescription

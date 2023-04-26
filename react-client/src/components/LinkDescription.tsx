@@ -1,10 +1,17 @@
+'use client'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import { PencilIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import {
+  PencilIcon,
+  TrashIcon,
+  XMarkIcon,
+  CheckIcon
+} from '@heroicons/react/24/solid'
 import convertDate from '@/shared/convertDate'
 import QRGenerator from '@/components/QRGenerator'
 import ky from 'ky'
 import { apiURL } from '@/shared/fetcher'
 import './LinkStyle.css'
+import { useState } from 'react'
 
 export default function LinkDescription({
   translate,
@@ -17,11 +24,26 @@ export default function LinkDescription({
   hideLink: () => void
   reloadLinks: () => void
 }) {
+  const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [inputValue, setInputValue] = useState<string>('')
   const shortURL = 'http://localhost:3031/' + linkData.refRoute
   const removeLink = async () => {
     await ky.delete(`${apiURL}/links/${linkData.uid}`)
     reloadLinks()
     hideLink()
+  }
+  const editLink = () => {
+    if (!(inputValue.length === 0 || inputValue === linkData.title)) {
+      ky.put(`${apiURL}/links/${linkData.uid}`, {
+        json: {
+          title: inputValue,
+          ref: linkData.ref
+        }
+      })
+      reloadLinks()
+      linkData.title = inputValue
+    }
+    setIsEdit(false)
   }
   return (
     <>
@@ -32,22 +54,55 @@ export default function LinkDescription({
         </button>
       </div>
       <div className="h-[calc(100%-64px)] bg-white px-4 py-8 dark:bg-[#23212e] sm:h-full sm:rounded-xl md:px-16">
-        <div className="flex flex-row items-center justify-between">
-          <p className="text-4xl font-bold">{linkData.title}</p>
-          <div className="flex flex-row items-center space-x-4">
-            <button
-              type="button"
-              onClick={removeLink}
-              className="transition hover:scale-105 active:scale-95"
-            >
-              <TrashIcon className="h-6 w-6 text-red-700" />
-            </button>
-            <button
-              type="button"
-              className="transition hover:scale-105 active:scale-95"
-            >
-              <PencilIcon className="h-5 w-5" />
-            </button>
+        <div className="flex items-start justify-between">
+          {isEdit ? (
+            <input
+              type="text"
+              onChange={event => setInputValue(event.target.value)}
+              defaultValue={linkData.title}
+              className="mr-6 w-full border-b-2 border-black text-4xl font-bold focus:outline-none"
+            />
+          ) : (
+            <p className="line-clamp-2 pb-2 text-4xl font-bold">
+              {linkData.title}
+            </p>
+          )}
+          <div className="mt-3 flex flex-row items-center space-x-4">
+            {isEdit ? (
+              <>
+                <button
+                  type="button"
+                  onClick={editLink}
+                  className="transition hover:scale-105 active:scale-95"
+                >
+                  <CheckIcon className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsEdit(false)}
+                  className="transition hover:scale-105 active:scale-95"
+                >
+                  <XMarkIcon className="h-6 w-6" />
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={removeLink}
+                  className="transition hover:scale-105 active:scale-95"
+                >
+                  <TrashIcon className="h-6 w-6 text-red-700" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsEdit(true)}
+                  className="transition hover:scale-105 active:scale-95"
+                >
+                  <PencilIcon className="h-5 w-5" />
+                </button>
+              </>
+            )}
           </div>
         </div>
         <p>
@@ -56,7 +111,7 @@ export default function LinkDescription({
         <a
           target="_blank"
           href={linkData.ref}
-          className="pt-5 text-2xl font-bold text-blue-400"
+          className="line-clamp-3 text-2xl font-bold text-blue-400"
         >
           {linkData.ref}
         </a>
