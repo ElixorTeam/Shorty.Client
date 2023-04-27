@@ -1,36 +1,49 @@
 {
-    "app": {
-        "headerSearch": "Search",
-        "navbarCreate": "Create",
-        "navbarLinks": "Links",
-        "navbarSettings": "Settings",
-        "windowTitle": "Link Description",
-        "windowDate": "Created",
-        "windowQR": "QR Code",
-        "sortKeyViewed": "Viewed",
-        "sortKeyLast": "Last",
-        "sortLabel": "Sort by"
-    },
-    "home" : {
-        "title": "Let's short your links together",
-        "description": "Links don't have to be lengthy",
-        "btnText": "Try right now",
-        "headerAuth": "Log In / Sign Up"
-    },
-    "auth": {
-        "pinTitle": "Enter PIN code",
-        "pinDescription": "The PIN code has been sent to your email. Click here to resend.",
-        "pinSubmit": "Enter"
-    },
-    "create": {
-        "formTitle": "Create link",
-        "urlLabel": "Url link",
-        "urlErrorRequired": "Url is required",
-        "urlErrorPattern": "Incorrent URL",
-        "titleLabel": "Title",
-        "customLabel": "Custom link",
-        "customErrorPattern": "Incorrent name",
-        "submitButton": "Create",
-        "labelOptional": "Optional"
-    }
+  "app": {
+    "headerSearch": "Search",
+    "navbarCreate": "Create",
+    "navbarLinks": "Links",
+    "navbarSettings": "Settings",
+    "windowTitle": "Link Description",
+    "windowDate": "Created",
+    "windowQR": "QR Code",
+    "sortKeyViewed": "Viewed",
+    "sortKeyLast": "Last",
+    "sortLabel": "Sort by"
+  },
+  "home" : {
+    "title": "Let's short your links together",
+    "description": "Links don't have to be lengthy",
+    "btnText": "Try right now",
+    "headerAuth": "Log In / Sign Up"
+  },
+  "auth": {
+    "formTitle": "Sign In",
+    "noAccountText": "No account?",
+    "noAccountLink": "Create",
+    "emailInput": "Email address",
+    "passwordInput": "Password",
+    "enterBtn": "Sign in",
+    "additionalEnter": "Or"
+  },
+  "register": {
+    "formTitle": "Sign Up",
+    "haveAccountText": "Have an account?",
+    "haveAccountLink": "Login",
+    "emailInput": "Email address",
+    "passwordInput": "Password",
+    "confirmPasswordInput": "Confirm password",
+    "enterBtn": "Sign up"
+  },
+  "create": {
+    "formTitle": "Create link",
+    "urlLabel": "Url link",
+    "urlErrorRequired": "Url is required",
+    "urlErrorPattern": "Incorrent URL",
+    "titleLabel": "Title",
+    "customLabel": "Custom link",
+    "customErrorPattern": "Incorrent name",
+    "submitButton": "Create",
+    "labelOptional": "Optional"
+  }
 }

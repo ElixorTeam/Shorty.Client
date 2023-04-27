@@ -4,116 +4,95 @@ import { Link } from 'next-intl'
 import { useRouter } from 'next-intl/client'
 import GoogleIcon from '@/assets/google-icon.svg'
 import GithubIcon from '@/assets/github-icon.svg'
+import InputComponent from '@/components/Common/InputComponent'
 
 type FormData = {
   email: string
   password: string
 }
 
-export default function AuthForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormData>()
+export default function AuthForm({
+  translate
+}: {
+  translate: { [_: string]: string }
+}) {
+  const { register, handleSubmit } = useForm<FormData>()
   const router = useRouter()
   const onSubmit = (data: FormData) => {
     console.log(data)
     router.push('/links')
   }
   return (
-    <div className="flex h-[calc(100vh-64px)] flex-col justify-center align-middle">
-      <div>
-        <p className="mb-2 text-center text-4xl font-bold dark:text-white">
-          Log in to your account
-        </p>
-        <p className="mb-2 text-center">
-          If you do not have account, than{' '}
-          <Link href="/register" className="text-sky-300">
-            create new
+    <div className="flex h-[calc(100vh-64px)] items-center justify-center">
+      <div className="flex h-fit w-80 flex-col justify-center rounded-lg p-10 md:w-96 md:shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:md:shadow-gray-900">
+        <p className="text-2xl font-bold">{translate['formTitle']}</p>
+        <p className="mb-1">
+          {translate['noAccountText']}{' '}
+          <Link href="/register" className="text-sky-500">
+            {translate['noAccountLink']}
           </Link>
         </p>
-
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="m-auto flex h-max w-[300px] flex-col items-center justify-center rounded-lg md:w-[500px]"
+          className="flex flex-col items-center"
         >
-          <div className="my-2 flex w-3/4 flex-col justify-center">
-            <label
-              htmlFor="email"
-              className="flex w-full flex-col justify-center text-lg"
-            >
-              E-mail
-              <input
-                id="email"
+          <div className="my-2 flex w-full flex-col justify-center">
+            <div className="w-full">
+              <InputComponent
                 type="email"
-                {...register('email', {
+                name="authEmailInput"
+                label={translate['emailInput']}
+                registerOptions={{
                   required: true,
                   pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-                })}
-                placeholder="example@gmail.com"
-                className={`mt-2 h-8 w-full rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white
-              ${errors.email && 'border-2 border-red-500 focus:outline-none'}`}
+                }}
+                register={register}
               />
-            </label>
-            {errors.email?.type === 'required' && (
-              <span className="text-red-500">Input required</span>
-            )}
-            {errors.email?.type === 'pattern' && (
-              <span className="text-red-500">Invalid e-mail address</span>
-            )}
-          </div>
-          <div className="my-2 flex w-3/4 flex-col justify-center">
-            <label
-              htmlFor="password"
-              className="flex w-full flex-col justify-center text-lg"
-            >
-              Password
-              <input
-                id="password"
+            </div>
+            <div className="mt-4 w-full">
+              <InputComponent
                 type="password"
-                {...register('password', {
+                name="authPasswordInput"
+                label={translate['passwordInput']}
+                registerOptions={{
                   required: true,
                   pattern: /^(?=.*\d)[a-zA-Z\d\W_]{8,}$/
-                })}
-                placeholder="********"
-                className={`mt-2 h-8 w-full rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white
-              ${
-                errors.password && 'border-2 border-red-500 focus:outline-none'
-              }`}
+                }}
+                register={register}
               />
-            </label>
-            {errors.password?.type === 'required' && (
-              <span className="text-red-500">Input required</span>
-            )}
-            {errors.password?.type === 'pattern' && (
-              <span className="text-red-500">Doesnt consist to pattern</span>
-            )}
+            </div>
           </div>
           <button
             type="submit"
-            className="mb-2 mt-6 h-10 w-[300px] rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition hover:scale-105 dark:shadow-blue-200/[.1]"
+            className="mt-2 h-10 w-full rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition-colors ease-linear hover:bg-blue-400 dark:shadow-blue-200/[.1]"
           >
-            <p className="text-lg font-semibold text-white">Enter via e-mail</p>
+            <p className="uppercase text-white">{translate['enterBtn']}</p>
           </button>
-          <button
-            type="button"
-            className="my-2 h-10 w-[300px] justify-center rounded-lg bg-white align-middle shadow-md transition hover:scale-105"
-          >
-            <div className="flex justify-center gap-2">
-              <GoogleIcon className="h-6 w-6" />
-              <p className="text-black">Enter via Google</p>
-            </div>
-          </button>
-          <button
-            type="button"
-            className="my-2 h-10 w-[300px] rounded-lg bg-neutral-800 shadow-md transition hover:scale-105"
-          >
-            <div className="flex justify-center gap-2">
-              <GithubIcon className="h-7 w-7 fill-white" />
-              <p className="text-white">Enter via GitHub</p>
-            </div>
-          </button>
+          <div className="my-4 flex w-full items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-600 dark:after:border-neutral-600">
+            <p className="mx-4 mb-0 text-center font-semibold uppercase dark:text-white">
+              {translate['additionalEnter']}
+            </p>
+          </div>
+          <div className="flex w-full flex-row gap-2">
+            <button
+              type="button"
+              className="h-10 w-1/2 justify-center rounded-lg bg-white align-middle shadow-md transition-colors ease-linear hover:bg-gray-50 dark:hover:bg-gray-200"
+            >
+              <div className="flex justify-center gap-2">
+                <GoogleIcon className="h-6 w-6" />
+                <p className="text-black">Google</p>
+              </div>
+            </button>
+            <button
+              type="button"
+              className="h-10 w-1/2 rounded-lg bg-neutral-700 shadow-md transition-colors ease-linear hover:bg-neutral-500 dark:bg-neutral-800 hover:dark:bg-neutral-700"
+            >
+              <div className="flex justify-center gap-2">
+                <GithubIcon className="h-7 w-7 fill-white" />
+                <p className="pt-[1px] text-white">GitHub</p>
+              </div>
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -4,9 +4,13 @@ import AuthForm from '@/components/Auth/AuthForm'
 export default function Auth() {
   const t = useTranslations('auth')
   const translation = {
-    pinTitle: t('pinTitle'),
-    pinDescription: t('pinDescription'),
-    pinSubmit: t('pinSubmit')
+    formTitle: t('formTitle'),
+    noAccountText: t('noAccountText'),
+    noAccountLink: t('noAccountLink'),
+    emailInput: t('emailInput'),
+    passwordInput: t('passwordInput'),
+    enterBtn: t('enterBtn'),
+    additionalEnter: t('additionalEnter')
   }
-  return <AuthForm />
+  return <AuthForm translate={translation} />
 }

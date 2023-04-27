@@ -1,5 +1,16 @@
 import RegisterForm from '@/components/Auth/RegisterForm'
+import { useTranslations } from 'next-intl'
 
 export default function Page() {
-  return <RegisterForm />
+  const t = useTranslations('register')
+  const translation = {
+    formTitle: t('formTitle'),
+    haveAccountText: t('haveAccountText'),
+    haveAccountLink: t('haveAccountLink'),
+    emailInput: t('emailInput'),
+    passwordInput: t('passwordInput'),
+    confirmPasswordInput: t('confirmPasswordInput'),
+    enterBtn: t('enterBtn')
+  }
+  return <RegisterForm translate={translation} />
 }
