@@ -2,8 +2,8 @@
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
 import { apiURL } from '@/shared/fetcher'
-import ky from 'ky'
 import { useState } from 'react'
+import ky from 'ky'
 
 type FormInputs = {
   title: string

@@ -10,14 +10,11 @@ export default function QRGenerator({
 }) {
   const { Canvas } = useQRCode()
   return (
-    <>
-      <p className="pt-5 text-2xl font-bold">{translate['windowQR']}</p>
+    <div className="overflow-hidden rounded-xl">
       <Canvas
         text={hrefLink}
         options={{
-          level: 'M',
           margin: 3,
-          scale: 4,
           width: 200,
           color: {
             dark: '#000000',
@@ -25,6 +22,6 @@ export default function QRGenerator({
           }
         }}
       />
-    </>
+    </div>
   )
 }

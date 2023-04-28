@@ -3,7 +3,7 @@ import { useState } from 'react'
 import ListLinkHeader from './ListLinkHeader'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import LinkDescription from '@/components/LinkDescription'
-import convertDate from '@/shared/convertDate'
+import { convertDate } from '@/shared/convertDate'
 import useSWR from 'swr'
 import { apiURL } from '@/shared/fetcher'
 import ky from 'ky'
@@ -64,7 +64,7 @@ export default function LinksApp({
       <div
         className={`${
           selectedLink ? 'block' : 'hidden'
-        } absolute left-0 top-0 z-[60] h-[calc(100vh-64px)] w-screen overflow-hidden sm:static sm:z-30 sm:h-full sm:w-full sm:p-3 md:p-6`}
+        } absolute left-0 top-0 z-[60] h-full w-screen overflow-y-auto sm:static sm:z-30 sm:h-[calc(100vh-64px)] sm:w-full`}
       >
         {selectedLink ? (
           <LinkDescription
