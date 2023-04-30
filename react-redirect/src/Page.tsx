@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import useSWR from 'swr'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { getLinkByUUID } from '@/utils/api'
-import useSWR from 'swr'
 
 const LINK_REF_PATTERN = /^[a-zA-Z0-9]{5}$/
 

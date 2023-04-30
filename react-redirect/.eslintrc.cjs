@@ -4,19 +4,31 @@ module.exports = {
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+      "airbnb",
+      "airbnb-typescript",
+      "airbnb/hooks",
+      "plugin:import/errors",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": './tsconfig.json'
     },
     "settings": {
       "react": {
         "version": "detect"
+      },
+      "import/resolver": {
+        "alias": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"],
+          "map": [
+            ["@", "./src"]
+          ]
+        }
       }
     },
     "plugins": [
