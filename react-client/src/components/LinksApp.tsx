@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import ListLinkHeader from './ListLinkHeader'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import LinkDescription from '@/components/LinkDescription'
+import LinkStickerBoard from '@/components/LinkStickerBoard'
 import { convertDate } from '@/shared/convertDate'
 import useSWR from 'swr'
 import { apiURL } from '@/shared/fetcher'
@@ -67,7 +67,7 @@ export default function LinksApp({
         } absolute left-0 top-0 z-[60] h-full w-screen overflow-y-auto sm:static sm:z-30 sm:h-[calc(100vh-64px)] sm:w-full`}
       >
         {selectedLink ? (
-          <LinkDescription
+          <LinkStickerBoard
             translate={translate}
             linkData={selectedLink}
             reloadLinks={() => mutate().then()}

@@ -33,8 +33,9 @@ export default function CreateForm({
     try {
       await ky.post(`${apiURL}/links/`, { json: formData })
     } catch (err: any) {
-      const errResponse: { msg: string } = await err.response?.json?.()
-      const errMsg = errResponse ? errResponse.msg : err.message
+      const errMsg = err?.response?.json?.().msg || err.message
+      // const errResponse: { msg: string } = await err.response?.json?.()
+      // const errMsg = errResponse ? errResponse.msg : err.message
       setRequestError(errMsg)
       return
     }
