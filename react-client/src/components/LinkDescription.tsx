@@ -1,5 +1,5 @@
 'use client'
-import { LinkRecordType } from '@/shared/LinkRecordType'
+
 import {
   PencilIcon,
   TrashIcon,
@@ -8,13 +8,14 @@ import {
   ArrowTopRightOnSquareIcon
 } from '@heroicons/react/24/solid'
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
-import { convertDateTime } from '@/shared/convertDate'
 import ky from 'ky'
-import { apiURL } from '@/shared/fetcher'
 import './LinkStyle.css'
 import { useState } from 'react'
-import GroupInput from '@/components/Common/GroupInput'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { apiURL } from '@/shared/fetcher'
+import { LinkRecordType } from '@/shared/LinkRecordType'
+import GroupInput from '@/components/Common/GroupInput'
+import { convertDateTime } from '@/shared/convertDate'
 import ButtonTemplate from '@/components/Common/ButtonTemplate'
 
 function DeleteButton({ onClick }: { onClick: () => void }) {
@@ -60,24 +61,25 @@ export default function LinkDescription({
   hideLink: () => void
   reloadLinks: () => void
 }) {
+  const [linkDatas, setLinkData] = useState<LinkRecordType>(linkData)
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
-  const shortURL = 'http://localhost:3031/' + linkData.refRoute
+  const shortURL = `http://localhost:3031/${linkDatas.refRoute}`
   const removeLink = async () => {
-    await ky.delete(`${apiURL}/links/${linkData.uid}`)
+    await ky.delete(`${apiURL}/links/${linkDatas.uid}`)
     reloadLinks()
     hideLink()
   }
   const editLink = () => {
-    if (!(inputValue.length === 0 || inputValue === linkData.title)) {
-      ky.put(`${apiURL}/links/${linkData.uid}`, {
+    if (!(inputValue.length === 0 || inputValue === linkDatas.title)) {
+      ky.put(`${apiURL}/links/${linkDatas.uid}`, {
         json: {
           title: inputValue,
-          ref: linkData.ref
+          ref: linkDatas.ref
         }
       })
       reloadLinks()
-      linkData.title = inputValue
+      setLinkData({ ...linkDatas, title: inputValue })
     }
     setIsEdit(false)
   }
@@ -88,12 +90,12 @@ export default function LinkDescription({
           <input
             type="text"
             onChange={event => setInputValue(event.target.value)}
-            defaultValue={linkData.title}
+            defaultValue={linkDatas.title}
             className="mr-6 w-full border-b-2 border-black text-4xl font-bold focus:outline-none"
           />
         ) : (
           <p className="line-clamp-1 pb-1 text-4xl font-bold">
-            {linkData.title}
+            {linkDatas.title}
           </p>
         )}
         <div className="mt-3 flex flex-row items-center space-x-4">
@@ -111,10 +113,10 @@ export default function LinkDescription({
         </div>
       </div>
       <p className="line-clamp-1">
-        {translate['windowDate']} {convertDateTime(linkData.createDt)}
+        {translate.windowDate} {convertDateTime(linkDatas.createDt)}
       </p>
       <div className="mt-4">
-        <GroupInput value={linkData.ref} label="Link" />
+        <GroupInput value={linkDatas.ref} label="Link" />
       </div>
       <div className="mt-2 flex gap-2">
         <div className="w-[320px]">
@@ -128,7 +130,7 @@ export default function LinkDescription({
             <DocumentDuplicateIcon className="h-5 w-[20px] text-neutral-500" />
           </button>
         </CopyToClipboard>
-        <a target="_blank" href={shortURL}>
+        <a target="_blank" href={shortURL} rel="noreferrer">
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"

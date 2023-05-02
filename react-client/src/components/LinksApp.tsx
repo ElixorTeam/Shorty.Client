@@ -1,15 +1,17 @@
 'use client'
+
 import { useState } from 'react'
-import ListLinkHeader from './ListLinkHeader'
+import useSWR from 'swr'
+import ky from 'ky'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import LinkStickerBoard from '@/components/LinkStickerBoard'
 import { convertDate } from '@/shared/convertDate'
-import useSWR from 'swr'
 import { apiURL } from '@/shared/fetcher'
-import ky from 'ky'
+import ListLinkHeader from './ListLinkHeader'
 import './LinkStyle.css'
+
 const fetcher = async (url: string): Promise<LinkRecordType[]> =>
-  await ky.get(url).json()
+  ky.get(url).json()
 
 export default function LinksApp({
   translate

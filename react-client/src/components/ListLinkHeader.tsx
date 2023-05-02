@@ -1,4 +1,5 @@
 'use client'
+
 import { ChangeEvent, useCallback, useState } from 'react'
 
 const enum TableKeyEnum {
@@ -22,14 +23,14 @@ export default function ListLinkHeader({
     setTableKey(sortKey)
   }, [])
   const sortOptions: SortOptionType[] = [
-    { title: translate['sortKeyViewed'], value: 'viewed' },
-    { title: translate['sortKeyLast'], value: 'last' }
+    { title: translate.sortKeyViewed, value: 'viewed' },
+    { title: translate.sortKeyLast, value: 'last' }
   ]
   return (
     <div className="sticky top-0 flex h-16 w-full items-center bg-white px-5 dark:bg-[#23212e] md:px-10">
       <div className="mr-2 flex flex-row items-center">
         <p className="mr-2 hidden text-gray-700 dark:text-gray-400 md:block">
-          {translate['sortLabel']}
+          {translate.sortLabel}
         </p>
         <select
           value={tableKey}

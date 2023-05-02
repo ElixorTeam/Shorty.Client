@@ -1,4 +1,5 @@
 'use client'
+
 import { useForm } from 'react-hook-form'
 import { Link } from 'next-intl'
 import { useRouter } from 'next-intl/client'
@@ -19,17 +20,18 @@ export default function AuthForm({
   const { register, handleSubmit } = useForm<FormData>()
   const router = useRouter()
   const onSubmit = (data: FormData) => {
+    // eslint-disable-next-line no-console
     console.log(data)
     router.push('/links')
   }
   return (
     <div className="flex h-[calc(100vh-64px)] items-center justify-center">
       <div className="flex h-fit w-80 flex-col justify-center rounded-lg p-10 md:w-96 md:shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:md:shadow-gray-900">
-        <p className="text-2xl font-bold">{translate['formTitle']}</p>
+        <p className="text-2xl font-bold">{translate.formTitle}</p>
         <p className="mb-1">
-          {translate['noAccountText']}{' '}
+          {translate.noAccountText}{' '}
           <Link href="/register" className="text-sky-500">
-            {translate['noAccountLink']}
+            {translate.noAccountLink}
           </Link>
         </p>
         <form
@@ -41,7 +43,7 @@ export default function AuthForm({
               <InputComponent
                 type="email"
                 name="authEmailInput"
-                label={translate['emailInput']}
+                label={translate.emailInput}
                 registerOptions={{
                   required: true,
                   pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -53,7 +55,7 @@ export default function AuthForm({
               <InputComponent
                 type="password"
                 name="authPasswordInput"
-                label={translate['passwordInput']}
+                label={translate.passwordInput}
                 registerOptions={{
                   required: true,
                   pattern: /^(?=.*\d)[a-zA-Z\d\W_]{8,}$/
@@ -66,11 +68,11 @@ export default function AuthForm({
             type="submit"
             className="mt-2 h-10 w-full rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition-colors ease-linear hover:bg-blue-400 dark:shadow-blue-200/[.1]"
           >
-            <p className="uppercase text-white">{translate['enterBtn']}</p>
+            <p className="uppercase text-white">{translate.enterBtn}</p>
           </button>
           <div className="my-4 flex w-full items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-600 dark:after:border-neutral-600">
             <p className="mx-4 mb-0 text-center font-semibold uppercase dark:text-white">
-              {translate['additionalEnter']}
+              {translate.additionalEnter}
             </p>
           </div>
           <div className="flex w-full flex-row gap-2">

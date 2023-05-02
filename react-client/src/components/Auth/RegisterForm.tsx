@@ -1,4 +1,5 @@
 'use client'
+
 import { useForm } from 'react-hook-form'
 import { Link } from 'next-intl'
 import { useRouter } from 'next-intl/client'
@@ -18,17 +19,18 @@ export default function RegisterForm({
   const { register, handleSubmit, getValues } = useForm<FormData>()
   const router = useRouter()
   const onSubmit = (data: FormData) => {
+    // eslint-disable-next-line no-console
     console.log(data)
     router.push('/links')
   }
   return (
     <div className="flex h-[calc(100vh-64px)] items-center justify-center">
       <div className="flex h-fit w-80 flex-col justify-center rounded-lg p-10 md:w-96 md:shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:md:shadow-gray-900">
-        <p className="text-2xl font-bold">{translate['formTitle']}</p>
+        <p className="text-2xl font-bold">{translate.formTitle}</p>
         <p className="mb-1">
-          {translate['haveAccountText']}{' '}
+          {translate.haveAccountText}{' '}
           <Link href="/auth" className="text-sky-500">
-            {translate['haveAccountLink']}
+            {translate.haveAccountLink}
           </Link>
         </p>
         <form
@@ -40,7 +42,7 @@ export default function RegisterForm({
               <InputComponent
                 type="email"
                 name="regEmailInput"
-                label={translate['emailInput']}
+                label={translate.emailInput}
                 registerOptions={{
                   required: true,
                   pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -52,7 +54,7 @@ export default function RegisterForm({
               <InputComponent
                 type="password"
                 name="regPasswordInput"
-                label={translate['passwordInput']}
+                label={translate.passwordInput}
                 registerOptions={{
                   required: true,
                   pattern: /^(?=.*\d)[a-zA-Z\d\W_]{8,}$/
@@ -64,7 +66,7 @@ export default function RegisterForm({
               <InputComponent
                 type="password"
                 name="regConfirmPasswordInput"
-                label={translate['confirmPasswordInput']}
+                label={translate.confirmPasswordInput}
                 registerOptions={{
                   required: true,
                   pattern: /^(?=.*\d)[a-zA-Z\d\W_]{8,}$/,
@@ -82,7 +84,7 @@ export default function RegisterForm({
             className="my-2 h-10 w-full rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition-colors ease-linear hover:bg-sky-500 dark:shadow-blue-200/[.1]"
           >
             <p className="text-lg font-semibold text-white">
-              {translate['enterBtn']}
+              {translate.enterBtn}
             </p>
           </button>
         </form>

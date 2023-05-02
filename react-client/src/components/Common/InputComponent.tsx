@@ -1,4 +1,5 @@
 'use client'
+
 import { UseFormRegister, RegisterOptions } from 'react-hook-form'
 
 export default function InputComponent({

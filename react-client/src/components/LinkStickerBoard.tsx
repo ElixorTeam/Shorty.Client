@@ -1,5 +1,5 @@
-import { LinkRecordType } from '@/shared/LinkRecordType'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { LinkRecordType } from '@/shared/LinkRecordType'
 import QRGenerator from '@/components/QRGenerator'
 import './LinkStyle.css'
 import LineChart from '@/components/LineChart'
@@ -17,7 +17,7 @@ export default function LinkStickerBoard({
   hideLink: () => void
   reloadLinks: () => void
 }) {
-  const shortURL = 'http://localhost:3031/' + linkData.refRoute
+  const shortURL = `http://localhost:3031/${linkData.refRoute}`
   const browserChartData = [
     { label: 'Chrome', value: 45 },
     { label: 'Firefox', value: 30 },
@@ -39,7 +39,7 @@ export default function LinkStickerBoard({
     <>
       <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] dark:bg-[#23212e] dark:shadow-[0px_8px_10px_0px_rgba(0,0,0,0.1)] sm:hidden">
         <p className="line-clamp-1 text-lg font-bold ">
-          {translate['windowTitle']}
+          {translate.windowTitle}
         </p>
         <button type="button" onClick={hideLink}>
           <XMarkIcon className="h-6 w-6 dark:text-white" />

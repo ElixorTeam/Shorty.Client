@@ -42,7 +42,8 @@ export default function BrowserDoughnutChart({
         chart.destroy()
       }
     }
+    return () => {}
   }, [data])
 
-  return <canvas ref={chartContainer}></canvas>
+  return <canvas ref={chartContainer} />
 }

@@ -1,4 +1,5 @@
 'use client'
+
 import { useQRCode } from 'next-qrcode'
 
 const QR_GENERATOR_OPTIONS = {

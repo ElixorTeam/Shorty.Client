@@ -1,8 +1,9 @@
 'use client'
+
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
-import { apiURL } from '@/shared/fetcher'
 import { useState } from 'react'
+import { apiURL } from '@/shared/fetcher'
 import ky from 'ky'
 
 type FormInputs = {
@@ -50,14 +51,14 @@ export default function CreateForm({
         className="w-[300px] md:w-[500px]"
       >
         <p className="text-2xl font-bold dark:text-white">
-          {translate['formTitle']}
+          {translate.formTitle}
         </p>
         {requestError ? (
           <p className="mt-4 text-red-500">{requestError}</p>
         ) : null}
         <div className="pt-8 text-left">
           <label htmlFor="ref" className="flex flex-col text-lg">
-            {translate['urlLabel']}
+            {translate.urlLabel}
             <input
               type="text"
               {...register('ref', {
@@ -70,17 +71,15 @@ export default function CreateForm({
             />
           </label>
           {errors.ref?.type === 'required' && (
-            <span className="text-red-500">
-              {translate['urlErrorRequired']}
-            </span>
+            <span className="text-red-500">{translate.urlErrorRequired}</span>
           )}
           {errors.ref?.type === 'pattern' && (
-            <span className="text-red-500">{translate['urlErrorPattern']}</span>
+            <span className="text-red-500">{translate.urlErrorPattern}</span>
           )}
         </div>
         <div className="pt-8 text-left">
           <label htmlFor="title" className="flex flex-col text-lg">
-            {translate['titleLabel']} ({translate['labelOptional']})
+            {translate.titleLabel} ({translate.labelOptional})
             <input
               type="text"
               {...register('title')}
@@ -89,36 +88,36 @@ export default function CreateForm({
           </label>
         </div>
         <div className="pt-8 text-left">
-          {/*<label htmlFor="custom" className="flex flex-col text-lg">*/}
-          {/*  {translate['customLabel']} ({translate['labelOptional']})*/}
-          {/*  <div className="mt-2 flex flex-row items-center space-x-5">*/}
-          {/*    <div className="flex h-8 w-24 items-center justify-center rounded ring-1 ring-gray-400/[.40] dark:bg-black/[.20]">*/}
-          {/*      <p className="text-gray-700">sh0.ty</p>*/}
-          {/*    </div>*/}
-          {/*    <p className="text-2xl">/</p>*/}
-          {/*    <input*/}
-          {/*      type="text"*/}
-          {/*      {...register('custom', {*/}
-          {/*        pattern: /^[a-zA-Z0-9]+$/*/}
-          {/*      })}*/}
-          {/*      className={`h-8 w-36 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white ${*/}
-          {/*        errors.custom && 'border-2 border-red-500 focus:outline-none'*/}
-          {/*      }`}*/}
-          {/*    />*/}
-          {/*    {errors.custom?.type === 'pattern' && (*/}
-          {/*      <span className="text-red-500">*/}
-          {/*        {translate['customErrorPattern']}*/}
-          {/*      </span>*/}
-          {/*    )}*/}
-          {/*  </div>*/}
-          {/*</label>*/}
+          {/* <label htmlFor="custom" className="flex flex-col text-lg"> */}
+          {/*  {translate['customLabel']} ({translate['labelOptional']}) */}
+          {/*  <div className="mt-2 flex flex-row items-center space-x-5"> */}
+          {/*    <div className="flex h-8 w-24 items-center justify-center rounded ring-1 ring-gray-400/[.40] dark:bg-black/[.20]"> */}
+          {/*      <p className="text-gray-700">sh0.ty</p> */}
+          {/*    </div> */}
+          {/*    <p className="text-2xl">/</p> */}
+          {/*    <input */}
+          {/*      type="text" */}
+          {/*      {...register('custom', { */}
+          {/*        pattern: /^[a-zA-Z0-9]+$/ */}
+          {/*      })} */}
+          {/*      className={`h-8 w-36 rounded px-2 text-sm text-black ring-1 ring-gray-400/[.40] dark:bg-black/[.20] dark:text-white ${ */}
+          {/*        errors.custom && 'border-2 border-red-500 focus:outline-none' */}
+          {/*      }`} */}
+          {/*    /> */}
+          {/*    {errors.custom?.type === 'pattern' && ( */}
+          {/*      <span className="text-red-500"> */}
+          {/*        {translate['customErrorPattern']} */}
+          {/*      </span> */}
+          {/*    )} */}
+          {/*  </div> */}
+          {/* </label> */}
         </div>
         <button
           type="submit"
           className="mb-10 mt-8 h-7 w-32 rounded-xl bg-blue-300 text-white shadow-xl shadow-blue-200 transition-all
           hover:scale-105 dark:shadow-blue-200/[.1]"
         >
-          {translate['submitButton']}
+          {translate.submitButton}
         </button>
       </form>
     </div>

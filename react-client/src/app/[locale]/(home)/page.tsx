@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import sphere from '@/public/sphere.png'
 import { Link, useTranslations } from 'next-intl'
+import sphere from '@/public/sphere.png'
 
 export default function Home() {
   const t = useTranslations('home')

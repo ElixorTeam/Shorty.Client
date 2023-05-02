@@ -1,4 +1,5 @@
 'use client'
+
 import { useState, useRef, useEffect } from 'react'
 import { LanguageIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { Link } from 'next-intl'

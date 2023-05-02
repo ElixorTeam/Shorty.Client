@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
 
@@ -33,11 +34,12 @@ export default function LineChart({
         chart.destroy()
       }
     }
+    return undefined
   }, [chartContainer, data, labels])
 
   return (
     <div>
-      <canvas ref={chartContainer}></canvas>
+      <canvas ref={chartContainer} />
     </div>
   )
 }
