@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import CreateForm from '@/components/CreateForm'
+import CreateForm from '@/components/Pages/CreateForm'
 
 export default function Create() {
   const t = useTranslations('create')

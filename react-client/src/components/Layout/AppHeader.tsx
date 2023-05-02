@@ -1,8 +1,8 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { BellIcon } from '@heroicons/react/24/solid'
 import { Link, useTranslations } from 'next-intl'
-import LanguageSwitcher from '@/components/Switchers/LocaleSwitcher'
-import ThemeSwitcher from '@/components/Switchers/ThemeSwitcher'
+import LanguageSwitcher from '@/components/Common/LocaleSwitcher'
+import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 
 function LayoutHeader() {
   const t = useTranslations('app')

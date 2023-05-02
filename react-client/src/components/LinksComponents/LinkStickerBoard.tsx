@@ -1,10 +1,9 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import QRGenerator from '@/components/QRGenerator'
-import './LinkStyle.css'
-import LineChart from '@/components/LineChart'
-import BrowserDoughnutChart from '@/components/BrowserDoghnutChart'
-import LinkDescription from '@/components/LinkDescription'
+import QRGenerator from '@/components/LinksComponents/QRGenerator'
+import LineChart from '@/components/Charts/LineChart'
+import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
+import LinkDescription from '@/components/LinksComponents/LinkDescription'
 
 export default function LinkStickerBoard({
   translate,

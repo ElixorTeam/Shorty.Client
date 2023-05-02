@@ -1,4 +1,4 @@
-import LinksApp from '@/components/LinksApp'
+import LinksApp from '@/components/Pages/LinksApp'
 import { useTranslations } from 'next-intl'
 
 export default function Links() {

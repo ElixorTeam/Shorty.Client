@@ -1,4 +1,4 @@
-import RegisterForm from '@/components/Auth/RegisterForm'
+import RegisterForm from '@/components/Pages/RegisterForm'
 import { useTranslations } from 'next-intl'
 
 export default function Page() {

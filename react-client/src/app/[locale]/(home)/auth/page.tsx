@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import AuthForm from '@/components/Auth/AuthForm'
+import AuthForm from '@/components/Pages/AuthForm'
 
 export default function Auth() {
   const t = useTranslations('auth')

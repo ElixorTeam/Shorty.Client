@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useTranslations } from 'next-intl'
-import LocaleSwitcher from '@/components/Switchers/LocaleSwitcher'
-import ThemeSwitcher from '@/components/Switchers/ThemeSwitcher'
+import LocaleSwitcher from '@/components/Common/LocaleSwitcher'
+import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 
 function HeaderItem({ children }: { children: ReactNode }) {
   return <li className="flex items-center">{children}</li>

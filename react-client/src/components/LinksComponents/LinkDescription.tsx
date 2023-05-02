@@ -9,7 +9,6 @@ import {
 } from '@heroicons/react/24/solid'
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import ky from 'ky'
-import './LinkStyle.css'
 import { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { apiURL } from '@/shared/fetcher'
