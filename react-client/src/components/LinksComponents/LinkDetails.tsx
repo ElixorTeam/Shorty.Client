@@ -17,39 +17,7 @@ import GroupInput from '@/components/Common/GroupInput'
 import { convertDateTime } from '@/shared/convertDate'
 import ButtonTemplate from '@/components/Common/ButtonTemplate'
 
-function DeleteButton({ onClick }: { onClick: () => void }) {
-  return (
-    <ButtonTemplate onClick={onClick}>
-      <TrashIcon className="h-6 w-6 text-red-700" />
-    </ButtonTemplate>
-  )
-}
-
-function EditButton({ onClick }: { onClick: () => void }) {
-  return (
-    <ButtonTemplate onClick={onClick}>
-      <PencilIcon className="h-5 w-5" />
-    </ButtonTemplate>
-  )
-}
-
-function CancelButton({ onClick }: { onClick: () => void }) {
-  return (
-    <ButtonTemplate onClick={onClick}>
-      <XMarkIcon className="h-6 w-6" />
-    </ButtonTemplate>
-  )
-}
-
-function ApplyButton({ onClick }: { onClick: () => void }) {
-  return (
-    <ButtonTemplate onClick={onClick}>
-      <CheckIcon className="h-6 w-6" />
-    </ButtonTemplate>
-  )
-}
-
-export default function LinkDescription({
+export default function LinkDetails({
   translate,
   linkData,
   hideLink,
@@ -100,13 +68,21 @@ export default function LinkDescription({
         <div className="mt-3 flex flex-row items-center space-x-4">
           {isEdit ? (
             <>
-              <ApplyButton onClick={editLink} />
-              <CancelButton onClick={() => setIsEdit(false)} />
+              <ButtonTemplate onClick={editLink}>
+                <CheckIcon className="h-6 w-6" />
+              </ButtonTemplate>
+              <ButtonTemplate onClick={() => setIsEdit(false)}>
+                <XMarkIcon className="h-6 w-6" />
+              </ButtonTemplate>
             </>
           ) : (
             <>
-              <DeleteButton onClick={removeLink} />
-              <EditButton onClick={() => setIsEdit(true)} />
+              <ButtonTemplate onClick={removeLink}>
+                <TrashIcon className="h-6 w-6 text-red-700" />
+              </ButtonTemplate>
+              <ButtonTemplate onClick={() => setIsEdit(true)}>
+                <PencilIcon className="h-5 w-5" />
+              </ButtonTemplate>
             </>
           )}
         </div>

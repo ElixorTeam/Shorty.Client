@@ -1,6 +1,6 @@
 import { convertDate } from '@/shared/convertDate'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import './ListLinkItem.module.css'
+import './ListLinkItem.css'
 
 export default function ListLinkItem({
   onClick,

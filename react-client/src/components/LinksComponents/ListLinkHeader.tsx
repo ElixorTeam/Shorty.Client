@@ -27,7 +27,7 @@ export default function ListLinkHeader({
     { title: translate.sortKeyLast, value: 'last' }
   ]
   return (
-    <div className="sticky top-0 flex h-16 w-full items-center bg-white px-5 dark:bg-[#23212e] md:px-10">
+    <div className="sticky shadow-inner top-0 flex h-16 w-full items-center bg-white px-5 dark:bg-[#23212e] md:px-10">
       <div className="mr-2 flex flex-row items-center">
         <p className="mr-2 hidden text-gray-700 dark:text-gray-400 md:block">
           {translate.sortLabel}

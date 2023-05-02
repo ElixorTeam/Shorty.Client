@@ -3,7 +3,7 @@ import { LinkRecordType } from '@/shared/LinkRecordType'
 import QRGenerator from '@/components/LinksComponents/QRGenerator'
 import LineChart from '@/components/Charts/LineChart'
 import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
-import LinkDescription from '@/components/LinksComponents/LinkDescription'
+import LinkDetails from '@/components/LinksComponents/LinkDetails'
 
 export default function LinkStickerBoard({
   translate,
@@ -44,9 +44,9 @@ export default function LinkStickerBoard({
           <XMarkIcon className="h-6 w-6 dark:text-white" />
         </button>
       </div>
-      <div className="flex max-w-5xl flex-wrap gap-4 bg-[#eef1f6] p-3 dark:bg-[#1c1a25] min-[640px]:bg-transparent md:p-6">
+      <div className="flex max-w-7xl m-auto flex-wrap gap-4 bg-[#eef1f6] p-3 dark:bg-[#1c1a25] min-[640px]:bg-transparent md:p-6">
         <div className="h-[232px] w-full max-w-2xl rounded-xl bg-white px-4 py-2 dark:bg-[#23212e] md:px-10 md:py-6">
-          <LinkDescription
+          <LinkDetails
             translate={translate}
             linkData={linkData}
             hideLink={hideLink}

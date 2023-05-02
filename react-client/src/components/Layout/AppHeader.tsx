@@ -7,7 +7,7 @@ import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 function LayoutHeader() {
   const t = useTranslations('app')
   return (
-    <header className="sticky top-0 z-50 flex px-5 shadow-[0px_6px_10px_0px_rgba(0,0,0,0.03)] ring-gray-200 dark:shadow-[0px_6px_10px_0px_rgba(0,0,0,0.1)] md:px-14">
+    <header className="sticky top-0 z-50 flex px-5 ring-gray-200 md:px-14">
       <div className="flex h-16 w-full items-center justify-between">
         <div className="flex flex-row items-center space-x-16">
           <Link

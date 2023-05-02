@@ -5,7 +5,7 @@ import AppNavbarItem from './AppNavbarItem'
 export default function LayoutNavbar() {
   const t = useTranslations('app')
   return (
-    <div className="z-40 h-full shadow-[8px_0px_10px_0px_rgba(0,0,0,0.0)] dark:shadow-[8px_0px_10px_-3px_rgba(0,0,0,0.1)]">
+    <div className="z-60 h-full">
       <nav className="mx-auto flex flex-col items-center lg:w-32">
         <Link href="/create">
           <button
