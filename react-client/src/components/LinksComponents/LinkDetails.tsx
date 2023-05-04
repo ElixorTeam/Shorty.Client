@@ -68,7 +68,7 @@ export default function LinkDetails({
               if (event.key === 'Enter') editLink()
             }}
             defaultValue={linkData.title}
-            className="mr-6 w-full border rounded-md border-gray-300 text-4xl font-bold focus:outline-none"
+            className="mr-6 w-full rounded-md border border-gray-300 text-4xl font-bold focus:outline-none"
           />
         ) : (
           <p className="line-clamp-1 pb-1 text-4xl font-bold">
