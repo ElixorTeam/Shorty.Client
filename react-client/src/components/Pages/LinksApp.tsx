@@ -40,6 +40,7 @@ export default function LinksApp({
             linkData={selectedLink}
             reloadLinks={() => mutate().then()}
             hideLink={() => setSelectedLink(null)}
+            setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />
         ) : null}
       </div>

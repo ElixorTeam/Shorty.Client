@@ -20,7 +20,7 @@ export default function ListLink({
 }) {
   const [sortedLinksData, setSortedLinksData] = useState<LinkRecordType[]>([])
   const [selectedSort, setSelectedSort] = useState<TableKeyEnum>(
-    TableKeyEnum.Alphabet
+    TableKeyEnum.Last
   )
   useEffect(() => {
     if (linksData)

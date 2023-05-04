@@ -19,44 +19,56 @@ export default function LinkDetails({
   translate,
   linkData,
   hideLink,
-  reloadLinks
+  reloadLinks,
+  setSelectedLink
 }: {
   translate: { [_: string]: string }
   linkData: LinkRecordType
   hideLink: () => void
   reloadLinks: () => void
+  setSelectedLink: (link: LinkRecordType) => void
 }) {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const shortURL = `http://localhost:3031/${linkData.refRoute}`
   const removeLink = async () => {
-    await ky.delete(`${apiURL}/links/${linkData.uid}`)
-    reloadLinks()
-    hideLink()
-  }
-  const editLink = () => {
-    if (!(inputValue.length === 0 || inputValue === linkData.title)) {
-      ky.put(`${apiURL}/links/${linkData.uid}`, {
-        json: {
-          title: inputValue,
-          ref: linkData.ref
-        }
-      })
+    try {
+      await ky.delete(`${apiURL}/links/${linkData.uid}`)
       reloadLinks()
-      // eslint-disable-next-line no-param-reassign
-      linkData.title = inputValue
+      hideLink()
+    } catch {
+      /* empty */
+    }
+  }
+  const editLink = async () => {
+    if (!(inputValue.length === 0 || inputValue === linkData.title)) {
+      try {
+        await ky.put(`${apiURL}/links/${linkData.uid}`, {
+          json: {
+            title: inputValue,
+            ref: linkData.ref
+          }
+        })
+        setSelectedLink({ ...linkData, title: inputValue })
+        reloadLinks()
+      } catch {
+        /* empty */
+      }
     }
     setIsEdit(false)
   }
   return (
     <>
-      <div className="flex items-start justify-between">
+      <div className="flex h-12 items-start justify-between">
         {isEdit ? (
           <input
             type="text"
             onChange={event => setInputValue(event.target.value)}
+            onKeyDown={event => {
+              if (event.key === 'Enter') editLink()
+            }}
             defaultValue={linkData.title}
-            className="mr-6 w-full border-b-2 border-black text-4xl font-bold focus:outline-none"
+            className="mr-6 w-full border rounded-md border-gray-300 text-4xl font-bold focus:outline-none"
           />
         ) : (
           <p className="line-clamp-1 pb-1 text-4xl font-bold">

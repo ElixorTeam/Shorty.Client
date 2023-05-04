@@ -9,12 +9,14 @@ export default function LinkStickerBoard({
   translate,
   linkData,
   hideLink,
-  reloadLinks
+  reloadLinks,
+  setSelectedLink
 }: {
   translate: { [_: string]: string }
   linkData: LinkRecordType
   hideLink: () => void
   reloadLinks: () => void
+  setSelectedLink: (link: LinkRecordType) => void
 }) {
   const shortURL = `http://localhost:3031/${linkData.refRoute}`
   const browserChartData = [
@@ -51,6 +53,7 @@ export default function LinkStickerBoard({
             linkData={linkData}
             hideLink={hideLink}
             reloadLinks={reloadLinks}
+            setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />
         </div>
         <div className="h-full w-fit rounded-xl bg-white p-4 dark:bg-[#23212e] sm:h-fit">
