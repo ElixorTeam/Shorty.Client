@@ -7,12 +7,12 @@ import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 function LayoutHeader() {
   const t = useTranslations('app')
   return (
-    <header className="sticky top-0 z-50 flex px-5 ring-gray-200 md:px-14">
+    <header className="sticky top-0 z-50 flex px-5 ring-gray-200 md:px-[62px]">
       <div className="flex h-16 w-full items-center justify-between">
-        <div className="flex flex-row items-center space-x-16">
+        <div className="flex flex-row items-center space-x-[60px]">
           <Link
             className="text-2xl font-extrabold dark:text-white"
-            href="links"
+            href="/links"
           >
             <p>Shorty</p>
           </Link>

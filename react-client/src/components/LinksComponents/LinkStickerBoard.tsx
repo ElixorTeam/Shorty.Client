@@ -44,7 +44,7 @@ export default function LinkStickerBoard({
           <XMarkIcon className="h-6 w-6 dark:text-white" />
         </button>
       </div>
-      <div className="flex max-w-7xl m-auto flex-wrap gap-4 bg-[#eef1f6] p-3 dark:bg-[#1c1a25] min-[640px]:bg-transparent md:p-6">
+      <div className="m-auto flex max-w-7xl flex-wrap gap-4 bg-[#eef1f6] p-3 dark:bg-[#1c1a25] min-[640px]:bg-transparent md:p-6">
         <div className="h-[232px] w-full max-w-2xl rounded-xl bg-white px-4 py-2 dark:bg-[#23212e] md:px-10 md:py-6">
           <LinkDetails
             translate={translate}

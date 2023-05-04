@@ -1,18 +1,12 @@
-'use client'
-
 import { ChangeEvent, useCallback, useState } from 'react'
-
-export const enum TableKeyEnum {
-  Alphabet = 'alphabet',
-  Last = 'last'
-}
+import { TableKeyEnum } from '@/shared/TableKeyEnum'
 
 type SortOptionType = {
   title: string
   value: string
 }
 
-export default function ListLinkHeader({
+export default function LinkListHeader({
   translate,
   selectedSort,
   setSelectedSort
