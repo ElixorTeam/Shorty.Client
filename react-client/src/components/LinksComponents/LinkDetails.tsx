@@ -28,25 +28,25 @@ export default function LinkDetails({
   hideLink: () => void
   reloadLinks: () => void
 }) {
-  const [linkDatas, setLinkData] = useState<LinkRecordType>(linkData)
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
-  const shortURL = `http://localhost:3031/${linkDatas.refRoute}`
+  const shortURL = `http://localhost:3031/${linkData.refRoute}`
   const removeLink = async () => {
-    await ky.delete(`${apiURL}/links/${linkDatas.uid}`)
+    await ky.delete(`${apiURL}/links/${linkData.uid}`)
     reloadLinks()
     hideLink()
   }
   const editLink = () => {
-    if (!(inputValue.length === 0 || inputValue === linkDatas.title)) {
-      ky.put(`${apiURL}/links/${linkDatas.uid}`, {
+    if (!(inputValue.length === 0 || inputValue === linkData.title)) {
+      ky.put(`${apiURL}/links/${linkData.uid}`, {
         json: {
           title: inputValue,
-          ref: linkDatas.ref
+          ref: linkData.ref
         }
       })
       reloadLinks()
-      setLinkData({ ...linkDatas, title: inputValue })
+      // eslint-disable-next-line no-param-reassign
+      linkData.title = inputValue
     }
     setIsEdit(false)
   }
@@ -57,12 +57,12 @@ export default function LinkDetails({
           <input
             type="text"
             onChange={event => setInputValue(event.target.value)}
-            defaultValue={linkDatas.title}
+            defaultValue={linkData.title}
             className="mr-6 w-full border-b-2 border-black text-4xl font-bold focus:outline-none"
           />
         ) : (
           <p className="line-clamp-1 pb-1 text-4xl font-bold">
-            {linkDatas.title}
+            {linkData.title}
           </p>
         )}
         <div className="mt-3 flex flex-row items-center space-x-4">
@@ -88,10 +88,10 @@ export default function LinkDetails({
         </div>
       </div>
       <p className="line-clamp-1">
-        {translate.windowDate} {convertDateTime(linkDatas.createDt)}
+        {translate.windowDate} {convertDateTime(linkData.createDt)}
       </p>
       <div className="mt-4">
-        <GroupInput value={linkDatas.ref} label="Link" />
+        <GroupInput value={linkData.ref} label="Link" />
       </div>
       <div className="mt-2 flex gap-2">
         <div className="w-[320px]">

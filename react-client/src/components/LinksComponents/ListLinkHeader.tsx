@@ -2,8 +2,8 @@
 
 import { ChangeEvent, useCallback, useState } from 'react'
 
-const enum TableKeyEnum {
-  Viewed = 'viewed',
+export const enum TableKeyEnum {
+  Alphabet = 'alphabet',
   Last = 'last'
 }
 
@@ -13,21 +13,29 @@ type SortOptionType = {
 }
 
 export default function ListLinkHeader({
-  translate
+  translate,
+  selectedSort,
+  setSelectedSort
 }: {
-  translate: { [key: string]: string }
+  translate: { [_: string]: string }
+  selectedSort: TableKeyEnum
+  setSelectedSort: (key: TableKeyEnum) => void
 }) {
-  const [tableKey, setTableKey] = useState<TableKeyEnum>(TableKeyEnum.Viewed)
-  const handleTableKey = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    const sortKey = e.target.value as TableKeyEnum
-    setTableKey(sortKey)
-  }, [])
+  const [tableKey, setTableKey] = useState<TableKeyEnum>(selectedSort)
+  const handleTableKey = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const sortKey = e.target.value as TableKeyEnum
+      setTableKey(sortKey)
+      setSelectedSort(sortKey)
+    },
+    [setSelectedSort]
+  )
   const sortOptions: SortOptionType[] = [
-    { title: translate.sortKeyViewed, value: 'viewed' },
+    { title: translate.sortKeyAlphabet, value: 'alphabet' },
     { title: translate.sortKeyLast, value: 'last' }
   ]
   return (
-    <div className="sticky shadow-inner top-0 flex h-16 w-full items-center bg-white px-5 dark:bg-[#23212e] md:px-10">
+    <div className="sticky top-0 flex h-16 w-full items-center bg-white px-5 shadow-inner dark:bg-[#23212e] md:px-10">
       <div className="mr-2 flex flex-row items-center">
         <p className="mr-2 hidden text-gray-700 dark:text-gray-400 md:block">
           {translate.sortLabel}

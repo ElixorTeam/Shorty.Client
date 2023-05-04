@@ -7,7 +7,7 @@ export default function Links() {
     windowTitle: t('windowTitle'),
     windowDate: t('windowDate'),
     windowQR: t('windowQR'),
-    sortKeyViewed: t('sortKeyViewed'),
+    sortKeyAlphabet: t('sortKeyAlphabet'),
     sortKeyLast: t('sortKeyLast'),
     sortLabel: t('sortLabel')
   }
