@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeProvider } from 'next-themes'
+import SearchProvider from '@/components/SearchProvider'
 
 export default function RootLayout({
   children
@@ -9,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <ThemeProvider enableSystem attribute="class">
-      {children}
+      <SearchProvider>{children}</SearchProvider>
     </ThemeProvider>
   )
 }

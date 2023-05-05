@@ -1,4 +1,4 @@
-import { BellIcon } from '@heroicons/react/24/solid'
+// import { BellIcon } from '@heroicons/react/24/solid'
 import { Link } from 'next-intl'
 import LanguageSwitcher from '@/components/Common/LocaleSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
@@ -22,9 +22,9 @@ function LayoutHeader() {
           <li className="flex items-center">
             <LanguageSwitcher />
           </li>
-          <li className="flex items-center">
-            <BellIcon className="h-5 w-5 transition hover:scale-105 active:scale-95" />
-          </li>
+          {/* <li className="flex items-center"> */}
+          {/*  <BellIcon className="h-5 w-5 transition hover:scale-105 active:scale-95" /> */}
+          {/* </li> */}
         </div>
       </div>
     </header>

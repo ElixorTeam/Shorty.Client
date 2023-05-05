@@ -56,16 +56,18 @@ export default function LinkStickerBoard({
             setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />
         </div>
-        <div className="h-full w-fit rounded-xl bg-white p-4 dark:bg-[#23212e] sm:h-fit">
-          <QRGenerator hrefLink={shortURL} />
+        <div className="rounded-xl bg-white p-4 dark:bg-[#23212e] sm:h-fit">
+          <div className="h-[200px] w-[200px]">
+            <QRGenerator hrefLink={shortURL} />
+          </div>
         </div>
         <div className="rounded-xl bg-white p-4 dark:bg-[#23212e]">
           <div className="h-[200px] w-[200px]">
             <BrowserDoughnutChart data={browserChartData} />
           </div>
         </div>
-        <div className="rounded-xl bg-white p-4 dark:bg-[#23212e]">
-          <div className="h-[200px] w-[392px]">
+        <div className="rounded-xl w-full max-w-[392px] bg-white p-4 dark:bg-[#23212e]">
+          <div className="h-[200px] w-full max-w-[392px]">
             <LineChart data={lineChartData} labels={lineChartLabels} />
           </div>
         </div>
