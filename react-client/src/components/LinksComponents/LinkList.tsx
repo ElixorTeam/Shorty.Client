@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import LinkListItem from '@/components/LinksComponents/LinkListItem'
 import LinkListHeader from '@/components/LinksComponents/LinkListHeader'
 import { TableKeyEnum } from '@/shared/TableKeyEnum'
 import { sortLinkData } from '@/utils/sortLinkData'
+import { SearchContext } from '@/components/SearchProvider'
 
 export default function ListLink({
   translate,
@@ -18,14 +19,23 @@ export default function ListLink({
   selectedLink: LinkRecordType | null
   setSelectedLink: (link: LinkRecordType) => void
 }) {
+  const { searchString } = useContext(SearchContext)
   const [sortedLinksData, setSortedLinksData] = useState<LinkRecordType[]>([])
   const [selectedSort, setSelectedSort] = useState<TableKeyEnum>(
     TableKeyEnum.Last
   )
   useEffect(() => {
-    if (linksData)
-      setSortedLinksData(sortLinkData([...linksData], selectedSort))
-  }, [linksData, selectedSort])
+    if (linksData) {
+      let linksList = [...linksData]
+      if (searchString.length !== 0) {
+        linksList = linksList.filter(link =>
+          link.title.toLowerCase().includes(searchString.toLowerCase())
+        )
+      }
+      setSortedLinksData(sortLinkData(linksList, selectedSort))
+    }
+  }, [linksData, selectedSort, searchString])
+
   return (
     <>
       <LinkListHeader

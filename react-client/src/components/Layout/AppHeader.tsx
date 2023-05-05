@@ -1,9 +1,11 @@
 // import { BellIcon } from '@heroicons/react/24/solid'
-import { Link } from 'next-intl'
+import { Link, useTranslations } from 'next-intl'
 import LanguageSwitcher from '@/components/Common/LocaleSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
+import LinkSearch from '@/components/LinksComponents/LinkSearch'
 
 function LayoutHeader() {
+  const t = useTranslations('app')
   return (
     <header className="sticky top-0 z-50 flex px-5 ring-gray-200 md:px-[62px]">
       <div className="flex h-16 w-full items-center justify-between">
@@ -14,6 +16,7 @@ function LayoutHeader() {
           >
             <p>Shorty</p>
           </Link>
+          <LinkSearch searchText={t('headerSearch')} />
         </div>
         <div className="flex flex-row space-x-4">
           <li className="flex items-center">

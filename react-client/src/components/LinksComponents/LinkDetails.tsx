@@ -65,7 +65,7 @@ export default function LinkDetails({
             type="text"
             onChange={event => setInputValue(event.target.value)}
             onKeyDown={event => {
-              if (event.key === 'Enter') editLink()
+              if (event.key === 'Enter') editLink().then()
             }}
             defaultValue={linkData.title}
             className="mr-6 w-full rounded-md border border-gray-300 text-4xl font-bold focus:outline-none"

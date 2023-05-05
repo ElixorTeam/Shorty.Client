@@ -66,7 +66,7 @@ export default function LinkStickerBoard({
             <BrowserDoughnutChart data={browserChartData} />
           </div>
         </div>
-        <div className="rounded-xl w-full max-w-[392px] bg-white p-4 dark:bg-[#23212e]">
+        <div className="w-full max-w-[392px] rounded-xl bg-white p-4 dark:bg-[#23212e]">
           <div className="h-[200px] w-full max-w-[392px]">
             <LineChart data={lineChartData} labels={lineChartLabels} />
           </div>

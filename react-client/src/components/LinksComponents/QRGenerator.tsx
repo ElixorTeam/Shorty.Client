@@ -4,14 +4,13 @@ import { useQRCode } from 'next-qrcode'
 import { useRef } from 'react'
 import {
   ArrowDownTrayIcon,
-  DocumentDuplicateIcon,
-  ShareIcon
+  DocumentDuplicateIcon
 } from '@heroicons/react/24/outline'
-import LinkShare from "@/components/LinksComponents/LinkShare";
+import LinkShare from '@/components/LinksComponents/LinkShare'
 
 const QR_GENERATOR_OPTIONS = {
-  margin: 2,
-  width: 160
+  width: 150,
+  margin: 2
 }
 export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
   const { Canvas } = useQRCode()
@@ -38,15 +37,15 @@ export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
     if (!canvas) return
     canvas.toBlob(blob => {
       if (typeof navigator.clipboard.write === 'function') {
-        navigator.clipboard.write([
-          new ClipboardItem({ 'image/png': blob as Blob })
-        ])
+        navigator.clipboard
+          .write([new ClipboardItem({ 'image/png': blob as Blob })])
+          .then()
       }
     })
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col gap-2 items-center justify-center">
       <div className="overflow-hidden rounded-xl" ref={qrCodeContainerRef}>
         <Canvas text={hrefLink} options={QR_GENERATOR_OPTIONS} />
       </div>
@@ -66,12 +65,12 @@ export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
           <DocumentDuplicateIcon className="h-5 w-[20px] text-neutral-500" />
         </button>
         <LinkShare shareLink={hrefLink} />
-        {/*<button*/}
-        {/*  type="button"*/}
-        {/*  className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"*/}
-        {/*>*/}
-        {/*  <ShareIcon className="h-5 w-[20px] text-neutral-500" />*/}
-        {/*</button>*/}
+        {/* <button */}
+        {/*  type="button" */}
+        {/*  className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200" */}
+        {/* > */}
+        {/*  <ShareIcon className="h-5 w-[20px] text-neutral-500" /> */}
+        {/* </button> */}
       </div>
     </div>
   )
