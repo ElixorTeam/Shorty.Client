@@ -11,6 +11,7 @@ import {
   VKShareButton
 } from 'react-share'
 import DropdownMenu from '@/components/Common/DropdownMenu'
+import IconButton from '@/components/Common/IconButton'
 
 function LinkShareButton({ children }: { children: ReactNode }) {
   return (
@@ -32,13 +33,9 @@ export default function LinkShare({ shareLink }: { shareLink: string }) {
   return (
     <div className="relative inline-block" onMouseEnter={() => setIsOpen(true)}>
       <div>
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"
-        >
-          <ShareIcon className="h-5 w-[20px] text-neutral-500" />
-        </button>
+        <IconButton onClick={() => setIsOpen(true)}>
+          <ShareIcon className="h-5 w-5 text-neutral-500" />
+        </IconButton>
       </div>
       <DropdownMenu isOpen={isOpen} setIsOpen={statue => setIsOpen(statue)}>
         <LinkShareButton>

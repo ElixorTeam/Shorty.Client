@@ -2,6 +2,7 @@ import './globals.css'
 import Provider from '@/components/Provider'
 import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
+import { ReactNode } from 'react'
 
 export const metadata = {
   title: 'Shorty',
@@ -12,7 +13,7 @@ export default function RootLayout({
   children,
   params
 }: {
-  children: React.ReactNode
+  children: ReactNode
   params: { locale: string }
 }) {
   const locale = useLocale()

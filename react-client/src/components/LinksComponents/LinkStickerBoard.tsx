@@ -9,13 +9,11 @@ export default function LinkStickerBoard({
   translate,
   linkData,
   hideLink,
-  reloadLinks,
   setSelectedLink
 }: {
   translate: { [_: string]: string }
   linkData: LinkRecordType
   hideLink: () => void
-  reloadLinks: () => void
   setSelectedLink: (link: LinkRecordType) => void
 }) {
   const shortURL = `http://localhost:3031/${linkData.refRoute}`
@@ -52,7 +50,6 @@ export default function LinkStickerBoard({
             translate={translate}
             linkData={linkData}
             hideLink={hideLink}
-            reloadLinks={reloadLinks}
             setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />
         </div>

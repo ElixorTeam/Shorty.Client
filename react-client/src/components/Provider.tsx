@@ -1,16 +1,12 @@
 'use client'
 
 import { ThemeProvider } from 'next-themes'
-import SearchProvider from '@/components/SearchProvider'
+import { ReactNode } from 'react'
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider enableSystem attribute="class">
-      <SearchProvider>{children}</SearchProvider>
+      {children}
     </ThemeProvider>
   )
 }

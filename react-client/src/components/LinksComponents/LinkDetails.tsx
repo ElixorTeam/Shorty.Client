@@ -7,55 +7,51 @@ import {
 } from '@heroicons/react/24/solid'
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import ky from 'ky'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { apiURL } from '@/shared/fetcher'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import GroupInput from '@/components/Common/GroupInput'
 import { convertDateTime } from '@/shared/convertDate'
 import ButtonTemplate from '@/components/Common/ButtonTemplate'
+import { useSWRConfig } from 'swr'
+import IconButton from '@/components/Common/IconButton'
+import { Link } from 'next-intl'
 
 export default function LinkDetails({
   translate,
   linkData,
   hideLink,
-  reloadLinks,
   setSelectedLink
 }: {
   translate: { [_: string]: string }
   linkData: LinkRecordType
   hideLink: () => void
-  reloadLinks: () => void
   setSelectedLink: (link: LinkRecordType) => void
 }) {
+  const { mutate } = useSWRConfig()
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const shortURL = `http://localhost:3031/${linkData.refRoute}`
   const removeLink = async () => {
-    try {
-      await ky.delete(`${apiURL}/links/${linkData.uid}`)
-      reloadLinks()
-      hideLink()
-    } catch {
-      /* empty */
-    }
+    await ky.delete(`${apiURL}/links/${linkData.uid}`)
+    await mutate(`${apiURL}/links/`)
+    hideLink()
   }
   const editLink = async () => {
-    if (!(inputValue.length === 0 || inputValue === linkData.title)) {
-      try {
-        await ky.put(`${apiURL}/links/${linkData.uid}`, {
-          json: {
-            title: inputValue,
-            ref: linkData.ref
-          }
-        })
+    if (inputValue.length === 0 || inputValue === linkData.title) return
+    await ky
+      .put(`${apiURL}/links/${linkData.uid}`, {
+        json: {
+          title: inputValue,
+          ref: linkData.ref
+        }
+      })
+      .then(() => {
         setSelectedLink({ ...linkData, title: inputValue })
-        reloadLinks()
-      } catch {
-        /* empty */
-      }
-    }
-    setIsEdit(false)
+        mutate(`${apiURL}/links/`)
+        setIsEdit(false)
+      })
   }
   return (
     <>
@@ -71,7 +67,7 @@ export default function LinkDetails({
             className="mr-6 w-full rounded-md border border-gray-300 text-4xl font-bold focus:outline-none"
           />
         ) : (
-          <p className="line-clamp-1 pb-1 text-4xl font-bold">
+          <p className="mt-1 line-clamp-1 pb-1 text-4xl font-bold">
             {linkData.title}
           </p>
         )}
@@ -108,21 +104,15 @@ export default function LinkDetails({
           <GroupInput value={shortURL} label="Short link" />
         </div>
         <CopyToClipboard text={shortURL}>
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"
-          >
-            <DocumentDuplicateIcon className="h-5 w-[20px] text-neutral-500" />
-          </button>
+          <IconButton>
+            <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
+          </IconButton>
         </CopyToClipboard>
-        <a target="_blank" href={shortURL} rel="noreferrer">
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"
-          >
+        <Link target="_blank" href={shortURL}>
+          <IconButton>
             <ArrowTopRightOnSquareIcon className="h-5 w-5 text-neutral-500" />
-          </button>
-        </a>
+          </IconButton>
+        </Link>
       </div>
     </>
   )

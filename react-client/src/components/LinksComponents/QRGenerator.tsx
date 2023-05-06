@@ -7,6 +7,7 @@ import {
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline'
 import LinkShare from '@/components/LinksComponents/LinkShare'
+import IconButton from '@/components/Common/IconButton'
 
 const QR_GENERATOR_OPTIONS = {
   width: 150,
@@ -45,32 +46,18 @@ export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-2">
       <div className="overflow-hidden rounded-xl" ref={qrCodeContainerRef}>
         <Canvas text={hrefLink} options={QR_GENERATOR_OPTIONS} />
       </div>
       <div className="flex gap-1">
-        <button
-          type="button"
-          onClick={handleDownloadQRCode}
-          className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"
-        >
-          <ArrowDownTrayIcon className="h-5 w-[20px] text-neutral-500" />
-        </button>
-        <button
-          type="button"
-          onClick={handleCopyQRCode}
-          className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200"
-        >
-          <DocumentDuplicateIcon className="h-5 w-[20px] text-neutral-500" />
-        </button>
+        <IconButton onClick={handleDownloadQRCode}>
+          <ArrowDownTrayIcon className="h-5 w-5 text-neutral-500" />
+        </IconButton>
+        <IconButton onClick={handleCopyQRCode}>
+          <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
+        </IconButton>
         <LinkShare shareLink={hrefLink} />
-        {/* <button */}
-        {/*  type="button" */}
-        {/*  className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors ease-linear hover:bg-neutral-100 active:bg-neutral-200" */}
-        {/* > */}
-        {/*  <ShareIcon className="h-5 w-[20px] text-neutral-500" /> */}
-        {/* </button> */}
       </div>
     </div>
   )

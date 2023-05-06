@@ -16,7 +16,7 @@ export default function LinksApp({
 }: {
   translate: { [_: string]: string }
 }) {
-  const { data, mutate, isLoading } = useSWR(`${apiURL}/links/`, fetcher)
+  const { data, isLoading } = useSWR(`${apiURL}/links/`, fetcher)
   const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
   return (
     <div className="sm:grid sm:grid-cols-[200px_1fr] md:grid-cols-[300px_1fr]">
@@ -38,7 +38,6 @@ export default function LinksApp({
           <LinkStickerBoard
             translate={translate}
             linkData={selectedLink}
-            reloadLinks={() => mutate().then()}
             hideLink={() => setSelectedLink(null)}
             setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />

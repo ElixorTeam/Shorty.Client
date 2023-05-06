@@ -23,9 +23,9 @@ export default function LayoutNavbar() {
             <LinkIcon className="h-6 w-6" />
             <p className="hidden lg:block">{t('navbarLinks')}</p>
           </AppNavbarItem>
-          <AppNavbarItem link="/settings">
+          <AppNavbarItem link="/">
             <Cog6ToothIcon className="h-6 w-6" />
-            <p className="hidden lg:block">{t('navbarSettings')}</p>
+            <p className="hidden lg:block">{t('navbarLogout')}</p>
           </AppNavbarItem>
         </ul>
       </nav>

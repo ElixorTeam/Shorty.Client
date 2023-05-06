@@ -5,6 +5,7 @@ import { useRouter } from 'next-intl/client'
 import { useState } from 'react'
 import { apiURL } from '@/shared/fetcher'
 import ky from 'ky'
+import { useSWRConfig } from 'swr'
 
 type FormInputs = {
   title: string
@@ -16,6 +17,7 @@ export default function CreateForm({
 }: {
   translate: { [_: string]: string }
 }) {
+  const { mutate } = useSWRConfig()
   const [requestError, setRequestError] = useState<string | null>(null)
   const {
     register,
@@ -33,15 +35,13 @@ export default function CreateForm({
     }
     try {
       await ky.post(`${apiURL}/links/`, { json: formData })
+      await mutate(`${apiURL}/links/`)
+      router.push('/links')
     } catch (err: any) {
-      const errMsg = err?.response?.json?.().msg || err.message
-      // const errResponse: { msg: string } = await err.response?.json?.()
-      // const errMsg = errResponse ? errResponse.msg : err.message
+      const errResponse: { msg: string } = await err.response?.json?.()
+      const errMsg = errResponse ? errResponse.msg : err.message
       setRequestError(errMsg)
-      return
     }
-    router.prefetch('/links')
-    router.push('/links')
   }
 
   return (
