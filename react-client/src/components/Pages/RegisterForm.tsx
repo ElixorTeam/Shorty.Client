@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'next-intl'
 import { useRouter } from 'next-intl/client'
 import InputComponent from '@/components/Common/InputComponent'
+import toast from 'react-hot-toast'
 
 type FormData = {
   email: string
@@ -16,8 +17,26 @@ export default function RegisterForm({
 }: {
   translate: { [_: string]: string }
 }) {
-  const { register, handleSubmit, getValues } = useForm<FormData>()
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors }
+  } = useForm<FormData>()
   const router = useRouter()
+
+  const checkErrors = () => {
+    if (errors.email?.type === 'required') toast.error('Email is required')
+    else if (errors.email?.type === 'pattern')
+      toast.error("Email doesn't follow a pattern")
+    else if (errors.password?.type === 'required')
+      toast.error('Password is required')
+    else if (errors.password?.type === 'pattern')
+      toast.error("Password doesn't follow a pattern")
+    else if (errors.confirmPassword?.type === 'validate')
+      toast.error('Passwords are different')
+  }
+
   const onSubmit = (data: FormData) => {
     // eslint-disable-next-line no-console
     console.log(data)
@@ -41,7 +60,7 @@ export default function RegisterForm({
             <div className="w-full">
               <InputComponent
                 type="email"
-                name="regEmailInput"
+                name="email"
                 label={translate.emailInput}
                 registerOptions={{
                   required: true,
@@ -53,7 +72,7 @@ export default function RegisterForm({
             <div className="mt-4 w-full">
               <InputComponent
                 type="password"
-                name="regPasswordInput"
+                name="password"
                 label={translate.passwordInput}
                 registerOptions={{
                   required: true,
@@ -65,7 +84,7 @@ export default function RegisterForm({
             <div className="mt-4 w-full">
               <InputComponent
                 type="password"
-                name="regConfirmPasswordInput"
+                name="confirmPassword"
                 label={translate.confirmPasswordInput}
                 registerOptions={{
                   required: true,
@@ -81,6 +100,7 @@ export default function RegisterForm({
           </div>
           <button
             type="submit"
+            onClick={checkErrors}
             className="my-2 h-10 w-full rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition-colors ease-linear hover:bg-sky-500 dark:shadow-blue-200/[.1]"
           >
             <p className="text-lg font-semibold text-white">

@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline'
 import LinkShare from '@/components/LinksComponents/LinkShare'
 import IconButton from '@/components/Common/IconButton'
+import toast from 'react-hot-toast'
 
 const QR_GENERATOR_OPTIONS = {
   width: 150,
@@ -41,6 +42,7 @@ export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
         navigator.clipboard
           .write([new ClipboardItem({ 'image/png': blob as Blob })])
           .then()
+        toast('QR Code copied')
       }
     })
   }

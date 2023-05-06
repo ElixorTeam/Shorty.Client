@@ -6,6 +6,7 @@ import { useRouter } from 'next-intl/client'
 import GoogleIcon from '@/assets/google-icon.svg'
 import GithubIcon from '@/assets/github-icon.svg'
 import InputComponent from '@/components/Common/InputComponent'
+import toast from 'react-hot-toast'
 
 type FormData = {
   email: string
@@ -17,8 +18,23 @@ export default function AuthForm({
 }: {
   translate: { [_: string]: string }
 }) {
-  const { register, handleSubmit } = useForm<FormData>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>()
   const router = useRouter()
+
+  const checkErrors = () => {
+    if (errors.email?.type === 'required') toast.error('Email is required')
+    else if (errors.email?.type === 'pattern')
+      toast.error("Email doesn't follow a pattern")
+    else if (errors.password?.type === 'required')
+      toast.error('Password is required')
+    else if (errors.password?.type === 'pattern')
+      toast.error("Password doesn't follow a pattern")
+  }
+
   const onSubmit = (data: FormData) => {
     // eslint-disable-next-line no-console
     console.log(data)
@@ -42,7 +58,7 @@ export default function AuthForm({
             <div className="w-full">
               <InputComponent
                 type="email"
-                name="authEmailInput"
+                name="email"
                 label={translate.emailInput}
                 registerOptions={{
                   required: true,
@@ -54,7 +70,7 @@ export default function AuthForm({
             <div className="mt-4 w-full">
               <InputComponent
                 type="password"
-                name="authPasswordInput"
+                name="password"
                 label={translate.passwordInput}
                 registerOptions={{
                   required: true,
@@ -66,6 +82,7 @@ export default function AuthForm({
           </div>
           <button
             type="submit"
+            onClick={checkErrors}
             className="mt-2 h-10 w-full rounded-lg bg-blue-300 shadow-md shadow-blue-200 transition-colors ease-linear hover:bg-blue-400 dark:shadow-blue-200/[.1]"
           >
             <p className="uppercase text-white">{translate.enterBtn}</p>

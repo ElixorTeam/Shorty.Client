@@ -45,7 +45,7 @@ export default function LinkStickerBoard({
         </button>
       </div>
       <div className="m-auto flex max-w-7xl flex-wrap gap-4 bg-[#eef1f6] p-3 dark:bg-[#1c1a25] min-[640px]:bg-transparent md:p-6">
-        <div className="h-[232px] w-full max-w-2xl rounded-xl bg-white px-4 py-2 dark:bg-[#23212e] md:px-10 md:py-6">
+        <div className="h-[232px] w-full max-w-2xl rounded-xl bg-white px-4 py-2 shadow-lg dark:bg-[#23212e] md:px-10 md:py-6">
           <LinkDetails
             translate={translate}
             linkData={linkData}
@@ -53,17 +53,17 @@ export default function LinkStickerBoard({
             setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />
         </div>
-        <div className="rounded-xl bg-white p-4 dark:bg-[#23212e] sm:h-fit">
+        <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-[#23212e] sm:h-fit">
           <div className="h-[200px] w-[200px]">
             <QRGenerator hrefLink={shortURL} />
           </div>
         </div>
-        <div className="rounded-xl bg-white p-4 dark:bg-[#23212e]">
+        <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-[#23212e]">
           <div className="h-[200px] w-[200px]">
             <BrowserDoughnutChart data={browserChartData} />
           </div>
         </div>
-        <div className="w-full max-w-[392px] rounded-xl bg-white p-4 dark:bg-[#23212e]">
+        <div className="w-full max-w-[392px] rounded-xl bg-white p-4 shadow-lg dark:bg-[#23212e]">
           <div className="h-[200px] w-full max-w-[392px]">
             <LineChart data={lineChartData} labels={lineChartLabels} />
           </div>

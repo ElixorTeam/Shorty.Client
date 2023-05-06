@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/24/solid'
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import ky from 'ky'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { apiURL } from '@/shared/fetcher'
 import { LinkRecordType } from '@/shared/LinkRecordType'
@@ -17,6 +17,7 @@ import ButtonTemplate from '@/components/Common/ButtonTemplate'
 import { useSWRConfig } from 'swr'
 import IconButton from '@/components/Common/IconButton'
 import { Link } from 'next-intl'
+import toast from 'react-hot-toast'
 
 export default function LinkDetails({
   translate,
@@ -32,36 +33,54 @@ export default function LinkDetails({
   const { mutate } = useSWRConfig()
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
+  const editInputRef = useRef<HTMLInputElement>(null)
   const shortURL = `http://localhost:3031/${linkData.refRoute}`
-  const removeLink = async () => {
-    await ky.delete(`${apiURL}/links/${linkData.uid}`)
-    await mutate(`${apiURL}/links/`)
-    hideLink()
-  }
+  const removeLink = async () =>
+    ky
+      .delete(`${apiURL}/links/${linkData.uid}`)
+      .then(() => {
+        mutate(`${apiURL}/links/`)
+        hideLink()
+        toast.success('Link successfully deleted')
+      })
+      .catch(() => toast.error('Link deletion failed'))
+
   const editLink = async () => {
     if (inputValue.length === 0 || inputValue === linkData.title) return
-    await ky
-      .put(`${apiURL}/links/${linkData.uid}`, {
-        json: {
-          title: inputValue,
-          ref: linkData.ref
-        }
-      })
+    ky.put(`${apiURL}/links/${linkData.uid}`, {
+      json: {
+        title: inputValue,
+        ref: linkData.ref
+      }
+    })
       .then(() => {
         setSelectedLink({ ...linkData, title: inputValue })
         mutate(`${apiURL}/links/`)
         setIsEdit(false)
+        toast.success('Link successfully edited')
       })
+      .catch(() => toast.error('Link editing failed'))
+  }
+
+  const setEditMode = () => {
+    setIsEdit(true)
+    setTimeout(() => {
+      if (editInputRef.current) {
+        editInputRef.current.focus()
+      }
+    }, 0)
   }
   return (
     <>
       <div className="flex h-12 items-start justify-between">
         {isEdit ? (
           <input
+            ref={editInputRef}
             type="text"
             onChange={event => setInputValue(event.target.value)}
             onKeyDown={event => {
               if (event.key === 'Enter') editLink().then()
+              else if (event.key === 'Escape') setIsEdit(false)
             }}
             defaultValue={linkData.title}
             className="mr-6 w-full rounded-md border border-gray-300 text-4xl font-bold focus:outline-none"
@@ -86,7 +105,7 @@ export default function LinkDetails({
               <ButtonTemplate onClick={removeLink}>
                 <TrashIcon className="h-6 w-6 text-red-700" />
               </ButtonTemplate>
-              <ButtonTemplate onClick={() => setIsEdit(true)}>
+              <ButtonTemplate onClick={setEditMode}>
                 <PencilIcon className="h-5 w-5" />
               </ButtonTemplate>
             </>
@@ -103,16 +122,18 @@ export default function LinkDetails({
         <div className="w-[320px]">
           <GroupInput value={shortURL} label="Short link" />
         </div>
-        <CopyToClipboard text={shortURL}>
-          <IconButton>
-            <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
-          </IconButton>
-        </CopyToClipboard>
-        <Link target="_blank" href={shortURL}>
-          <IconButton>
-            <ArrowTopRightOnSquareIcon className="h-5 w-5 text-neutral-500" />
-          </IconButton>
-        </Link>
+        <div className="flex gap-2">
+          <CopyToClipboard text={shortURL}>
+            <IconButton onClick={() => toast('Link copied')}>
+              <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
+            </IconButton>
+          </CopyToClipboard>
+          <Link target="_blank" href={shortURL}>
+            <IconButton>
+              <ArrowTopRightOnSquareIcon className="h-5 w-5 text-neutral-500" />
+            </IconButton>
+          </Link>
+        </div>
       </div>
     </>
   )
