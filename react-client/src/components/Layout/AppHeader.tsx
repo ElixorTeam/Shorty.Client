@@ -7,11 +7,11 @@ import LinkSearch from '@/components/LinksComponents/LinkSearch'
 function LayoutHeader() {
   const t = useTranslations('app')
   return (
-    <header className="sticky top-0 z-50 flex px-5 ring-gray-200 md:px-[62px]">
+    <header className="sticky top-0 z-50 flex px-5 ring-gray-200 md:px-[50px] lg:px-[62px]">
       <div className="flex h-16 w-full items-center justify-between">
-        <div className="flex flex-row items-center space-x-[60px]">
+        <div className="flex flex-row items-center gap-[60px]">
           <Link
-            className="text-2xl font-extrabold dark:text-white"
+            className="text-2xl font-extrabold dark:text-white md:hidden lg:block"
             href="/links"
           >
             <p>Shorty</p>

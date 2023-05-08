@@ -18,7 +18,7 @@ export default function NavbarItem({
         pathname === link ? 'text-sky-400' : 'text-gray-400'
       } w-full`}
     >
-      <li className="flex w-full flex-row items-center justify-center space-x-2 lg:justify-normal">
+      <li className="flex w-full flex-row items-center justify-center gap-3 lg:justify-normal">
         {children}
       </li>
     </Link>

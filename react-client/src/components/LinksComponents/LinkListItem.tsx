@@ -22,7 +22,7 @@ export default function LinkListItem({
                 : 'bg-slate-100 dark:bg-[#1f1e29]'
             }`
           : 'bg-slate-100 dark:bg-[#1f1e29]'
-      } flex h-24 w-full items-center px-5 text-left shadow-[inset_20px_0px_4px_-17px_rgb(0,0,0,0.05)] transition-colors ease-linear md:px-10`}
+      } flex h-24 w-full items-center px-5 text-left transition-colors ease-linear md:px-10`}
       onClick={onClick}
     >
       <div className="linkContainer grid w-full gap-1">

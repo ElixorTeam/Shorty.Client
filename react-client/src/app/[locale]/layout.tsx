@@ -25,7 +25,7 @@ export default function RootLayout({
 
   return (
     <html lang={params.locale}>
-      <body className="min-h-screen bg-white text-black antialiased dark:bg-[#23212e] dark:text-white">
+      <body className="h-screen text-black antialiased dark:text-white">
         <Provider>{children}</Provider>
         <Toaster position="bottom-right" />
       </body>

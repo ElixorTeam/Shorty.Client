@@ -51,7 +51,7 @@ export default function CreateForm({
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center p-4 text-left shadow-[inset_0_0_6px_2px_rgb(0,0,0,0.05)] dark:shadow-[inset_0_0_8px_2px_rgb(0,0,0,0.05)] sm:p-8">
+    <div className="flex h-full w-full flex-col items-center p-4 text-left sm:p-8">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full sm:w-[300px] md:w-[500px]"

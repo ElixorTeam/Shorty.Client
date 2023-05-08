@@ -1,11 +1,13 @@
 import {
-  PencilIcon,
-  TrashIcon,
   XMarkIcon,
   CheckIcon,
   ArrowTopRightOnSquareIcon
 } from '@heroicons/react/24/solid'
-import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
+import {
+  DocumentDuplicateIcon,
+  TrashIcon,
+  PencilIcon
+} from '@heroicons/react/24/outline'
 import ky from 'ky'
 import React, { useRef, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -13,7 +15,6 @@ import { apiURL } from '@/shared/fetcher'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import GroupInput from '@/components/Common/GroupInput'
 import { convertDateTime } from '@/shared/convertDate'
-import ButtonTemplate from '@/components/Common/ButtonTemplate'
 import { useSWRConfig } from 'swr'
 import IconButton from '@/components/Common/IconButton'
 import { Link } from 'next-intl'
@@ -83,31 +84,31 @@ export default function LinkDetails({
               else if (event.key === 'Escape') setIsEdit(false)
             }}
             defaultValue={linkData.title}
-            className="mr-6 w-full rounded-md border border-gray-300 text-4xl font-bold focus:outline-none"
+            className="mr-6 mt-3 h-9 w-full rounded-md border border-gray-300 pl-1 text-3xl font-bold focus:outline-none"
           />
         ) : (
-          <p className="mt-1 line-clamp-1 pb-1 text-4xl font-bold">
+          <p className="mt-3 line-clamp-1 h-9 pb-1 text-3xl font-bold">
             {linkData.title}
           </p>
         )}
-        <div className="mt-3 flex flex-row items-center space-x-4">
+        <div className="mt-3 flex flex-row items-center gap-2">
           {isEdit ? (
             <>
-              <ButtonTemplate onClick={editLink}>
-                <CheckIcon className="h-6 w-6" />
-              </ButtonTemplate>
-              <ButtonTemplate onClick={() => setIsEdit(false)}>
-                <XMarkIcon className="h-6 w-6" />
-              </ButtonTemplate>
+              <IconButton onClick={editLink}>
+                <CheckIcon className="h-5 w-5 text-neutral-500" />
+              </IconButton>
+              <IconButton onClick={() => setIsEdit(false)}>
+                <XMarkIcon className="h-5 w-5 text-neutral-500" />
+              </IconButton>
             </>
           ) : (
             <>
-              <ButtonTemplate onClick={removeLink}>
-                <TrashIcon className="h-6 w-6 text-red-700" />
-              </ButtonTemplate>
-              <ButtonTemplate onClick={setEditMode}>
-                <PencilIcon className="h-5 w-5" />
-              </ButtonTemplate>
+              <IconButton onClick={removeLink}>
+                <TrashIcon className="h-5 w-5 text-neutral-500" />
+              </IconButton>
+              <IconButton onClick={setEditMode}>
+                <PencilIcon className="h-5 w-5 text-neutral-500" />
+              </IconButton>
             </>
           )}
         </div>
