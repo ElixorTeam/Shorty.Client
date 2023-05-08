@@ -7,7 +7,6 @@ import { LinkRecordType } from '@/shared/LinkRecordType'
 import LinkStickerBoard from '@/components/LinksComponents/LinkStickerBoard'
 import { apiURL } from '@/shared/fetcher'
 import ListLink from '@/components/LinksComponents/LinkList'
-import LinkSearch from '@/components/LinksComponents/LinkSearch'
 
 const fetcher = async (url: string): Promise<LinkRecordType[]> =>
   ky.get(url).json()
@@ -17,7 +16,7 @@ export default function LinksApp({
 }: {
   translate: { [_: string]: string }
 }) {
-  const { data, isLoading } = useSWR(`${apiURL}/links/`, fetcher)
+  const { data, isLoading, error } = useSWR(`${apiURL}/links/`, fetcher)
   const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
   return (
     <div className="h-full sm:grid sm:grid-cols-[200px_1fr] md:grid-cols-[300px_1fr]">
@@ -25,7 +24,7 @@ export default function LinksApp({
         <ListLink
           translate={translate}
           linksData={data}
-          isLoading={isLoading}
+          isLoading={isLoading || error}
           selectedLink={selectedLink}
           setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
         />

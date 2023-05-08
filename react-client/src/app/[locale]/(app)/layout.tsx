@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <SearchProvider>
         <div className="m-auto h-full max-w-[1920px]">
           <AppHeader />
-          <div className="h-[calc(100%_-_64px)] sm:grid sm:grid-rows-1 sm:grid-cols-[50px_1fr] lg:grid-cols-[200px_1fr]">
+          <div className="h-[calc(100%_-_64px)] sm:grid sm:grid-cols-[50px_1fr] sm:grid-rows-1 lg:grid-cols-[200px_1fr]">
             <div className="hidden sm:block">
               <AppNavbar />
             </div>

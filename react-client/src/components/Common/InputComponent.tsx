@@ -20,7 +20,7 @@ export default function InputComponent({
         id={name}
         type={type}
         {...register(name, { required, pattern, validate })}
-        className="peer h-full w-full rounded-[7px] border border-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-gray-200 focus:border-2 focus:border-sky-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-gray-50 dark:border-neutral-600 dark:placeholder-shown:border-neutral-600 dark:focus:border-sky-500 dark:focus:border-t-transparent"
+        className="peer h-full w-full rounded-lg border border-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-gray-200 focus:border-2 focus:border-sky-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-gray-50 dark:border-neutral-600 dark:placeholder-shown:border-neutral-600 dark:focus:border-sky-500 dark:focus:border-t-transparent"
         placeholder=" "
       />
       <label

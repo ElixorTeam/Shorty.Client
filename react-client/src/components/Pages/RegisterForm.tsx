@@ -44,7 +44,7 @@ export default function RegisterForm({
   }
   return (
     <div className="flex h-[calc(100vh-64px)] items-center justify-center">
-      <div className="flex h-fit w-80 flex-col justify-center rounded-lg p-10 md:w-96 md:shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:md:shadow-gray-900">
+      <div className="flex h-fit w-80 flex-col justify-center rounded-lg p-10 shadow-2xl dark:bg-[#23212e] md:w-96">
         <p className="text-2xl font-bold">{translate.formTitle}</p>
         <p className="mb-1">
           {translate.haveAccountText}{' '}

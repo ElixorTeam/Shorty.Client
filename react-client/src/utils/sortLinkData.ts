@@ -1,12 +1,12 @@
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import { TableKeyEnum } from '@/shared/TableKeyEnum'
+import { SortKeyEnum } from '@/shared/SortKeyEnum'
 
 // eslint-disable-next-line import/prefer-default-export
-export const sortLinkData = (linkData: LinkRecordType[], key: TableKeyEnum) => {
+export const sortLinkData = (linkData: LinkRecordType[], key: SortKeyEnum) => {
   const sortedLinkData = [...linkData]
-  if (key === TableKeyEnum.Alphabet) {
+  if (key === SortKeyEnum.Name) {
     sortedLinkData.sort((a, b) => a.title.localeCompare(b.title))
-  } else if (key === TableKeyEnum.Last) {
+  } else if (key === SortKeyEnum.Date) {
     sortedLinkData.sort(
       (a, b) => new Date(b.createDt).getTime() - new Date(a.createDt).getTime()
     )

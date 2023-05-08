@@ -1,15 +1,14 @@
 {
   "app": {
-    "headerSearch": "Search",
     "navbarCreate": "Create",
     "navbarLinks": "Links",
     "navbarLogout": "Logout",
     "windowTitle": "Link Description",
     "windowDate": "Created",
     "windowQR": "QR Code",
-    "sortKeyAlphabet": "Alphabet",
-    "sortKeyLast": "Last",
-    "sortLabel": "Sort by"
+    "sortKeyName": "By name",
+    "sortKeyDate": "By date",
+    "linkSearch": "Search link"
   },
   "home" : {
     "title": "Let's short your links together",

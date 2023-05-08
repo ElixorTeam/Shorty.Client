@@ -7,9 +7,9 @@ export default function Links() {
     windowTitle: t('windowTitle'),
     windowDate: t('windowDate'),
     windowQR: t('windowQR'),
-    sortKeyAlphabet: t('sortKeyAlphabet'),
-    sortKeyLast: t('sortKeyLast'),
-    sortLabel: t('sortLabel')
+    sortKeyName: t('sortKeyName'),
+    sortKeyDate: t('sortKeyDate'),
+    linkSearch: t('linkSearch')
   }
   return <LinksApp translate={translation} />
 }

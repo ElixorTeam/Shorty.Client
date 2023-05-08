@@ -1,15 +1,14 @@
 {
   "app": {
-    "headerSearch": "Поиск",
     "navbarCreate": "Добавить",
     "navbarLinks": "Ссылки",
     "navbarLogout": "Выйти",
     "windowTitle": "Подробности ссылки",
     "windowDate": "Создана",
     "windowQR": "QR Код",
-    "sortKeyAlphabet": "Алфавиту",
-    "sortKeyLast": "Последние",
-    "sortLabel": "Сортировка"
+    "sortKeyName": "По имени",
+    "sortKeyDate": "По дате",
+    "linkSearch": "Поиск ссылки"
   },
   "home" : {
     "title": "Давай сделаем ссылки короче",

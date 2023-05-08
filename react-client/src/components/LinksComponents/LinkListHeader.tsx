@@ -1,50 +1,39 @@
-import { ChangeEvent, useCallback, useState } from 'react'
-import { TableKeyEnum } from '@/shared/TableKeyEnum'
-
-type SortOptionType = {
-  title: string
-  value: string
-}
+import LinkSortSelect from '@/components/LinksComponents/LinkSortSelect'
+import { SortOptionsType } from '@/shared/SortKeyEnum'
+import LinkSearch from '@/components/LinksComponents/LinkSearch'
 
 export default function LinkListHeader({
-  translate,
+  sortOptions,
+  placeholderText,
+  searchString,
+  setSearchString,
   selectedSort,
   setSelectedSort
 }: {
-  translate: { [_: string]: string }
-  selectedSort: TableKeyEnum
-  setSelectedSort: (key: TableKeyEnum) => void
+  sortOptions: SortOptionsType[]
+  placeholderText: string
+  searchString: string
+  setSearchString: (state: string) => void
+  selectedSort: SortOptionsType
+  setSelectedSort: (state: SortOptionsType) => void
 }) {
-  const [tableKey, setTableKey] = useState<TableKeyEnum>(selectedSort)
-  const handleTableKey = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => {
-      const sortKey = e.target.value as TableKeyEnum
-      setTableKey(sortKey)
-      setSelectedSort(sortKey)
-    },
-    [setSelectedSort]
-  )
-  const sortOptions: SortOptionType[] = [
-    { title: translate.sortKeyAlphabet, value: 'alphabet' },
-    { title: translate.sortKeyLast, value: 'last' }
-  ]
   return (
-    <div className="sticky top-0 flex h-16 w-full items-center bg-white px-5 dark:bg-[#23212e] md:px-10">
-      <div className="mr-2 flex flex-row items-center">
-        <p className="mr-2 hidden text-gray-700 dark:text-gray-400 md:block">
-          {translate.sortLabel}
-        </p>
-        <select
-          value={tableKey}
-          onChange={handleTableKey}
-          className="bg-white/[.0] text-black dark:text-white"
-        >
-          {sortOptions.map(item => (
-            <option key={item.value} value={item.value}>
-              {item.title}
-            </option>
-          ))}
-        </select>
+    <div className="sticky top-0 z-40 flex w-full flex-col items-center bg-white dark:bg-[#23212e]">
+      <div className="w-full border-b dark:border-b-white/[.1]">
+        <div className="my-2 flex h-7 w-full items-center gap-2 px-4">
+          <LinkSearch
+            searchText={searchString}
+            setSearchString={setSearchString}
+            placeholderText={placeholderText}
+          />
+        </div>
+      </div>
+      <div className="w-full border-b px-10 dark:border-b-white/[.1]">
+        <LinkSortSelect
+          sortOptions={sortOptions}
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+        />
       </div>
     </div>
   )
