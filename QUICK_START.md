@@ -4,20 +4,16 @@
 ```bash
 npm i -g pnpm
 ```
-3. Go to:
+3. Start up react-client:
 ```bash
 cd react-client
-```
-4. Install all dependencies:
-```bash
 pnpm i
-```
-5. Run in dev mode:
-```bash
 pnpm dev
 ```
-6. Run in prod mode:
+4. Start up react-redirect
 ```bash
-pnpm build
+cd react-redirect
+pnpm i
+pnpm dev
 ```
 [Go back](README.md)

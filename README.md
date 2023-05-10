@@ -7,10 +7,13 @@ This is React client application for **[Shorty Api](https://github.com/Bagger-sT
 
 ## 💻 Tech Stack
 - [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/)
-- [SWC](https://swc.rs/)
-- [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)
+- [React](https://reactjs.org/)
+- React-Client:
+  - [NextJS](https://nextjs.org/) 
+- React-Redirect:
+  - [Vite](https://vitejs.dev/)
+  - [SWC](https://swc.rs/)
 - **Tools:**
   - [Docker](https://www.docker.com/)
   
