@@ -42,9 +42,9 @@ export default function LinkDetails({
       .then(() => {
         mutate(`${apiURL}/links/`)
         hideLink()
-        toast.success('Link successfully deleted')
+        toast.success(translate.toastLinkDelError)
       })
-      .catch(() => toast.error('Link deletion failed'))
+      .catch(() => toast.error(translate.toastLinkDelSuccess))
 
   const editLink = async () => {
     if (inputValue.length === 0 || inputValue === linkData.title) return
@@ -58,9 +58,9 @@ export default function LinkDetails({
         setSelectedLink({ ...linkData, title: inputValue })
         mutate(`${apiURL}/links/`)
         setIsEdit(false)
-        toast.success('Link successfully edited')
+        toast.success(translate.toastLinkEditSuccess)
       })
-      .catch(() => toast.error('Link editing failed'))
+      .catch(() => toast.error(translate.toastLinkEditError))
   }
 
   const setEditMode = () => {
@@ -72,7 +72,7 @@ export default function LinkDetails({
     }, 0)
   }
   return (
-    <>
+    <div className="h-48">
       <div className="flex h-12 items-start justify-between">
         {isEdit ? (
           <input
@@ -125,7 +125,7 @@ export default function LinkDetails({
         </div>
         <div className="flex gap-2">
           <CopyToClipboard text={shortURL}>
-            <IconButton onClick={() => toast('Link copied')}>
+            <IconButton onClick={() => toast(translate.toastURLCopied)}>
               <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
             </IconButton>
           </CopyToClipboard>
@@ -136,6 +136,6 @@ export default function LinkDetails({
           </Link>
         </div>
       </div>
-    </>
+    </div>
   )
 }

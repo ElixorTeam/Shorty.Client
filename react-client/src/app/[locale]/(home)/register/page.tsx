@@ -10,7 +10,12 @@ export default function Page() {
     emailInput: t('emailInput'),
     passwordInput: t('passwordInput'),
     confirmPasswordInput: t('confirmPasswordInput'),
-    enterBtn: t('enterBtn')
+    enterBtn: t('enterBtn'),
+    toastEmailPatternError: t('toastEmailPatternError'),
+    toastEmailRequiredError: t('toastEmailRequiredError'),
+    toastPasswordPatternError: t('toastPasswordPatternError'),
+    toastPasswordRequiredError: t('toastPasswordRequiredError'),
+    toastConfirmValidError: t('toastConfirmValidError')
   }
   return <RegisterForm translate={translation} />
 }

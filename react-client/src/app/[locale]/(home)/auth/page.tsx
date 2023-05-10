@@ -10,7 +10,11 @@ export default function Auth() {
     emailInput: t('emailInput'),
     passwordInput: t('passwordInput'),
     enterBtn: t('enterBtn'),
-    additionalEnter: t('additionalEnter')
+    additionalEnter: t('additionalEnter'),
+    toastEmailPatternError: t('toastEmailPatternError'),
+    toastEmailRequiredError: t('toastEmailRequiredError'),
+    toastPasswordPatternError: t('toastPasswordPatternError'),
+    toastPasswordRequiredError: t('toastPasswordRequiredError')
   }
   return <AuthForm translate={translation} />
 }

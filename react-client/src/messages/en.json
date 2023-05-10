@@ -8,7 +8,13 @@
     "windowQR": "QR Code",
     "sortKeyName": "By name",
     "sortKeyDate": "By date",
-    "linkSearch": "Search link"
+    "linkSearch": "Search link",
+    "toastLinkDelError": "Link deletion failed",
+    "toastLinkDelSuccess": "Link successfully deleted",
+    "toastLinkEditError": "Title edition failed",
+    "toastLinkEditSuccess": "Title successfully edited",
+    "toastQRCodeCopied": "QR code copied",
+    "toastURLCopied": "Link URL copied"
   },
   "home" : {
     "title": "Let's short your links together",
@@ -23,7 +29,11 @@
     "emailInput": "Email address",
     "passwordInput": "Password",
     "enterBtn": "Sign in",
-    "additionalEnter": "Or"
+    "additionalEnter": "Or",
+    "toastEmailPatternError": "Email is incorrect",
+    "toastEmailRequiredError": "Enter your email",
+    "toastPasswordPatternError": "Password is incorrect",
+    "toastPasswordRequiredError": "Enter your password"
   },
   "register": {
     "formTitle": "Sign Up",
@@ -32,17 +42,20 @@
     "emailInput": "Email address",
     "passwordInput": "Password",
     "confirmPasswordInput": "Confirm password",
-    "enterBtn": "Sign up"
+    "enterBtn": "Sign up",
+    "toastEmailPatternError": "Email is incorrect",
+    "toastEmailRequiredError": "Enter your email",
+    "toastPasswordPatternError": "Password is incorrect",
+    "toastPasswordRequiredError": "Enter your password",
+    "toastConfirmValidError": "Passwords are different"
   },
   "create": {
     "formTitle": "Create link",
     "urlLabel": "Url link",
-    "urlErrorRequired": "Url is required",
-    "urlErrorPattern": "Incorrent URL",
     "titleLabel": "Title",
-    "customLabel": "Custom link",
-    "customErrorPattern": "Incorrent name",
     "submitButton": "Create",
-    "labelOptional": "Optional"
+    "labelOptional": "Optional",
+    "toastURLRequiredError": "Enter your URL",
+    "toastURLPatternError": "URL is incorrect"
   }
 }

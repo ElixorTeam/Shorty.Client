@@ -26,13 +26,14 @@ export default function AuthForm({
   const router = useRouter()
 
   const checkErrors = () => {
-    if (errors.email?.type === 'required') toast.error('Email is required')
+    if (errors.email?.type === 'required')
+      toast.error(translate.toastEmailRequiredError)
     else if (errors.email?.type === 'pattern')
-      toast.error("Email doesn't follow a pattern")
+      toast.error(translate.toastEmailPatternError)
     else if (errors.password?.type === 'required')
-      toast.error('Password is required')
+      toast.error(translate.toastPasswordRequiredError)
     else if (errors.password?.type === 'pattern')
-      toast.error("Password doesn't follow a pattern")
+      toast.error(translate.toastPasswordPatternError)
   }
 
   const onSubmit = (data: FormData) => {

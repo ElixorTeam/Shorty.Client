@@ -20,7 +20,7 @@ export default function LinksApp({
   const [selectedLink, setSelectedLink] = useState<LinkRecordType | null>(null)
   return (
     <div className="h-full sm:grid sm:grid-cols-[200px_1fr] md:grid-cols-[300px_1fr]">
-      <div className="mx-4 h-fit max-h-[calc(100%_-_10px)] overflow-y-hidden rounded-2xl shadow-2xl scrollbar-thin hover:overflow-y-auto sm:mx-0">
+      <div className="mx-4 h-fit max-h-[calc(100%_-_10px)] overflow-y-hidden rounded-2xl shadow-2xl scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto dark:scrollbar-thumb-gray-500 sm:mx-0">
         <ListLink
           translate={translate}
           linksData={data}

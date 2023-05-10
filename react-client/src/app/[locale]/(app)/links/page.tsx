@@ -9,7 +9,13 @@ export default function Links() {
     windowQR: t('windowQR'),
     sortKeyName: t('sortKeyName'),
     sortKeyDate: t('sortKeyDate'),
-    linkSearch: t('linkSearch')
+    linkSearch: t('linkSearch'),
+    toastLinkDelError: t('toastLinkDelError'),
+    toastLinkDelSuccess: t('toastLinkDelSuccess'),
+    toastLinkEditError: t('toastLinkEditError'),
+    toastLinkEditSuccess: t('toastLinkEditSuccess'),
+    toastQRCodeCopied: t('toastQRCodeCopied'),
+    toastURLCopied: t('toastURLCopied')
   }
   return <LinksApp translate={translation} />
 }

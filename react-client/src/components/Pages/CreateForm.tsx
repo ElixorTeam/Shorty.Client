@@ -28,9 +28,10 @@ export default function CreateForm({
   const router = useRouter()
 
   const checkErrors = () => {
-    if (errors.ref?.type === 'required') toast.error('URL is required')
+    if (errors.ref?.type === 'required')
+      toast.error(translate.toastURLRequiredError)
     else if (errors.ref?.type === 'pattern')
-      toast.error("URL doesn't follow a pattern")
+      toast.error(translate.toastURLPatternError)
   }
 
   const onSubmit = async (formInput: FormInputs) => {
@@ -53,8 +54,8 @@ export default function CreateForm({
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center sm:pb-[64px] sm:pr-[50px] lg:pr-[200px]">
-      <div className="w-fit rounded-lg bg-white p-10 shadow-2xl dark:bg-[#23212e]">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-80">
+      <div className="w-fit rounded-lg bg-white p-6 shadow-2xl dark:bg-[#23212e] sm:p-10">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-64 sm:w-80">
           <p className="w-fit text-2xl font-bold dark:text-white">
             {translate.formTitle}
           </p>

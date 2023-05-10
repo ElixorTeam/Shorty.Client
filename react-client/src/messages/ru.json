@@ -8,7 +8,13 @@
     "windowQR": "QR Код",
     "sortKeyName": "По имени",
     "sortKeyDate": "По дате",
-    "linkSearch": "Поиск ссылки"
+    "linkSearch": "Поиск ссылки",
+    "toastLinkDelError": "Не удалось удалить ссылку",
+    "toastLinkDelSuccess": "Ссылка успешно удалена",
+    "toastLinkEditError": "Не удалось изменить название",
+    "toastLinkEditSuccess": "Название успешно изменено",
+    "toastQRCodeCopied": "QR код скопирован",
+    "toastURLCopied": "URL адрес скопирован"
   },
   "home" : {
     "title": "Давай сделаем ссылки короче",
@@ -23,7 +29,11 @@
     "emailInput": "Email адрес",
     "passwordInput": "Пароль",
     "enterBtn": "Войти",
-    "additionalEnter": "Или"
+    "additionalEnter": "Или",
+    "toastEmailPatternError": "Некорректный email адрес",
+    "toastEmailRequiredError": "Введите email адрес",
+    "toastPasswordPatternError": "Некорректный пароль",
+    "toastPasswordRequiredError": "Введите пароль"
   },
   "register": {
     "formTitle": "Создать",
@@ -32,17 +42,20 @@
     "emailInput": "Email адрес",
     "passwordInput": "Пароль",
     "confirmPasswordInput": "Подтвердите пароль",
-    "enterBtn": "Создать"
+    "enterBtn": "Создать",
+    "toastEmailPatternError": "Некорректный email адрес",
+    "toastEmailRequiredError": "Введите email адрес",
+    "toastPasswordPatternError": "Некорректный пароль",
+    "toastPasswordRequiredError": "Введите пароль",
+    "toastConfirmValidError": "Пароли разные"
   },
   "create": {
     "formTitle": "Создать ссылку",
     "urlLabel": "URL ссылка",
-    "urlErrorRequired": "URl обязателен",
-    "urlErrorPattern": "Неправильная URL ссылка",
     "titleLabel": "Название",
-    "customLabel": "Уникальная ссылка",
-    "customErrorPattern": "Некорректное имя",
     "submitButton": "Создать",
-    "labelOptional": "Необязательно"
+    "labelOptional": "Необязательно",
+    "toastURLRequiredError": "Введите URL ссылку",
+    "toastURLPatternError": "URL ссылка некорректна"
   }
 }

@@ -6,13 +6,11 @@ export default function Create() {
   const translation = {
     formTitle: t('formTitle'),
     urlLabel: t('urlLabel'),
-    urlErrorRequired: t('urlErrorRequired'),
-    urlErrorPattern: t('urlErrorPattern'),
     titleLabel: t('titleLabel'),
-    customLabel: t('customLabel'),
-    customErrorPattern: t('customErrorPattern'),
     submitButton: t('submitButton'),
-    labelOptional: t('labelOptional')
+    labelOptional: t('labelOptional'),
+    toastURLRequiredError: t('toastURLRequiredError'),
+    toastURLPatternError: t('toastURLPatternError')
   }
   return <CreateForm translate={translation} />
 }

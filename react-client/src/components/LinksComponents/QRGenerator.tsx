@@ -14,7 +14,13 @@ const QR_GENERATOR_OPTIONS = {
   width: 150,
   margin: 2
 }
-export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
+export default function QRGenerator({
+  hrefLink,
+  toastMsg
+}: {
+  hrefLink: string
+  toastMsg: string
+}) {
   const { Canvas } = useQRCode()
   const qrCodeContainerRef = useRef<HTMLDivElement>(null)
 
@@ -42,7 +48,7 @@ export default function QRGenerator({ hrefLink }: { hrefLink: string }) {
         navigator.clipboard
           .write([new ClipboardItem({ 'image/png': blob as Blob })])
           .then()
-        toast('QR Code copied')
+        toast(toastMsg)
       }
     })
   }
