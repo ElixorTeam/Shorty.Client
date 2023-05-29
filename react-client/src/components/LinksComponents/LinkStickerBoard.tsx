@@ -46,7 +46,7 @@ export default function LinkStickerBoard({
   ]
   return (
     <>
-      <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 dark:bg-[#23212e] sm:hidden">
+      <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 shadow-md dark:bg-[#23212e] sm:hidden">
         <p className="line-clamp-1 text-lg font-bold ">
           {translate.windowTitle}
         </p>

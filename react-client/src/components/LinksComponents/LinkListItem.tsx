@@ -15,13 +15,7 @@ export default function LinkListItem({
     <button
       type="button"
       className={`${
-        selectedUID
-          ? `${
-              selectedUID === linkData.uid
-                ? 'bg-sky-200 dark:bg-[#282834]'
-                : 'bg-slate-100 dark:bg-[#1f1e29]'
-            }`
-          : 'bg-slate-100 dark:bg-[#1f1e29]'
+        selectedUID === linkData.uid ? 'bg-sky-200 dark:bg-[#282834]' : ''
       } flex h-24 w-full items-center px-5 text-left transition-colors ease-linear md:px-10`}
       onClick={onClick}
     >

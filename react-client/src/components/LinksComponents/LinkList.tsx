@@ -51,14 +51,14 @@ export default function ListLink({
         selectedSort={selectedSort}
         setSelectedSort={(state: SortOptionsType) => setSelectedSort(state)}
       />
-      <div>
+      <div className="overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-scroll dark:scrollbar-thumb-gray-500">
         {linksData?.length === 0 && !isLoading ? (
           <div className="flex h-24 w-full items-center justify-center text-center">
             <p>You have not add any links</p>
           </div>
         ) : null}
         {isLoading ? (
-          <div className="h-24 w-full animate-pulse bg-gray-200 dark:bg-[#282834]" />
+          <div className="h-24 w-full animate-pulse bg-slate-200 dark:bg-[#282834]" />
         ) : null}
         {sortedLinksData.map((item: LinkRecordType) => (
           <LinkListItem
