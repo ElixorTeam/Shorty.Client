@@ -1,6 +1,6 @@
 'use client'
 
-import { Link } from 'next-intl'
+import Link from 'next-intl/link'
 import { usePathname } from 'next/navigation'
 import DropdownMenu from '@/components/Common/DropdownMenu'
 import { useState } from 'react'

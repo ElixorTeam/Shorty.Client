@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { Link } from 'next-intl'
+import Link from 'next-intl/link'
 import { useRouter } from 'next-intl/client'
 import InputComponent from '@/components/Common/InputComponent'
 import toast from 'react-hot-toast'

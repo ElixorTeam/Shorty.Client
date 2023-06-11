@@ -1,5 +1,5 @@
 // import { BellIcon } from '@heroicons/react/24/solid'
-import { Link } from 'next-intl'
+import Link from 'next-intl/link'
 import LanguageSwitcher from '@/components/Common/LocaleSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 

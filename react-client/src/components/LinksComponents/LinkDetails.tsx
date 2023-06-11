@@ -17,7 +17,7 @@ import GroupInput from '@/components/Common/GroupInput'
 import { convertDateTime } from '@/shared/convertDate'
 import { useSWRConfig } from 'swr'
 import IconButton from '@/components/Common/IconButton'
-import { Link } from 'next-intl'
+import Link from 'next-intl/link'
 import toast from 'react-hot-toast'
 
 export default function LinkDetails({
@@ -35,7 +35,7 @@ export default function LinkDetails({
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const editInputRef = useRef<HTMLInputElement>(null)
-  const shortURL = `http://localhost:3031/${linkData.refRoute}`
+  const shortURL = `http://localhost:3031/${linkData.innerRef}`
   const removeLink = async () =>
     ky
       .delete(`${apiURL}/links/${linkData.uid}`)
@@ -50,8 +50,7 @@ export default function LinkDetails({
     if (inputValue.length === 0 || inputValue === linkData.title) return
     ky.put(`${apiURL}/links/${linkData.uid}`, {
       json: {
-        title: inputValue,
-        ref: linkData.ref
+        title: inputValue
       }
     })
       .then(() => {
@@ -117,7 +116,7 @@ export default function LinkDetails({
         {translate.windowDate} {convertDateTime(linkData.createDt)}
       </p>
       <div className="mt-4">
-        <GroupInput value={linkData.ref} label="Link" />
+        <GroupInput value={linkData.externalRef} label="Link" />
       </div>
       <div className="mt-2 flex gap-2">
         <div className="w-[320px]">

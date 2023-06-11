@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { Link } from 'next-intl'
+import Link from 'next-intl/link'
 import { useRouter } from 'next-intl/client'
 import GoogleIcon from '@/assets/google-icon.svg'
 import GithubIcon from '@/assets/github-icon.svg'

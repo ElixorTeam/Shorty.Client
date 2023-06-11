@@ -36,9 +36,8 @@ export default function CreateForm({
 
   const onSubmit = async (formInput: FormInputs) => {
     const formData = {
-      ref: formInput.ref,
-      title: formInput.title,
-      active: true
+      externalRef: formInput.ref,
+      title: formInput.title
     }
     try {
       await ky.post(`${apiURL}/links/`, { json: formData })

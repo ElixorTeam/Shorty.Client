@@ -1,9 +1,7 @@
 export type LinkRecordType = {
-  uid: string
-  ref: string
-  refRoute: string
   title: string
+  innerRef: string
+  externalRef: string
+  uid: string
   createDt: string
-  expirationDt: string | null
-  active: boolean
 }

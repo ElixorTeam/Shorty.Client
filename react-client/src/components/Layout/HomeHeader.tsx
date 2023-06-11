@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
-import { Link, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import Link from 'next-intl/link'
 import LocaleSwitcher from '@/components/Common/LocaleSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 

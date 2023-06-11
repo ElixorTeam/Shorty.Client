@@ -51,7 +51,7 @@ export default function ListLink({
         selectedSort={selectedSort}
         setSelectedSort={(state: SortOptionsType) => setSelectedSort(state)}
       />
-      <div className="overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-scroll dark:scrollbar-thumb-gray-500">
+      <div className="overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto dark:scrollbar-thumb-gray-500">
         {linksData?.length === 0 && !isLoading ? (
           <div className="flex h-24 w-full items-center justify-center text-center">
             <p>You have not add any links</p>

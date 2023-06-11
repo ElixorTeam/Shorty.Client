@@ -8,7 +8,7 @@ import LinkStickerBoard from '@/components/LinksComponents/LinkStickerBoard'
 import { apiURL } from '@/shared/fetcher'
 import ListLink from '@/components/LinksComponents/LinkList'
 
-const fetcher = async (url: string): Promise<LinkRecordType[]> =>
+const fetcher = async (url: string): Promise<{ data: LinkRecordType[] }> =>
   ky.get(url).json()
 
 export default function LinksApp({
@@ -23,7 +23,7 @@ export default function LinksApp({
       <div className="mx-4 flex h-fit max-h-[calc(100%_-_10px)] flex-col overflow-hidden rounded-2xl shadow-lg sm:mx-0 sm:max-h-[calc(100%_-_20px)] sm:shadow-2xl">
         <ListLink
           translate={translate}
-          linksData={data}
+          linksData={data?.data}
           isLoading={isLoading || error}
           selectedLink={selectedLink}
           setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}

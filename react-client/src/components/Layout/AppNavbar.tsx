@@ -1,5 +1,6 @@
 import { LinkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
-import { Link, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import Link from 'next-intl/link'
 import { PlusSmallIcon } from '@heroicons/react/24/solid'
 import AppNavbarItem from './AppNavbarItem'
 

@@ -26,7 +26,7 @@ export default function LinkStickerBoard({
   hideLink: () => void
   setSelectedLink: (link: LinkRecordType) => void
 }) {
-  const shortURL = `http://localhost:3031/${linkData.refRoute}`
+  const shortURL = `http://localhost:3031/${linkData.innerRef}`
   const browserChartData = [
     { label: 'Chrome', value: 45 },
     { label: 'Firefox', value: 30 },
