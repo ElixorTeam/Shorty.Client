@@ -34,7 +34,7 @@ export default function LinkShare({ shareLink }: { shareLink: string }) {
     <div className="relative inline-block" onMouseEnter={() => setIsOpen(true)}>
       <div>
         <IconButton onClick={() => setIsOpen(true)}>
-          <ShareIcon className="h-5 w-5 text-neutral-500" />
+          <ShareIcon className="h-5 w-5 text-gray-500" />
         </IconButton>
       </div>
       <DropdownMenu isOpen={isOpen} setIsOpen={statue => setIsOpen(statue)}>

@@ -94,19 +94,19 @@ export default function LinkDetails({
           {isEdit ? (
             <>
               <IconButton onClick={editLink}>
-                <CheckIcon className="h-5 w-5 text-neutral-500" />
+                <CheckIcon className="h-5 w-5 text-gray-500" />
               </IconButton>
               <IconButton onClick={() => setIsEdit(false)}>
-                <XMarkIcon className="h-5 w-5 text-neutral-500" />
+                <XMarkIcon className="h-5 w-5 text-gray-500" />
               </IconButton>
             </>
           ) : (
             <>
               <IconButton onClick={removeLink}>
-                <TrashIcon className="h-5 w-5 text-neutral-500" />
+                <TrashIcon className="h-5 w-5 text-gray-500" />
               </IconButton>
               <IconButton onClick={setEditMode}>
-                <PencilIcon className="h-5 w-5 text-neutral-500" />
+                <PencilIcon className="h-5 w-5 text-gray-500" />
               </IconButton>
             </>
           )}
@@ -118,19 +118,19 @@ export default function LinkDetails({
       <div className="mt-4">
         <GroupInput value={linkData.externalRef} label="Link" />
       </div>
-      <div className="mt-2 flex gap-2">
-        <div className="w-[320px]">
+      <div className="mt-2 flex gap-4">
+        <div className="w-full">
           <GroupInput value={shortURL} label="Short link" />
         </div>
         <div className="flex gap-2">
           <CopyToClipboard text={shortURL}>
             <IconButton onClick={() => toast(translate.toastURLCopied)}>
-              <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
+              <DocumentDuplicateIcon className="h-5 w-5 text-gray-500" />
             </IconButton>
           </CopyToClipboard>
           <Link target="_blank" href={shortURL}>
             <IconButton>
-              <ArrowTopRightOnSquareIcon className="h-5 w-5 text-neutral-500" />
+              <ArrowTopRightOnSquareIcon className="h-5 w-5 text-gray-500" />
             </IconButton>
           </Link>
         </div>

@@ -64,7 +64,7 @@ export default function LinkStickerBoard({
           />
         </div>
         <LinkStickerBoardItem>
-          <div className="m-4 h-48 w-48">
+          <div className="m-4 h-52 w-48">
             <QRGenerator
               hrefLink={shortURL}
               toastMsg={translate.toastQRCodeCopied}

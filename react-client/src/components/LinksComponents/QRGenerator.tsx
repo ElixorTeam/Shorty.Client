@@ -54,16 +54,16 @@ export default function QRGenerator({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <div className="overflow-hidden rounded-xl" ref={qrCodeContainerRef}>
+    <div className="flex h-full flex-col items-center justify-between">
+      <div className="mt-2 overflow-hidden rounded-xl" ref={qrCodeContainerRef}>
         <Canvas text={hrefLink} options={QR_GENERATOR_OPTIONS} />
       </div>
-      <div className="flex gap-1">
+      <div className="mb-2 flex gap-1 dark:mb-0">
         <IconButton onClick={handleDownloadQRCode}>
-          <ArrowDownTrayIcon className="h-5 w-5 text-neutral-500" />
+          <ArrowDownTrayIcon className="h-5 w-5 text-gray-500" />
         </IconButton>
         <IconButton onClick={handleCopyQRCode}>
-          <DocumentDuplicateIcon className="h-5 w-5 text-neutral-500" />
+          <DocumentDuplicateIcon className="h-5 w-5 text-gray-500" />
         </IconButton>
         <LinkShare shareLink={hrefLink} />
       </div>

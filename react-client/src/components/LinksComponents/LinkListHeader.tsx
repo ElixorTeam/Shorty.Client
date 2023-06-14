@@ -28,7 +28,7 @@ export default function LinkListHeader({
           />
         </div>
       </div>
-      <div className="w-full border-b px-10 dark:border-b-white/[.1]">
+      <div className="w-full border-b dark:border-b-white/[.1]">
         <LinkSortSelect
           sortOptions={sortOptions}
           selectedSort={selectedSort}

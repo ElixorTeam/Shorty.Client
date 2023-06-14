@@ -10,7 +10,7 @@ function LayoutHeader() {
         <Link className="text-2xl font-extrabold dark:text-white" href="/links">
           <p>Shorty</p>
         </Link>
-        <div className="flex flex-row space-x-4">
+        <div className="flex flex-row gap-1">
           <li className="flex items-center">
             <ThemeSwitcher />
           </li>
