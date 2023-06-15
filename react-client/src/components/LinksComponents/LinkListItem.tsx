@@ -24,7 +24,9 @@ export default function LinkListItem({
           {linkData.title}
         </p>
         <div className="linkBody flex w-40 justify-between">
-          <p className="line-clamp-2 text-xs text-gray-600">{linkData.ref}</p>
+          <p className="line-clamp-2 text-xs text-gray-600">
+            {linkData.externalRef}
+          </p>
         </div>
         <p className="linkDate self-center text-xs">
           {convertDate(linkData.createDt)}

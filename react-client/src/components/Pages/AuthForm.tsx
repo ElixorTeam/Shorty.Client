@@ -103,15 +103,15 @@ export default function AuthForm({
                 <p className="text-black">Google</p>
               </div>
             </button>
-            <button
-              type="button"
-              className="h-10 w-1/2 rounded-lg bg-neutral-700 shadow-md transition-colors ease-linear hover:bg-neutral-500 dark:bg-neutral-800 hover:dark:bg-neutral-700"
+            <Link
+              href="http://localhost:8082/shorty/oauth2/authorization/github"
+              className="flex items-center justify-center h-10 w-1/2 rounded-lg bg-neutral-700 shadow-md transition-colors ease-linear hover:bg-neutral-500 dark:bg-neutral-800 hover:dark:bg-neutral-700"
             >
-              <div className="flex justify-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <GithubIcon className="h-7 w-7 fill-white" />
-                <p className="pt-[1px] text-white">GitHub</p>
+                <p className="pt-[2px] text-white">GitHub</p>
               </div>
-            </button>
+            </Link>
           </div>
         </form>
       </div>
