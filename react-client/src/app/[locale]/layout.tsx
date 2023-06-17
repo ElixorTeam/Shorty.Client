@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang={params.locale}>
       <body className="h-screen text-black antialiased dark:text-white">
-        <Provider>{children}</Provider>
+          <Provider>{children}</Provider>
         <Toaster position="bottom-right" />
       </body>
     </html>

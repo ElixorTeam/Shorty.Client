@@ -8,58 +8,59 @@ import {
   TrashIcon,
   PencilIcon
 } from '@heroicons/react/24/outline'
-import ky from 'ky'
 import React, { useRef, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { apiURL } from '@/shared/fetcher'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import GroupInput from '@/components/Common/GroupInput'
 import { convertDateTime } from '@/shared/convertDate'
-import { useSWRConfig } from 'swr'
 import IconButton from '@/components/Common/IconButton'
 import Link from 'next-intl/link'
 import toast from 'react-hot-toast'
+import { useAppDispatch } from '@/redux/hooks'
+import { clearSelectedLink, setSelectedLink } from '@/redux/selectedLinkSlice'
+import { REDIRECT_URL } from '@/shared/urls'
+import {
+  useRemoveLinkMutation,
+  useUpdateLinkMutation
+} from '@/redux/linksFetch'
 
 export default function LinkDetails({
   translate,
-  linkData,
-  hideLink,
-  setSelectedLink
+  linkData
 }: {
   translate: { [_: string]: string }
   linkData: LinkRecordType
-  hideLink: () => void
-  setSelectedLink: (link: LinkRecordType) => void
 }) {
-  const { mutate } = useSWRConfig()
+  const dispatch = useAppDispatch()
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const editInputRef = useRef<HTMLInputElement>(null)
-  const shortURL = `http://localhost:3031/${linkData.innerRef}`
+  const shortURL = `${REDIRECT_URL}/${linkData.innerRef}`
+  const [deleteLink] = useRemoveLinkMutation()
+  const [updateLink] = useUpdateLinkMutation()
+
   const removeLink = async () =>
-    ky
-      .delete(`${apiURL}/links/${linkData.uid}`)
+    deleteLink(linkData.uid)
+      .unwrap()
       .then(() => {
-        mutate(`${apiURL}/links/`)
-        hideLink()
-        toast.success(translate.toastLinkDelError)
+        dispatch(clearSelectedLink())
+        toast.success(translate.toastLinkDelSuccess)
       })
-      .catch(() => toast.error(translate.toastLinkDelSuccess))
+      .catch(() => toast.error(translate.toastLinkDelError))
 
   const editLink = async () => {
     if (inputValue.length === 0 || inputValue === linkData.title) return
-    ky.put(`${apiURL}/links/${linkData.uid}`, {
-      json: {
-        title: inputValue
-      }
-    })
+    await updateLink({ uid: linkData.uid, title: inputValue })
+      .unwrap()
       .then(() => {
-        setSelectedLink({ ...linkData, title: inputValue })
-        mutate(`${apiURL}/links/`)
+        dispatch(setSelectedLink({ ...linkData, title: inputValue }))
         setIsEdit(false)
         toast.success(translate.toastLinkEditSuccess)
       })
-      .catch(() => toast.error(translate.toastLinkEditError))
+      .catch((error) => {
+        console.log(error)
+        toast.error(translate.toastLinkEditError)
+      })
   }
 
   const setEditMode = () => {

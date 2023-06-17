@@ -2,11 +2,15 @@
 
 import { ThemeProvider } from 'next-themes'
 import { ReactNode } from 'react'
+import { index } from '@/redux'
+import { Provider as ReduxProvider } from 'react-redux'
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider enableSystem attribute="class">
-      {children}
-    </ThemeProvider>
+    <ReduxProvider store={index}>
+      <ThemeProvider enableSystem attribute="class">
+        {children}
+      </ThemeProvider>
+    </ReduxProvider>
   )
 }

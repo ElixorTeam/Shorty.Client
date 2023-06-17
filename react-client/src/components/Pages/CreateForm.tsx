@@ -2,11 +2,9 @@
 
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
-import { apiURL } from '@/shared/fetcher'
-import ky from 'ky'
-import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import InputComponent from '@/components/Common/InputComponent'
+import { useAddLinkMutation } from '@/redux/linksFetch'
 
 type FormInputs = {
   title: string
@@ -19,13 +17,12 @@ export default function CreateForm({
 }: {
   translate: { [_: string]: string }
 }) {
-  const { mutate } = useSWRConfig()
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<FormInputs>()
-
+  const [addLink] = useAddLinkMutation()
   const router = useRouter()
 
   const checkErrors = () => {
@@ -35,22 +32,23 @@ export default function CreateForm({
       toast.error(translate.toastURLPatternError)
   }
 
-  const onSubmit = async (formInput: FormInputs) => {
+  const onSubmit = (formInput: FormInputs) => {
     const formData = {
       title: formInput.title,
       externalRef: formInput.externalRef,
       innerRef: formInput.innerRef
     }
-    try {
-      await ky.post(`${apiURL}/links/`, { json: formData })
-      await mutate(`${apiURL}/links/`)
-      router.push('/links')
-      toast.success('Success')
-    } catch (err: any) {
-      const errResponse: { msg: string } = await err.response?.json?.()
-      const errMsg = errResponse ? errResponse.msg : err.message
-      toast.error(errMsg)
-    }
+    addLink(formData)
+      .unwrap()
+      .then(() => {
+        router.push('/links')
+        toast.success('Success')
+      })
+      .catch(error => {
+        const errResponse: { msg: string } = error.response?.json?.()
+        const errMsg = errResponse ? errResponse.msg : error.message
+        toast.error(errMsg)
+      })
   }
 
   return (

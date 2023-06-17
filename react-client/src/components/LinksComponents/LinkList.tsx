@@ -4,20 +4,14 @@ import LinkListItem from '@/components/LinksComponents/LinkListItem'
 import LinkListHeader from '@/components/LinksComponents/LinkListHeader'
 import { SortKeyEnum, SortOptionsType } from '@/shared/SortKeyEnum'
 import { sortLinkData } from '@/utils/sortLinkData'
+import { useGetLinksQuery } from '@/redux/linksFetch'
 
-export default function ListLink({
-  translate,
-  linksData,
-  isLoading,
-  selectedLink,
-  setSelectedLink
+export default function LinkList({
+  translate
 }: {
   translate: { [_: string]: string }
-  linksData: LinkRecordType[] | undefined
-  isLoading: boolean
-  selectedLink: LinkRecordType | null
-  setSelectedLink: (link: LinkRecordType) => void
 }) {
+  const { data, isLoading } = useGetLinksQuery()
   const [searchString, setSearchString] = useState('')
   const [sortedLinksData, setSortedLinksData] = useState<LinkRecordType[]>([])
   const sortOptions = [
@@ -28,8 +22,8 @@ export default function ListLink({
     sortOptions[1]
   )
   useEffect(() => {
-    if (linksData) {
-      let linksList = [...linksData]
+    if (data) {
+      let linksList = [...data]
       if (searchString.length !== 0) {
         linksList = linksList.filter(link =>
           link.title.toLowerCase().includes(searchString.toLowerCase())
@@ -39,7 +33,7 @@ export default function ListLink({
         sortLinkData(linksList, selectedSort.value as SortKeyEnum)
       )
     }
-  }, [linksData, selectedSort, searchString])
+  }, [data, selectedSort, searchString])
 
   return (
     <>
@@ -52,8 +46,7 @@ export default function ListLink({
         setSelectedSort={(state: SortOptionsType) => setSelectedSort(state)}
       />
       <div className="overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto dark:scrollbar-thumb-gray-500">
-        {(linksData?.length === 0 || sortedLinksData.length === 0) &&
-        !isLoading ? (
+        {(data?.length === 0 || sortedLinksData.length === 0) && !isLoading ? (
           <div className="flex h-24 w-full items-center justify-center text-center">
             <p>No links found</p>
           </div>
@@ -61,13 +54,8 @@ export default function ListLink({
         {isLoading ? (
           <div className="h-24 w-full animate-pulse bg-slate-200 dark:bg-[#282834]" />
         ) : null}
-        {sortedLinksData.map((item: LinkRecordType) => (
-          <LinkListItem
-            key={item.uid}
-            onClick={() => setSelectedLink(item)}
-            linkData={item}
-            selectedUID={selectedLink?.uid}
-          />
+        {sortedLinksData.map((linkItem: LinkRecordType) => (
+          <LinkListItem key={linkItem.uid} linkData={linkItem} />
         ))}
       </div>
     </>

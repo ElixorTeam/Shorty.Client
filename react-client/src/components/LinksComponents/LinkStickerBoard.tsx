@@ -6,6 +6,8 @@ import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
 import LinkDetails from '@/components/LinksComponents/LinkDetails'
 import { ReactNode } from 'react'
 import LinkStats from '@/components/LinksComponents/LinkStats'
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { clearSelectedLink } from "@/redux/selectedLinkSlice";
 
 function LinkStickerBoardItem({ children }: { children: ReactNode }) {
   return (
@@ -17,15 +19,12 @@ function LinkStickerBoardItem({ children }: { children: ReactNode }) {
 
 export default function LinkStickerBoard({
   translate,
-  linkData,
-  hideLink,
-  setSelectedLink
+  linkData
 }: {
   translate: { [_: string]: string }
   linkData: LinkRecordType
-  hideLink: () => void
-  setSelectedLink: (link: LinkRecordType) => void
 }) {
+  const dispatch = useAppDispatch()
   const shortURL = `http://localhost:3031/${linkData.innerRef}`
   const browserChartData = [
     { label: 'Chrome', value: 45 },
@@ -50,7 +49,7 @@ export default function LinkStickerBoard({
         <p className="line-clamp-1 text-lg font-bold ">
           {translate.windowTitle}
         </p>
-        <button type="button" onClick={hideLink}>
+        <button type="button" onClick={() => dispatch(clearSelectedLink)}>
           <XMarkIcon className="h-6 w-6 dark:text-white" />
         </button>
       </div>
@@ -59,8 +58,6 @@ export default function LinkStickerBoard({
           <LinkDetails
             translate={translate}
             linkData={linkData}
-            hideLink={hideLink}
-            setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
           />
         </div>
         <LinkStickerBoardItem>
