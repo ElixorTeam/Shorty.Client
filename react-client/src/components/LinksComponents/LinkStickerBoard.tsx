@@ -6,8 +6,9 @@ import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
 import LinkDetails from '@/components/LinksComponents/LinkDetails'
 import { ReactNode } from 'react'
 import LinkStats from '@/components/LinksComponents/LinkStats'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { clearSelectedLink } from "@/redux/selectedLinkSlice";
+import { useAppDispatch } from '@/redux/hooks'
+import { clearSelectedLink } from '@/redux/selectedLinkSlice'
+import { REDIRECT_URL } from '@/shared/urls'
 
 function LinkStickerBoardItem({ children }: { children: ReactNode }) {
   return (
@@ -25,7 +26,7 @@ export default function LinkStickerBoard({
   linkData: LinkRecordType
 }) {
   const dispatch = useAppDispatch()
-  const shortURL = `http://localhost:3031/${linkData.innerRef}`
+  const shortURL = `${REDIRECT_URL}/${linkData.innerRef}`
   const browserChartData = [
     { label: 'Chrome', value: 45 },
     { label: 'Firefox', value: 30 },
@@ -55,10 +56,7 @@ export default function LinkStickerBoard({
       </div>
       <div className="m-auto flex max-w-6xl flex-wrap justify-center gap-4 bg-[#eef1f6] p-2 dark:bg-[#1c1a25] sm:p-6 sm:pt-0 min-[640px]:bg-transparent">
         <div className="w-full max-w-2xl rounded-2xl bg-white px-4 py-2 shadow-lg dark:bg-[#23212e] md:px-10 md:py-6">
-          <LinkDetails
-            translate={translate}
-            linkData={linkData}
-          />
+          <LinkDetails translate={translate} linkData={linkData} />
         </div>
         <LinkStickerBoardItem>
           <div className="m-4 h-52 w-48">

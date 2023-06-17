@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
 import toast from 'react-hot-toast'
 import InputComponent from '@/components/Common/InputComponent'
-import { useAddLinkMutation } from '@/redux/linksFetch'
+import { useAddLinkMutation } from '@/redux/linksApi'
 
 type FormInputs = {
   title: string

@@ -19,10 +19,7 @@ import toast from 'react-hot-toast'
 import { useAppDispatch } from '@/redux/hooks'
 import { clearSelectedLink, setSelectedLink } from '@/redux/selectedLinkSlice'
 import { REDIRECT_URL } from '@/shared/urls'
-import {
-  useRemoveLinkMutation,
-  useUpdateLinkMutation
-} from '@/redux/linksFetch'
+import { useRemoveLinkMutation, useUpdateLinkMutation } from '@/redux/linksApi'
 
 export default function LinkDetails({
   translate,
@@ -57,10 +54,7 @@ export default function LinkDetails({
         setIsEdit(false)
         toast.success(translate.toastLinkEditSuccess)
       })
-      .catch((error) => {
-        console.log(error)
-        toast.error(translate.toastLinkEditError)
-      })
+      .catch(() => toast.error(translate.toastLinkEditError))
   }
 
   const setEditMode = () => {

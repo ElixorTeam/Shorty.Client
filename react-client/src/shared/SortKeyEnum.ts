@@ -4,6 +4,11 @@ export const enum SortKeyEnum {
   Date = 'date'
 }
 
+export const sortOptions: SortOptionsType[] = [
+  { id: 1, label: 'sortKeyName', value: 'name' },
+  { id: 2, label: 'sortKeyDate', value: 'date' }
+]
+
 export type SortOptionsType = {
   id: number
   label: string
