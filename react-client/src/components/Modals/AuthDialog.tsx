@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import AuthContainer from './AuthContainer'
 
-export default function AuthDialog() {
+export default function AuthDialog({ authText }: { authText: string }) {
   const [open, setOpen] = useState(false)
 
   const cancelButtonRef = useRef(null)
@@ -13,7 +13,7 @@ export default function AuthDialog() {
   return (
     <>
       <button type="button" onClick={() => setOpen(true)}>
-        <p>Login in</p>
+        <p>{authText}</p>
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -57,7 +57,7 @@ export default function AuthDialog() {
                 >
                   <XMarkIcon className="h-5 w-5 text-gray-700 transition-colors group-hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300" />
                 </button>
-                <AuthContainer />
+                <AuthContainer authText={authText} />
               </div>
             </Transition.Child>
           </div>

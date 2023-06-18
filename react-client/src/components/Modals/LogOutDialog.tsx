@@ -5,7 +5,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
 
-export default function LogOutDialog() {
+export default function LogOutDialog({
+  translation
+}: {
+  translation: { [_: string]: string }
+}) {
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
   return (
@@ -13,10 +17,10 @@ export default function LogOutDialog() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-gray-400 flex gap-3"
+        className="flex gap-3 text-gray-400"
       >
-        <ArrowLeftOnRectangleIcon className="text-gray-600 sm:text-gray-400 h-7 w-7 sm:h-6 sm:w-6" />
-        <p className="hidden lg:block">Logout</p>
+        <ArrowLeftOnRectangleIcon className="h-7 w-7 text-gray-600 sm:h-6 sm:w-6 sm:text-gray-400" />
+        <p className="hidden lg:block">{translation.modalLogOutOpenButton}</p>
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -65,13 +69,11 @@ export default function LogOutDialog() {
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
-                      Log out of your account
+                      {translation.modalLogOutTitle}
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to log out of your your account?
-                        If you are sure, click Sign Out, otherwise, click Cancel
-                        to continue using your account.
+                        {translation.modalLogOutDescription}
                       </p>
                     </div>
                   </div>
@@ -82,7 +84,7 @@ export default function LogOutDialog() {
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
                   >
-                    Log out
+                    {translation.modalLogOutAcceptButton}
                   </button>
                   <button
                     type="button"
@@ -90,7 +92,7 @@ export default function LogOutDialog() {
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    {translation.modalLogOutCancelButton}
                   </button>
                 </div>
               </div>

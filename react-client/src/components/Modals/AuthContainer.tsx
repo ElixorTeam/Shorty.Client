@@ -1,11 +1,11 @@
 import GoogleIcon from '@/assets/google-icon.svg'
 import GithubIcon from '@/assets/github-icon.svg'
 
-export default function AuthContainer() {
+export default function AuthContainer({ authText }: { authText: string }) {
   return (
     <div>
       <p className="mb-6 line-clamp-1 w-full text-center text-lg uppercase">
-        Login in
+        {authText}
       </p>
       <div className="flex w-full flex-col items-center gap-4 px-5">
         <button
