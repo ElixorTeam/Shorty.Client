@@ -8,7 +8,7 @@ export const linksApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: builder => ({
     getLinks: builder.query<LinkRecordType[], void>({
-      query: () => 'links/',
+      query: () => 'links',
       transformResponse: (response: { data: LinkRecordType[] }) =>
         response.data,
       providesTags: result =>
@@ -22,7 +22,7 @@ export const linksApi = createApi({
     addLink: builder.mutation<LinkRecordType, Partial<LinkRecordType>>({
       query(body) {
         return {
-          url: 'links/',
+          url: 'links',
           method: 'POST',
           body
         }

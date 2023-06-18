@@ -28,13 +28,13 @@ export default function LinkDetails({
   translate: { [_: string]: string }
   linkData: LinkRecordType
 }) {
-  const dispatch = useAppDispatch()
+  const [deleteLink] = useRemoveLinkMutation()
+  const [updateLink] = useUpdateLinkMutation()
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const editInputRef = useRef<HTMLInputElement>(null)
+  const dispatch = useAppDispatch()
   const shortURL = `${REDIRECT_URL}/${linkData.innerRef}`
-  const [deleteLink] = useRemoveLinkMutation()
-  const [updateLink] = useUpdateLinkMutation()
 
   const removeLink = async () =>
     deleteLink(linkData.uid)
@@ -60,9 +60,7 @@ export default function LinkDetails({
   const setEditMode = () => {
     setIsEdit(true)
     setTimeout(() => {
-      if (editInputRef.current) {
-        editInputRef.current.focus()
-      }
+      if (editInputRef.current) editInputRef.current.focus()
     }, 0)
   }
   return (

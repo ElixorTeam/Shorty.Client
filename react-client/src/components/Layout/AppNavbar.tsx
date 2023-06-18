@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next-intl/link'
 import { PlusSmallIcon } from '@heroicons/react/24/solid'
 import AppNavbarItem from './AppNavbarItem'
+import LogOutDialog from "@/components/Modals/LogOutDialog";
 
 export default function LayoutNavbar() {
   const t = useTranslations('app')
@@ -23,10 +24,7 @@ export default function LayoutNavbar() {
             <LinkIcon className="h-6 w-6" />
             <p className="hidden lg:block">{t('navbarLinks')}</p>
           </AppNavbarItem>
-          <AppNavbarItem link="/">
-            <ArrowLeftOnRectangleIcon className="h-6 w-6" />
-            <p className="hidden lg:block">{t('navbarLogout')}</p>
-          </AppNavbarItem>
+          <LogOutDialog />
         </div>
       </nav>
     </div>

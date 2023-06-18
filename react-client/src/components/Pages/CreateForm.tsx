@@ -79,11 +79,13 @@ export default function CreateForm({
                 disabled
                 placeholder="shr.ty"
               />
-              <p className="pb-1 text-lg text-gray-400 dark:text-gray-300">/</p>
+              <p className="pb-1 text-xl font-light text-gray-400 dark:text-gray-300">
+                /
+              </p>
               <InputComponent
                 type="text"
                 name="innerRef"
-                label="Custom ref"
+                label="Path"
                 registerOptions={{
                   required: false,
                   pattern: /^[a-zA-Z0-9]{3,10}$/

@@ -50,7 +50,7 @@ export default function LinkStickerBoard({
         <p className="line-clamp-1 text-lg font-bold ">
           {translate.windowTitle}
         </p>
-        <button type="button" onClick={() => dispatch(clearSelectedLink)}>
+        <button type="button" onClick={() => dispatch(clearSelectedLink())}>
           <XMarkIcon className="h-6 w-6 dark:text-white" />
         </button>
       </div>

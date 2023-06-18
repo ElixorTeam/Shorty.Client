@@ -4,6 +4,7 @@ import {
   PlusCircleIcon
 } from '@heroicons/react/24/outline'
 import AppMobileNavbarItem from '@/components/Layout/AppMobileNavbarItem'
+import LogOutDialog from "@/components/Modals/LogOutDialog";
 
 export default function AppMobileNavbar() {
   return (
@@ -16,9 +17,10 @@ export default function AppMobileNavbar() {
           <AppMobileNavbarItem link="/create">
             <PlusCircleIcon className="h-7 w-7" />
           </AppMobileNavbarItem>
-          <AppMobileNavbarItem link="/">
-            <ArrowLeftOnRectangleIcon className="h-7 w-7 p-[1px]" />
-          </AppMobileNavbarItem>
+          <LogOutDialog />
+          {/*<AppMobileNavbarItem link="/">*/}
+          {/*  <ArrowLeftOnRectangleIcon className="h-7 w-7 p-[1px]" />*/}
+          {/*</AppMobileNavbarItem>*/}
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next-intl/link'
 import LocaleSwitcher from '@/components/Common/LocaleSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
+import AuthDialog from "@/components/Modals/AuthDialog";
 
 function HeaderItem({ children }: { children: ReactNode }) {
   return <li className="flex items-center">{children}</li>
@@ -26,7 +27,8 @@ export default function HomeHeader() {
               <LocaleSwitcher />
             </HeaderItem>
             <HeaderItem>
-              <Link href="/auth">{t('headerAuth')}</Link>
+              <AuthDialog />
+              {/*<Link href="/auth">{t('headerAuth')}</Link>*/}
             </HeaderItem>
           </ul>
         </nav>
