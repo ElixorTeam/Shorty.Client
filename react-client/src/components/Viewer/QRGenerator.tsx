@@ -6,22 +6,20 @@ import {
   ArrowDownTrayIcon,
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline'
-import LinkShare from '@/components/LinksComponents/LinkShare'
+import LinkShare from '@/components/Viewer/LinkShare'
 import IconButton from '@/components/Common/IconButton'
 import toast from 'react-hot-toast'
+import { REDIRECT_URL } from '@/shared/urls'
+import { useAppSelector } from '@/redux/hooks'
 
 const QR_GENERATOR_OPTIONS = {
   width: 150,
   margin: 2
 }
-export default function QRGenerator({
-  hrefLink,
-  toastMsg
-}: {
-  hrefLink: string
-  toastMsg: string
-}) {
+export default function QRGenerator({ toastMsg }: { toastMsg: string }) {
   const { Canvas } = useQRCode()
+  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const hrefLink = `${REDIRECT_URL}/${selectedLink?.innerRef}`
   const qrCodeContainerRef = useRef<HTMLDivElement>(null)
 
   const getCanvas = () => {

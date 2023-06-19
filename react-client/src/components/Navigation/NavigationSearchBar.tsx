@@ -1,8 +1,10 @@
+'use client'
+
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setSearchText } from '@/redux/searchTextSlice'
 
-export default function LinkSearch({
+export default function NavigationSearchBar({
   placeholderText
 }: {
   placeholderText: string

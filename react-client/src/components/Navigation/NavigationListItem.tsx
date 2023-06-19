@@ -1,10 +1,9 @@
 import { convertDate } from '@/shared/convertDate'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import './LinkListItem.css'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setSelectedLink } from '@/redux/selectedLinkSlice'
 
-export default function LinkListItem({
+export default function NavigationListItem({
   linkData
 }: {
   linkData: LinkRecordType
@@ -15,7 +14,7 @@ export default function LinkListItem({
     <button
       type="button"
       className={`${
-        selectedLink?.uid === linkData.uid ? 'bg-sky-200 dark:bg-[#282834]' : ''
+        selectedLink?.uid === linkData.uid && 'bg-sky-200 dark:bg-[#282834]'
       } flex h-24 w-full items-center px-5 text-left transition-colors ease-linear md:px-10`}
       onClick={() => dispatch(setSelectedLink(linkData))}
     >

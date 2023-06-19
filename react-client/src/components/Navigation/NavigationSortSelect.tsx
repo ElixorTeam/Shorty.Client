@@ -1,10 +1,12 @@
+'use client'
+
 import { Listbox } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/24/outline'
 import { sortOptions } from '@/shared/SortKeyEnum'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setLinksSort } from '@/redux/linksSortSlice'
 
-export default function LinkSortSelect({
+export default function NavigationSortSelect({
   translate
 }: {
   translate: { [_: string]: string }
