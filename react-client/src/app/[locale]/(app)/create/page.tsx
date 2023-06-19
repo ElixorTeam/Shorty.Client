@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import CreateForm from '@/components/Pages/CreateForm'
+import CreatePage from '@/components/Pages/CreatePage'
 
 export default function Create() {
   const t = useTranslations('create')
@@ -7,10 +7,11 @@ export default function Create() {
     formTitle: t('formTitle'),
     urlLabel: t('urlLabel'),
     titleLabel: t('titleLabel'),
+    pathLabel: t('pathLabel'),
     submitButton: t('submitButton'),
     labelOptional: t('labelOptional'),
     toastURLRequiredError: t('toastURLRequiredError'),
     toastURLPatternError: t('toastURLPatternError')
   }
-  return <CreateForm translate={translation} />
+  return <CreatePage translate={translation} />
 }

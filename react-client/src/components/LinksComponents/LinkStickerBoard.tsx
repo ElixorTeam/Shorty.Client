@@ -1,7 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import QRGenerator from '@/components/LinksComponents/QRGenerator'
-import LineChart from '@/components/Charts/LineChart'
+import ViewsLineChart from '@/components/Charts/ViewsLineChart'
 import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
 import LinkDetails from '@/components/LinksComponents/LinkDetails'
 import { ReactNode } from 'react'
@@ -78,7 +78,7 @@ export default function LinkStickerBoard({
         </LinkStickerBoardItem>
         <LinkStickerBoardItem>
           <div className="m-4 h-48 w-full sm:w-96">
-            <LineChart data={lineChartData} labels={lineChartLabels} />
+            <ViewsLineChart data={lineChartData} labels={lineChartLabels} />
           </div>
         </LinkStickerBoardItem>
       </div>

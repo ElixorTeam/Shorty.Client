@@ -6,6 +6,7 @@ import { SortKeyEnum } from '@/shared/SortKeyEnum'
 import { sortLinkData } from '@/utils/sortLinkData'
 import { useGetLinksQuery } from '@/redux/linksApi'
 import { useAppSelector } from '@/redux/hooks'
+import { FolderIcon } from '@heroicons/react/24/outline'
 
 export default function LinkList({
   translate
@@ -35,7 +36,8 @@ export default function LinkList({
       <LinkListHeader translate={translate} />
       <div className="overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto dark:scrollbar-thumb-gray-500">
         {(data?.length === 0 || sortedLinksData.length === 0) && !isLoading && (
-          <div className="flex h-24 w-full items-center justify-center text-center">
+          <div className="flex h-24 w-full flex-col items-center justify-center text-center text-gray-400 dark:text-gray-600">
+            <FolderIcon className="h-8 w-8 stroke-1" />
             <p>No links found</p>
           </div>
         )}

@@ -33,6 +33,7 @@
     "formTitle": "Create link",
     "urlLabel": "Url link",
     "titleLabel": "Title",
+    "pathLabel": "Path",
     "submitButton": "Create",
     "labelOptional": "Optional",
     "toastURLRequiredError": "Enter your URL",

@@ -33,6 +33,7 @@
     "formTitle": "Создать ссылку",
     "urlLabel": "URL ссылка",
     "titleLabel": "Название",
+    "pathLabel": "Путь",
     "submitButton": "Создать",
     "labelOptional": "Необязательно",
     "toastURLRequiredError": "Введите URL ссылку",

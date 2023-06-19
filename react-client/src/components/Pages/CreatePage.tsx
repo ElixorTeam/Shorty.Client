@@ -12,7 +12,7 @@ type FormInputs = {
   innerRef: string
 }
 
-export default function CreateForm({
+export default function CreatePage({
   translate
 }: {
   translate: { [_: string]: string }
@@ -85,7 +85,7 @@ export default function CreateForm({
               <InputComponent
                 type="text"
                 name="innerRef"
-                label="Path"
+                label={`${translate.pathLabel} (${translate.labelOptional})`}
                 registerOptions={{
                   required: false,
                   pattern: /^[a-zA-Z0-9]{3,10}$/
@@ -97,7 +97,7 @@ export default function CreateForm({
               <InputComponent
                 type="text"
                 name="title"
-                label={translate.titleLabel}
+                label={`${translate.titleLabel} (${translate.labelOptional})`}
                 registerOptions={{
                   required: false
                 }}

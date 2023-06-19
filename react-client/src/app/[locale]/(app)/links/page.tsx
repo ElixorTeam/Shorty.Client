@@ -1,4 +1,4 @@
-import LinksApp from '@/components/Pages/LinksApp'
+import AppPage from '@/components/Pages/AppPage'
 import { useTranslations } from 'next-intl'
 
 export default function Links() {
@@ -17,5 +17,5 @@ export default function Links() {
     toastQRCodeCopied: t('toastQRCodeCopied'),
     toastURLCopied: t('toastURLCopied')
   }
-  return <LinksApp translate={translation} />
+  return <AppPage translate={translation} />
 }

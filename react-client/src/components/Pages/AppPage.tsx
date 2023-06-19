@@ -4,7 +4,7 @@ import LinkStickerBoard from '@/components/LinksComponents/LinkStickerBoard'
 import ListLink from '@/components/LinksComponents/LinkList'
 import { useAppSelector } from '@/redux/hooks'
 
-export default function LinksApp({
+export default function AppPage({
   translate
 }: {
   translate: { [_: string]: string }
