@@ -1,7 +1,9 @@
-import { LinkRecordType } from '@/shared/LinkRecordType'
 import ky from 'ky'
+import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
 
-export const API_URL = 'http://localhost:8082/shorty/api'
+export const API_URL = 'http://localhost:8082/shorty/api/v1'
 
-export const getLinkByUUID = async (ref: string): Promise<LinkRecordType> =>
-  ky.get(`${API_URL}/links/route_ref/${ref}`).json()
+export const getLinkByInnerRef = async (
+  innerRef: string
+): Promise<ExternalRefResponseType> =>
+  ky.get(`${API_URL}/external_ref_by_inner/${innerRef}`).json()

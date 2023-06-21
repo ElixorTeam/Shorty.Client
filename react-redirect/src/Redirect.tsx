@@ -1,26 +1,26 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { LinkRecordType } from '@/shared/LinkRecordType'
-import { getLinkByUUID } from '@/utils/api'
+import { getLinkByInnerRef } from '@/utils/api'
+import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
 
-const LINK_REF_PATTERN = /^[a-zA-Z0-9]{5}$/
+const LINK_REF_PATTERN = /^[a-zA-Z0-9]{3,10}$/
 
 const isValidRef = (ref: string): boolean => LINK_REF_PATTERN.test(ref)
 
 function RedirectLink({ linkRef }: { linkRef: string }) {
-  const { data, error, isValidating } = useSWR<LinkRecordType, Error>(
+  const { data, error, isLoading } = useSWR<ExternalRefResponseType, Error>(
     linkRef,
-    getLinkByUUID,
+    getLinkByInnerRef,
     { shouldRetryOnError: false }
   )
 
   useEffect(() => {
-    if (data) window.location.href = data.ref
+    if (data) window.location.href = data.externalRef
   }, [data])
 
   if (error) return <p>Error: {error.message}</p>
-  if (isValidating || !data) return <p>Loading...</p>
+  if (isLoading || !data) return <p>Loading...</p>
   return <p>Redirecting...</p>
 }
 
