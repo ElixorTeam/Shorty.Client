@@ -2,7 +2,10 @@ import IconButton from '@/components/Common/IconButton'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 import React, { useRef, useState } from 'react'
-import { clearSelectedLink, setSelectedLink } from '@/redux/selectedLinkSlice'
+import {
+  clearSelectedLink,
+  setSelectedLink
+} from '@/redux/Slices/selectedLinkSlice'
 import toast from 'react-hot-toast'
 import { useRemoveLinkMutation, useUpdateLinkMutation } from '@/redux/linksApi'
 import { useAppDispatch } from '@/redux/hooks'

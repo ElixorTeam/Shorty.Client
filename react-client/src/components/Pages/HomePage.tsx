@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import Link from 'next-intl/link'
-import cursor from '@/public/cursor.png'
+import cursor from '@/assets/cursor.png'
 
 export default function HomePage() {
   const t = useTranslations('home')

@@ -37,7 +37,7 @@ export default function NavigationList() {
           <p>No links found</p>
         </li>
       )}
-      {data?.length === 0 && isLoading && (
+      {isLoading && (
         <li className="h-24 w-full animate-pulse bg-slate-200 dark:bg-[#282834]" />
       )}
       {sortedLinksData.map((item: LinkRecordType) => (

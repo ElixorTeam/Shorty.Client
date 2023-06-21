@@ -1,6 +1,6 @@
 'use client'
 
-import { clearSelectedLink } from '@/redux/selectedLinkSlice'
+import { clearSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useAppDispatch } from '@/redux/hooks'
 

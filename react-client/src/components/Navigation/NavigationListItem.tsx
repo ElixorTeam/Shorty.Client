@@ -1,7 +1,7 @@
 import { convertDate } from '@/shared/convertDate'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { setSelectedLink } from '@/redux/selectedLinkSlice'
+import { setSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 
 export default function NavigationListItem({
   linkData

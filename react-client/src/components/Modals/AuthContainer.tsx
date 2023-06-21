@@ -1,5 +1,6 @@
 import GoogleIcon from '@/assets/google-icon.svg'
 import GithubIcon from '@/assets/github-icon.svg'
+import Link from 'next-intl/link'
 
 export default function AuthContainer({ authText }: { authText: string }) {
   return (
@@ -17,15 +18,15 @@ export default function AuthContainer({ authText }: { authText: string }) {
             <p className="text-black">Google</p>
           </div>
         </button>
-        <button
-          type="button"
-          className="mb-4 h-10 w-full rounded-lg bg-neutral-700 shadow-md transition-colors ease-linear hover:bg-neutral-500 dark:bg-neutral-800 hover:dark:bg-neutral-700"
+        <Link
+          href="http://localhost:8082/shorty/oauth2/authorization/github"
+          className="mb-4 flex h-10 w-full items-center justify-center rounded-lg bg-neutral-700 shadow-md transition-colors ease-linear hover:bg-neutral-500 dark:bg-neutral-800 hover:dark:bg-neutral-700"
         >
           <div className="flex justify-center gap-2">
             <GithubIcon className="h-7 w-7 fill-white" />
             <p className="pt-[1px] text-white">GitHub</p>
           </div>
-        </button>
+        </Link>
       </div>
     </div>
   )
