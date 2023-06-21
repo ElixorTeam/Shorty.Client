@@ -18,5 +18,5 @@ export default createIntlMiddleware({
 })
 
 export const config = {
-  matcher: ['/((?!api|_next|favicon.ico|assets).*)']
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 }

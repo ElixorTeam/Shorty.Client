@@ -30,7 +30,7 @@ export default function InputComponent({
       />
       <label
         htmlFor={name}
-        className="pointer-events-none absolute -top-1.5 left-0 flex h-full w-full select-none text-[11px] font-normal
+        className="pointer-events-none absolute -top-1.5 left-0 flex h-full w-full select-none truncate text-[11px] font-normal
          leading-tight text-gray-400 transition-all before:pointer-events-none before:mr-1 before:mt-[6.5px]
           before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-l before:border-t
            before:border-gray-200 before:transition-all before:content-[''] after:pointer-events-none after:ml-1

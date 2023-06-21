@@ -1,11 +1,11 @@
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { LinkRecordType } from '@/shared/LinkRecordType'
-import QRGenerator from '@/components/LinksComponents/QRGenerator'
-import LineChart from '@/components/Charts/LineChart'
+import QRGenerator from '@/components/Viewer/QRGenerator'
+import ViewsLineChart from '@/components/Charts/ViewsLineChart'
 import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
-import LinkDetails from '@/components/LinksComponents/LinkDetails'
+import ViewerDescription from '@/components/Viewer/ViewerDescription'
 import { ReactNode } from 'react'
-import LinkStats from '@/components/LinksComponents/LinkStats'
+import LinkStats from '@/components/Viewer/LinkStats'
+import ViewerCloseButton from '@/components/Viewer/ViewerCloseButton'
+import { useTranslations } from 'next-intl'
 
 function LinkStickerBoardItem({ children }: { children: ReactNode }) {
   return (
@@ -15,18 +15,17 @@ function LinkStickerBoardItem({ children }: { children: ReactNode }) {
   )
 }
 
-export default function LinkStickerBoard({
-  translate,
-  linkData,
-  hideLink,
-  setSelectedLink
-}: {
-  translate: { [_: string]: string }
-  linkData: LinkRecordType
-  hideLink: () => void
-  setSelectedLink: (link: LinkRecordType) => void
-}) {
-  const shortURL = `http://localhost:3031/${linkData.innerRef}`
+export default function Viewer() {
+  const t = useTranslations('app')
+  const linkDetailTranslation = {
+    windowDate: t('windowDate'),
+    windowQR: t('windowQR'),
+    toastLinkDelError: t('toastLinkDelError'),
+    toastLinkDelSuccess: t('toastLinkDelSuccess'),
+    toastLinkEditError: t('toastLinkEditError'),
+    toastLinkEditSuccess: t('toastLinkEditSuccess'),
+    toastURLCopied: t('toastURLCopied')
+  }
   const browserChartData = [
     { label: 'Chrome', value: 45 },
     { label: 'Firefox', value: 30 },
@@ -47,28 +46,16 @@ export default function LinkStickerBoard({
   return (
     <>
       <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 shadow-md dark:bg-[#23212e] sm:hidden">
-        <p className="line-clamp-1 text-lg font-bold ">
-          {translate.windowTitle}
-        </p>
-        <button type="button" onClick={hideLink}>
-          <XMarkIcon className="h-6 w-6 dark:text-white" />
-        </button>
+        <p className="line-clamp-1 text-lg font-bold ">{t('windowTitle')}</p>
+        <ViewerCloseButton />
       </div>
       <div className="m-auto flex max-w-6xl flex-wrap justify-center gap-4 bg-[#eef1f6] p-2 dark:bg-[#1c1a25] sm:p-6 sm:pt-0 min-[640px]:bg-transparent">
         <div className="w-full max-w-2xl rounded-2xl bg-white px-4 py-2 shadow-lg dark:bg-[#23212e] md:px-10 md:py-6">
-          <LinkDetails
-            translate={translate}
-            linkData={linkData}
-            hideLink={hideLink}
-            setSelectedLink={(link: LinkRecordType) => setSelectedLink(link)}
-          />
+          <ViewerDescription translate={linkDetailTranslation} />
         </div>
         <LinkStickerBoardItem>
           <div className="m-4 h-52 w-48">
-            <QRGenerator
-              hrefLink={shortURL}
-              toastMsg={translate.toastQRCodeCopied}
-            />
+            <QRGenerator toastMsg={t('toastQRCodeCopied')} />
           </div>
         </LinkStickerBoardItem>
         <LinkStickerBoardItem>
@@ -83,7 +70,7 @@ export default function LinkStickerBoard({
         </LinkStickerBoardItem>
         <LinkStickerBoardItem>
           <div className="m-4 h-48 w-full sm:w-96">
-            <LineChart data={lineChartData} labels={lineChartLabels} />
+            <ViewsLineChart data={lineChartData} labels={lineChartLabels} />
           </div>
         </LinkStickerBoardItem>
       </div>

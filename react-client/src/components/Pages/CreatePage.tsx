@@ -2,11 +2,9 @@
 
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next-intl/client'
-import { apiURL } from '@/shared/fetcher'
-import ky from 'ky'
-import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import InputComponent from '@/components/Common/InputComponent'
+import { useAddLinkMutation } from '@/redux/linksApi'
 
 type FormInputs = {
   title: string
@@ -14,18 +12,17 @@ type FormInputs = {
   innerRef: string
 }
 
-export default function CreateForm({
+export default function CreatePage({
   translate
 }: {
   translate: { [_: string]: string }
 }) {
-  const { mutate } = useSWRConfig()
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<FormInputs>()
-
+  const [addLink] = useAddLinkMutation()
   const router = useRouter()
 
   const checkErrors = () => {
@@ -35,22 +32,23 @@ export default function CreateForm({
       toast.error(translate.toastURLPatternError)
   }
 
-  const onSubmit = async (formInput: FormInputs) => {
+  const onSubmit = (formInput: FormInputs) => {
     const formData = {
       title: formInput.title,
       externalRef: formInput.externalRef,
       innerRef: formInput.innerRef
     }
-    try {
-      await ky.post(`${apiURL}/links/`, { json: formData })
-      await mutate(`${apiURL}/links/`)
-      router.push('/links')
-      toast.success('Success')
-    } catch (err: any) {
-      const errResponse: { msg: string } = await err.response?.json?.()
-      const errMsg = errResponse ? errResponse.msg : err.message
-      toast.error(errMsg)
-    }
+    addLink(formData)
+      .unwrap()
+      .then(() => {
+        router.push('/links')
+        toast.success('Success')
+      })
+      .catch(error => {
+        const errResponse: { msg: string } = error.response?.json?.()
+        const errMsg = errResponse ? errResponse.msg : error.message
+        toast.error(errMsg)
+      })
   }
 
   return (
@@ -81,11 +79,13 @@ export default function CreateForm({
                 disabled
                 placeholder="shr.ty"
               />
-              <p className="pb-1 text-lg text-gray-400 dark:text-gray-300">/</p>
+              <p className="pb-1 text-xl font-light text-gray-400 dark:text-gray-300">
+                /
+              </p>
               <InputComponent
                 type="text"
                 name="innerRef"
-                label="Custom ref"
+                label={`${translate.pathLabel} (${translate.labelOptional})`}
                 registerOptions={{
                   required: false,
                   pattern: /^[a-zA-Z0-9]{3,10}$/
@@ -97,7 +97,7 @@ export default function CreateForm({
               <InputComponent
                 type="text"
                 name="title"
-                label={translate.titleLabel}
+                label={`${translate.titleLabel} (${translate.labelOptional})`}
                 registerOptions={{
                   required: false
                 }}

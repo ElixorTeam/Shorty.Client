@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
 
-export default function LineChart({
+export default function ViewsLineChart({
   data,
   labels
 }: {
