@@ -18,7 +18,7 @@ export default function ViewerDescription({
   translate: { [_: string]: string }
 }) {
   const selectedLink = useAppSelector(state => state.selectedLink.selected)
-  const shortURL = `${process.env.NEXT_PUBLIC_REDIRECT_URL}/${selectedLink?.externalRef}`
+  const shortURL = `${process.env.NEXT_PUBLIC_REDIRECT_URL}/${selectedLink?.innerRef}`
   return (
     <div>
       {selectedLink && (

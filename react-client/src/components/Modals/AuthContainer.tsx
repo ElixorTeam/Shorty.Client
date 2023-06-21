@@ -11,7 +11,7 @@ export default function AuthContainer({ authText }: { authText: string }) {
       <div className="flex w-full flex-col items-center gap-4 px-5">
         <Link
           href="http://localhost:8082/shorty/oauth2/authorization/google"
-          className="flex h-10 w-full justify-center rounded-lg bg-white align-middle shadow-md transition-colors ease-linear hover:bg-gray-50 dark:hover:bg-gray-200"
+          className="flex h-10 w-full items-center justify-center rounded-lg bg-white align-middle shadow-md transition-colors ease-linear hover:bg-gray-50 dark:hover:bg-gray-200"
         >
           <div className="flex justify-center gap-2">
             <GoogleIcon className="h-6 w-6" />

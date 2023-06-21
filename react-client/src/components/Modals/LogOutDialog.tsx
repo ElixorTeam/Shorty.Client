@@ -4,6 +4,9 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import { setAuthToken } from '@/redux/Slices/authTokenSlice'
+import { useAppDispatch } from '@/redux/hooks'
+import { useRouter } from 'next-intl/client'
 
 export default function LogOutDialog({
   translation
@@ -12,6 +15,13 @@ export default function LogOutDialog({
 }) {
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+  const handleLogOut = () => {
+    setOpen(false)
+    router.push('/')
+    dispatch(setAuthToken(''))
+  }
   return (
     <>
       <button
@@ -82,7 +92,7 @@ export default function LogOutDialog({
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={handleLogOut}
                   >
                     {translation.modalLogOutAcceptButton}
                   </button>
