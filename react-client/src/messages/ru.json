@@ -12,6 +12,7 @@
     "toastSuccess": "Успешно",
     "toastLoading": "Загрузка...",
     "toastError": "Ошибка во время загрузки",
+    "toastQRError": "Невозможно скопировать QR код",
     "toastQRCodeCopied": "QR код скопирован",
     "toastURLCopied": "URL адрес скопирован"
   },
@@ -19,7 +20,8 @@
     "title": "Давай сделаем ссылки короче",
     "description": "Ссылки не обязаны быть длинными",
     "btnText": "Начать",
-    "modalAuthTitle": "Войти / Регистрация"
+    "modalAuthTitle": "Войти / Регистрация",
+    "toastAuthError": "Пожалуйста, авторизируйтесь"
   },
   "auth": {
     "modalLogOutTitle": "Выйти из аккаунта",

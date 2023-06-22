@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import Link from 'next-intl/link'
 import cursor from '@/assets/cursor.png'
+import HomeMainButton from '@/components/Layout/HomeMainButton'
+import AuthContainer from '@/components/Modals/AuthContainer'
 
 export default function HomePage() {
   const t = useTranslations('home')
@@ -29,17 +30,9 @@ export default function HomePage() {
               className="absolute inset-0 mt-4 h-10 w-44 rounded-3xl bg-gradient-to-tr from-indigo-300 to-pink-300 opacity-90
                blur-md dark:opacity-30 md:h-14 md:w-64"
             />
-            <Link href="/links">
-              <button
-                type="button"
-                className="relative mt-4 h-10 w-44 rounded-3xl bg-gradient-to-tr from-indigo-300 to-pink-300 transition-all hover:scale-105 active:scale-95 sm:h-11
-              sm:w-52 md:h-14 md:w-64"
-              >
-                <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
-                  {t('btnText')}
-                </p>
-              </button>
-            </Link>
+            <HomeMainButton btnText={t('btnText')}>
+              <AuthContainer authText={t('modalAuthTitle')} />
+            </HomeMainButton>
           </div>
         </div>
       </div>

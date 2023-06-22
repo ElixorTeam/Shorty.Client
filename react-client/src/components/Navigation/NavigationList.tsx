@@ -41,8 +41,8 @@ export default function NavigationList() {
         <li className="h-24 w-full animate-pulse bg-slate-200 dark:bg-[#282834]" />
       )}
       {sortedLinksData.map((item: LinkRecordType) => (
-        <li>
-          <NavigationListItem key={item.uid} linkData={item} />
+        <li key={item.uid}>
+          <NavigationListItem linkData={item} />
         </li>
       ))}
     </ul>

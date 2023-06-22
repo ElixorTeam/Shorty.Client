@@ -16,7 +16,13 @@ const QR_GENERATOR_OPTIONS = {
   width: 150,
   margin: 2
 }
-export default function QRGenerator({ toastMsg }: { toastMsg: string }) {
+export default function QRGenerator({
+  toastMsg,
+  toastError
+}: {
+  toastMsg: string
+  toastError: string
+}) {
   const { Canvas } = useQRCode()
   const selectedLink = useAppSelector(state => state.selectedLink.selected)
   const hrefLink = `${REDIRECT_URL}/${selectedLink?.innerRef}`
@@ -47,7 +53,7 @@ export default function QRGenerator({ toastMsg }: { toastMsg: string }) {
           .write([new ClipboardItem({ 'image/png': blob as Blob })])
           .then()
         toast(toastMsg)
-      }
+      } else toast.error(toastError)
     })
   }
 

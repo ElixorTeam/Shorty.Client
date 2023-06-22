@@ -12,6 +12,7 @@
     "toastSuccess": "Success",
     "toastLoading": "Loading...",
     "toastError": "Error when fetching",
+    "toastQRError": "Failed to copy the QR code",
     "toastQRCodeCopied": "QR code copied",
     "toastURLCopied": "Link URL copied"
   },
@@ -19,7 +20,8 @@
     "title": "Let's short your links together",
     "description": "Links don't have to be lengthy",
     "btnText": "Try right now",
-    "modalAuthTitle": "Log In / Sign Up"
+    "modalAuthTitle": "Log In / Sign Up",
+    "toastAuthError": "Please authorize"
   },
   "auth": {
     "modalLogOutTitle": "Log out of your account",

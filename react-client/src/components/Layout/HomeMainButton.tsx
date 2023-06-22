@@ -1,23 +1,37 @@
 'use client'
 
+import { useAppSelector } from '@/redux/hooks'
+import { useRouter } from 'next-intl/client'
 import { Fragment, ReactNode, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
-export default function AuthDialog({
+export default function HomeMainButton({
   children,
-  authText
+  btnText
 }: {
   children: ReactNode
-  authText: string
+  btnText: string
 }) {
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
-
+  const router = useRouter()
+  const token = useAppSelector(state => state.authToken.token)
+  const handleRedirect = () => {
+    if (!token) setOpen(true)
+    else router.push('/links')
+  }
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)}>
-        <p>{authText}</p>
+      <button
+        type="button"
+        onClick={handleRedirect}
+        className="relative mt-4 h-10 w-44 rounded-3xl bg-gradient-to-tr from-indigo-300 to-pink-300 transition-all hover:scale-105 active:scale-95 sm:h-11
+              sm:w-52 md:h-14 md:w-64"
+      >
+        <p className="text-base uppercase text-white sm:text-lg md:text-2xl">
+          {btnText}
+        </p>
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -57,9 +71,9 @@ export default function AuthDialog({
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="group absolute right-0 top-0 m-5 rounded-md bg-gray-50 transition-colors hover:bg-gray-100 dark:bg-white/[.1]"
+                  className="group absolute right-0 top-0 m-5 rounded-md bg-gray-50 p-1 transition-colors hover:bg-gray-100 dark:bg-gray-700"
                 >
-                  <XMarkIcon className="m-1 h-5 w-5 text-gray-700 transition-colors group-hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300" />
+                  <XMarkIcon className="h-5 w-5 text-gray-700 transition-colors group-hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300" />
                 </button>
                 {children}
               </div>

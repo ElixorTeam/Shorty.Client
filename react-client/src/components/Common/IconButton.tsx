@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 export default function IconButton({
   children,
-  onClick
+  onClick = () => {}
 }: {
   onClick?: () => void
   children: ReactNode
@@ -17,8 +17,4 @@ export default function IconButton({
       {children}
     </button>
   )
-}
-
-IconButton.defaultProps = {
-  onClick: () => {}
 }

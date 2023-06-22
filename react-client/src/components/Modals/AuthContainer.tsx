@@ -1,6 +1,8 @@
+'use client'
+
+import Link from 'next-intl/link'
 import GoogleIcon from '@/assets/google-icon.svg'
 import GithubIcon from '@/assets/github-icon.svg'
-import Link from 'next-intl/link'
 
 export default function AuthContainer({ authText }: { authText: string }) {
   return (
