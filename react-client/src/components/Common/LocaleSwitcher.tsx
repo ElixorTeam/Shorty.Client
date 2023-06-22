@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next-intl/link'
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next-intl/client'
 import DropdownMenu from '@/components/Common/DropdownMenu'
 import { useState } from 'react'
 import { ChevronDownIcon, LanguageIcon } from '@heroicons/react/24/solid'
