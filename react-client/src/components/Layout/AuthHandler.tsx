@@ -11,7 +11,7 @@ export default function AuthHandler() {
   useEffect(() => {
     if (!token) {
       router.push('/')
-      toast.error('You should be authorized')
+      toast.error('Authorization error', { id: 'authError' })
     }
   }, [router, token])
   return null

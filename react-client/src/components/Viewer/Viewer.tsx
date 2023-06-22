@@ -20,10 +20,9 @@ export default function Viewer() {
   const linkDetailTranslation = {
     windowDate: t('windowDate'),
     windowQR: t('windowQR'),
-    toastLinkDelError: t('toastLinkDelError'),
-    toastLinkDelSuccess: t('toastLinkDelSuccess'),
-    toastLinkEditError: t('toastLinkEditError'),
-    toastLinkEditSuccess: t('toastLinkEditSuccess'),
+    toastSuccess: t('toastSuccess'),
+    toastLoading: t('toastLoading'),
+    toastError: t('toastError'),
     toastURLCopied: t('toastURLCopied')
   }
   const browserChartData = [
@@ -49,7 +48,7 @@ export default function Viewer() {
         <p className="line-clamp-1 text-lg font-bold ">{t('windowTitle')}</p>
         <ViewerCloseButton />
       </div>
-      <div className="m-auto flex max-w-6xl flex-wrap justify-center gap-4 bg-[#eef1f6] p-2 dark:bg-[#1c1a25] sm:p-6 sm:pt-0 min-[640px]:bg-transparent">
+      <div className="m-auto flex max-w-7xl flex-wrap justify-center gap-4 bg-[#eef1f6] p-2 dark:bg-[#1c1a25] sm:p-6 sm:pt-0 min-[640px]:bg-transparent">
         <div className="w-full max-w-2xl rounded-2xl bg-white px-4 py-2 shadow-lg dark:bg-[#23212e] md:px-10 md:py-6">
           <ViewerDescription translate={linkDetailTranslation} />
         </div>

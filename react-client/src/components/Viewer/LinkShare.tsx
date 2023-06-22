@@ -1,7 +1,8 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
-import { ShareIcon } from '@heroicons/react/24/outline'
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ShareIcon } from '@heroicons/react/24/solid'
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -10,65 +11,89 @@ import {
   VKIcon,
   VKShareButton
 } from 'react-share'
-import DropdownMenu from '@/components/Common/DropdownMenu'
-import IconButton from '@/components/Common/IconButton'
+import classNames from '@/utils/classNames'
 
-function LinkShareButton({ children }: { children: ReactNode }) {
+export default function ShareDropDown({ shareLink }: { shareLink: string }) {
   return (
-    <li>
-      <button
-        type="button"
-        className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700
-              hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[.05]"
-      >
-        {children}
-      </button>
-    </li>
-  )
-}
-
-export default function LinkShare({ shareLink }: { shareLink: string }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  return (
-    <div className="relative inline-block" onMouseEnter={() => setIsOpen(true)}>
+    <Menu as="div" className="relative inline-block text-left">
       <div>
-        <IconButton onClick={() => setIsOpen(true)}>
+        <Menu.Button
+          className="flex h-9 w-9 items-center justify-center rounded border border-neutral-300 transition-colors
+           hover:border-sky-200 hover:bg-sky-100 active:bg-sky-200 dark:border-gray-600 dark:hover:bg-gray-700
+            active:dark:bg-gray-700"
+        >
           <ShareIcon className="h-5 w-5 text-gray-500" />
-        </IconButton>
+        </Menu.Button>
       </div>
-      <DropdownMenu isOpen={isOpen} setIsOpen={statue => setIsOpen(statue)}>
-        <LinkShareButton>
-          <VKShareButton url={shareLink}>
-            <div className="flex gap-2">
-              <div className="overflow-hidden rounded">
-                <VKIcon className="h-5 w-5" />
-              </div>
-              <p>Вконтакте</p>
-            </div>
-          </VKShareButton>
-        </LinkShareButton>
-        <LinkShareButton>
-          <TelegramShareButton url={shareLink}>
-            <div className="flex gap-2">
-              <div className="overflow-hidden rounded">
-                <TelegramIcon className="h-5 w-5" />
-              </div>
-              <p>Telegram</p>
-            </div>
-          </TelegramShareButton>
-        </LinkShareButton>
-        <LinkShareButton>
-          <FacebookShareButton url={shareLink}>
-            <div className="flex gap-2">
-              <div className="overflow-hidden rounded">
-                <FacebookIcon className="h-5 w-5" />
-              </div>
-              <p>Facebook</p>
-            </div>
-          </FacebookShareButton>
-        </LinkShareButton>
-      </DropdownMenu>
-    </div>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items
+          className="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1
+           ring-black/[.05] focus:outline-none dark:bg-[#23212e] dark:ring-white/[.1]"
+        >
+          <Menu.Item>
+            {({ active }) => (
+              <VKShareButton url={shareLink} className="w-full">
+                <button
+                  type="button"
+                  className={classNames(
+                    active
+                      ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
+                      : 'text-gray-700 dark:text-gray-300',
+                    'group flex items-center px-4 py-2 text-sm w-full'
+                  )}
+                >
+                  <VKIcon className="mr-3 h-5 w-5 rounded" />
+                  Вконтакте
+                </button>
+              </VKShareButton>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <TelegramShareButton url={shareLink} className="w-full">
+                <button
+                  type="button"
+                  className={classNames(
+                    active
+                      ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
+                      : 'text-gray-700 dark:text-gray-300',
+                    'group flex items-center px-4 py-2 text-sm w-full'
+                  )}
+                >
+                  <TelegramIcon className="mr-3 h-5 w-5 rounded" />
+                  Telegram
+                </button>
+              </TelegramShareButton>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <FacebookShareButton url={shareLink} className="w-full">
+                <button
+                  type="button"
+                  className={classNames(
+                    active
+                      ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
+                      : 'text-gray-700 dark:text-gray-300',
+                    'group flex items-center px-4 py-2 text-sm w-full'
+                  )}
+                >
+                  <FacebookIcon className="mr-3 h-5 w-5 rounded" />
+                  Facebook
+                </button>
+              </FacebookShareButton>
+            )}
+          </Menu.Item>
+        </Menu.Items>
+      </Transition>
+    </Menu>
   )
 }

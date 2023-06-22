@@ -9,10 +9,9 @@
     "sortKeyName": "По имени",
     "sortKeyDate": "По дате",
     "linkSearch": "Поиск по названию",
-    "toastLinkDelError": "Не удалось удалить ссылку",
-    "toastLinkDelSuccess": "Ссылка успешно удалена",
-    "toastLinkEditError": "Не удалось изменить название",
-    "toastLinkEditSuccess": "Название успешно изменено",
+    "toastSuccess": "Успешно",
+    "toastLoading": "Загрузка...",
+    "toastError": "Ошибка во время загрузки",
     "toastQRCodeCopied": "QR код скопирован",
     "toastURLCopied": "URL адрес скопирован"
   },

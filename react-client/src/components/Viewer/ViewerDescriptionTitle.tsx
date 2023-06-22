@@ -24,26 +24,28 @@ export default function ViewerDescriptionTitle({
   const [inputValue, setInputValue] = useState<string>('')
   const editInputRef = useRef<HTMLInputElement>(null)
   const dispatch = useAppDispatch()
+  const toasterMsgs = {
+    loading: translate.toastLoading,
+    success: translate.toastSuccess,
+    error: translate.toastError
+  }
 
   const removeLink = async () =>
-    deleteLink(selectedLink.uid)
-      .unwrap()
-      .then(() => {
-        dispatch(clearSelectedLink())
-        toast.success(translate.toastLinkDelSuccess)
-      })
-      .catch(() => toast.error(translate.toastLinkDelError))
+    toast
+      .promise(deleteLink(selectedLink.uid).unwrap(), toasterMsgs)
+      .then(() => dispatch(clearSelectedLink()))
 
   const editLink = async () => {
     if (inputValue.length === 0 || inputValue === selectedLink.title) return
-    await updateLink({ uid: selectedLink.uid, title: inputValue })
-      .unwrap()
+    await toast
+      .promise(
+        updateLink({ uid: selectedLink.uid, title: inputValue }).unwrap(),
+        toasterMsgs
+      )
       .then(() => {
         dispatch(setSelectedLink({ ...selectedLink, title: inputValue }))
         setIsEdit(false)
-        toast.success(translate.toastLinkEditSuccess)
       })
-      .catch(() => toast.error(translate.toastLinkEditError))
   }
 
   const setEditMode = () => {

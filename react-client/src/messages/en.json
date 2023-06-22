@@ -9,10 +9,9 @@
     "sortKeyName": "By name",
     "sortKeyDate": "By date",
     "linkSearch": "Search by name",
-    "toastLinkDelError": "Link deletion failed",
-    "toastLinkDelSuccess": "Link successfully deleted",
-    "toastLinkEditError": "Title edition failed",
-    "toastLinkEditSuccess": "Title successfully edited",
+    "toastSuccess": "Success",
+    "toastLoading": "Loading...",
+    "toastError": "Error when fetching",
     "toastQRCodeCopied": "QR code copied",
     "toastURLCopied": "Link URL copied"
   },
