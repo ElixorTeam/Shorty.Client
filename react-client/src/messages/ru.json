@@ -12,6 +12,7 @@
     "toastSuccess": "Успешно",
     "toastLoading": "Загрузка...",
     "toastError": "Ошибка во время загрузки",
+    "toastTitleError": "Название слишком длинное или короткое",
     "toastQRError": "Невозможно скопировать QR код",
     "toastQRCodeCopied": "QR код скопирован",
     "toastURLCopied": "URL адрес скопирован"
@@ -37,6 +38,8 @@
     "pathLabel": "Путь",
     "submitButton": "Создать",
     "labelOptional": "Необязательно",
+    "tooltipRefCount": "От 3 до 10 символов",
+    "tooltipRefSymbols": "Доступны латинские символы,цифры",
     "toastLoading": "Загрузка...",
     "toastSuccess": "Успешно",
     "toastError": "Ошибка во время загрузки",

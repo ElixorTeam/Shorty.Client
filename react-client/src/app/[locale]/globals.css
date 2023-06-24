@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tooltipWrapper[role="tooltip"] {
+  @apply rounded-lg bg-gray-100/[.8] shadow-md p-4 text-gray-600 dark:bg-[#282834]/[.8] dark:text-gray-300;
+}

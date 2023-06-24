@@ -1,7 +1,7 @@
 import ky from 'ky'
 import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
 
-export const API_URL = 'http://localhost:8082/shorty/api/v1'
+export const API_URL = import.meta.env.VITE_API_URL
 
 export const getLinkByInnerRef = async (
   innerRef: string

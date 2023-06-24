@@ -23,6 +23,7 @@ export default function Viewer() {
     toastSuccess: t('toastSuccess'),
     toastLoading: t('toastLoading'),
     toastError: t('toastError'),
+    toastTitleError: t('toastTitleError'),
     toastURLCopied: t('toastURLCopied')
   }
   const browserChartData = [

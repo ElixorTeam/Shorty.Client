@@ -12,6 +12,7 @@
     "toastSuccess": "Success",
     "toastLoading": "Loading...",
     "toastError": "Error when fetching",
+    "toastTitleError": "Title is too long or short",
     "toastQRError": "Failed to copy the QR code",
     "toastQRCodeCopied": "QR code copied",
     "toastURLCopied": "Link URL copied"
@@ -37,6 +38,8 @@
     "pathLabel": "Path",
     "submitButton": "Create",
     "labelOptional": "Optional",
+    "tooltipRefCount": "From 3 to 10 characters",
+    "tooltipRefSymbols": "Latin characters and numbers",
     "toastLoading": "Loading...",
     "toastSuccess": "Success",
     "toastError": "Error while fetching",

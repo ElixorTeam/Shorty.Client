@@ -9,6 +9,8 @@ export default function CreatePage() {
     pathLabel: t('pathLabel'),
     submitButton: t('submitButton'),
     labelOptional: t('labelOptional'),
+    tooltipRefCount: t('tooltipRefCount'),
+    tooltipRefSymbols: t('tooltipRefSymbols'),
     toastLoading: t('toastLoading'),
     toastError: t('toastError'),
     toastSuccess: t('toastSuccess'),
