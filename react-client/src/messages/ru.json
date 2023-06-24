@@ -37,7 +37,12 @@
     "pathLabel": "Путь",
     "submitButton": "Создать",
     "labelOptional": "Необязательно",
+    "toastLoading": "Загрузка...",
+    "toastSuccess": "Успешно",
+    "toastError": "Ошибка во время загрузки",
     "toastURLRequiredError": "Введите URL ссылку",
-    "toastURLPatternError": "URL ссылка некорректна"
+    "toastURLPatternError": "URL ссылка некорректна",
+    "toastRefPatternError": "Путь некоретен",
+    "toastTitlePatternError": "Название слишком длинное"
   }
 }

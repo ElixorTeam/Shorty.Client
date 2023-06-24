@@ -1,8 +1,7 @@
-'use client'
-
 import Link from 'next-intl/link'
-import GoogleIcon from '@/assets/google-icon.svg'
-import GithubIcon from '@/assets/github-icon.svg'
+import Image from 'next/image'
+import GoogleIcon from '@/public/google.svg'
+import GithubIcon from '@/public/github.svg'
 
 export default function AuthContainer({ authText }: { authText: string }) {
   return (
@@ -16,7 +15,7 @@ export default function AuthContainer({ authText }: { authText: string }) {
           className="flex h-10 w-full items-center justify-center rounded-lg bg-white align-middle shadow-md transition-colors ease-linear hover:bg-gray-50 dark:hover:bg-gray-200"
         >
           <div className="flex justify-center gap-2">
-            <GoogleIcon className="h-6 w-6" />
+            <Image src={GoogleIcon} alt="" className="h-6 w-6" />
             <p className="text-black">Google</p>
           </div>
         </Link>
@@ -25,7 +24,7 @@ export default function AuthContainer({ authText }: { authText: string }) {
           className="mb-4 flex h-10 w-full items-center justify-center rounded-lg bg-neutral-700 shadow-md transition-colors ease-linear hover:bg-neutral-500 dark:bg-neutral-800 hover:dark:bg-neutral-700"
         >
           <div className="flex justify-center gap-2">
-            <GithubIcon className="h-7 w-7 fill-white" />
+            <Image src={GithubIcon} alt="" className="h-7 w-7" />
             <p className="pt-[1px] text-white">GitHub</p>
           </div>
         </Link>

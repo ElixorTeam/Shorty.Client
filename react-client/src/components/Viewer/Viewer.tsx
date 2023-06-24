@@ -56,7 +56,7 @@ export default function Viewer() {
           <div className="m-4 h-52 w-48">
             <QRGenerator
               toastMsg={t('toastQRCodeCopied')}
-              toastError={t('toastErrorQR')}
+              toastError={t('toastQRError')}
             />
           </div>
         </LinkStickerBoardItem>

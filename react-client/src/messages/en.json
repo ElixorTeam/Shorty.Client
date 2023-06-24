@@ -37,7 +37,12 @@
     "pathLabel": "Path",
     "submitButton": "Create",
     "labelOptional": "Optional",
+    "toastLoading": "Loading...",
+    "toastSuccess": "Success",
+    "toastError": "Error while fetching",
     "toastURLRequiredError": "Enter your URL",
-    "toastURLPatternError": "URL is incorrect"
+    "toastURLPatternError": "URL is incorrect",
+    "toastRefPatternError": "Ref is incorrect",
+    "toastTitlePatternError": "Title is too long"
   }
 }

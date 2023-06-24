@@ -24,7 +24,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang={params.locale}>
+    <html lang={params.locale} suppressHydrationWarning>
       <body className="h-screen text-black antialiased dark:text-white">
         <Provider>{children}</Provider>
         <Toaster position="bottom-right" />

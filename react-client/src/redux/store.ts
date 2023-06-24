@@ -4,8 +4,8 @@ import selectedLinkReducer from '@/redux/Slices/selectedLinkSlice'
 import searchTextReducer from '@/redux/Slices/searchTextSlice'
 import linkSortReducer from '@/redux/Slices/linksSortSlice'
 import authTokenReducer from '@/redux/Slices/authTokenSlice'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { persistStore, persistReducer } from 'reduxjs-toolkit-persist'
+import storage from 'reduxjs-toolkit-persist/lib/storage'
 import {
   FLUSH,
   REHYDRATE,
@@ -13,7 +13,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER
-} from 'redux-persist/es/constants'
+} from 'reduxjs-toolkit-persist/es/constants'
 
 const nonSerializableActionTypes = [
   FLUSH,

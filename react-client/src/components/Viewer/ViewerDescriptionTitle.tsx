@@ -36,7 +36,10 @@ export default function ViewerDescriptionTitle({
       .then(() => dispatch(clearSelectedLink()))
 
   const editLink = async () => {
-    if (inputValue.length === 0 || inputValue === selectedLink.title) return
+    if (inputValue.length === 0 || inputValue === selectedLink.title) {
+      setIsEdit(false)
+      return
+    }
     await toast
       .promise(
         updateLink({ uid: selectedLink.uid, title: inputValue }).unwrap(),
@@ -70,7 +73,7 @@ export default function ViewerDescriptionTitle({
           className="mr-6 mt-3 h-9 w-full rounded-md border border-gray-300 pl-1 text-3xl font-bold focus:outline-none"
         />
       ) : (
-        <p className="mt-3 line-clamp-1 h-9 pb-1 text-3xl font-bold">
+        <p className="mt-3 line-clamp-1 h-9 break-all pb-1 pr-3 text-3xl font-bold">
           {selectedLink.title}
         </p>
       )}
