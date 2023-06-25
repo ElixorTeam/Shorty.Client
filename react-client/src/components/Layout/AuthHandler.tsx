@@ -13,6 +13,6 @@ export default function AuthHandler() {
       router.push('/')
       toast.error('Authorization error', { id: 'authError' })
     }
-  }, [router, token])
+  }, [token])
   return null
 }
