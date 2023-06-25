@@ -14,6 +14,7 @@ import {
   PURGE,
   REGISTER
 } from 'reduxjs-toolkit-persist/es/constants'
+import { authApi } from '@/redux/authApi'
 
 const nonSerializableActionTypes = [
   FLUSH,
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
   selectedLink: selectedLinkReducer,
   linksSort: linkSortReducer,
   authToken: authTokenReducer,
-  [linksApi.reducerPath]: linksApi.reducer
+  [linksApi.reducerPath]: linksApi.reducer,
+  [authApi.reducerPath]: authApi.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -47,7 +49,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: nonSerializableActionTypes
       }
-    }).concat(linksApi.middleware)
+    })
+      .concat(linksApi.middleware)
+      .concat(authApi.middleware)
 })
 
 export const persistor = persistStore(store)

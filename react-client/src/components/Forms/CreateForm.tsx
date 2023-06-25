@@ -88,10 +88,7 @@ export default function CreateForm({
             /
           </p>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a
-            data-tooltip-id="my-tooltip"
-            className="w-full"
-          >
+          <a data-tooltip-id="my-tooltip" className="w-full">
             <InputComponent
               type="text"
               name="innerRef"

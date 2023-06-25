@@ -1,6 +1,6 @@
 import IconButton from '@/components/Common/IconButton'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { clearSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 import toast from 'react-hot-toast'
 import { useRemoveLinkMutation } from '@/redux/linksApi'
