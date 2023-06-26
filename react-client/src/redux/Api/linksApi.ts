@@ -1,16 +1,6 @@
-import type { RootState } from '@/redux/store'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import { API_URL } from '@/shared/urls'
-
-const baseQueryWithAuth = fetchBaseQuery({
-  baseUrl: API_URL,
-  prepareHeaders: (headers, { getState }) => {
-    const { token } = (getState() as RootState).authToken
-    if (token) headers.set('authorization', `Bearer ${token}`)
-    return headers
-  }
-})
+import baseQueryWithAuth from '@/redux/baseQueryWithAuth'
 
 export const linksApi = createApi({
   reducerPath: 'linksApi',

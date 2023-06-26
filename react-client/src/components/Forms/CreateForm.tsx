@@ -3,7 +3,7 @@
 import InputComponent from '@/components/Common/InputComponent'
 import { useState } from 'react'
 import { FieldErrors, useForm } from 'react-hook-form'
-import { useAddLinkMutation } from '@/redux/linksApi'
+import { useAddLinkMutation } from '@/redux/Api/linksApi'
 import { useRouter } from 'next-intl/client'
 import toast from 'react-hot-toast'
 import { Tooltip } from 'react-tooltip'

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { linksApi } from '@/redux/linksApi'
+import { linksApi } from '@/redux/Api/linksApi'
 import selectedLinkReducer from '@/redux/Slices/selectedLinkSlice'
 import searchTextReducer from '@/redux/Slices/searchTextSlice'
 import linkSortReducer from '@/redux/Slices/linksSortSlice'
@@ -14,7 +14,8 @@ import {
   PURGE,
   REGISTER
 } from 'reduxjs-toolkit-persist/es/constants'
-import { authApi } from '@/redux/authApi'
+import { authApi } from '@/redux/Api/authApi'
+import { analyzeApi } from '@/redux/Api/analyzeApi'
 
 const nonSerializableActionTypes = [
   FLUSH,
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   linksSort: linkSortReducer,
   authToken: authTokenReducer,
   [linksApi.reducerPath]: linksApi.reducer,
-  [authApi.reducerPath]: authApi.reducer
+  [authApi.reducerPath]: authApi.reducer,
+  [analyzeApi.reducerPath]: analyzeApi.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -52,6 +54,7 @@ export const store = configureStore({
     })
       .concat(linksApi.middleware)
       .concat(authApi.middleware)
+      .concat(analyzeApi.middleware)
 })
 
 export const persistor = persistStore(store)
