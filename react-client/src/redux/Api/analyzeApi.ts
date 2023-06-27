@@ -3,13 +3,20 @@ import baseQueryWithAuth from '@/redux/baseQueryWithAuth'
 
 type AnalyticItemType = {
   name: string
-  count: number
+  value: number
+}
+
+type ViewsAnalyticType = {
+  total: number
+  unique: number
+  avg_day: number
 }
 
 type LinkAnalyticsResponse = {
   os: AnalyticItemType[]
   browsers: AnalyticItemType[]
-  device: AnalyticItemType[]
+  devices: AnalyticItemType[]
+  views: ViewsAnalyticType
 }
 
 export const analyzeApi = createApi({

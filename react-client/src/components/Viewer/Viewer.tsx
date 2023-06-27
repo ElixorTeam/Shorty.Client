@@ -1,11 +1,12 @@
 import QRGenerator from '@/components/Viewer/QRGenerator'
-import ViewsLineChart from '@/components/Charts/ViewsLineChart'
 import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
 import ViewerDescription from '@/components/Viewer/ViewerDescription'
 import LinkStats from '@/components/Viewer/LinkStats'
 import ViewerCloseButton from '@/components/Viewer/ViewerCloseButton'
 import { useTranslations } from 'next-intl'
 import ViewerBlock from '@/components/Viewer/ViewerBlock'
+import OsDoughnutChart from '@/components/Charts/OsDoghnutChart'
+import DeviceDoughnutChart from '@/components/Charts/DeviceDoghnutChart'
 
 export default function Viewer() {
   const t = useTranslations('app')
@@ -18,13 +19,6 @@ export default function Viewer() {
     toastTitleError: t('toastTitleError'),
     toastURLCopied: t('toastURLCopied')
   }
-  // const browserChartData = [
-  //   { label: 'Chrome', value: 45 },
-  //   { label: 'Firefox', value: 30 },
-  //   { label: 'Safari', value: 10 },
-  //   { label: 'Edge', value: 8 },
-  //   { label: 'Other', value: 7 }
-  // ]
   // const lineChartData = [100, 200, 150, 300, 250, 400, 350]
   // const lineChartLabels = [
   //   '01.01.23',
@@ -54,13 +48,32 @@ export default function Viewer() {
           </div>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="m-4 h-48 w-full md:w-48">
+          <div className="h-56 w-full md:w-56">
+            <LinkStats />
+          </div>
+        </ViewerBlock>
+        <ViewerBlock>
+          <div className="relative m-4 flex h-48 w-full items-center justify-center md:w-48">
+            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
+              Browsers
+            </p>
             <BrowserDoughnutChart />
           </div>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="h-56 w-full md:w-56">
-            <LinkStats />
+          <div className="relative m-4 flex h-48 w-full items-center justify-center md:w-48">
+            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
+              OS
+            </p>
+            <OsDoughnutChart />
+          </div>
+        </ViewerBlock>
+        <ViewerBlock>
+          <div className="relative m-4 flex h-48 w-full items-center justify-center md:w-48">
+            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
+              Devices
+            </p>
+            <DeviceDoughnutChart />
           </div>
         </ViewerBlock>
         {/* <ViewerBlock> */}

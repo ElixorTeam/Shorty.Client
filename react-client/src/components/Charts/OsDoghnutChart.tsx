@@ -7,8 +7,8 @@ import DoughnutChart from '@/components/Charts/DoghnutChart'
 export default function OsDoughnutChart() {
   const selectedLink = useAppSelector(state => state.selectedLink.selected)
   const { data, isLoading } = useGetLinkAnalyticsQuery(selectedLink.uid)
-  const labels = data ? data.browsers.map(item => item.name) : []
-  const values = data ? data.browsers.map(item => item.value) : []
+  const labels = data ? data.os.map(item => item.name) : []
+  const values = data ? data.os.map(item => item.value) : []
   return (
     <DoughnutChart
       labels={labels}
