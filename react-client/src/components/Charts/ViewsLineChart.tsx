@@ -1,45 +1,47 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import Chart from 'chart.js/auto'
+import { Line } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js'
+import { useAppSelector } from '@/redux/hooks'
+import { useGetDayAnalyticsQuery } from '@/redux/Api/analyzeApi'
 
-export default function ViewsLineChart({
-  data,
-  labels
-}: {
-  data: number[]
-  labels: string[]
-}) {
-  const chartContainer = useRef<HTMLCanvasElement>(null)
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
-  useEffect(() => {
-    if (chartContainer && chartContainer.current) {
-      const chart = new Chart(chartContainer.current, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Views',
-              data,
-              fill: false,
-              borderColor: 'rgba(75,192,192,1)',
-              cubicInterpolationMode: 'monotone'
-            }
-          ]
-        }
-      })
-
-      return () => {
-        chart.destroy()
+export default function ViewsLineChart() {
+  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const { data, isLoading } = useGetDayAnalyticsQuery(selectedLink.uid)
+  const labels = data ? data.map(item => item.date) : []
+  const values = data ? data.map(item => item.count) : []
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: 'Views',
+        data: values,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        cubicInterpolationMode: 'monotone'
       }
-    }
-    return undefined
-  }, [chartContainer, data, labels])
-
-  return (
-    <div>
-      <canvas ref={chartContainer} />
-    </div>
-  )
+    ]
+  }
+  if (isLoading) return null
+  // @ts-ignore
+  return <Line data={chartData} />
 }

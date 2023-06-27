@@ -6,6 +6,11 @@ type AnalyticItemType = {
   value: number
 }
 
+type DayAnalyticsType = {
+  date: string
+  count: number
+}
+
 type ViewsAnalyticType = {
   total: number
   unique: number
@@ -25,8 +30,11 @@ export const analyzeApi = createApi({
   endpoints: builder => ({
     getLinkAnalytics: builder.query<LinkAnalyticsResponse, string>({
       query: uid => `links_analytics/${uid}`
+    }),
+    getDayAnalytics: builder.query<DayAnalyticsType[], string>({
+      query: uid => `links_analytics/time_line/${uid}`
     })
   })
 })
 
-export const { useGetLinkAnalyticsQuery } = analyzeApi
+export const { useGetLinkAnalyticsQuery, useGetDayAnalyticsQuery } = analyzeApi

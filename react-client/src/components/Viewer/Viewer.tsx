@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl'
 import ViewerBlock from '@/components/Viewer/ViewerBlock'
 import OsDoughnutChart from '@/components/Charts/OsDoghnutChart'
 import DeviceDoughnutChart from '@/components/Charts/DeviceDoghnutChart'
+import ViewsLineChart from '@/components/Charts/ViewsLineChart'
 
 export default function Viewer() {
   const t = useTranslations('app')
@@ -19,16 +20,6 @@ export default function Viewer() {
     toastTitleError: t('toastTitleError'),
     toastURLCopied: t('toastURLCopied')
   }
-  // const lineChartData = [100, 200, 150, 300, 250, 400, 350]
-  // const lineChartLabels = [
-  //   '01.01.23',
-  //   '02.01.23',
-  //   '03.01.23',
-  //   '04.01.23',
-  //   '05.01.23',
-  //   '06.01.23',
-  //   '07.01.23'
-  // ]
   return (
     <>
       <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 shadow-md dark:bg-[#23212e] sm:hidden">
@@ -76,11 +67,14 @@ export default function Viewer() {
             <DeviceDoughnutChart />
           </div>
         </ViewerBlock>
-        {/* <ViewerBlock> */}
-        {/*  <div className="m-4 h-48 w-full sm:w-96"> */}
-        {/*    <ViewsLineChart data={lineChartData} labels={lineChartLabels} /> */}
-        {/*  </div> */}
-        {/* </ViewerBlock> */}
+        <ViewerBlock>
+          <div className="relative m-4 h-48 w-full sm:w-96">
+            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
+              Weeks Views
+            </p>
+            <ViewsLineChart />
+          </div>
+        </ViewerBlock>
       </div>
     </>
   )
