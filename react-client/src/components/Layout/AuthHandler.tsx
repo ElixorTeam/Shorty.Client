@@ -6,18 +6,19 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useCheckAuthStatusQuery } from '@/redux/Api/authApi'
 import { setAuthToken } from '@/redux/Slices/authTokenSlice'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 export default function AuthHandler() {
   const router = useRouter()
   const token = useAppSelector(state => state.authToken.token)
   const dispatch = useAppDispatch()
-  const { isSuccess, isLoading } = useCheckAuthStatusQuery()
+  const { error } = useCheckAuthStatusQuery()
   useEffect(() => {
-    if (!token || (!isLoading && !isSuccess)) {
+    if (!token || (error && (error as FetchBaseQueryError).status === 401)) {
       router.push('/')
       dispatch(setAuthToken(''))
       toast.error('Authorization error', { id: 'authError' })
     }
-  }, [token, isLoading, isSuccess, dispatch])
+  }, [token, error, dispatch])
   return null
 }

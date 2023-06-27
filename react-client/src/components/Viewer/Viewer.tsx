@@ -8,6 +8,24 @@ import ViewerBlock from '@/components/Viewer/ViewerBlock'
 import OsDoughnutChart from '@/components/Charts/OsDoghnutChart'
 import DeviceDoughnutChart from '@/components/Charts/DeviceDoghnutChart'
 import ViewsLineChart from '@/components/Charts/ViewsLineChart'
+import { ReactNode } from 'react'
+
+function DoughnutWrapper({
+  title,
+  children
+}: {
+  title: string
+  children: ReactNode
+}) {
+  return (
+    <div className="relative flex h-full w-full items-center justify-center p-2 md:w-56">
+      <p className="absolute bottom-2 right-2 text-gray-400 dark:text-gray-500">
+        {title}
+      </p>
+      {children}
+    </div>
+  )
+}
 
 export default function Viewer() {
   const t = useTranslations('app')
@@ -20,6 +38,11 @@ export default function Viewer() {
     toastTitleError: t('toastTitleError'),
     toastURLCopied: t('toastURLCopied')
   }
+  const statTranslation = {
+    statUnique: t('statUnique'),
+    statTotal: t('statTotal'),
+    statAverage: t('statAverage')
+  }
   return (
     <>
       <div className="sticky flex h-16 w-full items-center justify-between bg-white px-6 shadow-md dark:bg-[#23212e] sm:hidden">
@@ -27,11 +50,11 @@ export default function Viewer() {
         <ViewerCloseButton />
       </div>
       <div className="m-auto flex max-w-7xl flex-wrap justify-center gap-4 bg-[#eef1f6] p-2 dark:bg-[#1c1a25] sm:p-6 sm:pt-0 min-[640px]:bg-transparent">
-        <div className="w-full max-w-2xl rounded-2xl bg-white px-4 py-2 shadow-lg dark:bg-[#23212e] md:px-10 md:py-6">
+        <div className="h-60 w-full max-w-2xl rounded-2xl bg-white px-4 py-2 shadow-lg dark:bg-[#23212e] md:px-10 md:py-6">
           <ViewerDescription translate={linkDetailTranslation} />
         </div>
         <ViewerBlock>
-          <div className="m-4 h-52 w-48">
+          <div className="h-full w-56">
             <QRGenerator
               toastMsg={t('toastQRCodeCopied')}
               toastError={t('toastQRError')}
@@ -39,38 +62,29 @@ export default function Viewer() {
           </div>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="h-56 w-full md:w-56">
-            <LinkStats />
+          <div className="h-full w-56">
+            <LinkStats translate={statTranslation} />
           </div>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="relative m-4 flex h-48 w-full items-center justify-center md:w-48">
-            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
-              Browsers
-            </p>
+          <DoughnutWrapper title={t('viewerDoughnutBrowsers')}>
             <BrowserDoughnutChart />
-          </div>
+          </DoughnutWrapper>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="relative m-4 flex h-48 w-full items-center justify-center md:w-48">
-            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
-              OS
-            </p>
+          <DoughnutWrapper title={t('viewerDoughnutOS')}>
             <OsDoughnutChart />
-          </div>
+          </DoughnutWrapper>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="relative m-4 flex h-48 w-full items-center justify-center md:w-48">
-            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
-              Devices
-            </p>
+          <DoughnutWrapper title={t('viewerDoughnutDevices')}>
             <DeviceDoughnutChart />
-          </div>
+          </DoughnutWrapper>
         </ViewerBlock>
         <ViewerBlock>
-          <div className="relative m-4 h-48 w-full sm:w-96">
-            <p className="absolute bottom-0 right-0 text-gray-400 dark:text-gray-500">
-              Weeks Views
+          <div className="relative flex h-full w-full items-center justify-center p-2 sm:w-96">
+            <p className="absolute bottom-2 right-2 text-gray-400 dark:text-gray-500">
+              {t('viewerWeekViews')}
             </p>
             <ViewsLineChart />
           </div>

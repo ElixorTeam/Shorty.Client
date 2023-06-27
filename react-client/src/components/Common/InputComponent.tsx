@@ -5,13 +5,15 @@ export default function InputComponent({
   name,
   label,
   registerOptions,
-  register
+  register,
+  maxLength = 256
 }: {
   type: string
   name: string
   label: string
   registerOptions: RegisterOptions
   register: UseFormRegister<any>
+  maxLength?: number
 }) {
   const { required, pattern, validate } = registerOptions
   return (
@@ -19,6 +21,7 @@ export default function InputComponent({
       <input
         id={name}
         type={type}
+        maxLength={maxLength}
         {...register(name, { required, pattern, validate })}
         className="peer h-full w-full rounded-lg border border-gray-200 border-t-transparent bg-transparent px-3 py-2.5
          font-sans text-sm font-normal text-gray-700 outline outline-0 transition-all placeholder-shown:border

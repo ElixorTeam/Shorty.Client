@@ -93,6 +93,7 @@ export default function CreateForm({
               type="text"
               name="innerRef"
               label={`${translate.pathLabel} (${translate.labelOptional})`}
+              maxLength={10}
               registerOptions={{
                 required: false,
                 pattern: /^[a-zA-Z0-9]{3,10}$/

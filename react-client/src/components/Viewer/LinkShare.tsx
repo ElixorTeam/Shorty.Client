@@ -35,7 +35,7 @@ export default function ShareDropDown({ shareLink }: { shareLink: string }) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1
+          className="absolute right-0 z-30 mt-2 w-32 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1
            ring-black/[.05] focus:outline-none dark:bg-[#23212e] dark:ring-white/[.1]"
         >
           <Menu.Item>

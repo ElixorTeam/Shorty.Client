@@ -77,6 +77,7 @@ export default function TitleForm({
     >
       <input
         type="text"
+        maxLength={64}
         {...register('title', { required: true, maxLength: 64, minLength: 1 })}
         className="mr-6 mt-3 h-9 w-full rounded-md border border-gray-300 pl-1 text-3xl font-bold focus:outline-none"
       />
