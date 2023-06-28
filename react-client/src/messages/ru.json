@@ -16,13 +16,15 @@
     "viewerDoughnutOS": "ОС",
     "viewerDoughnutBrowsers": "Браузеры",
     "viewerWeekViews": "Недельные просмотры",
+    "viewerDoughnutNoData": "Нет данных",
     "toastSuccess": "Успешно",
     "toastLoading": "Загрузка...",
     "toastError": "Ошибка во время загрузки",
     "toastTitleError": "Название слишком длинное или короткое",
     "toastQRError": "Невозможно скопировать QR код",
     "toastQRCodeCopied": "QR код скопирован",
-    "toastURLCopied": "URL адрес скопирован"
+    "toastURLCopied": "URL адрес скопирован",
+    "errorLinkNotExists": "Ссылка не существует"
   },
   "home" : {
     "title": "Давай сделаем ссылки короче",
@@ -53,6 +55,7 @@
     "toastURLRequiredError": "Введите URL ссылку",
     "toastURLPatternError": "URL ссылка некорректна",
     "toastRefPatternError": "Путь некоретен",
-    "toastTitlePatternError": "Название слишком длинное"
+    "errorInnerRefExists": "Такой путь уже существует",
+    "errorExternalRefNotValid": "URL ссылка некорректна"
   }
 }

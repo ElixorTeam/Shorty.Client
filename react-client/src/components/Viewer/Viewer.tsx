@@ -36,7 +36,8 @@ export default function Viewer() {
     toastLoading: t('toastLoading'),
     toastError: t('toastError'),
     toastTitleError: t('toastTitleError'),
-    toastURLCopied: t('toastURLCopied')
+    toastURLCopied: t('toastURLCopied'),
+    errorLinkNotExists: t('errorLinkNotExists')
   }
   const statTranslation = {
     statUnique: t('statUnique'),
@@ -68,17 +69,17 @@ export default function Viewer() {
         </ViewerBlock>
         <ViewerBlock>
           <DoughnutWrapper title={t('viewerDoughnutBrowsers')}>
-            <BrowserDoughnutChart />
+            <BrowserDoughnutChart noDataMsg={t('viewerDoughnutNoData')} />
           </DoughnutWrapper>
         </ViewerBlock>
         <ViewerBlock>
           <DoughnutWrapper title={t('viewerDoughnutOS')}>
-            <OsDoughnutChart />
+            <OsDoughnutChart noDataMsg={t('viewerDoughnutNoData')} />
           </DoughnutWrapper>
         </ViewerBlock>
         <ViewerBlock>
           <DoughnutWrapper title={t('viewerDoughnutDevices')}>
-            <DeviceDoughnutChart />
+            <DeviceDoughnutChart noDataMsg={t('viewerDoughnutNoData')} />
           </DoughnutWrapper>
         </ViewerBlock>
         <ViewerBlock>

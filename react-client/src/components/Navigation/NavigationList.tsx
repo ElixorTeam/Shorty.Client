@@ -30,7 +30,7 @@ export default function NavigationList() {
   }, [data, selectedSort, searchString])
 
   return (
-    <ul className="overflow-y-hidden scrollbar-thin divide-y dark:divide-white/[.05] scrollbar-thumb-gray-300 hover:overflow-y-auto dark:scrollbar-thumb-gray-500">
+    <ul className="divide-y overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto dark:divide-white/[.05] dark:scrollbar-thumb-gray-500">
       {(data?.length === 0 || sortedLinksData.length === 0) && !isLoading && (
         <li className="flex h-24 w-full flex-col items-center justify-center text-center text-gray-400 dark:text-gray-600">
           <FolderIcon className="h-8 w-8 stroke-1" />

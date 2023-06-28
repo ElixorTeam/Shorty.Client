@@ -50,8 +50,15 @@ export default function TitleForm({
         {
           loading: translate.toastLoading,
           success: translate.toastSuccess,
-          error: translate.toastError
-        }
+          error: err => {
+            const errMsg = err.data.error
+            const toastMsg = translate[err.data.error]
+            if (errMsg && toastMsg && toastMsg !== `app.${errMsg}`)
+              return toastMsg
+            return translate.toastError
+          }
+        },
+        { id: 'titleEditToast' }
       )
       .then(() => {
         dispatch(setSelectedLink({ ...selectedLink, title: formInput.title }))

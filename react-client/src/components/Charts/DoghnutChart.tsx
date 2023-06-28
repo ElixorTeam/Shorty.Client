@@ -9,11 +9,13 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 export default function DoughnutChart({
   labels,
   data,
+  noDataMsg,
   isLoading,
   isEmpty
 }: {
   labels: string[]
   data: number[]
+  noDataMsg: string
   isLoading: boolean
   isEmpty: boolean
 }) {
@@ -52,7 +54,7 @@ export default function DoughnutChart({
     return (
       <div className="flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
         <ChartPieIcon className="h-28 w-28 rotate-45 stroke-[0.4]" />
-        <p className="text-xl">No data</p>
+        <p className="text-xl">{noDataMsg}</p>
       </div>
     )
   }

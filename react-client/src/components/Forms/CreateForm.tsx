@@ -35,8 +35,6 @@ export default function CreateForm({
       })
     if (errors.innerRef?.type === 'pattern')
       toast.error(translate.toastRefPatternError, { id: 'createRefError' })
-    if (errors.title?.type === ('maxLength' || 'minLength'))
-      toast.error(translate.toastTitlePatternError, { id: 'createTitleError' })
   }
 
   const onSubmit = async (formInput: FormInputs) => {
@@ -52,8 +50,15 @@ export default function CreateForm({
         {
           loading: translate.toastLoading,
           success: translate.toastSuccess,
-          error: translate.toastError
-        }
+          error: err => {
+            const errMsg = err.data.error
+            const toastMsg = translate[err.data.error]
+            if (errMsg && toastMsg && toastMsg !== `create.${errMsg}`)
+              return toastMsg
+            return translate.toastError
+          }
+        },
+        { id: 'createFormToast' }
       )
       .then(() => {
         setIsSubmit(false)
@@ -72,7 +77,7 @@ export default function CreateForm({
             registerOptions={{
               required: true,
               pattern:
-                /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??#?)?)/
+                /(https:\/\/)((?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(\/[+~%/.\w-]*)?\??([-+=&;%@.\w_]*)#?([.!/\\\w]*)?/
             }}
             register={register}
           />
@@ -82,7 +87,7 @@ export default function CreateForm({
             className="h-10 w-24 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm placeholder:text-gray-500
                  dark:border-gray-600 dark:bg-gray-900/[.2]"
             disabled
-            placeholder="shr.ty"
+            placeholder="sh0.su"
           />
           <p className="pb-1 text-xl font-light text-gray-400 dark:text-gray-300">
             /
@@ -111,10 +116,9 @@ export default function CreateForm({
             type="text"
             name="title"
             label={`${translate.titleLabel} (${translate.labelOptional})`}
+            maxLength={64}
             registerOptions={{
-              required: false,
-              maxLength: 64,
-              minLength: 1
+              required: false
             }}
             register={register}
           />

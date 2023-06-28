@@ -16,13 +16,15 @@
     "viewerDoughnutOS": "OS",
     "viewerDoughnutBrowsers": "Browsers",
     "viewerWeekViews": "Week views",
+    "viewerDoughnutNoData": "No data",
     "toastSuccess": "Success",
     "toastLoading": "Loading...",
     "toastError": "Error when fetching",
     "toastTitleError": "Title is too long or short",
     "toastQRError": "Failed to copy the QR code",
     "toastQRCodeCopied": "QR code copied",
-    "toastURLCopied": "Link URL copied"
+    "toastURLCopied": "Link URL copied",
+    "errorLinkNotExists": "Link doesn't exist"
   },
   "home" : {
     "title": "Let's short your links together",
@@ -53,6 +55,7 @@
     "toastURLRequiredError": "Enter your URL",
     "toastURLPatternError": "URL is incorrect",
     "toastRefPatternError": "Ref is incorrect",
-    "toastTitlePatternError": "Title is too long"
+    "errorInnerRefExists": "Ref is already exists",
+    "errorExternalRefNotValid": "URL is incorrect"
   }
 }

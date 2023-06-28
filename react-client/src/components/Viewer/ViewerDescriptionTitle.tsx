@@ -21,11 +21,21 @@ export default function ViewerDescriptionTitle({
 
   const removeLink = async () =>
     toast
-      .promise(deleteLink(selectedLink.uid).unwrap(), {
-        loading: translate.toastLoading,
-        success: translate.toastSuccess,
-        error: translate.toastError
-      })
+      .promise(
+        deleteLink(selectedLink.uid).unwrap(),
+        {
+          loading: translate.toastLoading,
+          success: translate.toastSuccess,
+          error: err => {
+            const errMsg = err.data.error
+            const toastMsg = translate[err.data.error]
+            if (errMsg && toastMsg && toastMsg !== `app.${errMsg}`)
+              return toastMsg
+            return translate.toastError
+          }
+        },
+        { id: 'deleteLinkToast' }
+      )
       .then(() => dispatch(clearSelectedLink()))
 
   return (

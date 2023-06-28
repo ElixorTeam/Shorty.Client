@@ -17,7 +17,9 @@ export default function CreatePage() {
     toastURLRequiredError: t('toastURLRequiredError'),
     toastURLPatternError: t('toastURLPatternError'),
     toastRefPatternError: t('toastRefPatternError'),
-    toastTitlePatternError: t('toastTitlePatternError')
+    toastTitlePatternError: t('toastTitlePatternError'),
+    errorInnerRefExists: t('errorInnerRefExists'),
+    errorExternalRefNotValid: t('errorExternalRefNotValid')
   }
   return (
     <div className="flex h-full w-full flex-col items-center justify-center sm:pb-[64px] sm:pr-[50px] lg:pr-[200px]">

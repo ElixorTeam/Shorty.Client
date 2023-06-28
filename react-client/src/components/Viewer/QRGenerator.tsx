@@ -58,7 +58,7 @@ export default function QRGenerator({
   }
 
   return (
-    <div className="flex h-full flex-col items-center gap-1 dark:gap-3 justify-center">
+    <div className="flex h-full flex-col items-center justify-center gap-1 dark:gap-3">
       <div className="overflow-hidden rounded-xl" ref={qrCodeContainerRef}>
         <Canvas text={hrefLink} options={QR_GENERATOR_OPTIONS} />
       </div>
