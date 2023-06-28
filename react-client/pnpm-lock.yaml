@@ -21,8 +21,8 @@ dependencies:
     specifier: ^13.4.7
     version: 13.4.7(react-dom@18.2.0)(react@18.2.0)
   next-intl:
-    specifier: 2.15.0-beta.5
-    version: 2.15.0-beta.5(next@13.4.7)(react@18.2.0)
+    specifier: 3.0.0-beta.5
+    version: 3.0.0-beta.5(next@13.4.7)(react@18.2.0)
   next-qrcode:
     specifier: ^2.4.1
     version: 2.4.1(react@18.2.0)
@@ -2334,8 +2334,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /next-intl@2.15.0-beta.5(next@13.4.7)(react@18.2.0):
-    resolution: {integrity: sha512-E6k/+ta9/RVNhQJnHLY+WZbDyygp4mICsqrMCsRyMfuOm9h+uonNmrM8Blc0PiX0plAF6oKc9OtH90/eVaPRYA==}
+  /next-intl@3.0.0-beta.5(next@13.4.7)(react@18.2.0):
+    resolution: {integrity: sha512-OmTBneu7xUT0hjfRGw+9uYykLb8ODAktR2j2hz5FXdYj3mqbGNgRMaNbiP5c5Ri8zjPLZS1gy7HSAkMQernqVg==}
     engines: {node: '>=10'}
     peerDependencies:
       next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
