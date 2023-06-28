@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import cursor from '@/assets/cursor.png'
+import cursor from '@/public/cursor.png'
 import HomeMainButton from '@/components/Layout/HomeMainButton'
 import AuthContainer from '@/components/Modals/AuthContainer'
 
