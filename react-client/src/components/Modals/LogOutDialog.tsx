@@ -7,6 +7,7 @@ import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
 import { setAuthToken } from '@/redux/Slices/authTokenSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { useRouter } from 'next-intl/client'
+import { BACKEND_URL } from '@/shared/urls'
 
 export default function LogOutDialog({
   translation
@@ -20,6 +21,7 @@ export default function LogOutDialog({
   const handleLogOut = () => {
     router.push('/')
     setOpen(false)
+    fetch(`${BACKEND_URL}/shorty/logout`).then()
     setTimeout(() => dispatch(setAuthToken('')), 1000)
   }
   return (
