@@ -19,9 +19,13 @@ export default function LogOutDialog({
   const dispatch = useAppDispatch()
   const router = useRouter()
   const handleLogOut = () => {
+    // router.push(`${BACKEND_URL}/shorty/logout`)
     setOpen(false)
-    dispatch(setAuthToken(''))
-    router.push(`${BACKEND_URL}/shorty/logout`)
+    fetch(`${BACKEND_URL}/shorty/logout`, { method: 'POST' })
+      .then()
+      .catch(err => console.log(err))
+    setTimeout(() => dispatch(setAuthToken('')), 1000)
+    router.push('/')
   }
   return (
     <>
