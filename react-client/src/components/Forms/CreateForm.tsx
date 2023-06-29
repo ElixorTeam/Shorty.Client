@@ -7,6 +7,8 @@ import { useAddLinkMutation } from '@/redux/Api/linksApi'
 import { useRouter } from 'next-intl/client'
 import toast from 'react-hot-toast'
 import { Tooltip } from 'react-tooltip'
+import { useAppDispatch } from '@/redux/hooks'
+import { clearSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 
 type FormInputs = {
   title: string
@@ -19,6 +21,7 @@ export default function CreateForm({
 }: {
   translate: { [_: string]: string }
 }) {
+  const dispatch = useAppDispatch()
   const { register, handleSubmit } = useForm<FormInputs>()
   const [isSubmit, setIsSubmit] = useState(false)
   const [addLink] = useAddLinkMutation()
@@ -62,6 +65,7 @@ export default function CreateForm({
       )
       .then(() => {
         setIsSubmit(false)
+        dispatch(clearSelectedLink())
         router.push('/links')
       })
       .catch(() => setIsSubmit(false))
