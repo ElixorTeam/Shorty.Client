@@ -13,10 +13,5 @@ export const getLinkByInnerRef = async (
       CLIENT_UID: clientUID
     }
   }
-  return ky
-    .get(
-      `${API_URL}/links_analytics/external_ref_by_inner/${innerRef}`,
-      options
-    )
-    .json()
+  return ky.get(`${API_URL}/redirect/${innerRef}`, options).json()
 }

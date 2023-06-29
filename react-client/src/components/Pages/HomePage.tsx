@@ -11,7 +11,13 @@ export default function HomePage() {
       <div className="flex flex-col items-center space-y-10 md:flex-row-reverse md:justify-between">
         <div className="flex w-2/6 items-center md:block md:w-1/4">
           <div className="relative">
-            <Image className="z-30 scale-125" src={cursor} alt="img" />
+            <Image
+              className="z-30 scale-125"
+              src={cursor}
+              alt="img"
+              loading="lazy"
+              placeholder="blur"
+            />
             <div className="absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 bg-purple-400 opacity-40 blur-3xl" />
           </div>
         </div>
