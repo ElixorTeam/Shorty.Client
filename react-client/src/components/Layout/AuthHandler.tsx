@@ -15,7 +15,7 @@ export default function AuthHandler() {
   const { error } = useCheckAuthStatusQuery()
   useEffect(() => {
     if (!token || (error && (error as FetchBaseQueryError).status === 401)) {
-      router.push('/')
+      // router.push('/')
       dispatch(setAuthToken(''))
       toast.error('Authorization error', { id: 'authError' })
     }
