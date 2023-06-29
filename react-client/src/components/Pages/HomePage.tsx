@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import cursor from '@/public/cursor.png'
 import HomeMainButton from '@/components/Layout/HomeMainButton'
 import AuthContainer from '@/components/Modals/AuthContainer'
+import cursor from '@/public/cursor.png'
 
 export default function HomePage() {
   const t = useTranslations('home')
