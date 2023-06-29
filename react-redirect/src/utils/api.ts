@@ -2,9 +2,8 @@ import ky from 'ky'
 import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
 
 const BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN
-export const API_URL = `${BACKEND_DOMAIN}/shorty/api/v1`
 
-export const getLinkByInnerRef = async (
+const getLinkByInnerRef = async (
   innerRef: string,
   clientUID: string
 ): Promise<ExternalRefResponseType> => {
@@ -13,5 +12,9 @@ export const getLinkByInnerRef = async (
       CLIENT_UID: clientUID
     }
   }
-  return ky.get(`${API_URL}/redirect/${innerRef}`, options).json()
+  return ky
+    .get(`${BACKEND_DOMAIN}/shorty/api/v1/redirect/${innerRef}`, options)
+    .json()
 }
+
+export default getLinkByInnerRef

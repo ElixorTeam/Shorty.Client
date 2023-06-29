@@ -13,7 +13,7 @@ export default defineConfig({
     port: 3031
   },
   preview: {
-    port: 3031,
+    port: 3031
   },
-  plugins: [react()],
+  plugins: [react()]
 })
