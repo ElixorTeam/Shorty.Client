@@ -1,22 +1,38 @@
 # Stage 1
-FROM node:20-alpine AS deps
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
+FROM node:20-alpine as base
+
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN corepack enable
 
 # Stage 2
-FROM node:20-alpine AS builder
+FROM base AS deps
+
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN NODE_ENV=production npm run build && npm prune --production
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm i --prefer-offline --frozen-lockfile
 
 # Stage 3
-FROM node:20-alpine AS runner
+FROM base AS build
+
 WORKDIR /app
-ENV NODE_ENV production
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+RUN pnpm run build && pnpm prune --prod
+
+# Stage 4
+FROM base AS runner
+
+ENV NODE_ENV=production
+WORKDIR /app
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
 EXPOSE 3000
+
 CMD ["node", "server.js"]
