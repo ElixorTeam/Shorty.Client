@@ -11,14 +11,15 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { useAppSelector } from '@/redux/hooks'
 import ViewerDescriptionTitle from '@/components/Viewer/ViewerDescriptionTitle'
+import { REDIRECT_URL } from '@/shared/urls'
 
 export default function ViewerDescription({
-  translate,
+  translate
 }: {
   translate: { [_: string]: string }
 }) {
-  const selectedLink = useAppSelector((state) => state.selectedLink.selected)
-  const shortURL = `${process.env.NEXT_PUBLIC_REDIRECT_URL}/${selectedLink?.innerRef}`
+  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const shortURL = `${REDIRECT_URL}/${selectedLink?.innerRef}`
   return (
     <div>
       {selectedLink && (

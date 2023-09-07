@@ -12,5 +12,8 @@ export default defineConfig({
     host: true,
     port: 3031
   },
-  plugins: [react()],
+  preview: {
+    port: 3031
+  },
+  plugins: [react()]
 })

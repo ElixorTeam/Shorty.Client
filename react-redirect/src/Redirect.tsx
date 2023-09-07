@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { getLinkByInnerRef } from '@/utils/api'
+import getLinkByInnerRef from '@/utils/api'
 import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
 import getClientUID from '@/utils/localStorage'
 

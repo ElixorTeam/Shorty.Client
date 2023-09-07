@@ -1,12 +1,11 @@
-# use only for frontend development
 version: "3"
 services:
-  react-client-dev:
+  react-client:
     container_name: ShortyReactClient
     build: react-client
     ports:
       - "3000:3000"
-  react-redirect-dev:
+  react-redirect:
     container_name: ShortyReactRedirect
     build: react-redirect
     ports:
