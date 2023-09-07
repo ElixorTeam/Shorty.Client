@@ -3,6 +3,7 @@
 import Link from 'next-intl/link'
 import { usePathname } from 'next-intl/client'
 import { ReactNode } from 'react'
+import clsx from 'clsx'
 
 export default function AppMobileNavbarItem({
   link,
@@ -15,9 +16,10 @@ export default function AppMobileNavbarItem({
   return (
     <Link
       href={link}
-      className={`${
-        pathname === link ? 'text-sky-400' : 'text-gray-600'
-      } transition ease-linear`}
+      className={clsx(
+        pathname === link ? 'text-sky-400' : 'text-gray-600',
+        'transition ease-linear'
+      )}
     >
       {children}
     </Link>

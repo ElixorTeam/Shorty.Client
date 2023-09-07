@@ -2,6 +2,7 @@ import { convertDate } from '@/shared/convertDate'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setSelectedLink } from '@/redux/Slices/selectedLinkSlice'
+import clsx from 'clsx'
 
 export default function NavigationListItem({
   linkData,
@@ -13,9 +14,10 @@ export default function NavigationListItem({
   return (
     <button
       type="button"
-      className={`${
-        selectedLink?.uid === linkData.uid && 'bg-sky-200 dark:bg-[#282834]'
-      } flex h-24 w-full items-center px-5 text-left transition-colors ease-linear md:px-10`}
+      className={clsx(
+        selectedLink?.uid === linkData.uid && 'bg-sky-200 dark:bg-[#282834]',
+        'flex h-24 w-full items-center px-5 text-left transition-colors ease-linear md:px-10'
+      )}
       onClick={() => dispatch(setSelectedLink(linkData))}
     >
       <div className="linkContainer grid w-full gap-1">

@@ -12,5 +12,5 @@ export default function Auth() {
   const jwt = searchParams.get('jwt')
   if (jwt) dispatch(setAuthToken(jwt))
   router.push('/links')
-  return null
+  return <p>JWT received</p>
 }

@@ -7,6 +7,7 @@ specifiers:
   '@reduxjs/toolkit': ^1.9.5
   '@types/node': ^20.5.9
   '@types/react': ^18.2.21
+  '@types/react-copy-to-clipboard': ^5.0.4
   '@types/react-dom': ^18.2.7
   '@typescript-eslint/eslint-plugin': ^6.6.0
   '@typescript-eslint/parser': ^6.6.0
@@ -53,6 +54,7 @@ dependencies:
   '@reduxjs/toolkit': 1.9.5_nnem43rer6rxr5uhc4j6bxdlmm
   '@types/node': 20.5.9
   '@types/react': 18.2.21
+  '@types/react-copy-to-clipboard': 5.0.4
   '@types/react-dom': 18.2.7
   '@typescript-eslint/eslint-plugin': 6.6.0_vt4saesn3ecaumaytn5wzbmrxe
   '@typescript-eslint/parser': 6.6.0_w2g2uv42be7wag4oipwkfv43p4
@@ -454,6 +456,12 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: false
+
+  /@types/react-copy-to-clipboard/5.0.4:
+    resolution: {integrity: sha512-otTJsJpofYAeaIeOwV5xBUGpo6exXG2HX7X4nseToCB2VgPEBxGBHCm/FecZ676doNR7HCSTVtmohxfG2b3/yQ==}
+    dependencies:
+      '@types/react': 18.2.21
     dev: false
 
   /@types/react-dom/18.2.7:

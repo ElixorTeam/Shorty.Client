@@ -34,7 +34,7 @@ export default function LocaleSwitcher() {
       <DropdownMenu isOpen={isOpen} setIsOpen={(statue) => setIsOpen(statue)}>
         {languageOptions.map((option) => (
           <Link href={pathName} locale={option.value} key={option.value}>
-            <li>
+            <li key={option.value}>
               <button
                 type="button"
                 className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-black/[.02]
