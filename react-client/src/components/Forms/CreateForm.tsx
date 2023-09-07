@@ -15,7 +15,7 @@ type FormInputs = {
 }
 
 export default function CreateForm({
-  translate
+  translate,
 }: {
   translate: { [_: string]: string }
 }) {
@@ -25,14 +25,16 @@ export default function CreateForm({
   const router = useRouter()
 
   const onError = (errors: FieldErrors<FormInputs>) => {
-    if (errors.externalRef?.type === 'required')
+    if (errors.externalRef?.type === 'required') {
       toast.error(translate.toastURLRequiredError, {
-        id: 'createUrlRequiredError'
+        id: 'createUrlRequiredError',
       })
-    if (errors.externalRef?.type === 'pattern')
+    }
+    if (errors.externalRef?.type === 'pattern') {
       toast.error(translate.toastURLPatternError, {
-        id: 'createUrlPatternError'
+        id: 'createUrlPatternError',
       })
+    }
     if (errors.innerRef?.type === 'pattern')
       toast.error(translate.toastRefPatternError, { id: 'createRefError' })
   }
@@ -45,18 +47,18 @@ export default function CreateForm({
         addLink({
           title: formInput.title,
           externalRef: formInput.externalRef,
-          innerRef: formInput.innerRef
+          innerRef: formInput.innerRef,
         }).unwrap(),
         {
           loading: translate.toastLoading,
           success: translate.toastSuccess,
-          error: err => {
+          error: (err) => {
             const errMsg = err.data.error
             const toastMsg = translate[err.data.error]
             if (errMsg && toastMsg && toastMsg !== `create.${errMsg}`)
               return toastMsg
             return translate.toastError
-          }
+          },
         },
         { id: 'createFormToast' }
       )
@@ -77,7 +79,7 @@ export default function CreateForm({
             registerOptions={{
               required: true,
               pattern:
-                /(https:\/\/)((?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(\/[+~%/.\w-]*)?\??([-+=&;%@.\w_]*)#?([.!/\\\w]*)?/
+                /(https:\/\/)((?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(\/[+~%/.\w-]*)?\??([-+=&;%@.\w_]*)#?([.!/\\\w]*)?/,
             }}
             register={register}
           />
@@ -101,7 +103,7 @@ export default function CreateForm({
               maxLength={10}
               registerOptions={{
                 required: false,
-                pattern: /^[a-zA-Z0-9]{3,10}$/
+                pattern: /^[a-zA-Z0-9]{3,10}$/,
               }}
               register={register}
             />
@@ -118,7 +120,7 @@ export default function CreateForm({
             label={`${translate.titleLabel} (${translate.labelOptional})`}
             maxLength={64}
             registerOptions={{
-              required: false
+              required: false,
             }}
             register={register}
           />

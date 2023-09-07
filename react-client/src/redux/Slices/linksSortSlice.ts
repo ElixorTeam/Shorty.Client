@@ -6,7 +6,7 @@ type LinksSortState = {
 }
 
 const initialState: LinksSortState = {
-  selectedSort: sortOptions[1]
+  selectedSort: sortOptions[1],
 }
 
 const linksSortSlice = createSlice({
@@ -15,8 +15,8 @@ const linksSortSlice = createSlice({
   reducers: {
     setLinksSort: (state, action: PayloadAction<SortOptionsType>) => {
       state.selectedSort = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setLinksSort } = linksSortSlice.actions

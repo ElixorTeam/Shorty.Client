@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 export default function ButtonTemplate({
   onClick,
-  children
+  children,
 }: {
   onClick: () => void
   children: ReactNode

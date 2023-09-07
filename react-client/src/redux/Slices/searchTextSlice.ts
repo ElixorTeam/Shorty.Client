@@ -5,7 +5,7 @@ type SearchTextState = {
 }
 
 const initialState: SearchTextState = {
-  text: ''
+  text: '',
 }
 
 const searchTextSlice = createSlice({
@@ -14,8 +14,8 @@ const searchTextSlice = createSlice({
   reducers: {
     setSearchText: (state, action: PayloadAction<string>) => {
       state.text = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setSearchText } = searchTextSlice.actions

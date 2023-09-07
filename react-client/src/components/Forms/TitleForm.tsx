@@ -15,7 +15,7 @@ type FormInput = {
 export default function TitleForm({
   closeSetMode,
   selectedLink,
-  translate
+  translate,
 }: {
   closeSetMode: () => void
   selectedLink: LinkRecordType
@@ -23,8 +23,8 @@ export default function TitleForm({
 }) {
   const { register, handleSubmit, setFocus } = useForm<FormInput>({
     defaultValues: {
-      title: selectedLink.title
-    }
+      title: selectedLink.title,
+    },
   })
   const [updateLink] = useUpdateLinkMutation()
   const [isSubmit, setIsSubmit] = useState(false)
@@ -50,13 +50,13 @@ export default function TitleForm({
         {
           loading: translate.toastLoading,
           success: translate.toastSuccess,
-          error: err => {
+          error: (err) => {
             const errMsg = err.data.error
             const toastMsg = translate[err.data.error]
             if (errMsg && toastMsg && toastMsg !== `app.${errMsg}`)
               return toastMsg
             return translate.toastError
-          }
+          },
         },
         { id: 'titleEditToast' }
       )

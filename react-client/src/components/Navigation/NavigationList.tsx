@@ -4,22 +4,22 @@ import { useEffect, useState } from 'react'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import NavigationListItem from '@/components/Navigation/NavigationListItem'
 import { SortKeyEnum } from '@/shared/SortKeyEnum'
-import { sortLinkData } from '@/utils/sortLinkData'
+import sortLinkData from '@/utils/sortLinkData'
 import { useGetLinksQuery } from '@/redux/Api/linksApi'
 import { useAppSelector } from '@/redux/hooks'
 import { FolderIcon } from '@heroicons/react/24/outline'
 import './NavigationList.css'
 
 export default function NavigationList() {
-  const selectedSort = useAppSelector(state => state.linksSort.selectedSort)
-  const searchString = useAppSelector(state => state.searchText.text)
+  const selectedSort = useAppSelector((state) => state.linksSort.selectedSort)
+  const searchString = useAppSelector((state) => state.searchText.text)
   const { data, isLoading } = useGetLinksQuery()
   const [sortedLinksData, setSortedLinksData] = useState<LinkRecordType[]>([])
   useEffect(() => {
     if (data) {
       let linksList = [...data]
       if (searchString.length !== 0) {
-        linksList = linksList.filter(link =>
+        linksList = linksList.filter((link) =>
           link.title.toLowerCase().includes(searchString.toLowerCase())
         )
       }

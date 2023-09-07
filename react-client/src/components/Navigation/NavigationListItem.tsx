@@ -4,12 +4,12 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 
 export default function NavigationListItem({
-  linkData
+  linkData,
 }: {
   linkData: LinkRecordType
 }) {
   const dispatch = useAppDispatch()
-  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const selectedLink = useAppSelector((state) => state.selectedLink.selected)
   return (
     <button
       type="button"

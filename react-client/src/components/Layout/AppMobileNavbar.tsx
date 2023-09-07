@@ -10,7 +10,7 @@ export default function AppMobileNavbar() {
     modalLogOutDescription: tAuth('modalLogOutDescription'),
     modalLogOutOpenButton: tAuth('modalLogOutOpenButton'),
     modalLogOutCancelButton: tAuth('modalLogOutCancelButton'),
-    modalLogOutAcceptButton: tAuth('modalLogOutAcceptButton')
+    modalLogOutAcceptButton: tAuth('modalLogOutAcceptButton'),
   }
   return (
     <div className="sticky bottom-0 z-40 h-12 w-full overflow-hidden px-4 py-1">

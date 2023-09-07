@@ -2,13 +2,14 @@
 
 import Link from 'next-intl/link'
 import { usePathname } from 'next-intl/client'
+import { ReactNode } from 'react'
 
 export default function NavbarItem({
   link,
-  children
+  children,
 }: {
   link: string
-  children: React.ReactNode
+  children: ReactNode
 }) {
   const pathname = usePathname()
   return (

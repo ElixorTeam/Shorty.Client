@@ -2,15 +2,15 @@
 
 import { useRouter } from 'next-intl/client'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useCheckAuthStatusQuery } from '@/redux/Api/authApi'
 import { setAuthToken } from '@/redux/Slices/authTokenSlice'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-export default function AuthHandler() {
+export default function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter()
-  const token = useAppSelector(state => state.authToken.token)
+  const token = useAppSelector((state) => state.authToken.token)
   const dispatch = useAppDispatch()
   const { error } = useCheckAuthStatusQuery()
   useEffect(() => {
@@ -19,6 +19,6 @@ export default function AuthHandler() {
       dispatch(setAuthToken(''))
       toast.error('Authorization error', { id: 'authError' })
     }
-  }, [token, error, dispatch])
-  return null
+  }, [token, error, dispatch, router])
+  return children
 }

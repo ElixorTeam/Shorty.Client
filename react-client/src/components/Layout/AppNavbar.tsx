@@ -13,7 +13,7 @@ export default function LayoutNavbar() {
     modalLogOutDescription: tAuth('modalLogOutDescription'),
     modalLogOutOpenButton: tAuth('modalLogOutOpenButton'),
     modalLogOutCancelButton: tAuth('modalLogOutCancelButton'),
-    modalLogOutAcceptButton: tAuth('modalLogOutAcceptButton')
+    modalLogOutAcceptButton: tAuth('modalLogOutAcceptButton'),
   }
   return (
     <div className="h-full w-full">

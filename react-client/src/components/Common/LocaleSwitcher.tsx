@@ -13,7 +13,7 @@ type LanguageOption = {
 
 const languageOptions: LanguageOption[] = [
   { label: 'English', value: 'en' },
-  { label: 'Русский', value: 'ru' }
+  { label: 'Русский', value: 'ru' },
 ]
 
 export default function LocaleSwitcher() {
@@ -31,8 +31,8 @@ export default function LocaleSwitcher() {
           <ChevronDownIcon className="h-3 w-3" />
         </button>
       </div>
-      <DropdownMenu isOpen={isOpen} setIsOpen={statue => setIsOpen(statue)}>
-        {languageOptions.map(option => (
+      <DropdownMenu isOpen={isOpen} setIsOpen={(statue) => setIsOpen(statue)}>
+        {languageOptions.map((option) => (
           <Link href={pathName} locale={option.value} key={option.value}>
             <li>
               <button

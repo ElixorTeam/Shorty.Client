@@ -13,11 +13,11 @@ function LinkStatItem({ label, value }: { label: string; value: number }) {
 }
 
 export default function LinkStats({
-  translate
+  translate,
 }: {
   translate: { [_: string]: string }
 }) {
-  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const selectedLink = useAppSelector((state) => state.selectedLink.selected)
   const { data } = useGetLinkAnalyticsQuery(selectedLink.uid)
   return (
     <ul className="h-full w-full divide-y dark:divide-white/[.05]">

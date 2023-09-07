@@ -6,7 +6,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 
 export default function AuthDialog({
   children,
-  authText
+  authText,
 }: {
   children: ReactNode
   authText: string

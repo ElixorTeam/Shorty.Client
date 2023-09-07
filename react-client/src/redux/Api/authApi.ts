@@ -8,11 +8,11 @@ type CheckStatusType = {
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: baseQueryWithAuth,
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     checkAuthStatus: builder.query<CheckStatusType, void>({
-      query: () => 'auth/status'
-    })
-  })
+      query: () => 'auth/status',
+    }),
+  }),
 })
 
 export const { useCheckAuthStatusQuery } = authApi

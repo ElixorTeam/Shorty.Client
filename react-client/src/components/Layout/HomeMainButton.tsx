@@ -8,7 +8,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 
 export default function HomeMainButton({
   children,
-  btnText
+  btnText,
 }: {
   children: ReactNode
   btnText: string
@@ -16,7 +16,7 @@ export default function HomeMainButton({
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
   const router = useRouter()
-  const token = useAppSelector(state => state.authToken.token)
+  const token = useAppSelector((state) => state.authToken.token)
   const handleRedirect = () => {
     if (!token) setOpen(true)
     else router.push('/links')

@@ -6,7 +6,7 @@ type SelectedLinkState = {
 }
 
 const initialState: SelectedLinkState = {
-  selected: null
+  selected: null,
 }
 
 const selectedLinkSlice = createSlice({
@@ -16,10 +16,10 @@ const selectedLinkSlice = createSlice({
     setSelectedLink: (state, action: PayloadAction<LinkRecordType>) => {
       state.selected = action.payload
     },
-    clearSelectedLink: state => {
+    clearSelectedLink: (state) => {
       state.selected = null
-    }
-  }
+    },
+  },
 })
 
 export const { setSelectedLink, clearSelectedLink } = selectedLinkSlice.actions

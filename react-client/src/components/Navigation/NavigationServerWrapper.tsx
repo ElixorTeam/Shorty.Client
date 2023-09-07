@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 export default function NavigationServerWrapper({
-  children
+  children,
 }: {
   children: ReactNode
 }) {

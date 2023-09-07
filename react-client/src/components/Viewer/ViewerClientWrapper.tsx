@@ -4,11 +4,11 @@ import { ReactNode } from 'react'
 import { useAppSelector } from '@/redux/hooks'
 
 export default function ViewerClientWrapper({
-  children
+  children,
 }: {
   children: ReactNode
 }) {
-  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const selectedLink = useAppSelector((state) => state.selectedLink.selected)
   return (
     <div
       className={`${

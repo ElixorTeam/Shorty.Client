@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useRef } from 'react'
 export default function DropdownMenu({
   isOpen,
   setIsOpen,
-  children
+  children,
 }: {
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void

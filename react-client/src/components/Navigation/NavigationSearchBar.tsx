@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setSearchText } from '@/redux/Slices/searchTextSlice'
 
 export default function NavigationSearchBar({
-  placeholderText
+  placeholderText,
 }: {
   placeholderText: string
 }) {
   const dispatch = useAppDispatch()
-  const searchText = useAppSelector(state => state.searchText.text)
+  const searchText = useAppSelector((state) => state.searchText.text)
   return (
     <div className="flex w-full items-center justify-between pr-[26px]">
       <div className="flex items-center gap-2">
@@ -18,7 +18,7 @@ export default function NavigationSearchBar({
         <input
           placeholder={placeholderText}
           value={searchText}
-          onChange={event => dispatch(setSearchText(event.target.value))}
+          onChange={(event) => dispatch(setSearchText(event.target.value))}
           className="w-full bg-white/[.0] placeholder:text-base focus:outline-none"
         />
       </div>

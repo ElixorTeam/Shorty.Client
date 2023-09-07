@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/redux/hooks'
 import { useRouter } from 'next-intl/client'
 
 export default function LogOutDialog({
-  translation
+  translation,
 }: {
   translation: { [_: string]: string }
 }) {

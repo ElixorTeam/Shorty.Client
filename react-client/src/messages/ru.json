@@ -26,7 +26,7 @@
     "toastURLCopied": "URL адрес скопирован",
     "errorLinkNotExists": "Ссылка не существует"
   },
-  "home" : {
+  "home": {
     "title": "Давай сделаем ссылки короче",
     "description": "Ссылки не обязаны быть длинными",
     "btnText": "Начать",

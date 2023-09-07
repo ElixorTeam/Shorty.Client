@@ -1,8 +1,7 @@
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { SortKeyEnum } from '@/shared/SortKeyEnum'
 
-// eslint-disable-next-line import/prefer-default-export
-export const sortLinkData = (linkData: LinkRecordType[], key: SortKeyEnum) => {
+const sortLinkData = (linkData: LinkRecordType[], key: SortKeyEnum) => {
   const sortedLinkData = [...linkData]
   if (key === SortKeyEnum.Name) {
     sortedLinkData.sort((a, b) => a.title.localeCompare(b.title))
@@ -13,3 +12,5 @@ export const sortLinkData = (linkData: LinkRecordType[], key: SortKeyEnum) => {
   }
   return sortedLinkData
 }
+
+export default sortLinkData

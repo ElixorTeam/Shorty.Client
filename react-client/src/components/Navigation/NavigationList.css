@@ -1,9 +1,9 @@
 .linkContainer {
   grid-template-areas:
-    "A A A A   A A A A"
-    "B B B B   B B B B"
-    "B B B B   B B B B"
-    "C C C C   C C C C";
+    'A A A A   A A A A'
+    'B B B B   B B B B'
+    'B B B B   B B B B'
+    'C C C C   C C C C';
 }
 
 .linkHeader {
@@ -18,11 +18,11 @@
   grid-area: C;
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   .linkContainer {
     grid-template-areas:
-      "A A A A   A A A A   C C C C"
-      "B B B B   B B B B   D D D D"
-      "B B B B   B B B B   D D D D";
+      'A A A A   A A A A   C C C C'
+      'B B B B   B B B B   D D D D'
+      'B B B B   B B B B   D D D D';
   }
 }

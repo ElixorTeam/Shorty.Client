@@ -12,7 +12,7 @@ import { ReactNode } from 'react'
 
 function DoughnutWrapper({
   title,
-  children
+  children,
 }: {
   title: string
   children: ReactNode
@@ -37,12 +37,12 @@ export default function Viewer() {
     toastError: t('toastError'),
     toastTitleError: t('toastTitleError'),
     toastURLCopied: t('toastURLCopied'),
-    errorLinkNotExists: t('errorLinkNotExists')
+    errorLinkNotExists: t('errorLinkNotExists'),
   }
   const statTranslation = {
     statUnique: t('statUnique'),
     statTotal: t('statTotal'),
-    statAverage: t('statAverage')
+    statAverage: t('statAverage'),
   }
   return (
     <>

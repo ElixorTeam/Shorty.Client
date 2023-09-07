@@ -27,14 +27,14 @@ type LinkAnalyticsResponse = {
 export const analyzeApi = createApi({
   reducerPath: 'analyzeApi',
   baseQuery: baseQueryWithAuth,
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getLinkAnalytics: builder.query<LinkAnalyticsResponse, string>({
-      query: uid => `links_analytics/${uid}`
+      query: (uid) => `links_analytics/${uid}`,
     }),
     getDayAnalytics: builder.query<DayAnalyticsType[], string>({
-      query: uid => `links_analytics/time_line/${uid}`
-    })
-  })
+      query: (uid) => `links_analytics/time_line/${uid}`,
+    }),
+  }),
 })
 
 export const { useGetLinkAnalyticsQuery, useGetDayAnalyticsQuery } = analyzeApi

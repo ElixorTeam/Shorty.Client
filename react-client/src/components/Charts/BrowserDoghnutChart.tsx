@@ -5,12 +5,12 @@ import { useGetLinkAnalyticsQuery } from '@/redux/Api/analyzeApi'
 import DoughnutChart from '@/components/Charts/DoghnutChart'
 
 export default function OsDoughnutChart({ noDataMsg }: { noDataMsg: string }) {
-  const selectedLink = useAppSelector(state => state.selectedLink.selected)
+  const selectedLink = useAppSelector((state) => state.selectedLink.selected)
   const { data, isLoading, isError } = useGetLinkAnalyticsQuery(
     selectedLink.uid
   )
-  const labels = data ? data.browsers.map(item => item.name) : []
-  const values = data ? data.browsers.map(item => item.value) : []
+  const labels = data ? data.browsers.map((item) => item.name) : []
+  const values = data ? data.browsers.map((item) => item.value) : []
   return (
     <DoughnutChart
       labels={labels}

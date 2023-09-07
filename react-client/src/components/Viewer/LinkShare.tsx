@@ -9,9 +9,9 @@ import {
   TelegramIcon,
   TelegramShareButton,
   VKIcon,
-  VKShareButton
+  VKShareButton,
 } from 'react-share'
-import classNames from '@/utils/classNames'
+import clsx from 'clsx'
 
 export default function ShareDropDown({ shareLink }: { shareLink: string }) {
   return (
@@ -43,11 +43,11 @@ export default function ShareDropDown({ shareLink }: { shareLink: string }) {
               <VKShareButton url={shareLink} className="w-full">
                 <button
                   type="button"
-                  className={classNames(
+                  className={clsx(
                     active
                       ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
                       : 'text-gray-700 dark:text-gray-300',
-                    'group flex items-center px-4 py-2 text-sm w-full'
+                    'group flex w-full items-center px-4 py-2 text-sm'
                   )}
                 >
                   <VKIcon className="mr-3 h-5 w-5 rounded" />
@@ -61,11 +61,11 @@ export default function ShareDropDown({ shareLink }: { shareLink: string }) {
               <TelegramShareButton url={shareLink} className="w-full">
                 <button
                   type="button"
-                  className={classNames(
+                  className={clsx(
                     active
                       ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
                       : 'text-gray-700 dark:text-gray-300',
-                    'group flex items-center px-4 py-2 text-sm w-full'
+                    'group flex w-full items-center px-4 py-2 text-sm'
                   )}
                 >
                   <TelegramIcon className="mr-3 h-5 w-5 rounded" />
@@ -79,11 +79,11 @@ export default function ShareDropDown({ shareLink }: { shareLink: string }) {
               <FacebookShareButton url={shareLink} className="w-full">
                 <button
                   type="button"
-                  className={classNames(
+                  className={clsx(
                     active
                       ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
                       : 'text-gray-700 dark:text-gray-300',
-                    'group flex items-center px-4 py-2 text-sm w-full'
+                    'group flex w-full items-center px-4 py-2 text-sm'
                   )}
                 >
                   <FacebookIcon className="mr-3 h-5 w-5 rounded" />

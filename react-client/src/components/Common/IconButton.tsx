@@ -1,13 +1,13 @@
-import { ReactNode } from 'react'
+import { ReactNode, ButtonHTMLAttributes } from 'react'
 
 export default function IconButton({
   children,
-  onClick = () => {},
-  type = 'button'
+  onClick,
+  type,
 }: {
   children: ReactNode
   onClick?: () => void
-  type?: JSX.IntrinsicElements['button']['type']
+  type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
 }) {
   return (
     <button
@@ -20,4 +20,9 @@ export default function IconButton({
       {children}
     </button>
   )
+}
+
+IconButton.defaultProps = {
+  onClick: () => {},
+  type: 'button',
 }

@@ -10,7 +10,7 @@ import TitleForm from '@/components/Forms/TitleForm'
 
 export default function ViewerDescriptionTitle({
   selectedLink,
-  translate
+  translate,
 }: {
   selectedLink: LinkRecordType
   translate: { [_: string]: string }
@@ -26,13 +26,13 @@ export default function ViewerDescriptionTitle({
         {
           loading: translate.toastLoading,
           success: translate.toastSuccess,
-          error: err => {
+          error: (err) => {
             const errMsg = err.data.error
             const toastMsg = translate[err.data.error]
             if (errMsg && toastMsg && toastMsg !== `app.${errMsg}`)
               return toastMsg
             return translate.toastError
-          }
+          },
         },
         { id: 'deleteLinkToast' }
       )

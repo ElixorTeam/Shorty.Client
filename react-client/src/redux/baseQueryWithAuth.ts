@@ -8,7 +8,7 @@ const baseQueryWithAuth = fetchBaseQuery({
     const { token } = (getState() as RootState).authToken
     if (token) headers.set('authorization', `Bearer ${token}`)
     return headers
-  }
+  },
 })
 
 export default baseQueryWithAuth

@@ -1,18 +1,18 @@
-import './globals.css'
+import './styles.css'
 import Provider from '@/components/Provider'
 import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
   title: 'Shorty',
-  description: 'Short your links'
+  description: 'Short your links',
 }
 
 export default function RootLayout({
   children,
-  params
+  params,
 }: {
   children: ReactNode
   params: { locale: string }

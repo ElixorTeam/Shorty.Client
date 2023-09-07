@@ -1,4 +1,5 @@
 import { UseFormRegister, RegisterOptions } from 'react-hook-form'
+import { HTMLInputTypeAttribute } from 'react'
 
 export default function InputComponent({
   type,
@@ -6,9 +7,9 @@ export default function InputComponent({
   label,
   registerOptions,
   register,
-  maxLength = 256
+  maxLength,
 }: {
-  type: string
+  type?: HTMLInputTypeAttribute
   name: string
   label: string
   registerOptions: RegisterOptions
@@ -52,4 +53,9 @@ export default function InputComponent({
       </label>
     </div>
   )
+}
+
+InputComponent.defaultProps = {
+  maxLength: 256,
+  type: 'text',
 }

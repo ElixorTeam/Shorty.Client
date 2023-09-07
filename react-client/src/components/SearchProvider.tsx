@@ -9,7 +9,7 @@ type SearchContextType = {
 
 export const SearchContext = createContext<SearchContextType>({
   searchString: '',
-  setSearchString: () => {}
+  setSearchString: () => {},
 })
 
 export default function SearchProvider({ children }: { children: ReactNode }) {
@@ -17,7 +17,7 @@ export default function SearchProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       searchString,
-      setSearchString: (search: string) => setSelectedString(search)
+      setSearchString: (search: string) => setSelectedString(search),
     }),
     [searchString]
   )

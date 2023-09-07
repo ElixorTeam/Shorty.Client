@@ -6,7 +6,7 @@ export default function NavigationHeader() {
   const t = useTranslations('app')
   const sortSelectTranslation = {
     sortKeyName: t('sortKeyName'),
-    sortKeyDate: t('sortKeyDate')
+    sortKeyDate: t('sortKeyDate'),
   }
   return (
     <header className="sticky top-0 z-40 flex w-full flex-col items-center bg-white dark:bg-[#23212e]">

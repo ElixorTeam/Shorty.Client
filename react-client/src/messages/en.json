@@ -26,7 +26,7 @@
     "toastURLCopied": "Link URL copied",
     "errorLinkNotExists": "Link doesn't exist"
   },
-  "home" : {
+  "home": {
     "title": "Let's short your links together",
     "description": "Links don't have to be lengthy",
     "btnText": "Try right now",

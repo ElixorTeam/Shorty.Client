@@ -5,7 +5,7 @@ type AuthTokenState = {
 }
 
 const initialState: AuthTokenState = {
-  token: ''
+  token: '',
 }
 
 const authTokenSlice = createSlice({
@@ -14,8 +14,8 @@ const authTokenSlice = createSlice({
   reducers: {
     setAuthToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setAuthToken } = authTokenSlice.actions

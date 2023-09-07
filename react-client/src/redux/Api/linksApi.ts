@@ -6,28 +6,28 @@ export const linksApi = createApi({
   reducerPath: 'linksApi',
   tagTypes: ['Links'],
   baseQuery: baseQueryWithAuth,
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getLinks: builder.query<LinkRecordType[], void>({
       query: () => 'links',
       transformResponse: (response: { data: LinkRecordType[] }) =>
         response.data,
-      providesTags: result =>
+      providesTags: (result) =>
         result
           ? [
-              ...result.map(({ uid }) => ({ type: 'Links', uid } as const)),
-              { type: 'Links', id: 'LIST' }
+              ...result.map(({ uid }) => ({ type: 'Links', uid }) as const),
+              { type: 'Links', id: 'LIST' },
             ]
-          : [{ type: 'Links', id: 'LIST ' }]
+          : [{ type: 'Links', id: 'LIST ' }],
     }),
     addLink: builder.mutation<LinkRecordType, Partial<LinkRecordType>>({
       query(body) {
         return {
           url: 'links',
           method: 'POST',
-          body
+          body,
         }
       },
-      invalidatesTags: [{ type: 'Links', id: 'LIST' }]
+      invalidatesTags: [{ type: 'Links', id: 'LIST' }],
     }),
     updateLink: builder.mutation<LinkRecordType, Partial<LinkRecordType>>({
       query(data) {
@@ -35,24 +35,24 @@ export const linksApi = createApi({
         return {
           url: `links/${uid}`,
           method: 'PUT',
-          body
+          body,
         }
       },
-      invalidatesTags: (result, error, { uid }) => [{ type: 'Links', uid }]
+      invalidatesTags: (result, error, { uid }) => [{ type: 'Links', uid }],
     }),
     removeLink: builder.mutation<void, string>({
-      query: uid => ({
+      query: (uid) => ({
         url: `links/${uid}`,
-        method: 'DELETE'
+        method: 'DELETE',
       }),
-      invalidatesTags: (result, error, uid) => [{ type: 'Links', uid }]
-    })
-  })
+      invalidatesTags: (result, error, uid) => [{ type: 'Links', uid }],
+    }),
+  }),
 })
 
 export const {
   useGetLinksQuery,
   useAddLinkMutation,
   useUpdateLinkMutation,
-  useRemoveLinkMutation
+  useRemoveLinkMutation,
 } = linksApi

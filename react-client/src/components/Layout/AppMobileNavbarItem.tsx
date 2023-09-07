@@ -6,7 +6,7 @@ import { ReactNode } from 'react'
 
 export default function AppMobileNavbarItem({
   link,
-  children
+  children,
 }: {
   link: string
   children: ReactNode

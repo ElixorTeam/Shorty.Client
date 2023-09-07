@@ -12,7 +12,7 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
+  REGISTER,
 } from 'reduxjs-toolkit-persist/es/constants'
 import { authApi } from '@/redux/Api/authApi'
 import { analyzeApi } from '@/redux/Api/analyzeApi'
@@ -23,13 +23,13 @@ const nonSerializableActionTypes = [
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
+  REGISTER,
 ]
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['authToken']
+  whitelist: ['authToken'],
 }
 
 const rootReducer = combineReducers({
@@ -39,22 +39,22 @@ const rootReducer = combineReducers({
   authToken: authTokenReducer,
   [linksApi.reducerPath]: linksApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
-  [analyzeApi.reducerPath]: analyzeApi.reducer
+  [analyzeApi.reducerPath]: analyzeApi.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: nonSerializableActionTypes
-      }
+        ignoredActions: nonSerializableActionTypes,
+      },
     })
       .concat(linksApi.middleware)
       .concat(authApi.middleware)
-      .concat(analyzeApi.middleware)
+      .concat(analyzeApi.middleware),
 })
 
 export const persistor = persistStore(store)

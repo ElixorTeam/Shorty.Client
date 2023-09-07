@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .dark {
+    color-scheme: dark;
+  }
+
+  .tooltipWrapper[role='tooltip'] {
+    @apply rounded-lg bg-gray-100/[.8] p-4 text-gray-600 shadow-md dark:bg-[#282834]/[.8] dark:text-gray-300;
+  }
+}
