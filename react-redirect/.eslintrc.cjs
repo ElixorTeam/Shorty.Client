@@ -18,7 +18,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['.eslintrc.js', 'vite.config.ts'],
+  ignorePatterns: ['.eslintrc.js', 'vite.config.ts', 'tailwind.config.js'],
   rules: {
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': 'off',

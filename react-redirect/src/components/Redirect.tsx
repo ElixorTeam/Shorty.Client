@@ -32,13 +32,7 @@ function RedirectLink({
 
 export default function Redirect() {
   const { linkRef } = useParams()
-  return (
-    <div className="flex h-screen w-screen items-center justify-center dark:bg-black dark:text-white">
-      {!linkRef || !isValidRef(linkRef) ? (
-        <p>Enter a link reference in the URL (e.g. /abc12)</p>
-      ) : (
-        <RedirectLink linkRef={linkRef} clientUID={getClientUID()} />
-      )}
-    </div>
-  )
+  if (!linkRef || !isValidRef(linkRef))
+    return <p>Enter a link reference in the URL (e.g. /abc12)</p>
+  return <RedirectLink linkRef={linkRef} clientUID={getClientUID()} />
 }
