@@ -1,8 +1,9 @@
 'use client'
 
-import { ReactNode } from 'react'
-import { useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
+import { ReactNode } from 'react'
+
+import { useAppSelector } from '@/redux/hooks'
 
 export default function ViewerClientWrapper({
   children,

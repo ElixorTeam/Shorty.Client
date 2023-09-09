@@ -1,6 +1,5 @@
 'use client'
 
-import { Line } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +10,10 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import { useAppSelector } from '@/redux/hooks'
+import { Line } from 'react-chartjs-2'
+
 import { useGetDayAnalyticsQuery } from '@/redux/Api/analyzeApi'
+import { useAppSelector } from '@/redux/hooks'
 
 ChartJS.register(
   CategoryScale,

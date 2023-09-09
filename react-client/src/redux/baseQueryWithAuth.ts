@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { BACKEND_URL } from '@/shared/urls'
+
 import type { RootState } from '@/redux/store'
+import { BACKEND_URL } from '@/shared/urls'
 
 const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: `${BACKEND_URL}/shorty/api/v1`,

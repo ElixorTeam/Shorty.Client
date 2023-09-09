@@ -1,14 +1,15 @@
-import QRGenerator from '@/components/Viewer/QRGenerator'
-import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
-import ViewerDescription from '@/components/Viewer/ViewerDescription'
-import LinkStats from '@/components/Viewer/LinkStats'
-import ViewerCloseButton from '@/components/Viewer/ViewerCloseButton'
 import { useTranslations } from 'next-intl'
-import ViewerBlock from '@/components/Viewer/ViewerBlock'
-import OsDoughnutChart from '@/components/Charts/OsDoghnutChart'
-import DeviceDoughnutChart from '@/components/Charts/DeviceDoghnutChart'
-import ViewsLineChart from '@/components/Charts/ViewsLineChart'
 import { ReactNode } from 'react'
+
+import BrowserDoughnutChart from '@/components/Charts/BrowserDoghnutChart'
+import DeviceDoughnutChart from '@/components/Charts/DeviceDoghnutChart'
+import OsDoughnutChart from '@/components/Charts/OsDoghnutChart'
+import ViewsLineChart from '@/components/Charts/ViewsLineChart'
+import LinkStats from '@/components/Viewer/LinkStats'
+import QRGenerator from '@/components/Viewer/QRGenerator'
+import ViewerBlock from '@/components/Viewer/ViewerBlock'
+import ViewerCloseButton from '@/components/Viewer/ViewerCloseButton'
+import ViewerDescription from '@/components/Viewer/ViewerDescription'
 
 function DoughnutWrapper({
   title,

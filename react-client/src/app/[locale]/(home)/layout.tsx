@@ -1,5 +1,6 @@
-import HomeHeader from '@/components/Layout/HomeHeader'
 import { ReactNode } from 'react'
+
+import HomeHeader from '@/components/Layout/HomeHeader'
 
 export default function HomeLayout({ children }: { children: ReactNode }) {
   return (

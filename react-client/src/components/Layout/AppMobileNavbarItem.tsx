@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next-intl/link'
-import { usePathname } from 'next-intl/client'
-import { ReactNode } from 'react'
 import clsx from 'clsx'
+import { usePathname } from 'next-intl/client'
+import Link from 'next-intl/link'
+import { ReactNode } from 'react'
 
 export default function AppMobileNavbarItem({
   link,

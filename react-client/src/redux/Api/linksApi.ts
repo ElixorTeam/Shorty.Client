@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { LinkRecordType } from '@/shared/LinkRecordType'
+
 import baseQueryWithAuth from '@/redux/baseQueryWithAuth'
+import { LinkRecordType } from '@/shared/LinkRecordType'
 
 export const linksApi = createApi({
   reducerPath: 'linksApi',

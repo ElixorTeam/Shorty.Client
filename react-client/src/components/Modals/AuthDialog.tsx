@@ -1,8 +1,8 @@
 'use client'
 
-import { Fragment, ReactNode, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { Fragment, ReactNode, useRef, useState } from 'react'
 
 export default function AuthDialog({
   children,

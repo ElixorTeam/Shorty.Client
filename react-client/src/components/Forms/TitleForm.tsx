@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
-import IconButton from '@/components/Common/IconButton'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { useEffect, useState } from 'react'
+import { FieldErrors, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { setSelectedLink } from '@/redux/Slices/selectedLinkSlice'
+
+import IconButton from '@/components/Common/IconButton'
 import { useUpdateLinkMutation } from '@/redux/Api/linksApi'
 import { useAppDispatch } from '@/redux/hooks'
+import { setSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import { FieldErrors, useForm } from 'react-hook-form'
 
 type FormInput = {
   title: string

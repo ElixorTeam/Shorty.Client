@@ -1,13 +1,14 @@
 'use client'
 
+import { FolderIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
-import { LinkRecordType } from '@/shared/LinkRecordType'
+
 import NavigationListItem from '@/components/Navigation/NavigationListItem'
-import { SortKeyEnum } from '@/shared/SortKeyEnum'
-import sortLinkData from '@/utils/sortLinkData'
 import { useGetLinksQuery } from '@/redux/Api/linksApi'
 import { useAppSelector } from '@/redux/hooks'
-import { FolderIcon } from '@heroicons/react/24/outline'
+import { LinkRecordType } from '@/shared/LinkRecordType'
+import { SortKeyEnum } from '@/shared/SortKeyEnum'
+import sortLinkData from '@/utils/sortLinkData'
 import './NavigationList.css'
 
 export default function NavigationList() {

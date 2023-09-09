@@ -1,9 +1,10 @@
-import AppNavbar from '@/components/Layout/AppNavbar'
-import AppHeader from '@/components/Layout/AppHeader'
-import SearchProvider from '@/components/SearchProvider'
 import { ReactNode } from 'react'
-import AppMobileNavbar from '@/components/Layout/AppMobileNavbar'
+
 import AuthProvider from '@/components/AuthProvider'
+import AppHeader from '@/components/Layout/AppHeader'
+import AppMobileNavbar from '@/components/Layout/AppMobileNavbar'
+import AppNavbar from '@/components/Layout/AppNavbar'
+import SearchProvider from '@/components/SearchProvider'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

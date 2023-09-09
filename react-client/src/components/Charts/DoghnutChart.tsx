@@ -1,8 +1,8 @@
 'use client'
 
+import { ChartPieIcon } from '@heroicons/react/24/outline'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
-import { ChartPieIcon } from '@heroicons/react/24/outline'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 

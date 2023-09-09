@@ -1,8 +1,9 @@
 'use client'
 
-import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ShareIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
+import { Fragment } from 'react'
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -11,7 +12,6 @@ import {
   VKIcon,
   VKShareButton,
 } from 'react-share'
-import clsx from 'clsx'
 
 export default function ShareDropDown({ shareLink }: { shareLink: string }) {
   return (

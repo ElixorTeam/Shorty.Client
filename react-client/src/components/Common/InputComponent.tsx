@@ -1,5 +1,5 @@
-import { UseFormRegister, RegisterOptions } from 'react-hook-form'
 import { HTMLInputTypeAttribute } from 'react'
+import { UseFormRegister, RegisterOptions } from 'react-hook-form'
 
 export default function InputComponent({
   type,

@@ -1,8 +1,10 @@
 import { LinkIcon } from '@heroicons/react/24/outline'
+import { PlusSmallIcon } from '@heroicons/react/24/solid'
 import { useTranslations } from 'next-intl'
 import Link from 'next-intl/link'
-import { PlusSmallIcon } from '@heroicons/react/24/solid'
+
 import LogOutDialog from '@/components/Modals/LogOutDialog'
+
 import AppNavbarItem from './AppNavbarItem'
 
 export default function LayoutNavbar() {

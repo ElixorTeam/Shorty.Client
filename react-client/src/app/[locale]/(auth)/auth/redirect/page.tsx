@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next-intl/client'
+
 import { useAppDispatch } from '@/redux/hooks'
 import { setAuthToken } from '@/redux/Slices/authTokenSlice'
 

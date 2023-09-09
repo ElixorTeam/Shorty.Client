@@ -1,7 +1,7 @@
 'use client'
 
-import { useAppSelector } from '@/redux/hooks'
 import { useGetLinkAnalyticsQuery } from '@/redux/Api/analyzeApi'
+import { useAppSelector } from '@/redux/hooks'
 
 function LinkStatItem({ label, value }: { label: string; value: number }) {
   return (

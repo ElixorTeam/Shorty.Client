@@ -1,10 +1,11 @@
 'use client'
 
-import { useAppSelector } from '@/redux/hooks'
-import { useRouter } from 'next-intl/client'
-import { Fragment, ReactNode, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next-intl/client'
+import { Fragment, ReactNode, useRef, useState } from 'react'
+
+import { useAppSelector } from '@/redux/hooks'
 
 export default function HomeMainButton({
   children,

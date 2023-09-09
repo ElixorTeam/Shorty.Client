@@ -1,9 +1,10 @@
 import './styles.css'
-import Provider from '@/components/Provider'
-import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
+import { useLocale } from 'next-intl'
 import React, { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
+
+import Provider from '@/components/Provider'
 
 export const metadata = {
   title: 'Shorty',

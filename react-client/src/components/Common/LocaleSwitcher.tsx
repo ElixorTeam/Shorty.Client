@@ -1,10 +1,11 @@
 'use client'
 
-import Link from 'next-intl/link'
-import { usePathname } from 'next-intl/client'
-import DropdownMenu from '@/components/Common/DropdownMenu'
-import { useState } from 'react'
 import { ChevronDownIcon, LanguageIcon } from '@heroicons/react/24/solid'
+import { usePathname } from 'next-intl/client'
+import Link from 'next-intl/link'
+import { useState } from 'react'
+
+import DropdownMenu from '@/components/Common/DropdownMenu'
 
 type LanguageOption = {
   label: string

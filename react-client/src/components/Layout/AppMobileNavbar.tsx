@@ -1,7 +1,8 @@
 import { LinkIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import { useTranslations } from 'next-intl'
+
 import AppMobileNavbarItem from '@/components/Layout/AppMobileNavbarItem'
 import LogOutDialog from '@/components/Modals/LogOutDialog'
-import { useTranslations } from 'next-intl'
 
 export default function AppMobileNavbar() {
   const tAuth = useTranslations('auth')

@@ -1,12 +1,13 @@
 'use client'
 
-import InputComponent from '@/components/Common/InputComponent'
+import { useRouter } from 'next-intl/client'
 import { useState } from 'react'
 import { FieldErrors, useForm } from 'react-hook-form'
-import { useAddLinkMutation } from '@/redux/Api/linksApi'
-import { useRouter } from 'next-intl/client'
 import toast from 'react-hot-toast'
 import { Tooltip } from 'react-tooltip'
+
+import InputComponent from '@/components/Common/InputComponent'
+import { useAddLinkMutation } from '@/redux/Api/linksApi'
 import { useAppDispatch } from '@/redux/hooks'
 import { clearSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 
@@ -17,7 +18,7 @@ type FormInputs = {
 }
 
 export default function CreateForm({
-  translate
+  translate,
 }: {
   translate: { [_: string]: string }
 }) {
@@ -30,11 +31,11 @@ export default function CreateForm({
   const onError = (errors: FieldErrors<FormInputs>) => {
     if (errors.externalRef?.type === 'required')
       toast.error(translate.toastURLRequiredError, {
-        id: 'createUrlRequiredError'
+        id: 'createUrlRequiredError',
       })
     if (errors.externalRef?.type === 'pattern')
       toast.error(translate.toastURLPatternError, {
-        id: 'createUrlPatternError'
+        id: 'createUrlPatternError',
       })
     if (errors.innerRef?.type === 'pattern')
       toast.error(translate.toastRefPatternError, { id: 'createRefError' })
@@ -48,18 +49,18 @@ export default function CreateForm({
         addLink({
           title: formInput.title,
           externalRef: formInput.externalRef,
-          innerRef: formInput.innerRef
+          innerRef: formInput.innerRef,
         }).unwrap(),
         {
           loading: translate.toastLoading,
           success: translate.toastSuccess,
-          error: err => {
+          error: (err) => {
             const errMsg = err.data.error
             const toastMsg = translate[err.data.error]
             if (errMsg && toastMsg && toastMsg !== `create.${errMsg}`)
               return toastMsg
             return translate.toastError
-          }
+          },
         },
         { id: 'createFormToast' }
       )
@@ -80,7 +81,7 @@ export default function CreateForm({
             label={translate.urlLabel}
             registerOptions={{
               required: true,
-              pattern: /^https:\/\/(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]+)+\S*$/
+              pattern: /^https:\/\/(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]+)+\S*$/,
             }}
             register={register}
           />
@@ -104,7 +105,7 @@ export default function CreateForm({
               maxLength={10}
               registerOptions={{
                 required: false,
-                pattern: /^[a-zA-Z0-9]{3,10}$/
+                pattern: /^[a-zA-Z0-9]{3,10}$/,
               }}
               register={register}
             />
@@ -121,7 +122,7 @@ export default function CreateForm({
             label={`${translate.titleLabel} (${translate.labelOptional})`}
             maxLength={64}
             registerOptions={{
-              required: false
+              required: false,
             }}
             register={register}
           />

@@ -1,5 +1,6 @@
-import { LinkRecordType } from '@/shared/LinkRecordType'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+import { LinkRecordType } from '@/shared/LinkRecordType'
 
 type SelectedLinkState = {
   selected: LinkRecordType | null

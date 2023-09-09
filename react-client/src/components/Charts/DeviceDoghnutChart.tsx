@@ -1,8 +1,8 @@
 'use client'
 
-import { useAppSelector } from '@/redux/hooks'
-import { useGetLinkAnalyticsQuery } from '@/redux/Api/analyzeApi'
 import DoughnutChart from '@/components/Charts/DoghnutChart'
+import { useGetLinkAnalyticsQuery } from '@/redux/Api/analyzeApi'
+import { useAppSelector } from '@/redux/hooks'
 
 export default function OsDoughnutChart({ noDataMsg }: { noDataMsg: string }) {
   const selectedLink = useAppSelector((state) => state.selectedLink.selected)

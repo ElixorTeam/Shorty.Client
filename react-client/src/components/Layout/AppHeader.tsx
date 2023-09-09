@@ -1,4 +1,5 @@
 import Link from 'next-intl/link'
+
 import LanguageSwitcher from '@/components/Common/LocaleSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 

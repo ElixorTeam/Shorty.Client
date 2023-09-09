@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { sortOptions, SortOptionsType } from '@/shared/SortKeyEnum'
 
 type LinksSortState = {

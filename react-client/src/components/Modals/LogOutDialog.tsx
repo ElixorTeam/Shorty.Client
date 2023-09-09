@@ -1,12 +1,13 @@
 'use client'
 
-import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
 import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
-import { setAuthToken } from '@/redux/Slices/authTokenSlice'
-import { useAppDispatch } from '@/redux/hooks'
 import { useRouter } from 'next-intl/client'
+import { Fragment, useRef, useState } from 'react'
+
+import { useAppDispatch } from '@/redux/hooks'
+import { setAuthToken } from '@/redux/Slices/authTokenSlice'
 
 export default function LogOutDialog({
   translation,

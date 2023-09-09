@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import Redirect from '@/Redirect'
+
+import Redirect from '@/components/Redirect'
 
 export default function App() {
   return (

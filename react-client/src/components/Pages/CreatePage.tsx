@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+
 import CreateForm from '@/components/Forms/CreateForm'
 
 export default function CreatePage() {

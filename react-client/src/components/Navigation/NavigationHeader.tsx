@@ -1,6 +1,7 @@
-import NavigationSortSelect from '@/components/Navigation/NavigationSortSelect'
-import NavigationSearchBar from '@/components/Navigation/NavigationSearchBar'
 import { useTranslations } from 'next-intl'
+
+import NavigationSearchBar from '@/components/Navigation/NavigationSearchBar'
+import NavigationSortSelect from '@/components/Navigation/NavigationSortSelect'
 
 export default function NavigationHeader() {
   const t = useTranslations('app')

@@ -1,8 +1,9 @@
-import Link from 'next-intl/link'
 import Image from 'next/image'
-import { BACKEND_URL } from '@/shared/urls'
-import GoogleIcon from '@/public/google.svg'
+import Link from 'next-intl/link'
+
 import GithubIcon from '@/public/github.svg'
+import GoogleIcon from '@/public/google.svg'
+import { BACKEND_URL } from '@/shared/urls'
 
 export default function AuthContainer({ authText }: { authText: string }) {
   return (

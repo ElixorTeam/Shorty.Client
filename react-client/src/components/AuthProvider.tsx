@@ -1,12 +1,13 @@
 'use client'
 
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useRouter } from 'next-intl/client'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { ReactNode, useEffect } from 'react'
 import toast from 'react-hot-toast'
+
 import { useCheckAuthStatusQuery } from '@/redux/Api/authApi'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setAuthToken } from '@/redux/Slices/authTokenSlice'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter()

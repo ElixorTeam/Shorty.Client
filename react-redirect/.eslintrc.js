@@ -1,22 +1,24 @@
 module.exports = {
   root: true,
+  env: {
+    browser: true,
+  },
   extends: [
     'airbnb',
     'airbnb-typescript',
     'airbnb/hooks',
     'eslint:recommended',
+    'plugin:react/jsx-runtime',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'plugin:@next/next/recommended',
     'plugin:tailwindcss/recommended',
-    'next',
     'prettier',
   ],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['.eslintrc.js', 'vite.config.ts', 'next.config.js'],
+  ignorePatterns: ['.eslintrc.js', 'vite.config.ts'],
   rules: {
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': 'off',

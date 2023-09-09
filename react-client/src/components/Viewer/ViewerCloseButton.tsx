@@ -1,8 +1,9 @@
 'use client'
 
-import { clearSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+
 import { useAppDispatch } from '@/redux/hooks'
+import { clearSelectedLink } from '@/redux/Slices/selectedLinkSlice'
 
 export default function ViewerCloseButton() {
   const dispatch = useAppDispatch()

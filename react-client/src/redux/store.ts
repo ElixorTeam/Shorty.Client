@@ -1,11 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { linksApi } from '@/redux/Api/linksApi'
-import selectedLinkReducer from '@/redux/Slices/selectedLinkSlice'
-import searchTextReducer from '@/redux/Slices/searchTextSlice'
-import linkSortReducer from '@/redux/Slices/linksSortSlice'
-import authTokenReducer from '@/redux/Slices/authTokenSlice'
 import { persistStore, persistReducer } from 'reduxjs-toolkit-persist'
-import storage from 'reduxjs-toolkit-persist/lib/storage'
 import {
   FLUSH,
   REHYDRATE,
@@ -14,8 +8,15 @@ import {
   PURGE,
   REGISTER,
 } from 'reduxjs-toolkit-persist/es/constants'
-import { authApi } from '@/redux/Api/authApi'
+import storage from 'reduxjs-toolkit-persist/lib/storage'
+
 import { analyzeApi } from '@/redux/Api/analyzeApi'
+import { authApi } from '@/redux/Api/authApi'
+import { linksApi } from '@/redux/Api/linksApi'
+import authTokenReducer from '@/redux/Slices/authTokenSlice'
+import linkSortReducer from '@/redux/Slices/linksSortSlice'
+import searchTextReducer from '@/redux/Slices/searchTextSlice'
+import selectedLinkReducer from '@/redux/Slices/selectedLinkSlice'
 
 const nonSerializableActionTypes = [
   FLUSH,

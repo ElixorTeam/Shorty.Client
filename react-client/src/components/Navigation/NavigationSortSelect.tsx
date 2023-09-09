@@ -2,9 +2,10 @@
 
 import { Listbox } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/24/outline'
-import { sortOptions } from '@/shared/SortKeyEnum'
+
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { setLinksSort } from '@/redux/Slices/linksSortSlice'
+import { sortOptions } from '@/shared/SortKeyEnum'
 
 export default function NavigationSortSelect({
   translate,

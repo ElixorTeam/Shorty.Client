@@ -1,16 +1,17 @@
 'use client'
 
-import { useQRCode } from 'next-qrcode'
-import { useRef } from 'react'
 import {
   ArrowDownTrayIcon,
   DocumentDuplicateIcon,
 } from '@heroicons/react/24/outline'
-import LinkShare from '@/components/Viewer/LinkShare'
-import IconButton from '@/components/Common/IconButton'
+import { useQRCode } from 'next-qrcode'
+import { useRef } from 'react'
 import toast from 'react-hot-toast'
-import { REDIRECT_URL } from '@/shared/urls'
+
+import IconButton from '@/components/Common/IconButton'
+import LinkShare from '@/components/Viewer/LinkShare'
 import { useAppSelector } from '@/redux/hooks'
+import { REDIRECT_URL } from '@/shared/urls'
 
 const QR_GENERATOR_OPTIONS = {
   width: 150,
