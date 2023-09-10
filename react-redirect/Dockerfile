@@ -1,27 +1,26 @@
 # Stage 1
-FROM node:20-lts as base
+FROM node:20-alpine as base
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 WORKDIR /app
-RUN npm i -g pnpm
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Stage 2
-FROM base as deps
-
-COPY pnpm-lock.yaml package.json ./
-COPY . /app
-RUN pnpm i
-
-# Stage 3
 FROM base as builder
 
-COPY --from=deps /app/node_modules ./node_modules
-RUN pnpm run build && pnpm prune --prod
+COPY . .
+RUN pnpm fetch && pnpm i -r --offline
+RUN pnpm build && pnpm prune
 
-# Stage 4
+# Stage 3
 FROM base as runner
 
 ENV NODE_ENV=production
-EXPOSE 3031
 
-COPY --from=build /app/build ./
-CMD ["pnpm", "preview"]
+COPY --from=builder /app/dist ./dist
+RUN pnpm i -g serve
+
+EXPOSE 3031
+CMD ["serve", "-s", "dist", "-l", "3031"]

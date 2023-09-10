@@ -1,6 +1,14 @@
 node_modules
 dist
 
+# Linters
+.eslintrc.cjs
+.prettierignore
+.prettierrc.cjs
+
+# Git
+.gitignore
+
 # Editor directories
 .vscode/*
 .idea

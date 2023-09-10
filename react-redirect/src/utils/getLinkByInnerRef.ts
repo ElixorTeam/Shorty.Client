@@ -1,8 +1,7 @@
 import ky from 'ky'
 
 import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
-
-const BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN
+import { BACKEND_DOMAIN } from '@/shared/urls'
 
 const getLinkByInnerRef = async (
   innerRef: string,

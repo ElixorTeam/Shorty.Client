@@ -9,7 +9,11 @@ export default defineConfig({
     },
   },
   server: {
+    watch: {
+      usePolling: true,
+    },
     host: true,
+    strictPort: true,
     port: 3031,
   },
   preview: {

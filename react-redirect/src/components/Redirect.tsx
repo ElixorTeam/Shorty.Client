@@ -5,9 +5,9 @@ import useSWR from 'swr'
 import ErrorPage from '@/components/ErrorPage'
 import LoadingPage from '@/components/LoadingPage'
 import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
-import getLinkByInnerRef from '@/utils/api'
 import isValidRef from '@/utils/checkIsValidRef'
 import getClientUID from '@/utils/getClientUID'
+import getLinkByInnerRef from '@/utils/getLinkByInnerRef'
 
 function RedirectLink({
   linkRef,
