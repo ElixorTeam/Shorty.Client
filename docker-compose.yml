@@ -1,12 +1,14 @@
 version: "3"
 services:
-  react-client:
-    container_name: ShortyReactClient
-    build: react-client
-    ports:
-      - "3000:3000"
+#  react-client:
+#    container_name: ShortyReactClient
+#    build: react-client
+#    ports:
+#      - "3000:3000"
   react-redirect:
     container_name: ShortyReactRedirect
     build: react-redirect
+    volumes:
+      - ./.env.production:/app/.env
     ports:
       - "3031:3031"

@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:20-alpine as base
+FROM node:20-slim as base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -20,7 +20,9 @@ FROM base as runner
 ENV NODE_ENV=production
 
 COPY --from=builder /app/dist ./dist
+EXPOSE 3031
 RUN pnpm i -g serve
 
-EXPOSE 3031
-CMD ["serve", "-s", "dist", "-l", "3031"]
+COPY env.sh .
+RUN chmod +x env.sh && rm dist/env.js
+CMD ["/bin/bash", "-c", "./env.sh dist/env.js;serve -s dist -l 3031"]

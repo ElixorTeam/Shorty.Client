@@ -1,7 +1,7 @@
 import ky from 'ky'
 
 import { ExternalRefResponseType } from '@/shared/ExternalRefResponseType'
-import { BACKEND_DOMAIN } from '@/shared/urls'
+import { BACKEND_API } from '@/shared/urls'
 
 const getLinkByInnerRef = async (
   innerRef: string,
@@ -12,9 +12,7 @@ const getLinkByInnerRef = async (
       CLIENT_UID: clientUID,
     },
   }
-  return ky
-    .get(`${BACKEND_DOMAIN}/shorty/api/v1/redirect/${innerRef}`, options)
-    .json()
+  return ky.get(`${BACKEND_API}/redirect/${innerRef}`, options).json()
 }
 
 export default getLinkByInnerRef

@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export const BACKEND_DOMAIN: string = import.meta.env.VITE_BACKEND_DOMAIN ?? ''
+// @ts-ignore
+export const BACKEND_DOMAIN: string = window.env?.BACKEND_DOMAIN ?? ''
+export const BACKEND_API: string = `${BACKEND_DOMAIN}/shorty/api/v1`

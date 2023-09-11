@@ -3,13 +3,14 @@
   "version": "1.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "bash env.sh public/env.js && vite",
     "build": "tsc && vite build",
-    "start": "vite preview --host",
+    "preview": "vite preview --host",
     "lint": "eslint ./src",
     "format": "prettier src --write"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "ky": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
