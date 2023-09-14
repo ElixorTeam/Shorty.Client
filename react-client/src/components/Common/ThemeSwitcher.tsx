@@ -10,9 +10,12 @@ export default function ThemeSwitcher() {
   const changeTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
   useEffect(() => setMounted(true), [])
 
-  return !mounted ? (
-    <SunIcon className="mx-3 h-5 w-5 group-hover:scale-105 group-active:scale-95 dark:text-white" />
-  ) : (
+  if (!mounted)
+    return (
+      <SunIcon className="mx-3 h-5 w-5 group-hover:scale-105 group-active:scale-95 dark:text-white" />
+    )
+
+  return (
     <button
       type="button"
       onClick={changeTheme}

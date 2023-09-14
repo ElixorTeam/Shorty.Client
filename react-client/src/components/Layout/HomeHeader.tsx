@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next-intl/link'
 import { ReactNode } from 'react'
 
-import LocaleSwitcher from '@/components/Common/LocaleSwitcher'
+import LanguageSwitcher from '@/components/Common/LanguageSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 import AuthContainer from '@/components/Modals/AuthContainer'
 import AuthDialog from '@/components/Modals/AuthDialog'
@@ -26,7 +26,7 @@ export default function HomeHeader() {
               <ThemeSwitcher />
             </HeaderItem>
             <HeaderItem>
-              <LocaleSwitcher />
+              <LanguageSwitcher />
             </HeaderItem>
             <HeaderItem>
               <AuthDialog authText={t('modalAuthTitle')}>

@@ -22,6 +22,6 @@ set +o allexport
 
 cat <<EOF >"$output_path"
 window.env = {
-$(grep -v '^#' $env_file | xargs -I {} echo {} | sed 's/=/": "/g' | sed 's/^/  "/g' | sed 's/$/",/g')
+$(awk -F '=' '{ print "  \"" $1 "\": \"" $2 "\"," }' $env_file)
 };
 EOF

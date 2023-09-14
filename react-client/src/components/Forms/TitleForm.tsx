@@ -68,7 +68,7 @@ export default function TitleForm({
       })
       .catch(() => setIsSubmit(false))
   }
-  useEffect(() => setFocus('title'), [setFocus])
+  useEffect(() => setFocus('title'))
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Enter') handleSubmit(onSubmit, onError)()

@@ -8,7 +8,7 @@ import { useGetLinksQuery } from '@/redux/Api/linksApi'
 import { useAppSelector } from '@/redux/hooks'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { SortKeyEnum } from '@/shared/SortKeyEnum'
-import sortLinkData from '@/utils/sortLinkData'
+import sortLinks from '@/shared/sortLinkData'
 import './NavigationList.css'
 
 export default function NavigationList() {
@@ -25,7 +25,7 @@ export default function NavigationList() {
         )
       }
       setSortedLinksData(
-        sortLinkData(linksList, selectedSort.value as SortKeyEnum)
+        sortLinks(linksList, selectedSort.value as SortKeyEnum)
       )
     }
   }, [data, selectedSort, searchString])

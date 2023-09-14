@@ -1,6 +1,6 @@
 import Link from 'next-intl/link'
 
-import LanguageSwitcher from '@/components/Common/LocaleSwitcher'
+import LanguageSwitcher from '@/components/Common/LanguageSwitcher'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 
 function LayoutHeader() {

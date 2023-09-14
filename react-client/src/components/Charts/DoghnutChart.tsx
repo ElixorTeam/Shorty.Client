@@ -45,18 +45,17 @@ export default function DoughnutChart({
       },
     ],
   }
-  if (isLoading) {
+  if (isLoading)
     return (
       <div className="h-full w-full animate-pulse bg-white dark:bg-[#23212e]" />
     )
-  }
-  if (isEmpty) {
+
+  if (isEmpty)
     return (
       <div className="flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
         <ChartPieIcon className="h-28 w-28 rotate-45 stroke-[0.4]" />
         <p className="text-xl">{noDataMsg}</p>
       </div>
     )
-  }
   return <Doughnut data={ChartData} />
 }
