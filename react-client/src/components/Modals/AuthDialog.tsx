@@ -16,8 +16,12 @@ export default function AuthDialog({
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)}>
-        <p>{authText}</p>
+      <button
+        type="button"
+        className="h-8 w-24 rounded-2xl border bg-white"
+        onClick={() => setOpen(true)}
+      >
+        <p className="text-sm text-black">Sign Up</p>
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog

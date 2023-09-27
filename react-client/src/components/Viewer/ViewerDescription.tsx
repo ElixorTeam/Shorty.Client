@@ -3,7 +3,7 @@
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import Link from 'next-intl/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
 

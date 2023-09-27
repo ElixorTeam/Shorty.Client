@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': 'off',
+    'spaced-comment': 'off',
     'import/no-unresolved': 'error',
     'import/order': [
       'error',

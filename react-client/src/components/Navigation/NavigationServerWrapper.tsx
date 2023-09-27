@@ -7,7 +7,7 @@ export default function NavigationServerWrapper({
 }) {
   return (
     <div
-      className="mx-4 flex h-fit max-h-[calc(100%_-_10px)] flex-col overflow-hidden rounded-2xl shadow-lg sm:mx-0
+      className="mx-4 flex h-fit max-h-[calc(100%_-_10px)] flex-col overflow-hidden rounded-2xl shadow-lg dark:bg-zinc-900 sm:mx-0
          sm:max-h-[calc(100%_-_20px)] sm:shadow-2xl"
     >
       {children}
