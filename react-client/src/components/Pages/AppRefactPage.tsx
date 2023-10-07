@@ -7,6 +7,7 @@ import {
   PaperAirplaneIcon,
   TrashIcon,
   ClipboardDocumentIcon,
+  EyeIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { VKIcon } from 'react-share'
@@ -19,30 +20,38 @@ export default function AppPage() {
   return (
     <div className="relative h-full w-full bg-white/[.6]">
       <div className="h-full w-full">
-        <div className="grid h-full w-full grid-cols-[14rem,1fr] grid-rows-1 lg:grid-cols-[18rem,1fr]">
+        <div className="h-full w-full grid-cols-[14rem,1fr] grid-rows-1 sm:grid lg:grid-cols-[18rem,1fr]">
           <nav className="flex h-full w-full flex-col py-2">
             <header className="flex flex-col px-6 pb-4">
-              <div className="mx-4 my-2 flex w-full items-center gap-2">
+              <div className="mx-auto my-2">
+                <a href="#">
+                  <p className="text-3xl font-extrabold">Shorty</p>
+                </a>
+              </div>
+              <div className="mx-4 mb-4 mt-2 flex items-center justify-center gap-2">
                 <UserCircleIcon className="h-16 w-16" />
-                <div className="mb-1 flex w-full flex-col pr-6">
-                  <div className="flex w-full items-center gap-2">
+                <div className="mb-1 flex flex-col">
+                  <div className="flex items-center gap-2">
                     <p className="line-clamp-1 text-lg font-semibold text-stone-800">
                       Ap73MKa
                     </p>
-                    <ArrowLeftOnRectangleIcon className="h-4 w-4 text-gray-500 hover:text-gray-700" />
+                    <ArrowLeftOnRectangleIcon className="h-4 w-4 text-gray-700 hover:text-black" />
                   </div>
-                  <p className="line-clamp-1 text-xs text-gray-500">
+                  <p className="line-clamp-1 text-xs text-gray-700">
                     My account
                   </p>
                 </div>
               </div>
-              <button
-                type="button"
-                className="my-2 h-10 w-full overflow-hidden rounded-xl bg-stone-800 shadow-lg"
-              >
-                <p className="text-lg text-white">New link</p>
-              </button>
-              <p className="pb-4 pt-2 text-2xl font-semibold">Links</p>
+              <div className="flex justify-between">
+                <p className="pb-4 text-2xl font-semibold">Links</p>
+                <button
+                  type="button"
+                  className="h-8 overflow-hidden rounded-xl bg-stone-800 px-6 shadow-lg"
+                >
+                  <p className="text-white">New</p>
+                </button>
+              </div>
+
               <div className="flex h-10 w-full items-center gap-2 rounded-xl bg-white px-4 shadow-md">
                 <MagnifyingGlassIcon className="mt-1 h-5 w-5 text-gray-500" />
                 <p className="text-gray-500">Search...</p>
@@ -73,7 +82,7 @@ export default function AppPage() {
               </ul>
             </div>
           </nav>
-          <div className="flex h-full w-full overflow-x-hidden shadow-inner lg:shadow-none">
+          <div className="hidden h-full w-full overflow-x-hidden shadow-inner sm:flex lg:shadow-none">
             <div className="flex h-full w-full grid-cols-[1fr,18rem] grid-rows-1 flex-col-reverse overflow-y-auto lg:grid lg:flex-none lg:overflow-y-hidden">
               <div className="h-full w-full bg-gray-300/[.3] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 lg:overflow-y-auto lg:shadow-inner">
                 <div className="h-full w-full py-4">
@@ -82,6 +91,41 @@ export default function AppPage() {
                       Analytics
                     </p>
                     <p className="text-4xl font-semibold">Dashboard</p>
+                  </div>
+                  <div className="mt-8 grid h-24 w-full grid-cols-3 grid-rows-1 divide-x divide-black/[.1] px-8">
+                    <div className="flex h-full w-full items-center justify-center gap-2 px-1">
+                      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-stone-800">
+                        <EyeIcon className="h-8 w-8 text-stone-200" />
+                      </div>
+                      <div>
+                        <p className="text-stone-600">Daily view</p>
+                        <p className="text-3xl font-semibold tracking-tight">
+                          356
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex h-full w-full items-center justify-center gap-2 px-1">
+                      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-stone-800">
+                        <EyeIcon className="h-8 w-8 text-stone-200" />
+                      </div>
+                      <div>
+                        <p className="text-stone-600">Trending</p>
+                        <p className="text-3xl font-semibold tracking-tight">
+                          40%
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex h-full w-full items-center justify-center gap-2 px-1">
+                      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-stone-800">
+                        <EyeIcon className="h-8 w-8 text-stone-200" />
+                      </div>
+                      <div>
+                        <p className="text-stone-600">Total views</p>
+                        <p className="text-3xl font-semibold tracking-tight">
+                          1030
+                        </p>
+                      </div>
+                    </div>
                   </div>
                   <div className="flex h-full w-full flex-col px-8">
                     <div className="mb-24 mt-10 flex h-full max-h-80 w-full flex-col gap-4">
