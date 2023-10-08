@@ -4,10 +4,12 @@ import {
   ChartOptions,
   Legend,
   Tooltip,
+  CategoryScale,
+  LinearScale,
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 
-ChartJS.register(BarElement, Tooltip, Legend)
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
 export default function DevicesChart() {
   function getRandomInt(max: number) {
@@ -22,8 +24,8 @@ export default function DevicesChart() {
         data: labels.map(() => getRandomInt(100)),
         backgroundColor: 'rgb(79,182,255)',
         borderColor: 'rgba(76,163,255,0.13)',
-        borderRadius: 10,
-        maxBarThickness: 80,
+        borderRadius: 5,
+        maxBarThickness: 20,
         cubicInterpolationMode: 'monotone' as const,
       },
     ],

@@ -7,9 +7,9 @@ import {
   PaperAirplaneIcon,
   TrashIcon,
   ClipboardDocumentIcon,
-  EyeIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
 import Image from 'next/image'
 import { ComponentType } from 'react'
 
@@ -34,28 +34,6 @@ function ProjectButton({
         <Icon className="h-5 w-5 text-white" />
       </button>
       <p className="line-clamp-1 text-xs font-semibold">{text}</p>
-    </div>
-  )
-}
-
-function StatItem({
-  text,
-  value,
-  Icon,
-}: {
-  text: string
-  value: number
-  Icon: ComponentType<{ className?: string }>
-}) {
-  return (
-    <div className="flex h-full w-full items-center justify-center gap-2 overflow-hidden px-1">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-sky-400 lg:h-14 lg:w-14">
-        <Icon className="h-8 w-8 text-white" />
-      </div>
-      <div>
-        <p className="line-clamp-1 text-stone-600">{text}</p>
-        <p className="text-3xl font-semibold tracking-tight">{value}</p>
-      </div>
     </div>
   )
 }
@@ -89,66 +67,86 @@ function InputText({
   )
 }
 
+function LinkItem({ isActive }: { isActive: boolean }) {
+  return (
+    <button
+      type="button"
+      className={clsx(
+        isActive ? 'relative bg-sky-100' : '',
+        'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4'
+      )}
+    >
+      {isActive && (
+        <div className="absolute inset-y-0 left-0 w-1 rounded-full bg-sky-400" />
+      )}
+      <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full">
+        <Image
+          src={avatar_artyom.src}
+          width={avatar_artyom.width}
+          height={avatar_artyom.height}
+          alt=""
+          className="h-full w-full object-cover"
+        />
+      </div>
+      <div className="flex h-14 w-full flex-col gap-1 overflow-hidden text-left">
+        <div className="flex w-full items-center justify-between gap-2">
+          <p className="line-clamp-1 truncate text-sm font-semibold leading-tight">
+            Youtube Channelfrfrfr
+          </p>
+          <p className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-gray-700">
+            2 hours ago
+          </p>
+        </div>
+        <p className="line-clamp-2 text-ellipsis text-left text-xs leading-tight text-gray-500">
+          Please add more information about your pesonal web site so we can
+          address
+        </p>
+      </div>
+    </button>
+  )
+}
+
 export default function AppPage() {
   const buttons = [
     { id: 1, title: 'QR', icon: QrCodeIcon },
     { id: 2, title: 'Share', icon: PaperAirplaneIcon },
     { id: 3, title: 'Delete', icon: TrashIcon },
   ]
-  const stats = [
-    { id: 1, text: 'Daily view', value: 15, icon: EyeIcon },
-    { id: 2, text: 'Trendings', value: 40, icon: EyeIcon },
-    { id: 3, text: 'Total views', value: 150, icon: EyeIcon },
-  ]
-  const links = Array.from(Array(20).keys())
+  const links = Array.from(Array(10).keys())
   return (
     <div className="h-full w-full grid-cols-[18rem,1fr] grid-rows-1 divide-x border-x sm:grid">
-      <div className="sticky top-0 flex h-screen w-full grow flex-col divide-y overflow-hidden">
+      <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden bg-white">
         <div className="flex h-[63px] w-full shrink-0 items-center justify-center text-center">
-          <p className="text-3xl font-extrabold">Shorty</p>
+          <a href="/links1">
+            <p className="text-3xl font-extrabold">Shorty</p>
+          </a>
         </div>
-        <div className="flex h-full w-full flex-col divide-y overflow-hidden">
-          <div className="relative flex h-10 w-full shrink-0 items-center justify-center px-5">
-            <input
-              type="text"
-              placeholder="Search link..."
-              className="mx-auto h-full w-full overflow-hidden bg-white px-2 pr-5 focus:outline-none"
-            />
-            <MagnifyingGlassIcon className="absolute right-0 top-0 mr-4 mt-[7px] h-5 w-5 text-gray-400" />
+        <div className="flex h-full w-full flex-col overflow-hidden border-y bg-slate-50">
+          <div className="my-2 flex h-10 w-full items-center justify-between pl-6 pr-2">
+            <p className="text-2xl font-semibold">Links</p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border bg-slate-100 transition hover:bg-white"
+              >
+                <MagnifyingGlassIcon className="h-4 w-4 text-gray-500" />
+              </button>
+              <button
+                type="button"
+                className="flex h-8 items-center justify-center overflow-hidden rounded-lg border border-black/[.1] bg-sky-400 px-4 transition hover:bg-sky-300"
+              >
+                <p className="text-white">New</p>
+              </button>
+            </div>
           </div>
-          <div className="flex h-10 shrink-0 items-center gap-1 px-7">
-            <p className="">Sort by</p>
-            <p className="text-sky-400">Name</p>
-            <ChevronDownIcon className="mt-1 h-3 w-3 text-sky-400" />
-          </div>
-          <div className="h-full w-full bg-slate-50">
-            <ul className="flex h-full w-full flex-col gap-5 overflow-y-auto py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral-200 scrollbar-corner-transparent">
+          <div className="h-full w-full overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300/[.6] scrollbar-corner-transparent">
+            <ul className="flex h-full w-full flex-col">
+              <li className="w-full">
+                <LinkItem isActive />
+              </li>
               {links.map((item) => (
-                <li key={item.valueOf()} className="w-full pl-4 pr-2">
-                  <button
-                    type="button"
-                    className="flex w-full items-center gap-4"
-                  >
-                    <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full">
-                      <Image
-                        src={avatar_artyom.src}
-                        width={avatar_artyom.width}
-                        height={avatar_artyom.height}
-                        alt=""
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="mb-1 flex w-full flex-col overflow-hidden text-left">
-                      <div className="flex w-full items-center justify-between">
-                        <p className="line-clamp-1">Youtube Channel</p>
-                        <p className="text-xs text-gray-700">08.10.23</p>
-                      </div>
-
-                      <p className="line-clamp-1 text-xs text-gray-500">
-                        https://www.youtube.com/c/Ap73MKa
-                      </p>
-                    </div>
-                  </button>
+                <li key={item.valueOf()} className="w-full">
+                  <LinkItem isActive={false} />
                 </li>
               ))}
             </ul>
@@ -175,65 +173,78 @@ export default function AppPage() {
           </div>
         </div>
       </div>
-      <div className="relative hidden h-full w-full overflow-hidden sm:flex sm:flex-col">
-        <div className="sticky top-0 flex h-16 w-full shrink-0 items-center border-b border-b-black/[.1] backdrop-blur">
+      {/* eslint-disable tailwindcss/migration-from-tailwind-2 */}
+      <div className="relative hidden w-full overflow-clip sm:flex sm:flex-col">
+        <div className="sticky top-0 z-20 flex h-16 w-full shrink-0 items-center border-b border-b-black/[.1] bg-white/[.5] backdrop-blur">
           <p className="ml-10 text-2xl">Project</p>
         </div>
-        <div className="flex h-full w-full flex-col-reverse divide-x overflow-hidden lg:grid lg:flex-none lg:grid-cols-[1fr,18rem] lg:grid-rows-1">
-          <div className="h-full w-full grow">
-            <div className="flex h-fit w-full flex-col px-10 pt-4">
-              <p className="text-3xl font-semibold">Analytics</p>
-              <div className="my-10 flex h-full w-full flex-col gap-10">
-                <ul className="mx-auto flex h-24 w-full max-w-screen-md divide-x divide-black/[.1] overflow-hidden rounded-2xl border">
-                  {stats.map((item) => (
-                    <li key={item.id} className="w-1/3">
-                      <StatItem
-                        text={item.text}
-                        value={item.value}
-                        Icon={item.icon}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <div className="mx-auto flex h-[28rem] w-full max-w-screen-xl flex-col gap-4 overflow-hidden rounded-2xl border p-8">
-                  <div className="mb-4 flex w-full justify-between">
-                    <p className="text-2xl font-semibold text-stone-800">
-                      Views statistics
-                    </p>
-                    <button
-                      type="button"
-                      className="flex items-center gap-2 rounded-lg border border-black/[.1] bg-sky-400 px-3 py-1 shadow"
-                    >
-                      <p className="text-white">Week</p>
-                      <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
-                    </button>
+        <div className="flex h-full w-full flex-col-reverse lg:grid lg:flex-none lg:grid-cols-[1fr,18rem] lg:grid-rows-1 lg:divide-x lg:bg-slate-50">
+          <div className="mx-auto flex h-full w-full max-w-[70rem] flex-wrap content-start items-stretch justify-center gap-x-5 gap-y-10 overflow-x-hidden px-4 pb-10 pt-6 md:px-10 2xl:justify-between">
+            <div className="h-72 w-full min-w-[20rem] max-w-full shrink grow basis-[18rem] overflow-hidden rounded-2xl border bg-white shadow-sm xl:max-w-md">
+              <div className="grid h-full w-full grid-cols-[1fr,12rem] grid-rows-3 flex-wrap divide-x">
+                <div className="relative row-span-3 h-full w-full">
+                  <div className="absolute left-0 top-0 ml-4 mt-2">
+                    <p className="text-xl">Total views</p>
                   </div>
-                  <div className="h-full w-full">
-                    <WeekLineChart />
+                  <div className="flex h-full w-full items-center justify-center">
+                    <div className="relative px-8">
+                      <p className="text-6xl font-semibold text-sky-500">
+                        14.5k
+                      </p>
+                      <div className="absolute -top-4 right-4">
+                        <p className="text-lg text-gray-500">+ 140</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="mx-auto flex h-[28rem] w-full max-w-screen-xl flex-col gap-4 overflow-hidden rounded-2xl border p-8">
-                  <div className="mb-5 flex w-full justify-between">
-                    <p className="text-2xl font-semibold text-stone-800">
-                      Devices statistics
-                    </p>
-                    <button
-                      type="button"
-                      className="flex items-center gap-2 rounded-lg bg-sky-400 px-3 py-1 shadow"
-                    >
-                      <p className="text-white">OS</p>
-                      <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
-                    </button>
-                  </div>
-                  <div className="h-full w-full">
-                    <DevicesChart />
-                  </div>
+                <div className="flex h-full w-full flex-col justify-center border-b px-4">
+                  <p>Unique</p>
+                  <p className="text-3xl font-semibold text-gray-700">1.45k</p>
+                </div>
+                <div className="col-start-2 row-start-2 flex h-full w-full flex-col justify-center border-b px-4">
+                  <p>Trend</p>
+                  <p className="text-3xl font-semibold text-green-500">40%</p>
+                </div>
+                <div className="col-start-2 row-start-3 flex h-full w-full flex-col justify-center px-4">
+                  <p>Time left</p>
+                  <p className="text-3xl font-semibold text-red-500">2 weeks</p>
                 </div>
               </div>
             </div>
+            <div className="relative flex h-72 w-full min-w-[18rem] max-w-full shrink grow basis-[18rem] flex-col justify-center gap-4 overflow-hidden rounded-2xl border bg-white px-4 pt-4 shadow-sm xl:max-w-xl">
+              <div className="absolute right-0 top-0 mt-2 flex justify-between px-4">
+                <button
+                  type="button"
+                  className="flex items-center gap-2 rounded-lg bg-sky-400 px-3 py-1 shadow"
+                >
+                  <p className="text-white">OS</p>
+                  <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
+                </button>
+              </div>
+              <div className="h-full w-full">
+                <DevicesChart />
+              </div>
+            </div>
+            <div className="flex h-[24rem] w-full max-w-full flex-col gap-4 overflow-hidden rounded-2xl border bg-white px-8 py-4 shadow-sm">
+              <div className="mb-4 flex w-full justify-between">
+                <p className="text-2xl font-semibold text-stone-800">
+                  Views statistics
+                </p>
+                <button
+                  type="button"
+                  className="flex items-center gap-2 rounded-lg border border-black/[.1] bg-sky-400 px-3 py-1 shadow"
+                >
+                  <p className="text-white">Week</p>
+                  <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
+                </button>
+              </div>
+              <div className="h-full w-full">
+                <WeekLineChart />
+              </div>
+            </div>
           </div>
-          <div className="h-full w-full overflow-hidden px-4">
-            <div className="mt-5 w-full">
+          <div className="mb-10 h-fit w-full bg-white px-4 lg:mb-0 lg:h-full">
+            <div className="h-full w-full pt-5">
               <div className="flex w-full flex-col items-center gap-2">
                 <div className="h-24 w-24 overflow-hidden rounded-full">
                   <Image

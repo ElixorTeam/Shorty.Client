@@ -6,6 +6,6 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
-  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
+  plugins: [require('tailwind-scrollbar')],
 }
 export default config
