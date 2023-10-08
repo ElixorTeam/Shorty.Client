@@ -9,241 +9,262 @@ import {
   ClipboardDocumentIcon,
   EyeIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import { VKIcon } from 'react-share'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import Image from 'next/image'
+import { ComponentType } from 'react'
 
 import DevicesChart from '@/components/Charts/DevicesChart'
 import WeekLineChart from '@/components/Charts/WeekLineChart'
+import avatar_artyom from '@/public/avatar_artyom.jpg'
+
+function ProjectButton({
+  text,
+  Icon,
+}: {
+  text: string
+  Icon: ComponentType<{ className?: string }>
+}) {
+  return (
+    <div className="flex w-12 flex-col items-center justify-center gap-1">
+      <button
+        type="button"
+        className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-black/[.1]
+         bg-sky-400 shadow transition-colors hover:bg-sky-300"
+      >
+        <Icon className="h-5 w-5 text-white" />
+      </button>
+      <p className="line-clamp-1 text-xs font-semibold">{text}</p>
+    </div>
+  )
+}
+
+function StatItem({
+  text,
+  value,
+  Icon,
+}: {
+  text: string
+  value: number
+  Icon: ComponentType<{ className?: string }>
+}) {
+  return (
+    <div className="flex h-full w-full items-center justify-center gap-2 overflow-hidden px-1">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-sky-400 lg:h-14 lg:w-14">
+        <Icon className="h-8 w-8 text-white" />
+      </div>
+      <div>
+        <p className="line-clamp-1 text-stone-600">{text}</p>
+        <p className="text-3xl font-semibold tracking-tight">{value}</p>
+      </div>
+    </div>
+  )
+}
+
+function InputText({
+  id,
+  value,
+  label,
+}: {
+  id: string
+  value: string
+  label: string
+}) {
+  return (
+    <div className="w-full">
+      <label htmlFor={id} className="font-semibold text-stone-800">
+        {label}
+      </label>
+      <div className="mt-1 flex items-center overflow-hidden rounded-lg border bg-white">
+        <input
+          type="text"
+          id={id}
+          name="link"
+          disabled
+          className="h-8 w-full bg-transparent px-2 hover:cursor-text"
+          value={value}
+        />
+        <ClipboardDocumentIcon className="mr-2 h-5 w-5 text-gray-700 hover:text-black" />
+      </div>
+    </div>
+  )
+}
 
 export default function AppPage() {
-  const links = Array.from(Array(10).keys())
+  const buttons = [
+    { id: 1, title: 'QR', icon: QrCodeIcon },
+    { id: 2, title: 'Share', icon: PaperAirplaneIcon },
+    { id: 3, title: 'Delete', icon: TrashIcon },
+  ]
+  const stats = [
+    { id: 1, text: 'Daily view', value: 15, icon: EyeIcon },
+    { id: 2, text: 'Trendings', value: 40, icon: EyeIcon },
+    { id: 3, text: 'Total views', value: 150, icon: EyeIcon },
+  ]
+  const links = Array.from(Array(20).keys())
   return (
-    <div className="relative h-full w-full bg-white/[.6]">
-      <div className="h-full w-full">
-        <div className="h-full w-full grid-cols-[14rem,1fr] grid-rows-1 sm:grid lg:grid-cols-[18rem,1fr]">
-          <nav className="flex h-full w-full flex-col py-2">
-            <header className="flex flex-col px-6 pb-4">
-              <div className="mx-auto my-2">
-                <a href="#">
-                  <p className="text-3xl font-extrabold">Shorty</p>
-                </a>
-              </div>
-              <div className="mx-4 mb-4 mt-2 flex items-center justify-center gap-2">
-                <UserCircleIcon className="h-16 w-16" />
-                <div className="mb-1 flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <p className="line-clamp-1 text-lg font-semibold text-stone-800">
-                      Ap73MKa
+    <div className="h-full w-full grid-cols-[18rem,1fr] grid-rows-1 divide-x border-x sm:grid">
+      <div className="sticky top-0 flex h-screen w-full grow flex-col divide-y overflow-hidden">
+        <div className="flex h-[63px] w-full shrink-0 items-center justify-center text-center">
+          <p className="text-3xl font-extrabold">Shorty</p>
+        </div>
+        <div className="flex h-full w-full flex-col divide-y overflow-hidden">
+          <div className="relative flex h-10 w-full shrink-0 items-center justify-center px-5">
+            <input
+              type="text"
+              placeholder="Search link..."
+              className="mx-auto h-full w-full overflow-hidden bg-white px-2 pr-5 focus:outline-none"
+            />
+            <MagnifyingGlassIcon className="absolute right-0 top-0 mr-4 mt-[7px] h-5 w-5 text-gray-400" />
+          </div>
+          <div className="flex h-10 shrink-0 items-center gap-1 px-7">
+            <p className="">Sort by</p>
+            <p className="text-sky-400">Name</p>
+            <ChevronDownIcon className="mt-1 h-3 w-3 text-sky-400" />
+          </div>
+          <div className="h-full w-full bg-slate-50">
+            <ul className="flex h-full w-full flex-col gap-5 overflow-y-auto py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral-200 scrollbar-corner-transparent">
+              {links.map((item) => (
+                <li key={item.valueOf()} className="w-full pl-4 pr-2">
+                  <button
+                    type="button"
+                    className="flex w-full items-center gap-4"
+                  >
+                    <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full">
+                      <Image
+                        src={avatar_artyom.src}
+                        width={avatar_artyom.width}
+                        height={avatar_artyom.height}
+                        alt=""
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="mb-1 flex w-full flex-col overflow-hidden text-left">
+                      <div className="flex w-full items-center justify-between">
+                        <p className="line-clamp-1">Youtube Channel</p>
+                        <p className="text-xs text-gray-700">08.10.23</p>
+                      </div>
+
+                      <p className="line-clamp-1 text-xs text-gray-500">
+                        https://www.youtube.com/c/Ap73MKa
+                      </p>
+                    </div>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="flex w-full items-center justify-center gap-2 py-3">
+          <div className="h-12 w-12 overflow-hidden rounded-full">
+            <Image
+              src={avatar_artyom.src}
+              width={avatar_artyom.width}
+              height={avatar_artyom.height}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div>
+            <div className="flex items-center gap-1">
+              <p className="font-semibold">Ap73MKa</p>
+              <button type="button">
+                <ArrowLeftOnRectangleIcon className="mt-[1px] h-4 w-4 text-gray-500 hover:text-gray-700" />
+              </button>
+            </div>
+            <p className="text-xs text-gray-500">My account</p>
+          </div>
+        </div>
+      </div>
+      <div className="relative hidden h-full w-full overflow-hidden sm:flex sm:flex-col">
+        <div className="sticky top-0 flex h-16 w-full shrink-0 items-center border-b border-b-black/[.1] backdrop-blur">
+          <p className="ml-10 text-2xl">Project</p>
+        </div>
+        <div className="flex h-full w-full flex-col-reverse divide-x overflow-hidden lg:grid lg:flex-none lg:grid-cols-[1fr,18rem] lg:grid-rows-1">
+          <div className="h-full w-full grow">
+            <div className="flex h-fit w-full flex-col px-10 pt-4">
+              <p className="text-3xl font-semibold">Analytics</p>
+              <div className="my-10 flex h-full w-full flex-col gap-10">
+                <ul className="mx-auto flex h-24 w-full max-w-screen-md divide-x divide-black/[.1] overflow-hidden rounded-2xl border">
+                  {stats.map((item) => (
+                    <li key={item.id} className="w-1/3">
+                      <StatItem
+                        text={item.text}
+                        value={item.value}
+                        Icon={item.icon}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <div className="mx-auto flex h-[28rem] w-full max-w-screen-xl flex-col gap-4 overflow-hidden rounded-2xl border p-8">
+                  <div className="mb-4 flex w-full justify-between">
+                    <p className="text-2xl font-semibold text-stone-800">
+                      Views statistics
                     </p>
-                    <ArrowLeftOnRectangleIcon className="h-4 w-4 text-gray-700 hover:text-black" />
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 rounded-lg border border-black/[.1] bg-sky-400 px-3 py-1 shadow"
+                    >
+                      <p className="text-white">Week</p>
+                      <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
+                    </button>
                   </div>
-                  <p className="line-clamp-1 text-xs text-gray-700">
-                    My account
-                  </p>
+                  <div className="h-full w-full">
+                    <WeekLineChart />
+                  </div>
+                </div>
+                <div className="mx-auto flex h-[28rem] w-full max-w-screen-xl flex-col gap-4 overflow-hidden rounded-2xl border p-8">
+                  <div className="mb-5 flex w-full justify-between">
+                    <p className="text-2xl font-semibold text-stone-800">
+                      Devices statistics
+                    </p>
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 rounded-lg bg-sky-400 px-3 py-1 shadow"
+                    >
+                      <p className="text-white">OS</p>
+                      <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
+                    </button>
+                  </div>
+                  <div className="h-full w-full">
+                    <DevicesChart />
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-between">
-                <p className="pb-4 text-2xl font-semibold">Links</p>
-                <button
-                  type="button"
-                  className="h-8 overflow-hidden rounded-xl bg-stone-800 px-6 shadow-lg"
-                >
-                  <p className="text-white">New</p>
-                </button>
+            </div>
+          </div>
+          <div className="h-full w-full overflow-hidden px-4">
+            <div className="mt-5 w-full">
+              <div className="flex w-full flex-col items-center gap-2">
+                <div className="h-24 w-24 overflow-hidden rounded-full">
+                  <Image
+                    src={avatar_artyom.src}
+                    width={avatar_artyom.width}
+                    height={avatar_artyom.height}
+                    alt=""
+                    className="h-full w-full"
+                  />
+                </div>
+                <p className="text-xl">Youtube Channel</p>
               </div>
-
-              <div className="flex h-10 w-full items-center gap-2 rounded-xl bg-white px-4 shadow-md">
-                <MagnifyingGlassIcon className="mt-1 h-5 w-5 text-gray-500" />
-                <p className="text-gray-500">Search...</p>
-              </div>
-            </header>
-            <div className="flex h-full w-full flex-col overflow-hidden px-2">
-              <ul className="flex h-full flex-col overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 scrollbar-thumb-rounded-md">
-                {links.map((num) => (
-                  <li
-                    key={num}
-                    className="mx-2 flex cursor-pointer items-center rounded-xl p-4 hover:bg-slate-100"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <VKIcon className="h-12 w-12 rounded-full contrast-[4] grayscale" />
-                      </div>
-                      <div className="mb-1 flex flex-col gap-1">
-                        <p className="font-semibold text-gray-700">
-                          Youtube channel
-                        </p>
-                        <p className="line-clamp-1 text-sm text-gray-400">
-                          https://www.youtube.com/channel/Ap73MKa
-                        </p>
-                      </div>
-                    </div>
+              <ul className="mt-4 flex flex-row items-center justify-center gap-5">
+                {buttons.map((item) => (
+                  <li key={item.id}>
+                    <ProjectButton text={item.title} Icon={item.icon} />
                   </li>
                 ))}
               </ul>
-            </div>
-          </nav>
-          <div className="hidden h-full w-full overflow-x-hidden shadow-inner sm:flex lg:shadow-none">
-            <div className="flex h-full w-full grid-cols-[1fr,18rem] grid-rows-1 flex-col-reverse overflow-y-auto lg:grid lg:flex-none lg:overflow-y-hidden">
-              <div className="h-full w-full bg-gray-300/[.3] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 lg:overflow-y-auto lg:shadow-inner">
-                <div className="h-full w-full py-4">
-                  <div className="flex flex-col px-8">
-                    <p className="text-3xl font-semibold text-stone-700">
-                      Analytics
-                    </p>
-                    <p className="text-4xl font-semibold">Dashboard</p>
-                  </div>
-                  <div className="mt-8 grid h-24 w-full grid-cols-3 grid-rows-1 divide-x divide-black/[.1] px-8">
-                    <div className="flex h-full w-full items-center justify-center gap-2 px-1">
-                      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-stone-800">
-                        <EyeIcon className="h-8 w-8 text-stone-200" />
-                      </div>
-                      <div>
-                        <p className="text-stone-600">Daily view</p>
-                        <p className="text-3xl font-semibold tracking-tight">
-                          356
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex h-full w-full items-center justify-center gap-2 px-1">
-                      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-stone-800">
-                        <EyeIcon className="h-8 w-8 text-stone-200" />
-                      </div>
-                      <div>
-                        <p className="text-stone-600">Trending</p>
-                        <p className="text-3xl font-semibold tracking-tight">
-                          40%
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex h-full w-full items-center justify-center gap-2 px-1">
-                      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-stone-800">
-                        <EyeIcon className="h-8 w-8 text-stone-200" />
-                      </div>
-                      <div>
-                        <p className="text-stone-600">Total views</p>
-                        <p className="text-3xl font-semibold tracking-tight">
-                          1030
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex h-full w-full flex-col px-8">
-                    <div className="mb-24 mt-10 flex h-full max-h-80 w-full flex-col gap-4">
-                      <div className="flex w-full justify-between">
-                        <p className="text-2xl font-semibold text-stone-800">
-                          Views statistics
-                        </p>
-                        <button
-                          type="button"
-                          className="flex items-center gap-2 rounded-lg bg-stone-800 px-3 py-1 shadow-lg"
-                        >
-                          <p className="text-white">Week</p>
-                          <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
-                        </button>
-                      </div>
-                      <WeekLineChart />
-                    </div>
-                    <div className="mb-16 flex h-full max-h-80 w-full flex-col gap-4">
-                      <div className="flex w-full justify-between">
-                        <p className="text-2xl font-semibold text-stone-800">
-                          Devices statistics
-                        </p>
-                        <button
-                          type="button"
-                          className="flex items-center gap-2 rounded-lg bg-stone-800 px-3 py-1 shadow-lg"
-                        >
-                          <p className="text-white">OS</p>
-                          <ChevronDownIcon className="mt-1 h-4 w-4 text-white" />
-                        </button>
-                      </div>
-                      <DevicesChart />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="h-full w-full bg-gray-300/[.3] lg:bg-transparent">
-                <div className="flex w-full flex-col items-center px-4">
-                  <div className="mt-10 flex w-full flex-col items-center gap-1">
-                    <VKIcon className="h-16 w-16 rounded-full contrast-[4] grayscale" />
-                    <p className="text-lg font-semibold text-gray-800">
-                      Youtube channel
-                    </p>
-                  </div>
-                  <div className="mx-auto mt-5 flex gap-5">
-                    <div className="flex w-12 flex-col items-center justify-center gap-1">
-                      <button
-                        type="button"
-                        className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-stone-800 shadow-md"
-                      >
-                        <QrCodeIcon className="h-5 w-5 text-stone-200" />
-                      </button>
-                      <p className="line-clamp-1 text-xs font-bold text-stone-800">
-                        QR Code
-                      </p>
-                    </div>
-                    <div className="flex w-12 flex-col items-center justify-center gap-1 overflow-hidden">
-                      <button
-                        type="button"
-                        className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-stone-800 text-left shadow-md"
-                      >
-                        <PaperAirplaneIcon className="h-5 w-5 text-stone-200" />
-                      </button>
-                      <p className="line-clamp-1 text-ellipsis text-xs font-bold text-stone-800">
-                        Share
-                      </p>
-                    </div>
-                    <div className="flex w-12 flex-col items-center justify-center gap-1">
-                      <button
-                        type="button"
-                        className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-stone-800 shadow-md"
-                      >
-                        <TrashIcon className="h-5 w-5 text-stone-200" />
-                      </button>
-                      <p className="line-clamp-1 text-xs font-bold text-stone-800">
-                        Delete
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-6 flex w-full max-w-sm flex-col gap-4 px-4">
-                    <div className="w-full">
-                      <label
-                        htmlFor="link"
-                        className="font-semibold text-stone-800"
-                      >
-                        Link
-                      </label>
-                      <div className="mt-1 flex items-center overflow-hidden rounded-lg bg-white shadow">
-                        <input
-                          type="text"
-                          id="link"
-                          name="link"
-                          disabled
-                          className="h-8 w-full px-2"
-                          value="https://www.sh0.su/fuVf1"
-                        />
-                        <ClipboardDocumentIcon className="mr-2 h-5 w-5 text-gray-700 hover:text-black" />
-                      </div>
-                    </div>
-                    <div className="w-full">
-                      <label
-                        htmlFor="original"
-                        className="font-semibold text-stone-800"
-                      >
-                        Original
-                      </label>
-                      <div className="mt-1 flex items-center overflow-hidden rounded-lg bg-white shadow">
-                        <input
-                          type="text"
-                          id="original"
-                          name="original"
-                          disabled
-                          className="h-8 w-full px-2"
-                          value="https://www.youtube.com/channel/Ap73MKa"
-                        />
-                        <ClipboardDocumentIcon className="mr-2 h-5 w-5 text-gray-700 hover:text-black" />
-                      </div>
-                    </div>
-                  </div>
+              <div className="mt-4 flex w-full items-center justify-center px-4">
+                <div className="flex w-full max-w-sm flex-col gap-8">
+                  <InputText
+                    id="shortedVersion"
+                    value="https://www.sh0.su/fX6bg"
+                    label="Link"
+                  />
+                  <InputText
+                    id="originalVersion"
+                    value="https://www.youtube.com/c/Ap73MKa"
+                    label="Original"
+                  />
                 </div>
               </div>
             </div>

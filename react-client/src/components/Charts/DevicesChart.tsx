@@ -20,8 +20,8 @@ export default function DevicesChart() {
       {
         label: 'First dataset',
         data: labels.map(() => getRandomInt(100)),
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
-        borderColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'rgb(79,182,255)',
+        borderColor: 'rgba(76,163,255,0.13)',
         borderRadius: 10,
         maxBarThickness: 80,
         cubicInterpolationMode: 'monotone' as const,

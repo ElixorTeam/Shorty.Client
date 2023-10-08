@@ -83,11 +83,11 @@ export default function WeekLineChart() {
         backgroundColor: (context: ScriptableContext<'line'>) => {
           const { ctx } = context.chart
           const gradient = ctx.createLinearGradient(0, 0, 0, 200)
-          gradient.addColorStop(0, 'rgba(0,0,0,0.5)')
-          gradient.addColorStop(1, 'rgba(0,0,0,0.02)')
+          gradient.addColorStop(0, 'rgb(100,181,255)')
+          gradient.addColorStop(1, 'rgba(110,168,255,0.03)')
           return gradient
         },
-        borderColor: '#292524',
+        borderColor: '#29a0f5',
         cubicInterpolationMode: 'monotone' as const,
       },
     ],
