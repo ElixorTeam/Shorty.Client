@@ -1,14 +1,16 @@
 import { ReactNode } from 'react'
 
-import HomeHeader from '@/components/Layout/HomeHeader'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
 
-export default function HomeLayout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <>
-      <HomeHeader />
-      <div className="mx-auto h-[calc(100vh-64px)] w-full max-w-screen-xl">
+    <div className="flex min-h-screen w-full flex-col">
+      <Header />
+      <main className="mx-auto h-full w-full max-w-screen-xl grow">
         {children}
-      </div>
-    </>
+      </main>
+      <Footer />
+    </div>
   )
 }

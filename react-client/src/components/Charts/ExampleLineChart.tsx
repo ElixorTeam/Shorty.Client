@@ -27,20 +27,12 @@ ChartJS.register(
   Filler
 )
 
-export default function WeekLineChart() {
+export default function ExampleLineChart() {
   const chartRef = useRef<ChartJS>(null)
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * max)
   }
-  const labels = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ]
+  const labels = ['', '', '', '', '', '', '']
   const options: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -51,24 +43,10 @@ export default function WeekLineChart() {
     },
     scales: {
       x: {
-        grid: {
-          display: false,
-        },
-        border: {
-          display: false,
-        },
+        display: false,
       },
       y: {
-        grid: {
-          display: true,
-        },
-        border: {
-          dash: [2, 4],
-          display: false,
-        },
-        ticks: {
-          maxTicksLimit: 5,
-        },
+        display: false,
       },
     },
   }
@@ -83,8 +61,8 @@ export default function WeekLineChart() {
         backgroundColor: (context: ScriptableContext<'line'>) => {
           const { ctx } = context.chart
           const gradient = ctx.createLinearGradient(0, 0, 0, 200)
-          gradient.addColorStop(0, 'rgb(100,181,255)')
-          gradient.addColorStop(1, 'rgba(110,168,255,0.03)')
+          gradient.addColorStop(0, 'rgba(100,181,255,0.5)')
+          gradient.addColorStop(1, 'rgba(110,168,255,0)')
           return gradient
         },
         borderColor: '#29a0f5',

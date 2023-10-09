@@ -1,3 +1,5 @@
+'use client'
+
 import {
   BarElement,
   Chart as ChartJS,
@@ -61,5 +63,6 @@ export default function DevicesChart() {
       },
     },
   }
+  // @ts-ignore
   return <Bar data={data} className="grow" options={options} />
 }
