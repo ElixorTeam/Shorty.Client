@@ -9,7 +9,7 @@ function LinkItem({ isActive }: { isActive: boolean }) {
     <button
       type="button"
       className={clsx(
-        isActive ? 'relative bg-sky-100' : '',
+        isActive ? 'relative bg-sky-100 dark:bg-neutral-900' : '',
         'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4'
       )}
     >
@@ -46,15 +46,15 @@ function LinkItem({ isActive }: { isActive: boolean }) {
 export default function LinkSelector() {
   const links = Array.from(Array(10).keys())
   return (
-    <div className="flex h-full w-full flex-col overflow-hidden border-y bg-slate-50 dark:border-y-white/[.2] dark:bg-neutral-900">
+    <div className="flex h-full w-full flex-col overflow-hidden border-y bg-slate-50 dark:border-y-white/[.2] dark:bg-black">
       <div className="my-2 flex h-10 w-full items-center justify-between pl-6 pr-2">
         <p className="text-2xl font-semibold">Links</p>
         <div className="flex gap-2">
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border bg-slate-100 transition hover:bg-white"
+            className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border bg-slate-100 transition hover:bg-white dark:border-white/[.15] dark:bg-neutral-900 dark:hover:bg-neutral-800"
           >
-            <MagnifyingGlassIcon className="h-4 w-4 text-gray-500" />
+            <MagnifyingGlassIcon className="h-4 w-4 text-gray-500 dark:text-neutral-400" />
           </button>
           <button
             type="button"

@@ -2,14 +2,13 @@
 
 import { ChevronUpIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import cursor from '@/public/cursor.svg'
-import elixor from '@/public/ElixorIcon.png'
-
 import Image from 'next/image'
+import { ReactNode } from 'react'
 
 import ExampleLineChart from '@/components/Charts/ExampleLineChart'
 import QRGenerator from '@/components/QRGenerator'
-import { ReactNode } from 'react'
+import cursor from '@/public/cursor.svg'
+import elixor from '@/public/ElixorIcon.png'
 
 function FeatureCard({
   title,
@@ -37,7 +36,7 @@ function FeatureCard({
 
 export default function HomePage() {
   return (
-    <div className="h-full w-full">
+    <div className="mt-16 h-full w-full">
       <div className="flex h-[30rem] flex-col items-center justify-center px-6 text-center">
         <p className="bg-gradient-to-b from-gray-500 to-gray-900 bg-clip-text py-5 text-3xl font-semibold text-transparent dark:from-neutral-100 dark:to-neutral-500 md:text-5xl">
           Shorten, Manage, Analyze. Your key to efficient links.
@@ -47,26 +46,14 @@ export default function HomePage() {
           user-friendly platform for shortening, managing, and analyzing your
           links.
         </p>
-        <div className="mt-10 flex gap-6">
-          <a href="/app">
-            <button
-              type="button"
-              className="rounded-lg border border-white/[.15] bg-gray-800 px-6 py-2 transition hover:bg-gray-600 dark:bg-neutral-200 dark:hover:bg-neutral-50"
-            >
-              <p className="text-gray-100 dark:text-neutral-800">
-                Try right now
-              </p>
-            </button>
-          </a>
-          <a href="/app">
-            <button
-              type="button"
-              className="rounded-lg border px-4 py-2 transition hover:bg-gray-100 dark:border-white/[.3] dark:hover:bg-neutral-900"
-            >
-              <p>Enter app</p>
-            </button>
-          </a>
-        </div>
+        <a href="/app">
+          <button
+            type="button"
+            className="mt-8 rounded-lg border border-white/[.15] bg-gray-800 px-6 py-2 transition hover:bg-gray-600 dark:bg-neutral-200 dark:hover:bg-neutral-50"
+          >
+            <p className="text-gray-100 dark:text-neutral-800">Get Started</p>
+          </button>
+        </a>
       </div>
       <div className="mt-4 w-full text-center">
         <p className="text-3xl font-thin tracking-tight text-neutral-700 dark:text-neutral-300">

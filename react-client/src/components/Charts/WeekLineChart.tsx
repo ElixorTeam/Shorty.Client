@@ -84,7 +84,7 @@ export default function WeekLineChart() {
           const { ctx } = context.chart
           const gradient = ctx.createLinearGradient(0, 0, 0, 200)
           gradient.addColorStop(0, 'rgb(100,181,255)')
-          gradient.addColorStop(1, 'rgba(110,168,255,0.03)')
+          gradient.addColorStop(1, 'rgba(110,168,255,0)')
           return gradient
         },
         borderColor: '#29a0f5',
