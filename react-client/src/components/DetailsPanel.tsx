@@ -53,10 +53,10 @@ function InputText({
           id={id}
           name="link"
           disabled
-          className="h-8 w-full bg-transparent px-2 hover:cursor-text"
+          className="h-8 w-full border-none bg-transparent px-2 text-sm hover:cursor-text"
           value={value}
         />
-        <ClipboardDocumentIcon className="mr-2 h-5 w-5 text-gray-700 hover:text-black" />
+        <ClipboardDocumentIcon className="mr-2 h-5 w-5 text-gray-700 hover:text-black dark:text-neutral-300 dark:hover:text-neutral-200 dark:active:text-white" />
       </div>
     </div>
   )

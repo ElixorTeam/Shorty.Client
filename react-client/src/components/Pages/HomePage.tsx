@@ -134,7 +134,7 @@ export default function HomePage() {
               <input
                 type="text"
                 disabled
-                className="h-full w-full bg-transparent px-2 text-sm font-light text-neutral-600 focus:outline-none"
+                className="h-full w-full border-none bg-transparent px-2 text-sm font-light placeholder:text-neutral-600 focus:outline-none"
                 placeholder="Enter password..."
               />
               <LockClosedIcon className="mr-2 h-4 w-4 text-gray-700 dark:text-neutral-500" />
