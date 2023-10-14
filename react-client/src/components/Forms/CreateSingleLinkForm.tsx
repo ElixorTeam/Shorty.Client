@@ -65,7 +65,7 @@ const resolver: Resolver<FormValues> = async (values) => {
   }
 }
 
-export default function CreateLinkForm({
+export default function CreateSingleLinkForm({
   closeDialog,
 }: {
   closeDialog: () => void
@@ -136,37 +136,41 @@ export default function CreateLinkForm({
             />
           </div>
         </label>
-        <div
-          className={clsx(
-            (errors.linkPrefix || errors.linkPath) && 'border-red-500',
-            'relative mt-8 flex h-8 items-center rounded-lg border border-black/[.2] dark:border-white/[.2]'
-          )}
-        >
-          <p className="absolute -top-6 line-clamp-1 text-sm text-gray-700 dark:text-neutral-300">
-            Prefix{' '}
-            <span className="text-gray-500 dark:text-neutral-700">
-              (optional)
-            </span>
-          </p>
-          <input
-            type="text"
-            {...register('linkPrefix')}
-            className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
-          />
-          <div className="flex h-full items-center border-x border-x-black/[.2] bg-gray-100 px-4 dark:border-x-white/[.2] dark:bg-neutral-900 dark:text-neutral-300">
-            <p className="text-sm">.sh0.su/</p>
+        <div className="mt-2 w-full">
+          <div className="mb-1 flex w-full">
+            <p className="line-clamp-1 w-full text-sm text-gray-700 dark:text-neutral-300">
+              Prefix{' '}
+              <span className="text-gray-500 dark:text-neutral-700">
+                (optional)
+              </span>
+            </p>
+            <p className="line-clamp-1 w-full pl-14 text-sm text-gray-700 dark:text-neutral-300">
+              Path{' '}
+              <span className="text-gray-500 dark:text-neutral-700">
+                (optional)
+              </span>
+            </p>
           </div>
-          <p className="absolute -top-6 right-0 line-clamp-1 text-sm text-gray-700 dark:text-neutral-300">
-            Path{' '}
-            <span className="text-gray-500 dark:text-neutral-700">
-              (optional)
-            </span>
-          </p>
-          <input
-            type="text"
-            {...register('linkPath')}
-            className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
-          />
+          <div
+            className={clsx(
+              (errors.linkPrefix || errors.linkPath) && 'border-red-500',
+              'flex h-8 items-center rounded-lg border border-black/[.2] dark:border-white/[.2]'
+            )}
+          >
+            <input
+              type="text"
+              {...register('linkPrefix')}
+              className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
+            />
+            <div className="flex h-full items-center border-x border-x-black/[.2] bg-gray-100 px-4 dark:border-x-white/[.2] dark:bg-neutral-900 dark:text-neutral-300">
+              <p className="text-sm">.sh0.su/</p>
+            </div>
+            <input
+              type="text"
+              {...register('linkPath')}
+              className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
+            />
+          </div>
         </div>
         <label htmlFor="password" className="mt-2">
           <p className="text-sm text-gray-700 dark:text-neutral-300">

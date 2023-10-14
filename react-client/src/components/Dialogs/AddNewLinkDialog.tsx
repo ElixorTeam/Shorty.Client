@@ -1,12 +1,23 @@
 'use client'
 
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Tab, Transition } from '@headlessui/react'
+import clsx from 'clsx'
 import { Fragment, useState } from 'react'
 
-import CreateLinkForm from '@/components/Forms/CreateLinkForm'
+import CreateGroupLinkForm from '@/components/Forms/CreateGroupLinkForm'
+import CreateSingleLinkForm from '@/components/Forms/CreateSingleLinkForm'
 
 export default function AddNewLinkDialog() {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedTab, setSelectedTab] = useState(0)
+  const tabs = [
+    { id: 1, title: 'Single', content: CreateSingleLinkForm },
+    { id: 2, title: 'Group', content: CreateGroupLinkForm },
+  ]
+  const onModalClose = () => {
+    setIsOpen(false)
+    setSelectedTab(0)
+  }
 
   return (
     <>
@@ -19,11 +30,7 @@ export default function AddNewLinkDialog() {
         <p className="text-white">New</p>
       </button>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          onClose={() => setIsOpen(false)}
-        >
+        <Dialog as="div" className="relative z-50" onClose={onModalClose}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -35,7 +42,6 @@ export default function AddNewLinkDialog() {
           >
             <div className="fixed inset-0 bg-black/[.2] dark:bg-black/[.5]" />
           </Transition.Child>
-
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
@@ -48,15 +54,46 @@ export default function AddNewLinkDialog() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:border dark:border-white/[.15] dark:bg-neutral-950">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg text-gray-900 dark:text-neutral-200"
-                  >
-                    Create new link
-                  </Dialog.Title>
-                  <div className="mt-2 h-full w-full">
-                    <CreateLinkForm closeDialog={() => setIsOpen(false)} />
-                  </div>
+                  <Tab.Group onChange={setSelectedTab}>
+                    <Dialog.Title as="div" className="flex w-full flex-col">
+                      <Tab.List className="flex">
+                        {tabs.map((item) => (
+                          <Tab
+                            key={item.id}
+                            className={({ selected }) =>
+                              clsx(
+                                selected &&
+                                  'border-b-2 border-b-sky-400 text-sky-400 dark:border-b-sky-400 dark:text-sky-400',
+                                'w-full border-b pb-2 text-gray-500 transition hover:border-b-gray-400 hover:text-gray-800 dark:border-b-neutral-500 dark:text-neutral-500 dark:hover:border-b-neutral-400 dark:hover:text-neutral-400'
+                              )
+                            }
+                          >
+                            {item.title}
+                          </Tab>
+                        ))}
+                      </Tab.List>
+                    </Dialog.Title>
+                    <Tab.Panels>
+                      {tabs.map((item, index) => (
+                        <Tab.Panel key={item.id}>
+                          <Transition
+                            appear
+                            show={selectedTab === index}
+                            enter="transition-opacity duration-500"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="transition-opacity duration-500"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <div className="mt-2 h-full w-full">
+                              <item.content closeDialog={onModalClose} />
+                            </div>
+                          </Transition>
+                        </Tab.Panel>
+                      ))}
+                    </Tab.Panels>
+                  </Tab.Group>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

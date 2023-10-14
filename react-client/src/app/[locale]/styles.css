@@ -11,12 +11,3 @@
     color-scheme: dark;
   }
 }
-
-.bg-gradient-dithered {
-  background: linear-gradient(45deg, #202020 25%, transparent 25%) -50px 0,
-  linear-gradient(45deg, #202020 25%, transparent 25%) -50px 0,
-  linear-gradient(135deg, #202020 75%, transparent 75%),
-  linear-gradient(135deg, #202020 75%, transparent 75%);
-  background-size: 100px 100px;
-  background-color: #282828;
-}
