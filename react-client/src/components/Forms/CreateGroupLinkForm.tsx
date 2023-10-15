@@ -1,9 +1,10 @@
 import clsx from 'clsx'
+import { KeyboardEvent, useState } from 'react'
 import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { PlusCircleIcon } from '@heroicons/react/24/outline'
-import { useState } from 'react'
+
 import LinkListForm from '@/components/Forms/LinkListForm'
+import LinkPrefixPathInputField from '@/components/Forms/LinkPrefixPathInputField'
 
 type FormValues = {
   title: string
@@ -21,14 +22,19 @@ export default function CreateGroupLinkForm({
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>()
-
   const [links, setLinks] = useState<string[]>([])
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    if (links.length === 0) {
+      toast.error('Should be at least 1 link')
+      return
+    }
+    const numberedLinks = links.map((link, index) => `${index + 1}. ${link}`)
+    const basicLink = data.linkPrefix ? `${data.linkPrefix}.sh0.su` : 'sh0.su'
+    const finalLink = `${basicLink}/${data.linkPath}`
+    toast(`title: ${data.title}\nshort: ${finalLink}\n links:${numberedLinks}`)
     closeDialog()
   }
-
-  const addLink = (url: string) => setLinks([...links, url])
 
   const onError = (errs: FieldErrors) => {
     Object.entries(errs).forEach((err) => {
@@ -36,12 +42,18 @@ export default function CreateGroupLinkForm({
       toast.error(errMsg)
     })
   }
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Enter') event.preventDefault()
+  }
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <form
       className="mt-4 h-full w-full"
       onSubmit={handleSubmit(onSubmit, onError)}
+      onKeyDown={handleKeyDown}
     >
-      <div className="flex h-full w-full flex-col gap-2">
+      <div className="flex h-full w-full flex-col gap-4">
         <label htmlFor="title">
           <p className="text-sm text-gray-700 dark:text-neutral-300">
             Title{' '}
@@ -61,45 +73,8 @@ export default function CreateGroupLinkForm({
             />
           </div>
         </label>
-        <div className="mt-2 w-full">
-          <LinkListForm />
-        </div>
-        <div className="mt-2 w-full">
-          <div className="mb-1 flex w-full">
-            <p className="line-clamp-1 w-full text-sm text-gray-700 dark:text-neutral-300">
-              Prefix{' '}
-              <span className="text-gray-500 dark:text-neutral-700">
-                (optional)
-              </span>
-            </p>
-            <p className="line-clamp-1 w-full pl-14 text-sm text-gray-700 dark:text-neutral-300">
-              Path{' '}
-              <span className="text-gray-500 dark:text-neutral-700">
-                (optional)
-              </span>
-            </p>
-          </div>
-          <div
-            className={clsx(
-              (errors.linkPrefix || errors.linkPath) && 'border-red-500',
-              'flex h-8 items-center rounded-lg border border-black/[.2] dark:border-white/[.2]'
-            )}
-          >
-            <input
-              type="text"
-              {...register('linkPrefix')}
-              className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
-            />
-            <div className="flex h-full items-center border-x border-x-black/[.2] bg-gray-100 px-4 dark:border-x-white/[.2] dark:bg-neutral-900 dark:text-neutral-300">
-              <p className="text-sm">.sh0.su/</p>
-            </div>
-            <input
-              type="text"
-              {...register('linkPath')}
-              className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
-            />
-          </div>
-        </div>
+        <LinkListForm links={links} setLinks={setLinks} />
+        <LinkPrefixPathInputField register={register} errors={errors} />
       </div>
       <div className="mt-6 flex justify-end gap-2">
         <button

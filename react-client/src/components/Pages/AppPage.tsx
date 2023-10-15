@@ -1,12 +1,12 @@
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 import Dashboard from '@/components/Dashboard'
 import DetailsPanel from '@/components/DetailsPanel'
-import LinkSelector from '@/components/LinkSelector'
 import ProfileButton from '@/components/ProfileButton'
+import LinkSelector from '@/components/Selectors/LinkSelector'
 
 export default function AppPage() {
   return (
-    <div className="h-full w-full grid-cols-[18rem,1fr] grid-rows-1 divide-x border-x dark:divide-white/[.2] dark:border-x-white/[.15] sm:grid">
+    <div className="h-full w-full grid-cols-[18rem,1fr] grid-rows-1 divide-x dark:divide-white/[.2] dark:border-x-white/[.15] sm:grid min-[1930px]:border-x">
       <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden bg-white dark:bg-black">
         <div className="flex h-[63px] w-full shrink-0 items-center justify-center text-center">
           <a href="/">

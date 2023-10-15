@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply h-screen bg-white text-black antialiased dark:bg-black dark:text-white;
+    @apply h-screen bg-gray-50 text-black antialiased dark:bg-black dark:text-white;
   }
 
   .dark {

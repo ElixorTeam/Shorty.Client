@@ -1,10 +1,21 @@
 import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
-import { ChangeEvent, useState, KeyboardEvent } from 'react'
+import {
+  ChangeEvent,
+  useState,
+  KeyboardEvent,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 import toast from 'react-hot-toast'
 import isURL from 'validator/lib/isURL'
 
-export default function LinkListForm() {
-  const [links, setLinks] = useState<string[]>([])
+export default function LinkListForm({
+  links,
+  setLinks,
+}: {
+  links: string[]
+  setLinks: Dispatch<SetStateAction<string[]>>
+}) {
   const [inputValue, setInputValue] = useState('')
 
   const handleAddLink = () => {
@@ -36,7 +47,7 @@ export default function LinkListForm() {
   return (
     <div className="w-full">
       <p className="mb-1 text-sm text-gray-700 dark:text-neutral-300">Links</p>
-      <div className="flex h-28 w-full flex-col overflow-hidden rounded-lg border border-black/[.2] dark:border-white/[.2]">
+      <div className="flex h-32 w-full flex-col overflow-hidden rounded-lg border border-black/[.2] dark:border-white/[.2]">
         <div className="flex h-8 w-full items-center border-b border-b-black/[.2] dark:border-b-white/[.2]">
           <input
             value={inputValue}
