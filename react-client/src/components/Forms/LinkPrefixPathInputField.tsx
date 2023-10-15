@@ -27,7 +27,7 @@ export default function LinkPrefixPathInputField({
       <div
         className={clsx(
           (errors.linkPrefix || errors.linkPath) && 'border-red-500',
-          'flex h-8 items-center rounded-lg border border-black/[.2] dark:border-white/[.2]'
+          'flex h-8 items-center rounded-lg border border-black/[.2] dark:border-white/[.15]'
         )}
       >
         <input
@@ -48,7 +48,7 @@ export default function LinkPrefixPathInputField({
           })}
           className="h-full w-full border-none bg-transparent px-2 text-sm focus:outline-none focus:ring-0 dark:placeholder:text-neutral-500"
         />
-        <div className="flex h-full items-center border-x border-x-black/[.2] bg-gray-100 px-4 dark:border-x-white/[.2] dark:bg-neutral-900 dark:text-neutral-300">
+        <div className="flex h-full items-center border-x border-x-black/[.2] bg-gray-100 px-4 dark:border-x-white/[.15] dark:bg-neutral-900 dark:text-neutral-300">
           <p className="text-sm">.sh0.su/</p>
         </div>
         <input

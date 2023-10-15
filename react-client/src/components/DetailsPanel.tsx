@@ -47,7 +47,7 @@ function InputText({
       >
         {label}
       </label>
-      <div className="mt-1 flex items-center overflow-hidden rounded-lg border bg-white dark:border-white/[.2] dark:bg-black">
+      <div className="mt-1 flex items-center overflow-hidden rounded-lg border bg-white dark:border-white/[.15] dark:bg-black">
         <input
           type="text"
           id={id}

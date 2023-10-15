@@ -134,7 +134,7 @@ export default function CreateSingleLinkForm({
             id="private"
             {...register('isPrivate')}
             type="checkbox"
-            className="mt-[1px] h-4 w-4 rounded border-black/[.2] bg-transparent focus:outline-0 focus:ring-0 focus:ring-offset-0 dark:border-white/[.2]"
+            className="mt-[1px] h-4 w-4 rounded border-black/[.2] bg-transparent focus:outline-0 focus:ring-0 focus:ring-offset-0 dark:border-white/[.15]"
           />
         </label>
       </div>
@@ -142,7 +142,7 @@ export default function CreateSingleLinkForm({
         <button
           type="button"
           onClick={closeDialog}
-          className="overflow-hidden rounded-lg border border-black/[.1] px-4 py-2 hover:bg-gray-100 dark:border-white/[.2] dark:hover:bg-neutral-900"
+          className="overflow-hidden rounded-lg border border-black/[.1] px-4 py-2 hover:bg-gray-100 dark:border-white/[.15] dark:hover:bg-neutral-900"
         >
           <p className="text-sm">Cancel</p>
         </button>

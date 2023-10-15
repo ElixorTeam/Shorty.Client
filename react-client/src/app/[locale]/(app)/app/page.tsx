@@ -1,5 +1,9 @@
-import AppRefactPage from '@/components/Pages/AppPage'
+import AppPage from '@/components/Pages/AppPage'
 
-export default function Page() {
-  return <AppRefactPage />
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [_: string]: string | string[] | undefined }
+}) {
+  return <AppPage searchParams={searchParams} />
 }

@@ -23,7 +23,7 @@ export default function LinkGroup({
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="flex h-full w-full items-center justify-between overflow-hidden border-b bg-white px-4"
+          className="flex h-full w-full items-center justify-between overflow-hidden border-b bg-white px-4 dark:border-b-white/[.1] dark:bg-neutral-900/[.6]"
         >
           <p className="">{tagTitle}</p>
           {isOpen ? (
@@ -36,7 +36,7 @@ export default function LinkGroup({
       <ul
         className={clsx(
           isOpen ? 'flex' : 'hidden',
-          'w-full flex-col gap-1 border-b'
+          'w-full flex-col gap-1 border-b dark:border-b-white/[.15]'
         )}
       >
         {links.map((item) => (

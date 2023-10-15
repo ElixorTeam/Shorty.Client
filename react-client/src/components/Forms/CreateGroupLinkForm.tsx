@@ -80,7 +80,7 @@ export default function CreateGroupLinkForm({
         <button
           type="button"
           onClick={closeDialog}
-          className="overflow-hidden rounded-lg border border-black/[.1] px-4 py-2 hover:bg-gray-100 dark:border-white/[.2] dark:hover:bg-neutral-900"
+          className="overflow-hidden rounded-lg border border-black/[.1] px-4 py-2 hover:bg-gray-100 dark:border-white/[.15] dark:hover:bg-neutral-900"
         >
           <p className="text-sm">Cancel</p>
         </button>

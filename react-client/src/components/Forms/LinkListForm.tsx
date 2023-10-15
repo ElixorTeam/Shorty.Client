@@ -47,8 +47,8 @@ export default function LinkListForm({
   return (
     <div className="w-full">
       <p className="mb-1 text-sm text-gray-700 dark:text-neutral-300">Links</p>
-      <div className="flex h-32 w-full flex-col overflow-hidden rounded-lg border border-black/[.2] dark:border-white/[.2]">
-        <div className="flex h-8 w-full items-center border-b border-b-black/[.2] dark:border-b-white/[.2]">
+      <div className="flex h-32 w-full flex-col overflow-hidden rounded-lg border border-black/[.2] dark:border-white/[.15]">
+        <div className="flex h-8 w-full items-center border-b border-b-black/[.2] dark:border-b-white/[.15]">
           <input
             value={inputValue}
             onChange={handleInputChange}
