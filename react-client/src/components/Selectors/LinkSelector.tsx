@@ -1,7 +1,7 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
 import AddNewLinkDialog from '@/components/Dialogs/AddNewLinkDialog'
 import LinkGroup from '@/components/Selectors/LinkGroup'
+import LinkSearchInput from '@/components/Selectors/LinkSearchInput'
+import LinkSortDropdownMenu from '@/components/Selectors/LinkSortDropdownMenu'
 import avatar_artyom from '@/public/avatar_artyom.jpg'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 
@@ -45,15 +45,10 @@ export default function LinkSelector() {
   )
   return (
     <div className="flex h-full w-full flex-col overflow-hidden border-y bg-slate-50 dark:border-y-white/[.15] dark:bg-black">
-      <div className="flex h-12 w-full items-center justify-between border-b py-2 pl-6 pr-2 dark:border-b-white/[.15]">
-        <p className="text-2xl font-semibold">Links</p>
+      <div className="flex h-12 w-full items-center justify-between border-b p-2 dark:border-b-white/[.15]">
+        <LinkSearchInput />
         <div className="flex gap-2">
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border bg-slate-100 transition hover:bg-white dark:border-white/[.15] dark:bg-neutral-900 dark:hover:bg-neutral-800"
-          >
-            <MagnifyingGlassIcon className="h-4 w-4 text-gray-500 dark:text-neutral-400" />
-          </button>
+          <LinkSortDropdownMenu />
           <AddNewLinkDialog />
         </div>
       </div>

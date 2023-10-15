@@ -7,6 +7,9 @@ import { useState } from 'react'
 
 import LinkSelectorItem from '@/components/Selectors/LinkSelectorItem'
 import { LinkRecordType } from '@/shared/LinkRecordType'
+import { SortKeyEnum } from '@/shared/SortKeyEnum'
+import useSearchStore from '@/stores/searchStore'
+import useSortStore from '@/stores/sortStore'
 
 export default function LinkGroup({
   tagTitle,
@@ -17,8 +20,31 @@ export default function LinkGroup({
 }) {
   const [isOpen, setIsOpen] = useState(true)
 
+  const searchString = useSearchStore((state) => state.searchString)
+  const sortKey = useSortStore((state) => state.sortKey)
+
+  const filteredAndSortedLinks = links
+    .filter((item) => item.title.includes(searchString))
+    .sort((a, b) => {
+      switch (sortKey) {
+        case SortKeyEnum.Name:
+          return a.title.localeCompare(b.title)
+        case SortKeyEnum.Date:
+          return b.createDate.getTime() - a.createDate.getTime()
+        // case SortKeyEnum.View:
+        //   return b.views - a.views;
+        default:
+          return 0
+      }
+    })
+
   return (
-    <div className="flex w-full flex-col">
+    <div
+      className={clsx(
+        filteredAndSortedLinks.length === 0 ? 'hidden' : 'flex',
+        'w-full flex-col'
+      )}
+    >
       <div className="h-8 w-full">
         <button
           type="button"
@@ -39,7 +65,7 @@ export default function LinkGroup({
           'w-full flex-col gap-1 border-b dark:border-b-white/[.15]'
         )}
       >
-        {links.map((item) => (
+        {filteredAndSortedLinks.map((item) => (
           <li key={item.uid}>
             <LinkSelectorItem link={item} />
           </li>

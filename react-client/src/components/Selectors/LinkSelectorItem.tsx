@@ -26,11 +26,11 @@ export default function LinkSelectorItem({ link }: { link: LinkRecordType }) {
         type="button"
         className={clsx(
           isActive ? 'relative bg-sky-100 dark:bg-neutral-900' : '',
-          'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4'
+          'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4 transition-colors'
         )}
       >
         {isActive && (
-          <div className="absolute inset-y-0 left-0 w-1 rounded-r-lg bg-sky-400" />
+          <div className="absolute inset-y-0 left-0 w-1 rounded-r-sm bg-sky-400" />
         )}
         <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full">
           {link.imageURL ? (
