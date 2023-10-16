@@ -1,7 +1,7 @@
 'use client'
 
 import { Menu, Transition } from '@headlessui/react'
-import { ShareIcon } from '@heroicons/react/24/solid'
+import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
 import {
@@ -12,7 +12,7 @@ import {
   VKIcon,
   VKShareButton,
 } from 'react-share'
-import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
+
 import DetailPanelButton from '@/components/DetailsPanel/DetailsPanelButton'
 
 export default function ShareLinkMenu({ linkUrl }: { linkUrl: string }) {
@@ -33,7 +33,7 @@ export default function ShareLinkMenu({ linkUrl }: { linkUrl: string }) {
   ]
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button>
+      <Menu.Button as="div">
         <DetailPanelButton Icon={PaperAirplaneIcon} text="Share" />
       </Menu.Button>
       <Transition
@@ -45,10 +45,7 @@ export default function ShareLinkMenu({ linkUrl }: { linkUrl: string }) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items
-          className="absolute right-0 z-30 mt-2 w-32 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1
-           ring-black/[.05] focus:outline-none dark:bg-[#23212e] dark:ring-white/[.1]"
-        >
+        <Menu.Items className="absolute -right-10 z-30 mt-2 w-32 rounded-lg border border-black/[.1] bg-gray-50 py-1 shadow-lg dark:border-white/[.15] dark:bg-neutral-950">
           {items.map((item) => (
             <Menu.Item key={item.id}>
               {({ active }) => (
@@ -57,8 +54,8 @@ export default function ShareLinkMenu({ linkUrl }: { linkUrl: string }) {
                     type="button"
                     className={clsx(
                       active
-                        ? 'bg-sky-50 text-sky-700 dark:bg-sky-200/[.1] dark:text-sky-300'
-                        : 'text-gray-700 dark:text-gray-300',
+                        ? 'bg-gray-200 text-black dark:bg-neutral-900 dark:text-neutral-200'
+                        : 'text-gray-700 dark:text-neutral-400',
                       'group flex w-full items-center px-4 py-2 text-sm'
                     )}
                   >

@@ -40,20 +40,21 @@ export default function PanelTitleInput({ title }: { title: string }) {
         })}
         defaultValue={title}
         placeholder="Enter title..."
-        className="w-full rounded-lg border-black/[.1] p-0 px-2 py-1 text-sm focus:border-black/[.1] focus:ring-0"
+        className="w-full rounded-lg border-black/[.1] bg-transparent p-0 px-2 py-1 text-sm placeholder:text-neutral-600
+         focus:border-black/[.1] focus:ring-0 dark:border-white/[.15]"
       />
       <button type="submit">
-        <CheckIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
+        <CheckIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
       </button>
       <button type="button" onClick={() => setIsEditMode(false)}>
-        <XMarkIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
+        <XMarkIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
       </button>
     </form>
   ) : (
     <div className="flex w-full items-center justify-center gap-2">
       <p className="line-clamp-1 text-xl">{title}</p>
       <button type="button" onClick={() => setIsEditMode(true)}>
-        <PencilIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
+        <PencilIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
       </button>
     </div>
   )

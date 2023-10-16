@@ -1,7 +1,7 @@
 'use client'
 
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
 
 export default function InputTextWithCopy({

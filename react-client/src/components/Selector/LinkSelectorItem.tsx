@@ -32,18 +32,17 @@ export default function LinkSelectorItem({ link }: { link: LinkRecordType }) {
         {isActive && (
           <div className="absolute inset-y-0 left-0 w-1 rounded-r-sm bg-sky-400" />
         )}
-        <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full">
+        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
           {link.imageURL ? (
             <Image
               src={avatar_artyom.src}
-              width={1}
-              height={1}
-              layout="responsive"
+              width={48}
+              height={48}
               alt=""
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gray-200">
+            <div className="flex h-full w-full items-center justify-center bg-gray-200 dark:bg-neutral-700  ">
               <span>{link.title.charAt(0)}</span>
             </div>
           )}

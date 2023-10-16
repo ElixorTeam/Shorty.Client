@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import Link from 'next-intl/link'
 
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
-import Dashboard from '@/components/Dashboard'
+import Dashboard from '@/components/Dashboard/Dashboard'
 import DetailsPanel from '@/components/DetailsPanel/DetailsPanel'
 import ProfileButton from '@/components/ProfileButton'
 import LinkSelector from '@/components/Selector/LinkSelector'

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { ReactNode } from 'react'
 
 import ExampleLineChart from '@/components/Charts/ExampleLineChart'
-import QRGenerator from '@/components/QRGenerator'
+import QRGenerator from '@/components/DetailsPanel/QRGenerator'
 import cursor from '@/public/cursor.svg'
 import elixor from '@/public/ElixorIcon.png'
 

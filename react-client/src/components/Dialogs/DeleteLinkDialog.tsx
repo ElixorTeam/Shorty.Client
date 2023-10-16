@@ -52,7 +52,7 @@ export default function DeleteLinkDialog({ linkUid }: { linkUid: string }) {
                   <Dialog.Title>
                     <p className="mb-3 text-lg font-semibold">Deleting link</p>
                   </Dialog.Title>
-                  <p className="mb-4 text-gray-600">
+                  <p className="mb-4 text-gray-600 dark:text-neutral-500">
                     Are you sure you wont to delete link? All link data will be
                     permanently removed. This action cannot be undone.
                   </p>
@@ -60,7 +60,7 @@ export default function DeleteLinkDialog({ linkUid }: { linkUid: string }) {
                     <button
                       type="button"
                       onClick={() => setIsOpen(false)}
-                      className="overflow-hidden rounded-lg border border-black/[.1] px-4 py-1 transition-colors hover:bg-gray-100"
+                      className="overflow-hidden rounded-lg border border-black/[.1] px-4 py-1 transition-colors hover:bg-gray-100 dark:border-white/[.15] dark:hover:bg-neutral-900"
                     >
                       Close
                     </button>

@@ -30,7 +30,7 @@ export default function DetailsPanel() {
             type="button"
             className="invisible absolute inset-0 flex h-full w-full items-center justify-center bg-white/[.7] group-hover:visible"
           >
-            <CameraIcon className="h-10 w-10 stroke-1" />
+            <CameraIcon className="h-10 w-10 stroke-1 text-black" />
           </button>
         </div>
         <PanelTitleInput title="Channel Elixor" />

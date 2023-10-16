@@ -3,17 +3,16 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { QrCodeIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import DetailPanelButton from '@/components/DetailsPanel/DetailsPanelButton'
-import QRGenerator from '@/components/QRGenerator'
+import QRGenerator from '@/components/DetailsPanel/QRGenerator'
 
 export default function QRCodeDialog({ linkUrl }: { linkUrl: string }) {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
       <DetailPanelButton
-        text="QR Code"
+        text="QRCode"
         Icon={QrCodeIcon}
         onClick={() => setIsOpen(true)}
       />
@@ -46,14 +45,16 @@ export default function QRCodeDialog({ linkUrl }: { linkUrl: string }) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-xs overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:border dark:border-white/[.15] dark:bg-neutral-950">
-                  <Dialog.Title className="flex items-center justify-between">
+                  <Dialog.Title className="flex items-center justify-between dark:mb-4">
                     <p className="text-lg font-semibold">QR Code</p>
                     <button type="button" onClick={() => setIsOpen(false)}>
                       <XMarkIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
                     </button>
                   </Dialog.Title>
                   <div className="flex h-full w-full items-center justify-center">
-                    <QRGenerator text={linkUrl} />
+                    <div className="h-fit w-fit overflow-hidden rounded-lg">
+                      <QRGenerator text={linkUrl} />
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

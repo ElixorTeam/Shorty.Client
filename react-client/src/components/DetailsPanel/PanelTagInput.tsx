@@ -49,11 +49,11 @@ export default function PanelTagInput({ tag }: { tag: string }) {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
-            className="w-full rounded-lg border border-black/[.15] bg-transparent px-2 py-1 pr-10 text-sm shadow-sm focus:border-black/[.15] focus:ring-0"
+            className="w-full rounded-lg border border-black/[.15] bg-transparent px-2 py-1 pr-10 text-sm shadow-sm focus:border-black/[.15] focus:ring-0 dark:border-white/[.15]"
           />
         </div>
         {filteredTags.length > 0 && (
-          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-fit overflow-auto rounded-md border bg-gray-50 py-1 shadow-lg focus:outline-none">
+          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-fit overflow-auto rounded-md border bg-gray-50 py-1 shadow-lg focus:outline-none dark:border-white/[.15] dark:bg-neutral-950">
             {filteredTags.map((item) => (
               <Combobox.Option
                 key={item}
@@ -61,7 +61,9 @@ export default function PanelTagInput({ tag }: { tag: string }) {
                 className={({ active }) =>
                   clsx(
                     'relative cursor-default select-none px-3 py-1 pr-6 text-sm',
-                    active ? 'bg-gray-200 text-black' : 'text-gray-600'
+                    active
+                      ? 'bg-gray-200 text-black dark:bg-neutral-900 dark:text-neutral-200'
+                      : 'text-gray-600 dark:text-neutral-500'
                   )
                 }
               >
@@ -72,19 +74,19 @@ export default function PanelTagInput({ tag }: { tag: string }) {
         )}
       </Combobox>
       <button type="button" onClick={handleSubmit}>
-        <CheckIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
+        <CheckIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
       </button>
       <button type="button" onClick={() => setIsEditMode(false)}>
-        <XMarkIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
+        <XMarkIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
       </button>
     </div>
   ) : (
     <div className="flex w-full items-center justify-center gap-1">
-      <div className="overflow-hidden rounded-2xl border border-black/[.2] bg-gray-200 px-3 py-1">
+      <div className="overflow-hidden rounded-2xl border border-black/[.2] bg-gray-200 px-3 py-1 dark:border-white/[.1] dark:bg-neutral-800">
         <p className="text-sm">{tag}</p>
       </div>
       <button type="button" onClick={() => setIsEditMode(true)}>
-        <PencilIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
+        <PencilIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
       </button>
     </div>
   )

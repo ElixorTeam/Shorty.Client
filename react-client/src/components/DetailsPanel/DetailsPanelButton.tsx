@@ -3,7 +3,7 @@ import { ComponentType } from 'react'
 export default function DetailPanelButton({
   text,
   Icon,
-  onClick,
+  onClick = () => {},
 }: {
   text: string
   Icon: ComponentType<{ className?: string }>
@@ -22,8 +22,4 @@ export default function DetailPanelButton({
       <p className="line-clamp-1 text-xs font-semibold">{text}</p>
     </div>
   )
-}
-
-DetailPanelButton.defaultProps = {
-  onClick: () => {},
 }

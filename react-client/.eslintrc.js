@@ -18,6 +18,7 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js', 'vite.config.ts', 'next.config.js'],
   rules: {
+    'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': 'off',
     'spaced-comment': 'off',
