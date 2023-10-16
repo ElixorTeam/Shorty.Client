@@ -4,7 +4,7 @@ import WeekLineChart from '@/components/Charts/WeekLineChart'
 
 export default function WeekLineChartWrapper() {
   return (
-    <>
+    <div className="flex h-full w-full flex-col overflow-hidden px-6 py-4">
       <div className="mb-4 flex w-full justify-between">
         <p className="text-2xl font-semibold text-stone-800 dark:text-neutral-300">
           Views statistics
@@ -20,6 +20,6 @@ export default function WeekLineChartWrapper() {
       <div className="h-full w-full">
         <WeekLineChart />
       </div>
-    </>
+    </div>
   )
 }

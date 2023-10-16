@@ -5,6 +5,7 @@ import { CheckIcon, PencilIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import toast from 'react-hot-toast'
+import IconButton from '@/components/Common/IconButton'
 
 const tags = ['Youtube', 'Vk']
 
@@ -73,21 +74,15 @@ export default function PanelTagInput({ tag }: { tag: string }) {
           </Combobox.Options>
         )}
       </Combobox>
-      <button type="button" onClick={handleSubmit}>
-        <CheckIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
-      </button>
-      <button type="button" onClick={() => setIsEditMode(false)}>
-        <XMarkIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
-      </button>
+      <IconButton onClick={handleSubmit} Icon={CheckIcon} />
+      <IconButton onClick={() => setIsEditMode(false)} Icon={XMarkIcon} />
     </div>
   ) : (
     <div className="flex w-full items-center justify-center gap-1">
       <div className="overflow-hidden rounded-2xl border border-black/[.2] bg-gray-200 px-3 py-1 dark:border-white/[.1] dark:bg-neutral-800">
         <p className="text-sm">{tag}</p>
       </div>
-      <button type="button" onClick={() => setIsEditMode(true)}>
-        <PencilIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black dark:text-neutral-400 dark:hover:text-neutral-200 dark:active:text-white" />
-      </button>
+      <IconButton onClick={() => setIsEditMode(true)} Icon={PencilIcon} />
     </div>
   )
 }

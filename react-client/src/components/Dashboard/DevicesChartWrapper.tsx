@@ -4,8 +4,8 @@ import DevicesChart from '@/components/Charts/DevicesChart'
 
 export default function DevicesChartWrapper() {
   return (
-    <>
-      <div className="flex w-full justify-between">
+    <div className="flex h-full w-full flex-col overflow-hidden px-6 py-4">
+      <div className="mb-2 flex w-full justify-between">
         <p className="text-2xl font-semibold text-stone-800 dark:text-neutral-300">
           Views statistics
         </p>
@@ -20,6 +20,6 @@ export default function DevicesChartWrapper() {
       <div className="h-full w-full overflow-hidden">
         <DevicesChart />
       </div>
-    </>
+    </div>
   )
 }

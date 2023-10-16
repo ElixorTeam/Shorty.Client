@@ -12,7 +12,7 @@ export default function StatisticsChart({
   dayLeft: number
 }) {
   return (
-    <div className="grid h-full w-full grid-cols-[1fr,12rem] grid-rows-3 flex-wrap divide-x dark:divide-white/[.15]">
+    <div className="grid h-full w-full grow grid-cols-[1.5fr,1fr] grid-rows-3 flex-wrap divide-x dark:divide-white/[.15]">
       <div className="relative row-span-3 h-full w-full">
         <div className="absolute left-0 top-0 ml-4 mt-2">
           <p className="text-xl">Total views</p>

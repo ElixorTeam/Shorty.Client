@@ -1,8 +1,9 @@
 'use client'
 
-import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
+import IconButton from '@/components/Common/IconButton'
 
 export default function InputTextWithCopy({
   id,
@@ -21,7 +22,7 @@ export default function InputTextWithCopy({
       >
         {label}
       </label>
-      <div className="mt-1 flex items-center overflow-hidden rounded-lg border bg-white dark:border-white/[.15] dark:bg-black">
+      <div className="mt-1 flex items-center overflow-hidden rounded-lg border bg-white pr-2 dark:border-white/[.15] dark:bg-black">
         <input
           type="text"
           id={id}
@@ -34,7 +35,7 @@ export default function InputTextWithCopy({
           text={value}
           onCopy={() => toast.success('The value is copied to the clipboard')}
         >
-          <ClipboardDocumentIcon className="mr-2 h-5 w-5 cursor-pointer text-gray-700 hover:text-black dark:text-neutral-300 dark:hover:text-neutral-200 dark:active:text-white" />
+          <IconButton Icon={ClipboardDocumentIcon} />
         </CopyToClipboard>
       </div>
     </div>

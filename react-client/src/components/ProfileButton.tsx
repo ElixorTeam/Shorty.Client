@@ -1,7 +1,11 @@
-import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowLeftOnRectangleIcon,
+  ClipboardDocumentIcon,
+} from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
 import avatar_artyom from '@/public/avatar_artyom.jpg'
+import IconButton from '@/components/Common/IconButton'
 
 export default function ProfileButton() {
   return (
@@ -18,9 +22,7 @@ export default function ProfileButton() {
       <div>
         <div className="flex items-center gap-1">
           <p className="font-semibold">Ap73MKa</p>
-          <button type="button">
-            <ArrowLeftOnRectangleIcon className="mt-[1px] h-4 w-4 text-gray-500 hover:text-gray-700" />
-          </button>
+          <IconButton Icon={ArrowLeftOnRectangleIcon} className="mt-[1px]" />
         </div>
         <p className="text-xs text-gray-500">My account</p>
       </div>

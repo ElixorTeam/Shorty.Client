@@ -1,3 +1,5 @@
+'use client'
+
 import { useQRCode } from 'next-qrcode'
 
 export default function QRGenerator({ text }: { text: string }) {
