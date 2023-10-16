@@ -3,8 +3,8 @@ import { KeyboardEvent, useState } from 'react'
 import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-import LinkListForm from '@/components/Forms/LinkListForm'
-import LinkPrefixPathInputField from '@/components/Forms/LinkPrefixPathInputField'
+import GroupListInputField from '@/components/Forms/GroupListInputField'
+import ShortURLInputField from '@/components/Forms/ShortURLInputField'
 
 type FormValues = {
   title: string
@@ -12,7 +12,7 @@ type FormValues = {
   linkPrefix: string
 }
 
-export default function CreateGroupLinkForm({
+export default function GroupLinkForm({
   closeDialog,
 }: {
   closeDialog: () => void
@@ -73,8 +73,8 @@ export default function CreateGroupLinkForm({
             />
           </div>
         </label>
-        <LinkListForm links={links} setLinks={setLinks} />
-        <LinkPrefixPathInputField register={register} errors={errors} />
+        <GroupListInputField links={links} setLinks={setLinks} />
+        <ShortURLInputField register={register} errors={errors} />
       </div>
       <div className="mt-6 flex justify-end gap-2">
         <button

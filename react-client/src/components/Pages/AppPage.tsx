@@ -5,8 +5,8 @@ import Link from 'next-intl/link'
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 import Dashboard from '@/components/Dashboard/Dashboard'
 import DetailsPanel from '@/components/DetailsPanel/DetailsPanel'
-import ProfileButton from '@/components/ProfileButton'
-import LinkSelector from '@/components/Selector/LinkSelector'
+import ProfileSection from '@/components/Layout/ProfileSection'
+import Selector from '@/components/Selector/Selector'
 
 export default function AppPage({
   searchParams,
@@ -26,9 +26,9 @@ export default function AppPage({
             </p>
           </a>
         </div>
-        <LinkSelector />
+        <Selector />
         <div className="flex w-full items-center justify-center gap-2 py-2">
-          <ProfileButton />
+          <ProfileSection />
           <ThemeSwitcher />
         </div>
       </div>

@@ -1,4 +1,4 @@
-export default function Footer() {
+export default function HomeFooter() {
   return (
     <footer className="w-full">
       <div className="mx-auto max-w-7xl p-6 md:flex md:items-center md:justify-between lg:px-8">

@@ -4,8 +4,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import { QrCodeIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 
+import QRGenerator from '@/components/Common/QRGenerator'
 import DetailPanelButton from '@/components/DetailsPanel/DetailsPanelButton'
-import QRGenerator from '@/components/DetailsPanel/QRGenerator'
 
 export default function QRCodeDialog({ linkUrl }: { linkUrl: string }) {
   const [isOpen, setIsOpen] = useState(false)

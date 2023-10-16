@@ -27,7 +27,7 @@ ChartJS.register(
   Filler
 )
 
-export default function WeekLineChart() {
+export default function LineChart() {
   const chartRef = useRef<ChartJS>(null)
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * max)

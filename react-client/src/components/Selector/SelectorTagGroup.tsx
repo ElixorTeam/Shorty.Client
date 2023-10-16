@@ -5,13 +5,13 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import { useState } from 'react'
 
-import LinkSelectorItem from '@/components/Selector/LinkSelectorItem'
+import TagGroupItem from '@/components/Selector/TagGroupItem'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { SortKeyEnum } from '@/shared/SortKeyEnum'
 import useSearchStore from '@/stores/searchStore'
 import useSortStore from '@/stores/sortStore'
 
-export default function LinkGroup({
+export default function SelectorTagGroup({
   tagTitle,
   links,
 }: {
@@ -67,7 +67,7 @@ export default function LinkGroup({
       >
         {filteredAndSortedLinks.map((item) => (
           <li key={item.uid}>
-            <LinkSelectorItem link={item} />
+            <TagGroupItem link={item} />
           </li>
         ))}
       </ul>

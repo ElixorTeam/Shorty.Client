@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import useSearchStore from '@/stores/searchStore'
 
-export default function LinkSearchInput() {
+export default function SelectorSearchField() {
   const searchString = useSearchStore((state) => state.searchString)
   const setSearchString = useSearchStore((state) => state.setSearchString)
   return (

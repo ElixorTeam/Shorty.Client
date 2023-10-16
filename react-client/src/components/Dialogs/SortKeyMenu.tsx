@@ -8,7 +8,7 @@ import { Fragment } from 'react'
 import { sortOptions } from '@/shared/SortKeyEnum'
 import useSortStore from '@/stores/sortStore'
 
-export default function LinkSortDropdownMenu() {
+export default function SortKeyMenu() {
   const sortKey = useSortStore((state) => state.sortKey)
   const setSortKey = useSortStore((state) => state.setSortKey)
   return (

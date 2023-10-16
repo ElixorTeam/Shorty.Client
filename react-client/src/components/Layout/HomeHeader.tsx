@@ -1,6 +1,6 @@
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 
-export default function Header() {
+export default function HomeHeader() {
   return (
     <header className="fixed top-0 z-40 flex h-16 w-full shrink-0 items-center border-b bg-white/[.5] px-10 backdrop-blur-md dark:border-b-white/[.15] dark:bg-black/[.3]">
       <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between">

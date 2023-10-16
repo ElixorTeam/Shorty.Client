@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 
-export default function LinkPrefixPathInputField({
+export default function ShortURLInputField({
   register,
   errors,
 }: {

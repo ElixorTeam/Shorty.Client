@@ -1,4 +1,5 @@
 import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
+import isUrl from 'is-url-superb'
 import {
   ChangeEvent,
   useState,
@@ -7,9 +8,8 @@ import {
   SetStateAction,
 } from 'react'
 import toast from 'react-hot-toast'
-import isURL from 'validator/lib/isURL'
 
-export default function LinkListForm({
+export default function GroupListInputField({
   links,
   setLinks,
 }: {
@@ -23,7 +23,7 @@ export default function LinkListForm({
       toast.error('Empty input')
       return
     }
-    if (!isURL(inputValue)) {
+    if (!isUrl(inputValue)) {
       toast.error('Wrong url')
       return
     }

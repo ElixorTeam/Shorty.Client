@@ -1,13 +1,10 @@
-import {
-  ArrowLeftOnRectangleIcon,
-  ClipboardDocumentIcon,
-} from '@heroicons/react/24/outline'
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
-import avatar_artyom from '@/public/avatar_artyom.jpg'
 import IconButton from '@/components/Common/IconButton'
+import avatar_artyom from '@/public/avatar_artyom.jpg'
 
-export default function ProfileButton() {
+export default function ProfileSection() {
   return (
     <div className="flex items-center justify-center gap-2">
       <div className="h-12 w-12 overflow-hidden rounded-full">

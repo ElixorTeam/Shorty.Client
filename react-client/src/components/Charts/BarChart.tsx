@@ -13,7 +13,7 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
-export default function DevicesChart() {
+export default function BarChart() {
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * max)
   }

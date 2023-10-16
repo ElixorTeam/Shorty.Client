@@ -19,8 +19,8 @@ const dashboardItemVariants = cva(
 type DashboardItemType = HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof dashboardItemVariants>
 
-function DashboardItem({ size, ...props }: DashboardItemType) {
+function DashboardPanel({ size, ...props }: DashboardItemType) {
   return <div {...props} className={dashboardItemVariants({ size })} />
 }
 
-export { DashboardItem, dashboardItemVariants }
+export { DashboardPanel, dashboardItemVariants }

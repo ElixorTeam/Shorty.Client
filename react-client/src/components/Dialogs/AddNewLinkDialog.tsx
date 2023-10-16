@@ -4,15 +4,15 @@ import { Dialog, Tab, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { Fragment, useState } from 'react'
 
-import CreateGroupLinkForm from '@/components/Forms/CreateGroupLinkForm'
-import CreateSingleLinkForm from '@/components/Forms/CreateSingleLinkForm'
+import GroupLinkForm from '@/components/Forms/GroupLinkForm'
+import SingleLinkForm from '@/components/Forms/SingleLinkForm'
 
 export default function AddNewLinkDialog() {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedTab, setSelectedTab] = useState(0)
   const tabs = [
-    { id: 1, title: 'Single', content: CreateSingleLinkForm },
-    { id: 2, title: 'Group', content: CreateGroupLinkForm },
+    { id: 1, title: 'Single', content: SingleLinkForm },
+    { id: 2, title: 'Group', content: GroupLinkForm },
   ]
   const onModalClose = () => {
     setIsOpen(false)

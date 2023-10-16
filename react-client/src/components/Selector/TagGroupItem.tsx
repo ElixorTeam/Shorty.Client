@@ -6,7 +6,7 @@ import Link from 'next-intl/link'
 import avatar_artyom from '@/public/avatar_artyom.jpg'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 
-export default function LinkSelectorItem({ link }: { link: LinkRecordType }) {
+export default function TagGroupItem({ link }: { link: LinkRecordType }) {
   const searchParams = useSearchParams()
   const linkUID = searchParams.get('linkUID') ?? ''
   const isActive = linkUID === link.uid

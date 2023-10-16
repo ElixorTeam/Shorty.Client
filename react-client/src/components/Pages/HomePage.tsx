@@ -3,8 +3,8 @@ import { ChevronDownIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 
 import ExampleLineChart from '@/components/Charts/ExampleLineChart'
-import QRGenerator from '@/components/DetailsPanel/QRGenerator'
-import FeatureCard from '@/components/FeatureCard'
+import QRGenerator from '@/components/Common/QRGenerator'
+import FeatureCard from '@/components/Layout/FeatureCard'
 import cursor from '@/public/cursor.svg'
 import elixor from '@/public/ElixorIcon.png'
 

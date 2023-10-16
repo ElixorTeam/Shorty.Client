@@ -1,10 +1,10 @@
 import clsx from 'clsx'
+import isUrl from 'is-url-superb'
 import { useEffect } from 'react'
 import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import isURL from 'validator/lib/isURL'
 
-import LinkPrefixPathInputField from '@/components/Forms/LinkPrefixPathInputField'
+import ShortURLInputField from '@/components/Forms/ShortURLInputField'
 
 type FormValues = {
   title: string
@@ -15,7 +15,7 @@ type FormValues = {
   password: string
 }
 
-export default function CreateSingleLinkForm({
+export default function SingleLinkForm({
   closeDialog,
 }: {
   closeDialog: () => void
@@ -79,7 +79,7 @@ export default function CreateSingleLinkForm({
               type="text"
               {...register('link', {
                 required: { value: true, message: 'Link is required' },
-                validate: (value) => isURL(value) || 'Link must be valid',
+                validate: (value) => isUrl(value) || 'Link must be valid',
               })}
               className={clsx(
                 errors.link && 'border-red-500',
@@ -90,7 +90,7 @@ export default function CreateSingleLinkForm({
           </div>
         </label>
         <div className="mt-2 w-full">
-          <LinkPrefixPathInputField register={register} errors={errors} />
+          <ShortURLInputField register={register} errors={errors} />
         </div>
         <label htmlFor="password" className="mt-2">
           <p className="text-sm text-gray-700 dark:text-neutral-300">

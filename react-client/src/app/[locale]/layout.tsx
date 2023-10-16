@@ -18,12 +18,7 @@ export default function RootLayout({
   children: ReactNode
   params: { locale: string }
 }) {
-  const locale = useLocale()
-
-  if (params.locale !== locale) {
-    notFound()
-  }
-
+  if (params.locale !== useLocale()) notFound()
   return (
     <html lang={params.locale} suppressHydrationWarning>
       <body>

@@ -1,4 +1,4 @@
-export default function StatisticsChart({
+export default function StatisticsOverview({
   totalViews,
   uniqueViews,
   todayViews,
