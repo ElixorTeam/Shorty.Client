@@ -1,7 +1,7 @@
 import AddNewLinkDialog from '@/components/Dialogs/AddNewLinkDialog'
-import LinkGroup from '@/components/Selectors/LinkGroup'
-import LinkSearchInput from '@/components/Selectors/LinkSearchInput'
-import LinkSortDropdownMenu from '@/components/Selectors/LinkSortDropdownMenu'
+import LinkGroup from '@/components/Selector/LinkGroup'
+import LinkSearchInput from '@/components/Selector/LinkSearchInput'
+import LinkSortDropdownMenu from '@/components/Selector/LinkSortDropdownMenu'
 import avatar_artyom from '@/public/avatar_artyom.jpg'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 

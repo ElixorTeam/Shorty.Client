@@ -5,7 +5,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import { useState } from 'react'
 
-import LinkSelectorItem from '@/components/Selectors/LinkSelectorItem'
+import LinkSelectorItem from '@/components/Selector/LinkSelectorItem'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 import { SortKeyEnum } from '@/shared/SortKeyEnum'
 import useSearchStore from '@/stores/searchStore'

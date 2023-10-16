@@ -18,7 +18,7 @@ export default function LinkSelectorItem({ link }: { link: LinkRecordType }) {
     if (link.createDate.getFullYear() !== new Date().getFullYear()) {
       options.year = '2-digit'
     }
-    return link.createDate.toLocaleDateString(navigator.language, options)
+    return link.createDate.toLocaleDateString('en-US', options)
   }
   return (
     <Link href={`/app?linkUID=${link.uid}`}>
