@@ -1,43 +1,19 @@
-import {
-  CameraIcon,
-  PaperAirplaneIcon,
-  QrCodeIcon,
-  TrashIcon,
-} from '@heroicons/react/24/outline'
+import { CameraIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import { ComponentType } from 'react'
 
 import InputTextWithCopy from '@/components/Common/InputTextWithCopy'
 import PanelTagInput from '@/components/DetailsPanel/PanelTagInput'
 import PanelTitleInput from '@/components/DetailsPanel/PanelTitleInput'
+import DeleteLinkDialog from '@/components/Dialogs/DeleteLinkDialog'
+import QRCodeDialog from '@/components/Dialogs/QRCodeDialog'
+import ShareLinkMenu from '@/components/Dialogs/ShareLinkMenu'
 import avatar_artyom from '@/public/avatar_artyom.jpg'
-
-function ProjectButton({
-  text,
-  Icon,
-}: {
-  text: string
-  Icon: ComponentType<{ className?: string }>
-}) {
-  return (
-    <div className="flex w-12 flex-col items-center justify-center gap-1">
-      <button
-        type="button"
-        className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-black/[.1]
-         bg-sky-400 shadow transition-colors hover:bg-sky-300"
-      >
-        <Icon className="h-5 w-5 text-white" />
-      </button>
-      <p className="line-clamp-1 text-xs font-semibold">{text}</p>
-    </div>
-  )
-}
 
 export default function DetailsPanel() {
   const buttons = [
-    { id: 1, title: 'QR', icon: QrCodeIcon },
-    { id: 2, title: 'Share', icon: PaperAirplaneIcon },
-    { id: 3, title: 'Delete', icon: TrashIcon },
+    { id: 1, button: <QRCodeDialog linkUrl="https://sh0.su/f1fav" /> },
+    { id: 2, button: <ShareLinkMenu linkUrl="https://sh0.su/f1fav" /> },
+    { id: 3, button: <DeleteLinkDialog linkUid="1" /> },
   ]
   return (
     <div className="h-full w-full pt-5">
@@ -62,9 +38,7 @@ export default function DetailsPanel() {
       </div>
       <ul className="mt-4 flex flex-row items-center justify-center gap-5">
         {buttons.map((item) => (
-          <li key={item.id}>
-            <ProjectButton text={item.title} Icon={item.icon} />
-          </li>
+          <li key={item.id}>{item.button}</li>
         ))}
       </ul>
       <div className="mt-4 flex w-full items-center justify-center px-4">

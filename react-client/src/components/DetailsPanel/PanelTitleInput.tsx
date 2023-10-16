@@ -39,9 +39,10 @@ export default function PanelTitleInput({ title }: { title: string }) {
             value !== title || 'The new name is the same as the old one',
         })}
         defaultValue={title}
-        className="w-full border-0 border-b border-b-black/[.1] p-0 pb-[2px] text-sm focus:border-b-black/[.1] focus:ring-0"
+        placeholder="Enter title..."
+        className="w-full rounded-lg border-black/[.1] p-0 px-2 py-1 text-sm focus:border-black/[.1] focus:ring-0"
       />
-      <button type="button" onClick={() => setIsEditMode(false)}>
+      <button type="submit">
         <CheckIcon className="h-4 w-4 text-gray-600 hover:text-gray-800 active:text-black" />
       </button>
       <button type="button" onClick={() => setIsEditMode(false)}>
