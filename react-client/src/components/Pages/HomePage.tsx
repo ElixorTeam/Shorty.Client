@@ -3,9 +3,9 @@ import { ChevronDownIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 
 import ExampleLineChart from '@/components/Charts/ExampleLineChart'
+import CursorIcon from '@/components/Common/CursorIcon'
 import QRGenerator from '@/components/Common/QRGenerator'
 import FeatureCard from '@/components/Layout/FeatureCard'
-import cursor from '@/public/cursor.svg'
 import elixor from '@/public/ElixorIcon.png'
 
 export default function HomePage() {
@@ -119,11 +119,7 @@ export default function HomePage() {
           title="Custom prefix"
           description="Add your own prefix to the link so that everyone knows that this is your link."
         >
-          <Image
-            src={cursor}
-            alt=""
-            className="absolute left-[12rem] top-[11rem] z-20 h-10 w-10 dark:invert"
-          />
+          <CursorIcon className="absolute left-[12rem] top-[11rem] z-30 h-10 w-10 text-black dark:invert" />
           <div className="absolute left-[5rem] top-[7rem] flex h-20 w-[50rem] items-center overflow-hidden rounded-2xl border bg-white px-4 dark:border-white/[.15] dark:bg-neutral-950">
             <p className="text-5xl text-gray-400 dark:text-neutral-600">
               <span className="text-gray-800 dark:text-neutral-200">

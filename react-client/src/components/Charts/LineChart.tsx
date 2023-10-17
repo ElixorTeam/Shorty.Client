@@ -13,8 +13,9 @@ import {
   ScriptableContext,
   ChartOptions,
 } from 'chart.js'
-import { useRef } from 'react'
 import { Line } from 'react-chartjs-2'
+
+import getRandomInt from '@/utils/getRandomInt'
 
 ChartJS.register(
   CategoryScale,
@@ -28,10 +29,6 @@ ChartJS.register(
 )
 
 export default function LineChart() {
-  const chartRef = useRef<ChartJS>(null)
-  function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max)
-  }
   const labels = [
     'Monday',
     'Tuesday',
@@ -41,7 +38,7 @@ export default function LineChart() {
     'Saturday',
     'Sunday',
   ]
-  const options: ChartOptions = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -93,6 +90,5 @@ export default function LineChart() {
     ],
   }
 
-  // @ts-ignore
-  return <Line className="grow" ref={chartRef} data={data} options={options} />
+  return <Line className="grow" data={data} options={options} />
 }

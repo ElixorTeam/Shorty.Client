@@ -10,7 +10,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
   const searchParams = useSearchParams()
   const linkUID = searchParams.get('linkUID') ?? ''
   const isActive = linkUID === link.uid
-  const formatedDate = () => {
+  const formattedDate = () => {
     const options: Intl.DateTimeFormatOptions = {
       day: 'numeric',
       month: 'short',
@@ -52,11 +52,11 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
             <p className="line-clamp-1 truncate text-sm font-semibold leading-tight">
               {link.title}
             </p>
-            <p className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-gray-700">
-              {formatedDate()}
+            <p className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-gray-700 dark:text-neutral-500">
+              {formattedDate()}
             </p>
           </div>
-          <p className="line-clamp-1 text-ellipsis text-left text-xs leading-tight text-gray-500">
+          <p className="line-clamp-1 text-ellipsis text-left text-xs leading-tight text-gray-500 dark:text-neutral-500">
             {link.url}
           </p>
         </div>

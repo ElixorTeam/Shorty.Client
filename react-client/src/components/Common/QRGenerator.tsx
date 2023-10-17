@@ -4,7 +4,6 @@ import { useQRCode } from 'next-qrcode'
 
 export default function QRGenerator({ text }: { text: string }) {
   const { Canvas } = useQRCode()
-
   return (
     <Canvas
       text={text}

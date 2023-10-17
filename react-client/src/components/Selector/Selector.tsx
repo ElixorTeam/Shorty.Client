@@ -5,41 +5,41 @@ import SelectorTagGroup from '@/components/Selector/SelectorTagGroup'
 import avatar_artyom from '@/public/avatar_artyom.jpg'
 import { LinkRecordType } from '@/shared/LinkRecordType'
 
+const links: LinkRecordType[] = [
+  {
+    uid: '1',
+    title: 'Youtube Channelfrfrfr',
+    url: 'https://www.youtube.com/c/Ap73MKa',
+    createDate: new Date(),
+    tag: 'Youtube',
+    imageURL: avatar_artyom.src,
+  },
+  {
+    uid: '2',
+    title: 'VK',
+    url: 'https://www.vk.com',
+    createDate: new Date(),
+    tag: 'Youtube',
+    imageURL: '',
+  },
+  {
+    uid: '3',
+    title: 'Elixor',
+    url: 'https://www.elixor.com',
+    createDate: new Date(),
+    tag: 'Vk',
+    imageURL: '',
+  },
+]
+
 export default function Selector() {
-  const links: LinkRecordType[] = [
-    {
-      uid: '1',
-      title: 'Youtube Channelfrfrfr',
-      url: 'https://www.youtube.com/c/Ap73MKa',
-      createDate: new Date(),
-      tag: 'Youtube',
-      imageURL: avatar_artyom.src,
-    },
-    {
-      uid: '2',
-      title: 'VK',
-      url: 'https://www.vk.com',
-      createDate: new Date(),
-      tag: 'Youtube',
-      imageURL: '',
-    },
-    {
-      uid: '3',
-      title: 'Elixor',
-      url: 'https://www.elixor.com',
-      createDate: new Date(),
-      tag: 'Vk',
-      imageURL: '',
-    },
-  ]
   const groupedLinks = links.reduce(
     (groups: { [key: string]: LinkRecordType[] }, link) => {
       const key = link.tag
-      if (!groups[key]) {
-        groups[key] = []
+      return {
+        ...groups,
+        [key]: [...(groups[key] || []), link],
       }
-      groups[key].push(link)
-      return groups
     },
     {}
   )

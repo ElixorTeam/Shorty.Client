@@ -13,17 +13,13 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
-export default function BarChart() {
-  function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max)
-  }
-  const labels = ['IPhone', 'Android', 'MacOS', 'Linux']
-  const data = {
-    labels,
+export default function BarChart({ data }: { data: Record<string, number> }) {
+  const chartData = {
+    labels: Object.keys(data),
     datasets: [
       {
-        label: 'First dataset',
-        data: labels.map(() => getRandomInt(100)),
+        label: '',
+        data: Object.values(data),
         backgroundColor: 'rgb(79,182,255)',
         borderColor: 'rgba(76,163,255,0.13)',
         borderRadius: 5,
@@ -32,7 +28,8 @@ export default function BarChart() {
       },
     ],
   }
-  const options: ChartOptions = {
+
+  const options: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -42,6 +39,7 @@ export default function BarChart() {
     },
     scales: {
       x: {
+        type: 'category',
         grid: {
           display: false,
         },
@@ -63,6 +61,6 @@ export default function BarChart() {
       },
     },
   }
-  // @ts-ignore
-  return <Bar data={data} className="grow" options={options} />
+
+  return <Bar data={chartData} className="grow" options={options} />
 }

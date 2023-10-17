@@ -16,7 +16,6 @@ export default function SortKeyMenu() {
       <Menu.Button className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border bg-slate-100 transition hover:bg-white dark:border-white/[.15] dark:bg-neutral-900 dark:hover:bg-neutral-800">
         <ArrowsUpDownIcon className="h-4 w-4 text-gray-500 dark:text-neutral-400" />
       </Menu.Button>
-
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
