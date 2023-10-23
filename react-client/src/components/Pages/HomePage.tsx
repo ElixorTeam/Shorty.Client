@@ -1,12 +1,11 @@
 import { ChevronUpIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import Image from 'next/image'
 
 import ExampleLineChart from '@/components/Charts/ExampleLineChart'
 import CursorIcon from '@/components/Common/CursorIcon'
+import ElixorIcon from '@/components/Common/ElixorIcon'
 import QRGenerator from '@/components/Common/QRGenerator'
 import FeatureCard from '@/components/Layout/FeatureCard'
-import elixor from '@/public/ElixorIcon.png'
 
 export default function HomePage() {
   return (
@@ -55,8 +54,8 @@ export default function HomePage() {
               <div className="flex h-full w-full">
                 <ul className="flex w-full flex-col gap-6 py-4">
                   <li className="flex w-full gap-3 px-4">
-                    <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border dark:border-white/[.15]">
-                      <Image src={elixor} alt="" className="h-full w-full" />
+                    <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border p-2 pt-1 dark:border-white/[.15]">
+                      <ElixorIcon className="h-full w-full dark:fill-white" />
                     </div>
                     <div className="w-full">
                       <div className="flex w-full items-center justify-between gap-2">
@@ -167,8 +166,8 @@ export default function HomePage() {
               </button>
               <ul className="flex w-full flex-col gap-4 py-2">
                 <li className="flex w-full gap-3 px-4">
-                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full">
-                    <Image src={elixor} alt="" className="h-full w-full" />
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border p-2 pt-1 dark:border-white/[.15]">
+                    <ElixorIcon className="h-full w-full dark:fill-white" />
                   </div>
                   <div className="w-full">
                     <div className="flex w-full items-center justify-between gap-2">

@@ -6,10 +6,8 @@ import clsx from 'clsx'
 import { useState } from 'react'
 
 import TagGroupItem from '@/components/Selector/TagGroupItem'
+import useFilteredLinks from '@/hooks/useFilteredLinks'
 import { LinkRecordType } from '@/shared/LinkRecordType'
-import { SortKeyEnum } from '@/shared/SortKeyEnum'
-import useSearchStore from '@/stores/searchStore'
-import useSortStore from '@/stores/sortStore'
 
 export default function SelectorTagGroup({
   tagTitle,
@@ -18,30 +16,12 @@ export default function SelectorTagGroup({
   tagTitle: string
   links: LinkRecordType[]
 }) {
+  const filteredLinks = useFilteredLinks(links)
   const [isOpen, setIsOpen] = useState(true)
-
-  const searchString = useSearchStore((state) => state.searchString)
-  const sortKey = useSortStore((state) => state.sortKey)
-
-  const filteredAndSortedLinks = links
-    .filter((item) => item.title.includes(searchString))
-    .sort((a, b) => {
-      switch (sortKey) {
-        case SortKeyEnum.Name:
-          return a.title.localeCompare(b.title)
-        case SortKeyEnum.Date:
-          return b.createDate.getTime() - a.createDate.getTime()
-        // case SortKeyEnum.View:
-        //   return b.views - a.views;
-        default:
-          return 0
-      }
-    })
-
   return (
     <div
       className={clsx(
-        filteredAndSortedLinks.length === 0 ? 'hidden' : 'flex',
+        filteredLinks.length === 0 ? 'hidden' : 'flex',
         'w-full flex-col'
       )}
     >
@@ -65,7 +45,7 @@ export default function SelectorTagGroup({
           'w-full flex-col gap-1 border-b dark:border-b-white/[.15]'
         )}
       >
-        {filteredAndSortedLinks.map((item) => (
+        {filteredLinks.map((item) => (
           <li key={item.uid}>
             <TagGroupItem link={item} />
           </li>

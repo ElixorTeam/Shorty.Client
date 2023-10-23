@@ -106,7 +106,7 @@ export default function SingleLinkForm({
               disabled={!watchIsPrivate}
               {...register('password', {
                 pattern: {
-                  value: /^[a-zA-Z0-9]$/,
+                  value: /^\w+$/,
                   message: 'Password must be valid',
                 },
                 maxLength: {
