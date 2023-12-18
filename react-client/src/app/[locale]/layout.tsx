@@ -1,26 +1,29 @@
 import './styles.css'
 import { notFound } from 'next/navigation'
-import { useLocale } from 'next-intl'
+import { unstable_setRequestLocale } from 'next-intl/server'
 import React, { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import Provider from '@/components/Provider'
+import { locales } from '@/utils/navigation'
 
 export const metadata = {
   title: 'Shorty',
   description: 'Short your links',
 }
 
-export default function RootLayout({
+export default function LocaleLayout({
   children,
-  params,
+  params: { locale },
 }: {
   children: ReactNode
   params: { locale: string }
 }) {
-  if (params.locale !== useLocale()) notFound()
+  if (!locales.includes(locale as any)) notFound()
+  unstable_setRequestLocale(locale)
+
   return (
-    <html lang={params.locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <Provider>{children}</Provider>
         <Toaster position="bottom-right" />

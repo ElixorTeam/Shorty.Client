@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import Link from 'next-intl/link'
 
 import avatar_artyom from '@/public/avatar_artyom.jpg'
 import { LinkRecordType } from '@/shared/LinkRecordType'
@@ -21,7 +21,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
     return link.createDate.toLocaleDateString('en-US', options)
   }
   return (
-    <Link href={`/app?linkUID=${link.uid}`}>
+    <Link href={{ pathname: '/app', query: { linkUID: link.uid } }}>
       <button
         type="button"
         className={clsx(

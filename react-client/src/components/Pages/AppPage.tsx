@@ -1,12 +1,12 @@
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import Link from 'next-intl/link'
 
 import ThemeSwitcher from '@/components/Common/ThemeSwitcher'
 import Dashboard from '@/components/Dashboard/Dashboard'
 import DetailsPanel from '@/components/DetailsPanel/DetailsPanel'
 import ProfileSection from '@/components/Layout/ProfileSection'
 import Selector from '@/components/Selector/Selector'
+import { Link } from '@/utils/navigation'
 
 export default function AppPage({
   searchParams,
@@ -19,12 +19,12 @@ export default function AppPage({
     <div className="h-full w-full grid-cols-[18rem,1fr] grid-rows-1 divide-x dark:divide-white/[.15] dark:border-x-white/[.15] sm:grid min-[1930px]:border-x">
       <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden bg-white dark:bg-black">
         <div className="flex h-[63px] w-full shrink-0 items-center justify-center text-center">
-          <a href="/">
+          <Link href="/">
             <p className="text-3xl font-extrabold">
               Sho<span className="tracking-wide">r</span>
               <span className="tracking-wider">t</span>y
             </p>
-          </a>
+          </Link>
         </div>
         <Selector />
         <div className="flex w-full items-center justify-center gap-2 py-2">

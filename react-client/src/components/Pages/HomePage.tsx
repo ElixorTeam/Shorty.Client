@@ -7,6 +7,7 @@ import CursorIcon from '@/components/Common/CursorIcon'
 import QRGenerator from '@/components/Common/QRGenerator'
 import FeatureCard from '@/components/Layout/FeatureCard'
 import elixor from '@/public/ElixorIcon.png'
+import { Link } from '@/utils/navigation'
 
 export default function HomePage() {
   return (
@@ -20,14 +21,14 @@ export default function HomePage() {
           user-friendly platform for shortening, managing, and analyzing your
           links.
         </p>
-        <a href="/app">
+        <Link href="/app">
           <button
             type="button"
             className="mt-8 rounded-lg border border-white/[.15] bg-gray-800 px-6 py-2 transition hover:bg-gray-600 dark:bg-neutral-200 dark:hover:bg-neutral-50"
           >
             <p className="text-gray-100 dark:text-neutral-800">Get Started</p>
           </button>
-        </a>
+        </Link>
       </div>
       <div className="mt-4 w-full text-center">
         <p className="text-3xl font-thin tracking-tight text-neutral-700 dark:text-neutral-300">

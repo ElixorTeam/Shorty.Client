@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/control-has-associated-label': 'off',
     'import/no-unresolved': 'error',
     'import/order': [
       'error',
