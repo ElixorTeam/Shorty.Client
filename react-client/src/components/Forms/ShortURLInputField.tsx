@@ -34,7 +34,7 @@ export default function ShortURLInputField({
           type="text"
           {...register('linkPrefix', {
             pattern: {
-              value: /^[a-zA-Z0-9]$/,
+              value: /^\w+$/,
               message: 'Prefix must be valid',
             },
             maxLength: {
@@ -55,7 +55,7 @@ export default function ShortURLInputField({
           type="text"
           {...register('linkPath', {
             pattern: {
-              value: /^[a-zA-Z0-9]$/,
+              value: /^\w+$/,
               message: 'Path must be valid',
             },
             maxLength: {

@@ -1,20 +1,24 @@
 'use client'
 
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
+import { InputHTMLAttributes } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import toast from 'react-hot-toast'
 
 import IconButton from '@/components/Common/IconButton'
 
+type InputTextWithCopyType = {
+  id: string
+  value: string
+  label: string
+} & InputHTMLAttributes<HTMLInputElement>
+
 export default function InputTextWithCopy({
   id,
   value,
   label,
-}: {
-  id: string
-  value: string
-  label: string
-}) {
+  ...props
+}: InputTextWithCopyType) {
   return (
     <div className="w-full">
       <label
@@ -31,6 +35,7 @@ export default function InputTextWithCopy({
           disabled
           className="h-8 w-full border-none bg-transparent px-2 text-sm hover:cursor-text"
           value={value}
+          {...props}
         />
         <CopyToClipboard
           text={value}

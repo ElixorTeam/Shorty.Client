@@ -56,7 +56,7 @@ export default function ExampleLineChart() {
     datasets: [
       {
         fill: 'start',
-        label: 'First dataset',
+        label: '',
         data: labels.map(() => getRandomInt(1000)),
         backgroundColor: (context: ScriptableContext<'line'>) => {
           const { ctx } = context.chart
