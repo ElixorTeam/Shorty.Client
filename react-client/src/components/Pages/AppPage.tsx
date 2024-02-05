@@ -20,10 +20,10 @@ export default function AppPage({
       <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden bg-white dark:bg-black">
         <div className="flex h-[63px] w-full shrink-0 items-center justify-center text-center">
           <Link href="/">
-            <p className="text-3xl font-extrabold">
+            <span className="text-3xl font-extrabold">
               Sho<span className="tracking-wide">r</span>
               <span className="tracking-wider">t</span>y
-            </p>
+            </span>
           </Link>
         </div>
         <Selector />
