@@ -171,7 +171,7 @@ export default function Overview() {
         <DashboardCard
           title="Time left"
           Icon={ClockIcon}
-          value="43"
+          value="43 days"
           subvalue=""
         />
       </div>
