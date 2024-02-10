@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply min-h-screen bg-zinc-50 text-black antialiased dark:bg-zinc-950 dark:text-white;
+    @apply h-screen w-screen overflow-x-hidden bg-zinc-50 text-black antialiased dark:bg-zinc-950 dark:text-white;
   }
 
   .dark {

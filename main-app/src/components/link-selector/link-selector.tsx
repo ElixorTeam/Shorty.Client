@@ -12,7 +12,7 @@ export default function Selector({ links }: { links: LinkRecordType[] }) {
       <nav className="flex h-full w-full flex-col overflow-hidden">
         <SelectorHeader />
         <ScrollArea className="h-full w-full">
-          <ul className="flex flex-col gap-2 px-3 pb-2">
+          <ul className="flex flex-col gap-2 px-3 pb-3">
             {Object.entries(groupedLinks).map(([tag, tagLinks]) => (
               <li key={tag}>
                 <SelectorTagGroup tagTitle={tag} links={tagLinks} />

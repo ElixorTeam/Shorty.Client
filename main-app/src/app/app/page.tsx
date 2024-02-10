@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { LinkRecordType } from '@/shared/link-record-type'
 import {
   ArrowLeftIcon,
+  ArrowUturnLeftIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline'
@@ -17,6 +18,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Overview from '@/components/overview'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
 import LinkSettings from '@/components/link-settings'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 const links: LinkRecordType[] = [
   {
@@ -132,17 +139,16 @@ export default function Page({
       <div
         className={cn(
           isAnySelectedLink ? 'absolute top-0' : 'hidden',
-          'z-20 w-full overflow-clip sm:relative md:flex md:flex-col'
+          'z-20 w-full bg-zinc-50 overflow-clip md:relative md:flex md:flex-col dark:bg-zinc-950'
         )}
       >
-        <div className="sticky top-0 z-20 flex h-14 w-full shrink-0 items-center justify-between gap-4 border-b border-b-black/[.1] bg-zinc-50/[.5] px-6 backdrop-blur dark:border-b-white/[.15] dark:bg-zinc-950/[.3]">
-          <div>
+        <div className="sticky grid top-0 shrink-0 z-20 h-14 w-full grid-cols-5 gap-4 border-b border-b-black/[.1] bg-zinc-50/[.5] px-6 backdrop-blur dark:border-b-white/[.15] dark:bg-zinc-950/[.3]">
+          <div className='flex h-full items-center'>
             {isAnySelectedLink ? (
               <>
                 <Button
                   size="sm"
                   variant="outline"
-                  className="mr-32 mt-1"
                   asChild
                 >
                   <Link href="/app">
@@ -155,7 +161,7 @@ export default function Page({
               ''
             )}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 col-span-3 justify-center items-center">
             {isAnySelectedLink ? (
               <>
                 <Button variant="outline" size="icon" disabled>
@@ -165,23 +171,29 @@ export default function Page({
                   <ChevronRightIcon className="h-4 w-4" />
                 </Button>
                 <div className="flex h-10 items-center overflow-hidden rounded-md bg-zinc-100 px-4 shadow-sm dark:bg-zinc-900">
-                  <span>Youtube link</span>
+                  <p className='truncate'>Youtube link</p>
                 </div>
               </>
             ) : (
               ''
             )}
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="link" className="flex items-center gap-3" asChild>
-              <Link href="/">
-                <span className="font-medium">Artyom Vlasov</span>
+          <div className="flex items-center justify-end gap-4 overflow-hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-2">
+                <p className="font-medium hidden truncate lg:block">Artyom Vlasov</p>
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={avatar_artyom.src} alt="link-icon" />
                   <AvatarFallback>A</AvatarFallback>
                 </Avatar>
-              </Link>
-            </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <ArrowUturnLeftIcon className="mr-2 size-4" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <ThemeToggle />
           </div>
         </div>

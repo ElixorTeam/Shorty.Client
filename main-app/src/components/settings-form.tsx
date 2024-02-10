@@ -51,13 +51,15 @@ const formSchema = z.object({
     .string()
     .min(2, { message: 'Prefix must be at least 2 characters' })
     .max(6, { message: 'Prefix must be no longer than 6 characters' })
-    .optional(),
+    .optional()
+    .or(z.literal('')),
   domain: z.string(),
   path: z
     .string()
-    .min(1, { message: 'Path must be at least 1 characters' })
+    .min(2, { message: 'Path must be at least 2 characters' })
     .max(16, { message: 'Path must be no longer than 16 characters' })
-    .optional(),
+    .optional()
+    .or(z.literal(''))
 })
 
 export function SettingsForm() {
@@ -94,27 +96,25 @@ export function SettingsForm() {
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
+    if (!e.target.files) return
 
-    const file = e.target.files[0];
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    const file = e.target.files[0]
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp']
 
     if (!validTypes.includes(file.type)) {
-      alert('Недопустимый тип файла. Допускаются только JPEG, PNG и WEBP');
+      alert('Недопустимый тип файла. Допускаются только JPEG, PNG и WEBP')
       return
     }
 
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
+    const img = new Image()
+    img.src = URL.createObjectURL(file)
     img.onload = () => {
-      if (img.width <= 256 && img.height <= 256)
-        form.setValue('avatar', file);
-      else
-        alert('Размер изображения должен быть не более 256x256');
-    };
-  };
+      if (img.width <= 256 && img.height <= 256) form.setValue('avatar', file)
+      else alert('Размер изображения должен быть не более 256x256')
+    }
+  }
 
-  return ( 
+  return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
@@ -264,7 +264,7 @@ export function SettingsForm() {
               control={form.control}
               name="prefix"
               render={({ field }) => (
-                <FormItem className="w-1/3">
+                <FormItem className="w-1/3 z-10">
                   <FormControl>
                     <Input {...field} className="rounded-r-none" />
                   </FormControl>

@@ -129,8 +129,7 @@ export default function Overview() {
           </DescriptionItem>
         </div>
       </div>
-
-      <div className="flex justify-between pt-4">
+      <div className="flex flex-col space-y-2 lg:flex-row lg:space-y-0 justify-between pt-4">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex gap-3">
           <DatePickerWithRange />
