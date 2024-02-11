@@ -33,7 +33,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+import { cn, generateUrl } from '@/lib/utils'
 
 type TagType = {
   value: string
@@ -93,7 +93,7 @@ export default function SettingsForm() {
 
   const finalUrl = (): string => {
     const { prefix, domain, path } = form.getValues()
-    return (prefix ? `${prefix}.` : '') + domain + (path ? `/${path}` : '')
+    return generateUrl(prefix, domain, path)
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {

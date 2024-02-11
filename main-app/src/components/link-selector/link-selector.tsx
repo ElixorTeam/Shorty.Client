@@ -1,3 +1,5 @@
+'use client'
+
 import SelectorHeader from '@/components/link-selector/selector-header'
 import SelectorTagGroup from '@/components/link-selector/tag-group'
 import useGroupedLinks from '@/components/link-selector/use-grouped-links'

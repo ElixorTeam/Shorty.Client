@@ -23,7 +23,7 @@ import { useState } from 'react'
 import DashboardCard from '@/components/dashboard-card'
 import { DatePickerWithRange } from '@/components/date-picker-with-range'
 import DescriptionItem from '@/components/description-item'
-import { RecentViews } from '@/components/recent-views'
+import RecentViews from '@/components/recent-views'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -41,9 +41,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ViewsDiagram } from '@/components/views-diagram'
+import ViewsDiagram from '@/components/views-diagram'
 import avatar_artyom from '@/public/avatar_artyom.jpg'
-
 
 export default function Overview() {
   const [currentTab, setCurrentTab] = useState<string>('all-time')

@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { cn, generateRandomString } from '@/lib/utils'
+import { cn, generateRandomString, generateUrl } from '@/lib/utils'
 
 const formSchema = z.object({
   title: z
@@ -84,7 +84,7 @@ export default function CreateLinkForm() {
 
   const finalUrl = (): string => {
     const { prefix, domain, path } = form.getValues()
-    return (prefix ? `${prefix}.` : '') + domain + (path ? `/${path}` : '')
+    return generateUrl(prefix, domain, path)
   }
 
   return (

@@ -16,3 +16,11 @@ export function generateRandomString(length: number = 6): string {
 
   return result
 }
+
+export function generateUrl(
+  prefix: string | null | undefined,
+  domain: string,
+  path: string | null | undefined
+): string {
+  return (prefix ? `${prefix}.` : '') + domain + (path ? `/${path}` : '')
+}
