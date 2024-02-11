@@ -1,8 +1,23 @@
 'use client'
 
+import {
+  CheckIcon,
+  ChevronUpDownIcon,
+  PlusCircleIcon,
+} from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { Button } from '@/components/ui/button'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command'
 import {
   Form,
   FormControl,
@@ -13,26 +28,12 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from '@/components/ui/command'
 import { cn } from '@/lib/utils'
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-  PlusCircleIcon,
-} from '@heroicons/react/24/outline'
-import { ChangeEvent, useState } from 'react'
 
 type TagType = {
   value: string
@@ -59,10 +60,10 @@ const formSchema = z.object({
     .min(2, { message: 'Path must be at least 2 characters' })
     .max(16, { message: 'Path must be no longer than 16 characters' })
     .optional()
-    .or(z.literal(''))
+    .or(z.literal('')),
 })
 
-export function SettingsForm() {
+export default function SettingsForm() {
   const [searchTag, setSearchTag] = useState<string>('')
   const [tags, setTags] = useState<TagType[]>([
     {
@@ -92,7 +93,7 @@ export function SettingsForm() {
 
   const finalUrl = (): string => {
     const { prefix, domain, path } = form.getValues()
-    return (prefix ? prefix + '.' : '') + domain + (path ? '/' + path : '')
+    return (prefix ? `${prefix}.` : '') + domain + (path ? `/${path}` : '')
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -174,7 +175,7 @@ export function SettingsForm() {
                       {field.value
                         ? tags.find((tag) => tag.value === field.value)?.label
                         : 'Select language'}
-                      <ChevronUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
@@ -202,7 +203,7 @@ export function SettingsForm() {
                                 form.setValue('tag', newTag.value)
                               }}
                             >
-                              <PlusCircleIcon className="mr-2 h-4 w-4" />
+                              <PlusCircleIcon className="mr-2 size-4" />
                               {searchTag.trim()}
                             </CommandItem>
                           )}
@@ -264,7 +265,7 @@ export function SettingsForm() {
               control={form.control}
               name="prefix"
               render={({ field }) => (
-                <FormItem className="w-1/3 z-10">
+                <FormItem className="z-10 w-1/3">
                   <FormControl>
                     <Input {...field} className="rounded-r-none" />
                   </FormControl>

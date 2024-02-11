@@ -1,7 +1,8 @@
-import { ThemeToggle } from '@/components/theme-toggle'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ReactNode } from 'react'
+
+import { ThemeToggle } from '@/components/theme-toggle'
+import { Button } from '@/components/ui/button'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -22,7 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         </div>
       </header>
-      <main className="mx-auto h-full w-full max-w-screen-xl grow">
+      <main className="mx-auto size-full max-w-screen-xl grow">
         {children}
       </main>
     </div>

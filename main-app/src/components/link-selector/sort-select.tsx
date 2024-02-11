@@ -1,9 +1,10 @@
 'use client'
 
-import { sortOptions } from '@/components/link-selector/sort-key-enum'
-import { useSortKey } from '@/components/link-selector/selector-context'
-import { Button } from '@/components/ui/button'
 import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
+
+import { useSortKey } from '@/components/link-selector/selector-context'
+import { sortOptions } from '@/components/link-selector/sort-key-enum'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +21,7 @@ export default function SortSelect() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <ArrowsUpDownIcon className="h-4 w-4" />
+          <ArrowsUpDownIcon className="size-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-44">

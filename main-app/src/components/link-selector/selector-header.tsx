@@ -2,8 +2,8 @@
 
 import { useSearchingString } from './selector-context'
 import SortSelect from './sort-select'
-import { Input } from '../ui/input'
 import CreateLinkDialog from '../create-link-dialog'
+import { Input } from '../ui/input'
 
 export default function SelectorHeader() {
   const { searchingString, setSearchingString } = useSearchingString()

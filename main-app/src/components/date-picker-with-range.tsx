@@ -1,11 +1,10 @@
 'use client'
 
-import * as React from 'react'
 import { addDays, format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
+import * as React from 'react'
 import { DateRange } from 'react-day-picker'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -13,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 export function DatePickerWithRange({
   className,
@@ -28,13 +28,13 @@ export function DatePickerWithRange({
         <PopoverTrigger asChild>
           <Button
             id="date"
-            variant={'outline'}
+            variant="outline"
             className={cn(
               'w-[300px] justify-start text-left font-normal',
               !date && 'text-muted-foreground'
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 size-4" />
             {date?.from ? (
               date.to ? (
                 <>

@@ -53,7 +53,7 @@ const data = [
   },
 ]
 
-export function ViewsDiagram() {
+export default function ViewsDiagram() {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>

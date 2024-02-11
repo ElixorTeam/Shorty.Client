@@ -16,7 +16,7 @@ export default function DashboardCard({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="text-muted-foreground h-4 w-4" />
+        <Icon className="text-muted-foreground size-4" />
       </CardHeader>
       <CardContent>
         <p className="text-2xl font-bold">{value}</p>

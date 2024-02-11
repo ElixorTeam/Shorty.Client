@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-import { LinkRecordType } from '@/shared/link-record-type'
-import { cn } from '@/lib/utils'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { cn } from '@/lib/utils'
+import { LinkRecordType } from '@/shared/link-record-type'
 
 export default function TagGroupItem({ link }: { link: LinkRecordType }) {
   const searchParams = useSearchParams()
@@ -34,7 +34,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
         {isActive && (
           <div className="absolute inset-y-0 left-0 w-1 rounded-r-sm bg-zinc-800 dark:bg-zinc-200" />
         )}
-        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+        <div className="relative size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
             <AvatarImage src={link.imageURL} alt="link-icon" />
             <AvatarFallback>{link.title.charAt(0)}</AvatarFallback>

@@ -1,8 +1,10 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -13,9 +15,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from './ui/button'
-import { cn } from '@/lib/utils'
-import { TrashIcon } from '@heroicons/react/24/outline'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { cn, generateRandomString } from '@/lib/utils'
 
 const formSchema = z.object({
   title: z
@@ -83,19 +84,7 @@ export default function CreateLinkForm() {
 
   const finalUrl = (): string => {
     const { prefix, domain, path } = form.getValues()
-    return (prefix ? prefix + '.' : '') + domain + (path ? '/' + path : '')
-  }
-
-  function generateRandomString(length: number = 6): string {
-    const characters: string = '0123456789abcdefghijklmnopqrstuvwxyz';
-    let result: string = '';
-
-    for (let i: number = 0; i < length; i++) {
-        const randomIndex: number = Math.floor(Math.random() * characters.length);
-        result += characters[randomIndex];
-    }
-
-    return result;
+    return (prefix ? `${prefix}.` : '') + domain + (path ? `/${path}` : '')
   }
 
   return (
@@ -124,10 +113,10 @@ export default function CreateLinkForm() {
           )}
         />
         <div>
-          {fields.map((field, index) => (
+          {fields.map((url_field, index) => (
             <FormField
               control={form.control}
-              key={field.id}
+              key={url_field.id}
               name={`urls.${index}.url`}
               render={({ field }) => (
                 <FormItem>
@@ -137,13 +126,13 @@ export default function CreateLinkForm() {
                   <FormControl>
                     <div className="flex gap-2">
                       <Input {...field} />
-                      {type == 'group' && index >= 2 && (
+                      {type === 'group' && index >= 2 && (
                         <Button
                           variant="outline"
                           size="icon"
                           onClick={() => remove(index)}
                         >
-                          <TrashIcon className="mx-2 h-4 w-4" />
+                          <TrashIcon className="mx-2 size-4" />
                         </Button>
                       )}
                     </div>
@@ -153,7 +142,7 @@ export default function CreateLinkForm() {
               )}
             />
           ))}
-          {type == 'group' && (
+          {type === 'group' && (
             <Button
               type="button"
               variant="outline"

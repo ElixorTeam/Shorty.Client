@@ -6,8 +6,8 @@ import { useState } from 'react'
 
 import TagGroupItem from '@/components/link-selector/tag-group-item'
 import useFilteredLinks from '@/components/link-selector/use-filtered-list'
-import { LinkRecordType } from '@/shared/link-record-type'
 import { cn } from '@/lib/utils'
+import { LinkRecordType } from '@/shared/link-record-type'
 
 export default function SelectorTagGroup({
   tagTitle,
@@ -36,9 +36,9 @@ export default function SelectorTagGroup({
         >
           <span>{tagTitle}</span>
           {isOpen ? (
-            <ChevronUpIcon className="h-4 w-4" />
+            <ChevronUpIcon className="size-4" />
           ) : (
-            <ChevronDownIcon className="h-4 w-4" />
+            <ChevronDownIcon className="size-4" />
           )}
         </button>
       </div>

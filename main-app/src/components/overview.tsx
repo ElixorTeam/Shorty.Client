@@ -18,12 +18,15 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import avatar_artyom from '@/public/avatar_artyom.jpg'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { DatePickerWithRange } from '@/components/date-picker-with-range'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useState } from 'react'
+
 import DashboardCard from '@/components/dashboard-card'
+import { DatePickerWithRange } from '@/components/date-picker-with-range'
+import DescriptionItem from '@/components/description-item'
+import { RecentViews } from '@/components/recent-views'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -31,23 +34,22 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { RecentViews } from '@/components/recent-views'
-import { ViewsDiagram } from '@/components/views-diagram'
-import { Badge } from '@/components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import DescriptionItem from '@/components/description-item'
-import { useState } from 'react'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ViewsDiagram } from '@/components/views-diagram'
+import avatar_artyom from '@/public/avatar_artyom.jpg'
+
 
 export default function Overview() {
   const [currentTab, setCurrentTab] = useState<string>('all-time')
 
   return (
-    <div className="h-full w-full grow space-y-4 p-8 pt-6">
+    <div className="size-full grow space-y-4 p-8 pt-6">
       <div className="w-full space-y-4 border-b pb-8 dark:border-b-zinc-800">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4">
@@ -129,7 +131,7 @@ export default function Overview() {
           </DescriptionItem>
         </div>
       </div>
-      <div className="flex flex-col space-y-2 lg:flex-row lg:space-y-0 justify-between pt-4">
+      <div className="flex flex-col justify-between space-y-2 pt-4 lg:flex-row lg:space-y-0">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex gap-3">
           <DatePickerWithRange />
