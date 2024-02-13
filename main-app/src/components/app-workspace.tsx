@@ -1,9 +1,10 @@
 'use client'
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
+
 import LinkSettings from '@/components/link-settings'
 import Overview from '@/components/overview'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
 
 export default function AppWorkspace() {
   return (

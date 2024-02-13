@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 
-import ThemeProvider from '@/components/theme-provider'
-
 import './styles.css'
+import ThemeProvider from '@/components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   description: 'App to short links',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode

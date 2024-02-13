@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
-import { ThemeToggle } from '@/components/theme-toggle'
+import ThemeToggle from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -17,15 +17,15 @@ export default function Layout({ children }: { children: ReactNode }) {
           </Link>
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            <Button variant="outline">
-              <span className="uppercase">Sign up</span>
+            <Button variant="outline" asChild>
+              <Link href="/api/auth/signin">
+                <span className="uppercase">Sign up</span>
+              </Link>
             </Button>
           </div>
         </div>
       </header>
-      <main className="mx-auto size-full max-w-screen-xl grow">
-        {children}
-      </main>
+      <main className="mx-auto size-full max-w-screen-xl grow">{children}</main>
     </div>
   )
 }

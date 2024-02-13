@@ -1,11 +1,13 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-import Selector from '@/components/link-selector/link-selector'
-import { cn } from '@/lib/utils'
-import { LinkRecordType } from '@/shared/link-record-type'
-import avatar_artyom from '@/public/avatar_artyom.jpg'
+import { auth } from '@/auth'
 import AppHeader from '@/components/app-header'
 import AppWorkspace from '@/components/app-workspace'
+import Selector from '@/components/link-selector/link-selector'
+import { cn } from '@/lib/utils'
+import avatar_artyom from '@/public/avatar_artyom.jpg'
+import { LinkRecordType } from '@/shared/link-record-type'
 
 const links: LinkRecordType[] = [
   {
@@ -98,13 +100,14 @@ const links: LinkRecordType[] = [
   },
 ]
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
   searchParams: { [_: string]: string | string[] | undefined }
 }) {
   const { linkUID } = searchParams
   const isAnySelectedLink = !!linkUID
+
   return (
     <div className="size-full grid-rows-1 divide-x dark:divide-zinc-800 dark:border-zinc-800 md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[24rem,1fr] min-[1930px]:border-x">
       <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden">
@@ -133,10 +136,7 @@ export default function Page({
               <div className="w-full max-w-xs px-2">
                 <p className="text-center leading-relaxed">
                   Please select a link. If you don’t have any, then click on{' '}
-                  <span
-                    className="inline-flex items-center justify-center overflow-hidden rounded-lg border
-                      border-black/[.1] bg-gray-200 px-2 py-1 align-middle dark:border-white/[.15] dark:bg-neutral-800"
-                  >
+                  <span className="inline-flex items-center justify-center overflow-hidden rounded-md border bg-white px-2 py-1 align-middle dark:border-zinc-800 dark:bg-black">
                     <span className="text-xs">New</span>
                   </span>
                 </p>
