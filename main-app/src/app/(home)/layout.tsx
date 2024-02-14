@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
+import SignUpButton from '@/components/sign-up-button'
 import ThemeToggle from '@/components/theme-toggle'
-import { Button } from '@/components/ui/button'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -17,11 +17,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </Link>
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            <Button variant="outline" asChild>
-              <Link href="/api/auth/signin">
-                <span className="uppercase">Sign up</span>
-              </Link>
-            </Button>
+            <SignUpButton />
           </div>
         </div>
       </header>

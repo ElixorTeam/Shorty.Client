@@ -68,7 +68,7 @@ export default async function AppHeader({
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <form
-              onSubmit={async () => {
+              action={async () => {
                 'use server'
 
                 await signOut()

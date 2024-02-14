@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 
 import './styles.css'
+import { auth } from '@/auth'
+import SessionProvider from '@/components/session-provider'
 import ThemeProvider from '@/components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,17 +19,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
+  const session = await auth()
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <SessionProvider session={session}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   )

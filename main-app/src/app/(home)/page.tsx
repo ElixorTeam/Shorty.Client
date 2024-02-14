@@ -13,11 +13,9 @@ export default function Page() {
         user-friendly platform for shortening, managing, and analyzing your
         links.
       </p>
-      <Link href="/app">
-        <Button size="lg" type="button">
-          Get Started
-        </Button>
-      </Link>
+      <Button size="lg" type="button" asChild>
+        <Link href="/main">Get Started</Link>
+      </Button>
     </div>
   )
 }
