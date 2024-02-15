@@ -1,13 +1,18 @@
-'use client'
-
-import { signIn } from 'next-auth/react'
-
+import { signIn } from '@/auth'
 import { Button } from '@/components/ui/button'
 
-export default function SignUpButton() {
+export default async function SignUpButton() {
   return (
-    <Button variant="outline" onClick={() => signIn('keycloak')}>
-      <span className="uppercase">Sign up</span>
-    </Button>
+    <form
+      action={async () => {
+        'use server'
+
+        await signIn('keycloak')
+      }}
+    >
+      <Button variant="outline" type="submit">
+        <span className="uppercase">Sign up</span>
+      </Button>
+    </form>
   )
 }
