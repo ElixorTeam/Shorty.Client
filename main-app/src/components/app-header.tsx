@@ -4,24 +4,24 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { User } from 'next-auth'
 
-import { auth } from '@/auth'
 import AvatarDropdown from '@/components/avatar-dropdown'
-import SignUpButton from '@/components/sign-up-button'
 import ThemeToggle from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 
 export default async function AppHeader({
   linkUID,
+  user,
 }: {
   linkUID: string | string[] | undefined
+  user?: User
 }) {
   const isAnySelectedLink = !!linkUID
-  const session = await auth()
   return (
     <div className="sticky top-0 z-20 grid h-14 w-full shrink-0 grid-cols-5 gap-4 border-b border-b-black/[.1] bg-zinc-50/[.5] px-6 backdrop-blur dark:border-b-white/[.15] dark:bg-zinc-950/[.3]">
       <div className="flex h-full items-center">
-        {isAnySelectedLink ?? (
+        {isAnySelectedLink && (
           <Button size="sm" variant="outline" asChild>
             <Link href="/main">
               <ArrowLeftIcon className="mr-2 size-4" />
@@ -31,7 +31,7 @@ export default async function AppHeader({
         )}
       </div>
       <div className="col-span-3 flex items-center justify-center gap-2">
-        {isAnySelectedLink ?? (
+        {isAnySelectedLink && (
           <>
             <Button variant="outline" size="icon" disabled>
               <ChevronLeftIcon className="size-4" />
@@ -47,7 +47,7 @@ export default async function AppHeader({
       </div>
       <div className="flex items-center justify-end gap-4 overflow-hidden">
         <ThemeToggle />
-        <AvatarDropdown />
+        <AvatarDropdown user={user} />
       </div>
     </div>
   )

@@ -1,10 +1,29 @@
-declare module 'next-auth/jwt' {
+import 'next-auth'
+import { type DefaultSession } from 'next-auth'
+
+export type ExtendedUser = DefaultSession['user'] & {
+  role: RoleType
+}
+
+export type RoleType = 'admin' | 'user'
+
+declare module '@auth/core/jwt' {
   interface JWT {
-    access_token: string
-    id_token: string
-    refresh_token: string
-    access_expires_at: number
-    refresh_expires_at: number
-    error: string
+    idToken?: string
+    accessToken?: string
+    refreshToken?: string
+    expiresAt?: number
+    role: RoleType
+  }
+}
+
+declare module 'next-auth' {
+  interface Session {
+    user: ExtendedUser
+    idToken?: string
+  }
+
+  interface Account {
+    role: RoleType
   }
 }

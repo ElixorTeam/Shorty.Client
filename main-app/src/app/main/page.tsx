@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 
 import { auth } from '@/auth'
 import AppHeader from '@/components/app-header'
@@ -107,7 +106,7 @@ export default async function Page({
 }) {
   const { linkUID } = searchParams
   const isAnySelectedLink = !!linkUID
-
+  const session = await auth()
   return (
     <div className="size-full grid-rows-1 divide-x dark:divide-zinc-800 dark:border-zinc-800 md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[24rem,1fr] min-[1930px]:border-x">
       <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden">
@@ -128,7 +127,7 @@ export default async function Page({
         )}
       >
         <div className="flex size-full flex-col">
-          <AppHeader linkUID={linkUID} />
+          <AppHeader linkUID={linkUID} user={session?.user} />
           {isAnySelectedLink ? (
             <AppWorkspace />
           ) : (

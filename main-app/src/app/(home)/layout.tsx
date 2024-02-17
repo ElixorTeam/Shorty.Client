@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
+import { auth } from '@/auth'
+import AvatarDropdown from '@/components/avatar-dropdown'
 import SignUpButton from '@/components/sign-up-button'
 import ThemeToggle from '@/components/theme-toggle'
-import AvatarDropdown from '@/components/avatar-dropdown'
-import { auth } from '@/auth'
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const session = await auth()
@@ -20,7 +20,11 @@ export default async function Layout({ children }: { children: ReactNode }) {
           </Link>
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            {session ? <AvatarDropdown /> : <SignUpButton />}
+            {session ? (
+              <AvatarDropdown user={session.user} />
+            ) : (
+              <SignUpButton />
+            )}
           </div>
         </div>
       </header>

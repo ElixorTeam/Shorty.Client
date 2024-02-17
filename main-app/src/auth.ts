@@ -1,51 +1,35 @@
-import ky from 'ky'
-import NextAuth from 'next-auth'
-import { JWT } from 'next-auth/jwt'
+import { JWT } from '@auth/core/jwt'
+import { TokenSet } from '@auth/core/types'
+import NextAuth, { Session } from 'next-auth'
 import keycloak from 'next-auth/providers/keycloak'
 
-import authConfig from '@/auth.config'
 import envServer from '@/lib/envServer'
 
-type JWTResponse = {
-  access_token: string
-  token_type: string
-  refresh_token: string
-  expires_in: number
-  id_token: string
-}
-
-export const getProtocolUrl = () =>
+const getProtocolUrl = () =>
   `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}/protocol/openid-connect`
 
-export const getRefreshToken = async (token: JWT) => {
-  const formData = new URLSearchParams()
-  formData.append('client_id', envServer.KEYCLOAK_CLIENT_ID)
-  formData.append('client_secret', envServer.KEYCLOAK_CLIENT_SECRET)
-  formData.append('grant_type', 'refresh_token')
-  formData.append('refresh_token', token.refresh_token)
-
-  const response = await ky.post(`${getProtocolUrl()}/token`, {
+const requestRefreshOfAccessToken = (token: JWT) =>
+  fetch(`${getProtocolUrl()}/token`, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: formData,
+    body: new URLSearchParams({
+      client_id: envServer.KEYCLOAK_CLIENT_ID,
+      client_secret: envServer.KEYCLOAK_CLIENT_SECRET,
+      grant_type: 'refresh_token',
+      refresh_token: token.refreshToken ?? '',
+    }),
+    method: 'POST',
+    cache: 'no-store',
   })
 
-  if (!response.ok)
-    return {
-      ...token,
-      error: 'RefreshAccessTokenError',
-    }
-
-  const newJWT: JWTResponse = await response.json()
-  return {
-    ...token,
-    accessToken: newJWT.access_token,
-    accessTokenExpired: Date.now() + (newJWT.expires_in - 15) * 1000,
-    refreshToken: newJWT.refresh_token,
-  }
-}
-
-export const sessionLogout = async (tokenId: string) =>
-  ky.get(`${getProtocolUrl()}/logout?id_token_hint=${tokenId}`)
+const requestSessionLogout = (idToken: string) =>
+  fetch(`${getProtocolUrl()}/logout`, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      id_token_hint: idToken,
+    }),
+    method: 'POST',
+    cache: 'no-store',
+  })
 
 export const {
   handlers: { GET, POST },
@@ -53,7 +37,6 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  ...authConfig,
   providers: [
     keycloak({
       clientId: envServer.KEYCLOAK_CLIENT_ID,
@@ -63,26 +46,58 @@ export const {
   ],
   callbacks: {
     async jwt({ token, account }) {
-      const newToken = { ...token }
-      // todo: jwt types, role
+      const currentToken = { ...token } as JWT
+
       if (account) {
-        newToken.id_token = account.id_token
-        newToken.access_token = account.access_token
-        newToken.expires_at = Math.floor(
-          Date.now() / 1000 + account.expires_in!
-        )
-        newToken.refresh_token = account.refresh_token
-        return newToken
+        currentToken.role = account.role
+        currentToken.idToken = account.id_token
+        currentToken.accessToken = account.access_token
+        currentToken.refreshToken = account.refresh_token
+        currentToken.expiresAt = account.expires_at
+        return currentToken
       }
 
-      if (Date.now() < newToken.expires_at * 1000) return newToken
+      if (Date.now() < currentToken.expiresAt! * 1000 - 15 * 1000)
+        return currentToken
 
-      return getRefreshToken(token)
+      try {
+        const response = await requestRefreshOfAccessToken(currentToken)
+        const tokens: TokenSet = await response.json()
+        if (!response.ok) throw new Error(JSON.stringify(tokens))
+        const updatedToken: JWT = {
+          ...currentToken,
+          idToken: currentToken.idToken,
+          accessToken: currentToken.accessToken,
+          expiresAt: Math.floor(
+            Date.now() / 1000 + (tokens.expires_in as number)
+          ),
+          refreshToken: tokens.refresh_token ?? currentToken.refreshToken,
+        }
+        return updatedToken
+      } catch (error) {
+        console.log('can not refresh access token')
+        return { ...currentToken, error: 'RefreshAccessTokenError' }
+      }
+    },
+    async session({ session, token }) {
+      const currentSession = { ...session } as Session
+      const currentToken = { ...token } as JWT
+      currentSession.idToken = currentToken.idToken
+      currentSession.user.role = currentToken.role as 'admin' | 'user'
+      return currentSession
     },
   },
   events: {
     async signOut(token) {
-      await sessionLogout(token.token.id_token)
+      try {
+        // @ts-ignore
+        const currentToken = { ...token.token } as JWT
+        const response = await requestSessionLogout(currentToken.idToken ?? '')
+        if (!response.ok)
+          throw new Error(JSON.stringify(currentToken.idToken ?? ''))
+      } catch (error) {
+        console.log('can not log out from session')
+      }
     },
   },
 })

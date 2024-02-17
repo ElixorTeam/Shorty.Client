@@ -1,4 +1,6 @@
-import { auth, signOut } from '@/auth'
+import { User } from 'next-auth'
+
+import { signOut } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -7,14 +9,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-export default async function AvatarDropdown() {
-  const session = await auth()
+export default async function AvatarDropdown({ user }: { user?: User }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2">
         <Avatar className="size-8">
-          <AvatarImage src={session?.user?.image!} alt="user-avatar" />
-          <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
+          <AvatarImage src={user?.image!} alt="user-avatar" />
+          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
