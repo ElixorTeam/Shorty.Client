@@ -1,4 +1,4 @@
-import { getToken } from '@auth/core/jwt'
+import { getToken } from 'next-auth/jwt'
 
 import { auth } from '@/auth'
 import envServer from '@/lib/envServer'

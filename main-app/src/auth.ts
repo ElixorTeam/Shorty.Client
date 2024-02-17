@@ -75,7 +75,7 @@ export const {
         }
         return updatedToken
       } catch (error) {
-        console.log('can not refresh access token')
+        console.log(`can not refresh access token ${error}`)
         return { ...currentToken, error: 'RefreshAccessTokenError' }
       }
     },
@@ -96,7 +96,7 @@ export const {
         if (!response.ok)
           throw new Error(JSON.stringify(currentToken.idToken ?? ''))
       } catch (error) {
-        console.log('can not log out from session')
+        console.log(`can not log out from session ${error}`)
       }
     },
   },
