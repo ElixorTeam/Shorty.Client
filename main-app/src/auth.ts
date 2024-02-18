@@ -1,9 +1,9 @@
-import { JWT } from '@auth/core/jwt'
 import { TokenSet } from '@auth/core/types'
 import NextAuth, { Session } from 'next-auth'
+import { JWT } from 'next-auth/jwt'
 import keycloak from 'next-auth/providers/keycloak'
 
-import envServer from '@/lib/envServer'
+import envServer from '@/shared/lib/env-variables'
 
 const getProtocolUrl = () =>
   `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}/protocol/openid-connect`
@@ -63,8 +63,8 @@ export const {
       try {
         const response = await requestRefreshOfAccessToken(currentToken)
         const tokens: TokenSet = await response.json()
-        if (!response.ok) throw new Error(JSON.stringify(tokens))
-        const updatedToken: JWT = {
+        if (!response.ok) throw new Error(await response.text())
+        return {
           ...currentToken,
           idToken: currentToken.idToken,
           accessToken: currentToken.accessToken,
@@ -73,9 +73,8 @@ export const {
           ),
           refreshToken: tokens.refresh_token ?? currentToken.refreshToken,
         }
-        return updatedToken
       } catch (error) {
-        console.log(`can not refresh access token ${error}`)
+        console.log(`Error while refreshing access token: ${error}`)
         return { ...currentToken, error: 'RefreshAccessTokenError' }
       }
     },
@@ -93,10 +92,9 @@ export const {
         // @ts-ignore
         const currentToken = { ...token.token } as JWT
         const response = await requestSessionLogout(currentToken.idToken ?? '')
-        if (!response.ok)
-          throw new Error(JSON.stringify(currentToken.idToken ?? ''))
+        if (!response.ok) throw new Error(await response.text())
       } catch (error) {
-        console.log(`can not log out from session ${error}`)
+        console.log(`Error while log out: ${error}`)
       }
     },
   },

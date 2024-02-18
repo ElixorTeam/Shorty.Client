@@ -1,8 +1,10 @@
 import { getToken } from 'next-auth/jwt'
 
 import { auth } from '@/auth'
-import envServer from '@/lib/envServer'
-import { apiAuthPrefix, publicRoutes } from '@/routes'
+import envServer from '@/shared/lib/env-variables'
+
+const publicRoutes = ['/']
+const apiAuthPrefix = '/api/auth'
 
 // @ts-ignore
 export default auth(async (req) => {

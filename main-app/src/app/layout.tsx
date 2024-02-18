@@ -4,8 +4,8 @@ import { ReactNode } from 'react'
 
 import './styles.css'
 import { auth } from '@/auth'
-import SessionProvider from '@/components/session-provider'
-import ThemeProvider from '@/components/theme-provider'
+import SessionProvider from '@/features/providers/session-provider'
+import ThemeProvider from '@/features/providers/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
