@@ -1,6 +1,6 @@
 import { getToken } from 'next-auth/jwt'
 
-import { auth } from '@/auth'
+import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 
 const publicRoutes = ['/']

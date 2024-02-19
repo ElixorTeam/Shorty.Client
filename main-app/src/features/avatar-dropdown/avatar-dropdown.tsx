@@ -1,4 +1,4 @@
-import { signOut } from '@/auth'
+import { signOut } from '@/shared/auth'
 import { ExtendedUser } from '@/shared/types/next-auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import {

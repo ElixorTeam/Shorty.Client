@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-import { auth } from '@/auth'
 import AvatarDropdown from '@/features/avatar-dropdown'
 import ThemeToggle from '@/features/theme-toggle'
 import SignUpButton from '@/pages-flat/home/sign-up-button'
+import { auth } from '@/shared/auth'
 import { Button } from '@/shared/ui/button'
 
 export default async function HomePage() {

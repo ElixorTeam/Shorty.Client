@@ -3,33 +3,9 @@ import NextAuth, { Session } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import keycloak from 'next-auth/providers/keycloak'
 
+import reqAccessByRefreshToken from '@/shared/auth/reqAccessByRefreshToken'
+import reqSessionLogout from '@/shared/auth/reqSessionLogout'
 import envServer from '@/shared/lib/env-variables'
-
-const getProtocolUrl = () =>
-  `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}/protocol/openid-connect`
-
-const requestRefreshOfAccessToken = (token: JWT) =>
-  fetch(`${getProtocolUrl()}/token`, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      client_id: envServer.KEYCLOAK_CLIENT_ID,
-      client_secret: envServer.KEYCLOAK_CLIENT_SECRET,
-      grant_type: 'refresh_token',
-      refresh_token: token.refreshToken ?? '',
-    }),
-    method: 'POST',
-    cache: 'no-store',
-  })
-
-const requestSessionLogout = (idToken: string) =>
-  fetch(`${getProtocolUrl()}/logout`, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      id_token_hint: idToken,
-    }),
-    method: 'POST',
-    cache: 'no-store',
-  })
 
 export const {
   handlers: { GET, POST },
@@ -61,7 +37,9 @@ export const {
         return currentToken
 
       try {
-        const response = await requestRefreshOfAccessToken(currentToken)
+        const response = await reqAccessByRefreshToken(
+          currentToken.refreshToken ?? ''
+        )
         const tokens: TokenSet = await response.json()
         if (!response.ok) throw new Error(await response.text())
         return {
@@ -91,7 +69,7 @@ export const {
       try {
         // @ts-ignore
         const currentToken = { ...token.token } as JWT
-        const response = await requestSessionLogout(currentToken.idToken ?? '')
+        const response = await reqSessionLogout(currentToken.idToken ?? '')
         if (!response.ok) throw new Error(await response.text())
       } catch (error) {
         console.log(`Error while log out: ${error}`)

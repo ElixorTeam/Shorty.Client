@@ -1,4 +1,4 @@
-import { signIn } from '@/auth'
+import { signIn } from '@/shared/auth'
 import { Button } from '@/shared/ui/button'
 
 export default async function SignUpButton() {

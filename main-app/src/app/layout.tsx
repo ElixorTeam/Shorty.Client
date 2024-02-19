@@ -4,9 +4,8 @@ import { PublicEnvScript } from 'next-runtime-env'
 import { ReactNode } from 'react'
 
 import './styles.css'
-import { auth } from '@/auth'
-import SessionProvider from '@/features/providers/session-provider'
-import ThemeProvider from '@/features/providers/theme-provider'
+import { auth } from '@/shared/auth'
+import { SessionProvider, ThemeProvider } from '@/shared/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 

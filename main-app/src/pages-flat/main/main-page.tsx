@@ -1,9 +1,9 @@
-import { auth } from '@/auth'
 import NavigationHeader from '@/pages-flat/main/navigation-header'
 import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
 import linkData from '@/pages-flat/main/test-link-data'
 import WorkspaceHeader from '@/pages-flat/main/workspace-header'
 import WorkspaceTabs from '@/pages-flat/main/workspace-tabs'
+import { auth } from '@/shared/auth'
 import cn from '@/shared/lib/tailwind-merge'
 import Selector from '@/widgets/link-selector/link-selector'
 
