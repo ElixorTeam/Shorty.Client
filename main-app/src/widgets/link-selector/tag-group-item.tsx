@@ -23,7 +23,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
   }
 
   return (
-    <Link href={{ pathname: '/main', query: { linkUID: link.uid } }}>
+    <Link href={{ pathname: '/main', query: { linkUid: link.uid } }}>
       <button
         type="button"
         className={cn(

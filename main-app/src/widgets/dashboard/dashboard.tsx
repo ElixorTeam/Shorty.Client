@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ArrowTrendingUpIcon,
   ClockIcon,
@@ -23,7 +25,7 @@ import ViewsDiagram from '@/widgets/dashboard/views-diagram'
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState<string>('all-time')
   return (
-    <div className="w-full">
+    <div className="w-full space-y-4">
       <div className="flex flex-col justify-between space-y-2 pt-4 lg:flex-row lg:space-y-0">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex gap-3">

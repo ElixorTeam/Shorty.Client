@@ -8,7 +8,6 @@ import * as React from 'react'
 import cn from '@/shared/lib/tailwind-merge'
 import { Dialog, DialogContent } from '@/shared/ui/dialog'
 
-
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive>

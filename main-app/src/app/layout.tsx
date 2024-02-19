@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { PublicEnvScript } from 'next-runtime-env'
 import { ReactNode } from 'react'
 
 import './styles.css'
@@ -22,6 +23,9 @@ export default async function RootLayout({
   const session = await auth()
   return (
     <html lang="en">
+      <head>
+        <PublicEnvScript />
+      </head>
       <body className={inter.className}>
         <SessionProvider session={session}>
           <ThemeProvider

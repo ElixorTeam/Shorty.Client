@@ -1,4 +1,4 @@
-import MainPage from '@/views/main'
+import MainPage from '@/pages-flat/main'
 
 export default function Page({
   searchParams,

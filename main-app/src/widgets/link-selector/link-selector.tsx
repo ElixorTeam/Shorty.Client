@@ -1,5 +1,3 @@
-'use client'
-
 import { LinkRecordType } from '@/shared/types/link-record-type'
 import { ScrollArea } from '@/shared/ui/scroll-area'
 import SelectorHeader from '@/widgets/link-selector/selector-header'

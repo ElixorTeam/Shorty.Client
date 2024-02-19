@@ -7,7 +7,6 @@ import { DayPicker } from 'react-day-picker'
 import cn from '@/shared/lib/tailwind-merge'
 import { buttonVariants } from '@/shared/ui/button'
 
-
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
 function Calendar({
@@ -56,7 +55,9 @@ function Calendar({
         ...classNames,
       }}
       components={{
+        // eslint-disable-next-line
         IconLeft: ({ ...props }) => <ChevronLeft className="size-4" />,
+        // eslint-disable-next-line
         IconRight: ({ ...props }) => <ChevronRight className="size-4" />,
       }}
       {...props}

@@ -1,0 +1,10 @@
+.next
+node_modules
+
+# Linters
+.eslintrc.js
+.prettierignore
+.prettierrc.js
+
+# Git
+.gitignore

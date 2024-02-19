@@ -1,12 +1,8 @@
-'use client'
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
-
-import Overview from '@/components/overview'
 import { Button } from '@/shared/ui/button'
-import UpdateLinkForm from '@/widgets/update-link-form'
-import Description from '@/widgets/description/description'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 import Dashboard from '@/widgets/dashboard/dashboard'
+import Description from '@/widgets/description/description'
+import UpdateLinkForm from '@/widgets/update-link-form'
 
 export default function WorkspaceTabs() {
   return (
