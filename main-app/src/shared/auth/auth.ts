@@ -60,6 +60,7 @@ export const {
       const currentSession = { ...session } as Session
       const currentToken = { ...token } as JWT
       currentSession.idToken = currentToken.idToken
+      currentSession.accessToken = currentToken.accessToken
       currentSession.user.role = currentToken.role as 'admin' | 'user'
       return currentSession
     },

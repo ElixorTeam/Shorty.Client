@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 import './styles.css'
 import { auth } from '@/shared/auth'
 import { SessionProvider, ThemeProvider } from '@/shared/providers'
+import QueryProvider from '@/shared/providers/query-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,14 +28,16 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         <SessionProvider session={session}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          <QueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </QueryProvider>
         </SessionProvider>
       </body>
     </html>

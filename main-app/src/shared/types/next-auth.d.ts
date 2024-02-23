@@ -21,6 +21,7 @@ declare module 'next-auth' {
   interface Session {
     user: ExtendedUser
     idToken?: string
+    accessToken?: string
   }
 
   interface Account {

@@ -10,6 +10,8 @@ const envServer = envServerSchema.safeParse({
   AUTH_SECRET: env('AUTH_SECRET'),
   AUTH_URL: env('AUTH_URL'),
 
+  BACKEND_URL: env('BACKEND_URL'),
+
   PORT: env('PORT'),
   NODE_ENV: env('NODE_ENV'),
 })

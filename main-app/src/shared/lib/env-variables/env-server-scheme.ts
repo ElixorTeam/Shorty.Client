@@ -8,6 +8,8 @@ const envServerSchema = z.object({
   AUTH_SECRET: z.string().trim().min(1),
   AUTH_URL: z.string().trim().min(1),
 
+  BACKEND_URL: z.string().trim().min(1),
+
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
