@@ -22,6 +22,9 @@ export default async function AvatarDropdown({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {user && user.roles.includes('admin') && (
+          <DropdownMenuItem>Admin</DropdownMenuItem>
+        )}
         <form
           action={async () => {
             'use server'
@@ -32,13 +35,12 @@ export default async function AvatarDropdown({
           <DropdownMenuItem asChild>
             <button
               type="submit"
-              className="relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-zinc-100 focus:text-zinc-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-zinc-800 dark:focus:text-zinc-50"
+              className="focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
             >
               Sign out
             </button>
           </DropdownMenuItem>
         </form>
-        {user?.role === 'admin' && <DropdownMenuItem>Admin</DropdownMenuItem>}
       </DropdownMenuContent>
     </DropdownMenu>
   )

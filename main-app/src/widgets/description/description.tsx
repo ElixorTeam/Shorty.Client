@@ -28,7 +28,7 @@ import DescriptionItem from '@/widgets/description/description-item'
 
 export default function Description() {
   return (
-    <div className="w-full space-y-4 border-b pb-8 dark:border-b-zinc-800">
+    <div className="w-full space-y-4 border-b pb-8">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <Avatar className="size-14">
@@ -42,7 +42,7 @@ export default function Description() {
               </h2>
               <Badge className="mt-[1px]">Group</Badge>
             </div>
-            <span className="truncate text-sm text-zinc-400 dark:text-zinc-600">
+            <span className="text-muted-foreground truncate text-sm">
               https://sh0.su/f56fx
             </span>
           </div>

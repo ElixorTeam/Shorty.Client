@@ -7,7 +7,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar'
 
 export default function TagGroupItem({ link }: { link: LinkRecordType }) {
   const searchParams = useSearchParams()
-  const linkUID = searchParams.get('linkUID') ?? ''
+  const linkUID = searchParams.get('linkUid') ?? ''
   const isActive = linkUID === link.uid
 
   const formattedDate = () => {
@@ -27,14 +27,14 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
       <button
         type="button"
         className={cn(
-          isActive ? 'relative bg-zinc-300 dark:bg-zinc-700' : '',
-          'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-900'
+          isActive ? 'bg-muted relative' : 'hover:bg-muted',
+          'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4 transition-colors'
         )}
       >
         {isActive && (
-          <div className="absolute inset-y-0 left-0 w-1 rounded-r-sm bg-zinc-800 dark:bg-zinc-200" />
+          <div className="bg-muted absolute inset-y-0 left-0 w-1 rounded-r-sm" />
         )}
-        <div className="relative size-10 shrink-0 overflow-hidden rounded-full">
+        <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
             <AvatarImage src={link.imageURL} alt="link-icon" />
             <AvatarFallback>{link.title.charAt(0)}</AvatarFallback>
@@ -45,11 +45,11 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
             <span className="line-clamp-1 truncate text-sm font-semibold leading-tight">
               {link.title}
             </span>
-            <span className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-zinc-700 dark:text-zinc-500">
+            <span className="text-muted-foreground mt-[1px] shrink-0 text-xs leading-tight tracking-tight">
               {formattedDate()}
             </span>
           </div>
-          <span className="line-clamp-1 text-ellipsis text-left text-xs leading-tight text-zinc-500 dark:text-zinc-500">
+          <span className="text-muted-foreground truncate text-left text-xs leading-tight">
             {link.url}
           </span>
         </div>

@@ -9,9 +9,10 @@ import SelectorTagGroup from '@/widgets/link-selector/tag-group'
 import useGroupedLinks from '@/widgets/link-selector/use-grouped-links'
 
 import { LinkSelectorContextProvider } from './selector-context'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 export default function Selector() {
-  const { data, isError, isFetching, isFetched } = useGetRecords()
+  const { data, isFetching } = useGetRecords()
 
   const convertToLinkRecord = (apiObject: ApiRecordType): LinkRecordType => ({
     uid: apiObject.id,
@@ -27,17 +28,7 @@ export default function Selector() {
     <LinkSelectorContextProvider>
       <nav className="flex size-full flex-col overflow-hidden">
         <SelectorHeader />
-        {isFetching && (
-          <div className="flex size-full items-center justify-center">
-            Loading...
-          </div>
-        )}
-        {isError && (
-          <div className="flex size-full items-center justify-center">
-            Error while fetching data
-          </div>
-        )}
-        {isFetched && !isError && (
+        {data && data.length > 0 ? (
           <ScrollArea className="size-full">
             <ul className="flex flex-col gap-2 px-3 pb-3">
               {Object.entries(groupedLinks).map(([tag, tagLinks]) => (
@@ -47,6 +38,17 @@ export default function Selector() {
               ))}
             </ul>
           </ScrollArea>
+        ) : (
+          <div className="flex size-full items-center justify-center">
+            {isFetching ? (
+              <span>Loading...</span>
+            ) : (
+              <>
+                <ExclamationTriangleIcon className="size-16" />
+                <span>No data found</span>
+              </>
+            )}
+          </div>
         )}
       </nav>
     </LinkSelectorContextProvider>

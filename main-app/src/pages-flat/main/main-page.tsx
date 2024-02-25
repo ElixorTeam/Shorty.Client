@@ -24,7 +24,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
   })
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="size-full grid-rows-1 divide-x dark:divide-zinc-800 dark:border-zinc-800 md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[24rem,1fr] min-[1930px]:border-x">
+      <div className="size-full grid-rows-1 divide-x md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[24rem,1fr] min-[1930px]:border-x">
         <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden">
           <NavigationHeader />
           <Selector />
@@ -32,7 +32,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
         <div
           className={cn(
             linkUid ? 'absolute top-0' : 'hidden',
-            'z-20 w-full overflow-clip bg-zinc-50 dark:bg-zinc-950 md:relative md:flex md:flex-col'
+            'bg-background z-20 w-full overflow-clip md:relative md:flex md:flex-col'
           )}
         >
           <div className="flex size-full flex-col">

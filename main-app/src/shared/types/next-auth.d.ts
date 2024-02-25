@@ -1,11 +1,11 @@
 import 'next-auth'
 import { type DefaultSession } from 'next-auth'
 
-export type ExtendedUser = DefaultSession['user'] & {
-  role: RoleType
-}
-
 export type RoleType = 'admin' | 'user'
+
+export type ExtendedUser = DefaultSession['user'] & {
+  roles: RoleType[]
+}
 
 declare module 'next-auth/jwt' {
   interface JWT {
@@ -13,18 +13,14 @@ declare module 'next-auth/jwt' {
     accessToken?: string
     refreshToken?: string
     expiresAt?: number
-    role: RoleType
+    roles: RoleType[]
+    error?: string
   }
 }
 
 declare module 'next-auth' {
   interface Session {
     user: ExtendedUser
-    idToken?: string
     accessToken?: string
-  }
-
-  interface Account {
-    role: RoleType
   }
 }

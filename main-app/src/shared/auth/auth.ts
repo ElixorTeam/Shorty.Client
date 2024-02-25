@@ -3,6 +3,7 @@ import NextAuth, { Session } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import keycloak from 'next-auth/providers/keycloak'
 
+import getUserRolesByAccessToken from '@/shared/auth/getUserRolesByAccessToken'
 import reqAccessByRefreshToken from '@/shared/auth/reqAccessByRefreshToken'
 import reqSessionLogout from '@/shared/auth/reqSessionLogout'
 import envServer from '@/shared/lib/env-variables'
@@ -25,11 +26,13 @@ export const {
       const currentToken = { ...token } as JWT
 
       if (account) {
-        currentToken.role = account.role
         currentToken.idToken = account.id_token
         currentToken.accessToken = account.access_token
         currentToken.refreshToken = account.refresh_token
         currentToken.expiresAt = account.expires_at
+        currentToken.roles = getUserRolesByAccessToken(
+          account.access_token ?? ''
+        )
         return currentToken
       }
 
@@ -44,11 +47,9 @@ export const {
         if (!response.ok) throw new Error(await response.text())
         return {
           ...currentToken,
-          idToken: currentToken.idToken,
-          accessToken: currentToken.accessToken,
-          expiresAt: Math.floor(
-            Date.now() / 1000 + (tokens.expires_in as number)
-          ),
+          idToken: tokens.id_token,
+          accessToken: tokens.access_token,
+          expiresAt: tokens.expires_at,
           refreshToken: tokens.refresh_token ?? currentToken.refreshToken,
         }
       } catch (error) {
@@ -59,9 +60,8 @@ export const {
     async session({ session, token }) {
       const currentSession = { ...session } as Session
       const currentToken = { ...token } as JWT
-      currentSession.idToken = currentToken.idToken
       currentSession.accessToken = currentToken.accessToken
-      currentSession.user.role = currentToken.role as 'admin' | 'user'
+      currentSession.user.roles = currentToken.roles
       return currentSession
     },
   },

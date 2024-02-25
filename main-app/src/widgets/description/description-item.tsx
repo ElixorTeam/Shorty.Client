@@ -13,7 +13,7 @@ export default function DescriptionItem({
 }) {
   return (
     <>
-      <div className="flex shrink-0 items-center text-zinc-600 dark:text-zinc-400">
+      <div className="text-muted-foreground flex shrink-0 items-center">
         <Icon className="mr-1 size-4" />
         <span>{title}</span>
       </div>

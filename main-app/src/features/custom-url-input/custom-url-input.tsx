@@ -45,7 +45,7 @@ export default function CustomUrlInput<T extends CustomUrlValues>({
             </FormItem>
           )}
         />
-        <div className="flex h-10 w-1/3 shrink-0 items-center justify-center border-y px-4 dark:border-y-zinc-800 dark:bg-zinc-900">
+        <div className="bg-muted flex h-10 w-1/3 shrink-0 items-center justify-center border-y px-4">
           {form.getValues().domain}
         </div>
         <FormField
@@ -62,9 +62,7 @@ export default function CustomUrlInput<T extends CustomUrlValues>({
           )}
         />
       </div>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-        Final url will be {getCustomUrl()}
-      </p>
+      <p className="text-muted text-sm">Final url will be {getCustomUrl()}</p>
     </div>
   )
 }

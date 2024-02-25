@@ -22,7 +22,7 @@ export default function SelectorTagGroup({
     <div
       className={cn(
         filteredLinks.length === 0 ? 'hidden' : 'flex',
-        'w-full flex-col overflow-hidden rounded-md border dark:border-zinc-800'
+        'w-full flex-col overflow-hidden rounded-md border'
       )}
     >
       <div className="h-8 w-full">
@@ -30,7 +30,7 @@ export default function SelectorTagGroup({
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            isOpen ? 'border-b dark:border-b-zinc-800' : '',
+            isOpen ? 'border-b' : '',
             'flex h-full w-full shrink-0 items-center justify-between overflow-hidden px-4'
           )}
         >

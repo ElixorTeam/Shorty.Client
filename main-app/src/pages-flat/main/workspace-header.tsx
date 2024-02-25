@@ -19,7 +19,7 @@ export default async function WorkspaceHeader({
 }) {
   const isAnySelectedLink = !!linkUID
   return (
-    <div className="sticky top-0 z-20 grid h-14 w-full shrink-0 grid-cols-5 gap-4 border-b border-b-black/[.1] bg-zinc-50/[.5] px-6 backdrop-blur dark:border-b-white/[.15] dark:bg-zinc-950/[.3]">
+    <div className="bg-background/[.95] supports-[backdrop-filter]:bg-background/[.6] sticky top-0 z-20 grid h-14 w-full shrink-0 grid-cols-5 gap-4 border-b px-6 backdrop-blur">
       <div className="flex h-full items-center">
         {isAnySelectedLink && (
           <Button size="sm" variant="outline" asChild>
@@ -39,7 +39,7 @@ export default async function WorkspaceHeader({
             <Button variant="outline" size="icon" disabled>
               <ChevronRightIcon className="size-4" />
             </Button>
-            <div className="flex h-10 items-center overflow-hidden rounded-md bg-zinc-100 px-4 shadow-sm dark:bg-zinc-900">
+            <div className="bg-muted flex h-10 items-center overflow-hidden rounded-md px-4 shadow-sm">
               <p className="truncate">Youtube link</p>
             </div>
           </>

@@ -7,7 +7,7 @@ import UpdateLinkForm from '@/widgets/update-link-form'
 export default function WorkspaceTabs() {
   return (
     <Tabs defaultValue="overview">
-      <TabsList className="sticky top-14 z-20 flex h-10 w-full shrink-0 items-center justify-center border-b bg-zinc-50/[.6] backdrop-blur dark:border-b-zinc-800 dark:bg-zinc-950/[.6]">
+      <TabsList className="bg-background/[.95] supports-[backdrop-filter]:bg-background/[.6] sticky top-14 z-20 flex h-10 w-full shrink-0 items-center justify-center border-b backdrop-blur">
         <TabsTrigger value="overview" asChild>
           <Button variant="link">Overview</Button>
         </TabsTrigger>
