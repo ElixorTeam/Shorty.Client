@@ -1,3 +1,3 @@
-import actionClient from '@/shared/lib/save-action/action-client'
+import actionClient from '@/shared/lib/safe-action/action-client'
 
 export default actionClient

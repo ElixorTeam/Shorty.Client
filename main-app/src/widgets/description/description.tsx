@@ -42,7 +42,7 @@ export default function Description() {
               </h2>
               <Badge className="mt-[1px]">Group</Badge>
             </div>
-            <span className="text-muted-foreground truncate text-sm">
+            <span className="truncate text-sm text-muted-foreground">
               https://sh0.su/f56fx
             </span>
           </div>

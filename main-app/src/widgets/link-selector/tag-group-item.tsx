@@ -32,7 +32,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
         )}
       >
         {isActive && (
-          <div className="bg-muted absolute inset-y-0 left-0 w-1 rounded-r-sm" />
+          <div className="absolute inset-y-0 left-0 w-1 rounded-r-sm bg-muted" />
         )}
         <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
@@ -45,11 +45,11 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
             <span className="line-clamp-1 truncate text-sm font-semibold leading-tight">
               {link.title}
             </span>
-            <span className="text-muted-foreground mt-[1px] shrink-0 text-xs leading-tight tracking-tight">
+            <span className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-muted-foreground">
               {formattedDate()}
             </span>
           </div>
-          <span className="text-muted-foreground truncate text-left text-xs leading-tight">
+          <span className="truncate text-left text-xs leading-tight text-muted-foreground">
             {link.url}
           </span>
         </div>

@@ -6,7 +6,6 @@ import {
 
 import NavigationHeader from '@/pages-flat/main/navigation-header'
 import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
-import linkData from '@/pages-flat/main/test-link-data'
 import WorkspaceHeader from '@/pages-flat/main/workspace-header'
 import WorkspaceTabs from '@/pages-flat/main/workspace-tabs'
 import getRecords from '@/shared/api/get-records'

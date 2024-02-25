@@ -11,8 +11,8 @@ import TextGenerator from '@/shared/ui/text-generator'
 export default async function HomePage() {
   const session = await auth()
   return (
-    <div className="bg-grid-black/[.03] dark:bg-grid-white/[.02] min-h-screen">
-      <header className="bg-background/[.95] supports-[backdrop-filter]:bg-background/[.6] border-border/[.4] sticky top-0 z-40 w-full border-b backdrop-blur">
+    <div className="min-h-screen bg-grid-black/[.03] dark:bg-grid-white/[.02]">
+      <header className="sticky top-0 z-40 w-full border-b border-border/[.4] bg-background/[.95] backdrop-blur supports-[backdrop-filter]:bg-background/[.6]">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/main-app/public">
             <span className="text-2xl font-extrabold">
@@ -35,14 +35,14 @@ export default async function HomePage() {
         <div className="my-16 flex flex-col items-center justify-center gap-6 px-6 text-center md:my-32">
           <TextGenerator
             words="Shorten, Manage, Analyze. Your key to efficient links."
-            className="from from-primary to-muted-foreground bg-gradient-to-b bg-clip-text text-5xl font-semibold text-transparent"
+            className="from bg-gradient-to-b from-primary to-muted-foreground bg-clip-text text-5xl font-semibold text-transparent"
           />
           <div className="max-w-screen-md">
             <TextGenerator
               words="Unlock the power of efficient linking. Our service offers a simple,
               user-friendly platform for shortening, managing, and analyzing your
               links."
-              className="text-muted-foreground text-xl font-light"
+              className="text-xl font-light text-muted-foreground"
             />
           </div>
           <Button size="lg" variant="outline" type="button" asChild>

@@ -1,5 +1,7 @@
 'use client'
 
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+
 import { ApiRecordType } from '@/shared/api/api-record-type'
 import useGetRecords from '@/shared/api/use-get-posts'
 import { LinkRecordType } from '@/shared/types/link-record-type'
@@ -9,7 +11,6 @@ import SelectorTagGroup from '@/widgets/link-selector/tag-group'
 import useGroupedLinks from '@/widgets/link-selector/use-grouped-links'
 
 import { LinkSelectorContextProvider } from './selector-context'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 export default function Selector() {
   const { data, isFetching } = useGetRecords()
