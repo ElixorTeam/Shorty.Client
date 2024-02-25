@@ -8,6 +8,7 @@ import NavigationHeader from '@/pages-flat/main/navigation-header'
 import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
 import WorkspaceHeader from '@/pages-flat/main/workspace-header'
 import WorkspaceTabs from '@/pages-flat/main/workspace-tabs'
+import getDomains from '@/shared/api/get-domains'
 import getRecords from '@/shared/api/get-records'
 import { auth } from '@/shared/auth'
 import cn from '@/shared/lib/tailwind-merge'
@@ -20,6 +21,11 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
   await queryClient.prefetchQuery({
     queryFn: getRecords,
     queryKey: ['records'],
+  })
+
+  await queryClient.prefetchQuery({
+    queryFn: getDomains,
+    queryKey: ['domains'],
   })
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

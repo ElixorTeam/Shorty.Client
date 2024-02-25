@@ -10,4 +10,5 @@ Dockerfile
 .gitignore
 
 .env.dist
+.env.local
 components.json

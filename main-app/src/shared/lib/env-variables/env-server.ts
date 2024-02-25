@@ -1,24 +1,17 @@
 import { env } from 'next-runtime-env'
 
-import envServerSchema from '@/shared/lib/env-variables/env-server-scheme'
+const envServer = {
+  KEYCLOAK_BASE_URL: env('KEYCLOAK_BASE_URL') as string,
+  KEYCLOAK_CLIENT_SECRET: env('KEYCLOAK_CLIENT_SECRET') as string,
+  KEYCLOAK_CLIENT_ID: env('KEYCLOAK_CLIENT_ID') as string,
+  KEYCLOAK_REALM: env('KEYCLOAK_REALM') as string,
+  AUTH_SECRET: env('AUTH_SECRET') as string,
+  AUTH_URL: env('AUTH_URL') as string,
 
-const envServer = envServerSchema.safeParse({
-  KEYCLOAK_BASE_URL: env('KEYCLOAK_BASE_URL'),
-  KEYCLOAK_CLIENT_SECRET: env('KEYCLOAK_CLIENT_SECRET'),
-  KEYCLOAK_CLIENT_ID: env('KEYCLOAK_CLIENT_ID'),
-  KEYCLOAK_REALM: env('KEYCLOAK_REALM'),
-  AUTH_SECRET: env('AUTH_SECRET'),
-  AUTH_URL: env('AUTH_URL'),
+  BACKEND_URL: env('BACKEND_URL') as string,
 
-  BACKEND_URL: env('BACKEND_URL'),
+  PORT: env('PORT') as unknown as number,
+  NODE_ENV: env('NODE_ENV') as string,
+}
 
-  PORT: env('PORT'),
-  NODE_ENV: env('NODE_ENV'),
-})
-
-if (!envServer.success)
-  throw new Error(
-    `There is an error with the server environment variables ${envServer.error}`
-  )
-
-export default envServer.data
+export default envServer

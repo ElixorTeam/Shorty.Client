@@ -1,3 +1,5 @@
+'use client'
+
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
@@ -5,6 +7,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import CustomUrlInput from '@/features/custom-url-input'
+import useGetDomains from '@/shared/api/use-get-domains'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -28,6 +31,7 @@ const singleUrl: UrlType[] = [{ url: '' }]
 const groupUrls: UrlType[] = [{ url: '' }, { url: '' }]
 
 export default function CreateLinkForm() {
+  const { data: domains } = useGetDomains()
   const [type, setType] = useState<string>('single')
   const form = useForm<z.infer<typeof createFormSchema>>({
     resolver: zodResolver(createFormSchema),
@@ -35,7 +39,7 @@ export default function CreateLinkForm() {
       title: '',
       urls: singleUrl,
       prefix: '',
-      domain: 'sh0.su',
+      domain: domains && domains.length > 0 ? domains[0].value : '',
       path: generateUrlPath(),
     },
   })

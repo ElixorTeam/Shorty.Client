@@ -100,4 +100,4 @@ lerna-debug.log
 
 # System Files
 Thumbs.db
-.env
+.env.example

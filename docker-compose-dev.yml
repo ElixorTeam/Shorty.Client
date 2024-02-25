@@ -1,0 +1,16 @@
+version: "3"
+services:
+  react-client:
+    container_name: ShortyAppClient
+    build: main-app
+    environment:
+      KEYCLOAK_BASE_URL: http://172.16.2.9:8180
+      KEYCLOAK_CLIENT_SECRET: ikl4rejQwgUXoS9RYvPA59sif0LFHRXV
+      KEYCLOAK_CLIENT_ID: shorty-client
+      KEYCLOAK_REALM: shorty
+      AUTH_SECRET: VrGrBwdw6fJ6yqu0CplImHJTFf9aLyA+x7GffAMQnQk=
+      AUTH_URL: http://localhost:3000/api/auth
+      BACKEND_URL: http://172.16.2.9:2000/api/v1
+      HOSTNAME: 0.0.0.0
+    ports:
+      - "3000:3000"
