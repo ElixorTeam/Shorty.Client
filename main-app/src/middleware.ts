@@ -11,7 +11,6 @@ export default auth(async (req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
   const authResponse = Response.redirect(new URL('/api/auth/signin', nextUrl))
-
   // @ts-ignore
   const session = await getToken({ req, secret: envServer.AUTH_SECRET })
 

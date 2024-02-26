@@ -27,7 +27,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
       <button
         type="button"
         className={cn(
-          isActive ? 'bg-muted relative' : 'hover:bg-muted',
+          isActive ? 'relative bg-muted' : 'hover:bg-muted',
           'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4 transition-colors'
         )}
       >
