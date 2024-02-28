@@ -1,4 +1,4 @@
 export type DomainType = {
-  id: string
+  uid: string
   value: string
 }

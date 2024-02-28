@@ -7,6 +7,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import CustomUrlInput from '@/features/custom-url-input'
+import createLink from '@/shared/api/create-link-action'
 import useGetDomains from '@/shared/api/use-get-domains'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
@@ -54,8 +55,18 @@ export default function CreateLinkForm() {
     setType(value)
   }
 
-  const onSubmit = (values: z.infer<typeof createFormSchema>) =>
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof createFormSchema>) => {
+    const res = await createLink({
+      domainUid: domains && domains.length > 0 ? domains[0].uid : '',
+      url: values.urls.length > 0 ? values.urls[0].url : '',
+      title: values.title,
+      password: values.password,
+      subdomain: values.prefix,
+    })
+
+    const { data, serverError, validationErrors } = res
+    console.log(data, serverError, validationErrors)
+  }
 
   return (
     <Form {...form}>

@@ -3,16 +3,13 @@
 import { useQRCode } from 'next-qrcode'
 
 export default function QrcodeExample() {
-  const { Image } = useQRCode()
+  const { Canvas } = useQRCode()
   return (
     <div className="overflow-hidden rounded-lg border">
-      <Image
-        text="https://elixor.sh0.su"
+      <Canvas
+        text="https://github.com/bunlong/next-qrcode"
         options={{
-          type: 'image/jpeg',
-          quality: 0.3,
           errorCorrectionLevel: 'M',
-          margin: 3,
           scale: 4,
           width: 200,
         }}

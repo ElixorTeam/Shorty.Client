@@ -1,5 +1,5 @@
 import { createSafeActionClient } from 'next-safe-action'
 
-const actionClient = createSafeActionClient()
+const action = createSafeActionClient()
 
-export default actionClient
+export default action

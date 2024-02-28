@@ -16,11 +16,11 @@ export default function Selector() {
   const { data, isFetching } = useGetRecords()
 
   const convertToLinkRecord = (apiObject: ApiRecordType): LinkRecordType => ({
-    uid: apiObject.id,
+    uid: apiObject.uid,
     title: apiObject.title,
-    url: apiObject.shortSubDomain,
+    url: apiObject.url,
     createDate: new Date(apiObject.createDt),
-    tag: apiObject.prefix,
+    tag: apiObject.subdomain,
     imageURL: '',
   })
 
@@ -30,8 +30,8 @@ export default function Selector() {
       <nav className="flex size-full flex-col overflow-hidden">
         <SelectorHeader />
         {data && data.length > 0 ? (
-          <ScrollArea className="size-full">
-            <ul className="flex flex-col gap-2 px-3 pb-3">
+          <ScrollArea className="size-full overflow-hidden">
+            <ul className="flex w-[24rem] w-full flex-col gap-2 overflow-hidden px-3 pb-3">
               {Object.entries(groupedLinks).map(([tag, tagLinks]) => (
                 <li key={tag}>
                   <SelectorTagGroup tagTitle={tag} links={tagLinks} />

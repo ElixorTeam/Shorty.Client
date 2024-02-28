@@ -1,8 +1,10 @@
 export type ApiRecordType = {
-  id: string
+  uid: string
   title: string
-  shortSubDomain: string
-  prefix: string
+  url: string
+  subdomain: string
+  domainUid: string
+  password: string
+  updateDt: string
   createDt: string
-  changeDt: string
 }
