@@ -8,11 +8,13 @@ import NavigationHeader from '@/pages-flat/main/navigation-header'
 import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
 import WorkspaceHeader from '@/pages-flat/main/workspace-header'
 import WorkspaceTabs from '@/pages-flat/main/workspace-tabs'
+import getCurrentRecord from '@/shared/api/get-current-record'
 import getDomains from '@/shared/api/get-domains'
 import getRecords from '@/shared/api/get-records'
 import { auth } from '@/shared/auth'
 import cn from '@/shared/lib/tailwind-merge'
 import Selector from '@/widgets/link-selector/link-selector'
+import LinkSuspense from '@/pages-flat/main/link-suspense'
 
 export default async function MainPage({ linkUid }: { linkUid: string }) {
   const session = await auth()
@@ -26,6 +28,11 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
   await queryClient.prefetchQuery({
     queryFn: getDomains,
     queryKey: ['domains'],
+  })
+
+  await queryClient.prefetchQuery({
+    queryFn: async () => getCurrentRecord(linkUid),
+    queryKey: ['currentRecord', linkUid],
   })
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -41,8 +48,10 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
           )}
         >
           <div className="flex size-full flex-col">
-            <WorkspaceHeader linkUID={linkUid} user={session?.user} />
-            {linkUid ? <WorkspaceTabs /> : <NoSelectedWarning />}
+            <LinkSuspense>
+              <WorkspaceHeader linkUID={linkUid} user={session?.user} />
+              <WorkspaceTabs />
+            </LinkSuspense>
           </div>
         </div>
       </div>

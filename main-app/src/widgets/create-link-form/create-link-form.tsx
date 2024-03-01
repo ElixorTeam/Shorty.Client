@@ -1,7 +1,6 @@
-'use client'
-
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -24,6 +23,7 @@ import { Input } from '@/shared/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 import createFormSchema from '@/widgets/create-link-form/create-form-scheme'
 import generateUrlPath from '@/widgets/create-link-form/generate-url-path'
+import { useToast } from '@/shared/ui/use-toast'
 
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
 
@@ -31,7 +31,13 @@ const singleUrl: UrlType[] = [{ url: '' }]
 
 const groupUrls: UrlType[] = [{ url: '' }, { url: '' }]
 
-export default function CreateLinkForm() {
+export default function CreateLinkForm({
+  onFormSubmit,
+}: {
+  onFormSubmit: () => void
+}) {
+  const router = useRouter()
+  const { toast } = useToast()
   const { data: domains } = useGetDomains()
   const [type, setType] = useState<string>('single')
   const form = useForm<z.infer<typeof createFormSchema>>({
@@ -42,6 +48,7 @@ export default function CreateLinkForm() {
       prefix: '',
       domain: domains && domains.length > 0 ? domains[0].value : '',
       path: generateUrlPath(),
+      password: '',
     },
   })
 
@@ -65,7 +72,15 @@ export default function CreateLinkForm() {
     })
 
     const { data, serverError, validationErrors } = res
-    console.log(data, serverError, validationErrors)
+    if (data?.failure || serverError || validationErrors) {
+      toast({
+        title: 'Form error',
+        description: data?.failure,
+      })
+      return
+    }
+    router.push(`/main?linkUid=${data?.data?.uid}`, { scroll: false })
+    onFormSubmit()
   }
 
   return (

@@ -30,8 +30,8 @@ export default function Selector() {
       <nav className="flex size-full flex-col overflow-hidden">
         <SelectorHeader />
         {data && data.length > 0 ? (
-          <ScrollArea className="size-full overflow-hidden">
-            <ul className="flex w-[24rem] w-full flex-col gap-2 overflow-hidden px-3 pb-3">
+          <ScrollArea className="size-full overflow-hidden [&_div:first-child]:!block">
+            <ul className="flex w-full flex-col gap-2 overflow-hidden px-3 pb-3">
               {Object.entries(groupedLinks).map(([tag, tagLinks]) => (
                 <li key={tag}>
                   <SelectorTagGroup tagTitle={tag} links={tagLinks} />

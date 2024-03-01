@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ArrowPathIcon,
   ArrowUpOnSquareIcon,
@@ -13,8 +15,11 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-import avatar_artyom from '@/public/avatar_artyom.jpg'
+import deleteLink from '@/shared/api/delete-link-action'
+import useGetCurrentRecord from '@/shared/api/use-get-current-record'
+import useGetDomains from '@/shared/api/use-get-domains'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
@@ -24,27 +29,66 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
+import { useToast } from '@/shared/ui/use-toast'
 import DescriptionItem from '@/widgets/description/description-item'
 
 export default function Description() {
+  const { data: record } = useGetCurrentRecord()
+  const { data: domains } = useGetDomains()
+  const { toast } = useToast()
+  const router = useRouter()
+  const getShortLink = () => {
+    const domain = domains?.find((item) => item.uid === record?.domainUid)
+    return `https://${record?.subdomain}.${domain?.value}`
+  }
+
+  const getFormattedDate = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = {
+      day: 'numeric',
+      month: 'short',
+    }
+
+    if (date.getFullYear() !== new Date().getFullYear())
+      options.year = '2-digit'
+
+    return date.toLocaleDateString('en-US', options)
+  }
+
+  const deleteRecord = async () => {
+    const { data } = await deleteLink({
+      linkUid: record?.uid ?? '',
+    })
+    if (data?.failure) {
+      toast({
+        title: 'Error while deleting',
+        description: data.failure,
+      })
+      return
+    }
+    router.push('/main')
+  }
+
   return (
     <div className="w-full space-y-4 border-b pb-8">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <Avatar className="size-14">
-            <AvatarImage src={avatar_artyom.src} alt="avatar" />
-            <AvatarFallback>Y</AvatarFallback>
+            <AvatarImage src="" alt="avatar" />
+            <AvatarFallback>{record?.title[0]}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <h2 className="truncate text-2xl font-semibold tracking-tight">
-                Youtube links
+                {record?.title}
               </h2>
-              <Badge className="mt-[1px]">Group</Badge>
+              <Badge className="mt-[1px]">Single</Badge>
             </div>
-            <span className="truncate text-sm text-muted-foreground">
-              https://sh0.su/f56fx
-            </span>
+            <Link
+              href={getShortLink()}
+              className="truncate text-sm text-muted-foreground hover:underline hover:underline-offset-4"
+            >
+              {getShortLink()}
+            </Link>
           </div>
         </div>
         <div className="flex gap-2">
@@ -79,7 +123,7 @@ export default function Description() {
                 <HandRaisedIcon className="mr-2 size-4" />
                 <span>Disable</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={deleteRecord}>
                 <TrashIcon className="mr-2 size-4" />
                 <span>Delete</span>
               </DropdownMenuItem>
@@ -99,13 +143,13 @@ export default function Description() {
         </DescriptionItem>
         <DescriptionItem title="Link" Icon={LinkIcon}>
           <Button variant="link" className="h-6 p-0" asChild>
-            <Link href="https://youtube.com/channel/Ap73MKa" target="_blank">
-              https://youtube.com/channel/Ap73MKa
+            <Link href={record?.url ?? ''} target="_blank">
+              {record?.url}
             </Link>
           </Button>
         </DescriptionItem>
         <DescriptionItem title="Created" Icon={CalendarIcon}>
-          21 Feb
+          {getFormattedDate(new Date(record?.createDt ?? ''))}
         </DescriptionItem>
       </div>
     </div>

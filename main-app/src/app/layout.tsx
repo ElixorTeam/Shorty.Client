@@ -8,6 +8,7 @@ import { auth } from '@/shared/auth'
 import cn from '@/shared/lib/tailwind-merge'
 import { SessionProvider, ThemeProvider } from '@/shared/providers'
 import QueryProvider from '@/shared/providers/query-provider'
+import { Toaster } from '@/shared/ui/toaster'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -45,6 +46,7 @@ export default async function RootLayout({
               disableTransitionOnChange
             >
               {children}
+              <Toaster />
             </ThemeProvider>
           </QueryProvider>
         </SessionProvider>

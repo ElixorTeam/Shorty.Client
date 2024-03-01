@@ -62,7 +62,9 @@ export default function CustomUrlInput<T extends CustomUrlValues>({
           )}
         />
       </div>
-      <p className="text-sm text-muted">Final url will be {getCustomUrl()}</p>
+      <p className="text-sm text-muted-foreground">
+        Final url will be {getCustomUrl()}
+      </p>
     </div>
   )
 }

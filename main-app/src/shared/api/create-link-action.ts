@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
+import { ApiRecordType } from '@/shared/api/api-record-type'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import action from '@/shared/lib/safe-action'
@@ -20,6 +21,7 @@ const createLink = action(
   async ({ domainUid, title, subdomain, url, password }) => {
     try {
       const session = await auth()
+      console.log(domainUid, title, subdomain, url, password)
       const response = await fetch(`${envServer.BACKEND_URL}/links`, {
         body: JSON.stringify({
           domainUid,
@@ -36,12 +38,13 @@ const createLink = action(
         method: 'POST',
         cache: 'no-store',
       })
+      const text = await response.json()
       if (!response.ok) {
-        console.log(await response.json())
-        throw new Error(await response.json())
+        console.log(text.error)
+        throw new Error(text.error)
       }
       revalidatePath('/main')
-      return { success: 'Successful request' }
+      return { data: text as ApiRecordType }
     } catch (error) {
       return { failure: `Get error ${error}` }
     }
