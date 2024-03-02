@@ -1,4 +1,4 @@
-export type ApiRecordType = {
+export type RecordType = {
   uid: string
   title: string
   url: string

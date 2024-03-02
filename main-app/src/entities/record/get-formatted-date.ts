@@ -1,4 +1,4 @@
-const dateFormate = (date: Date) => {
+const getFormattedDate = (date: Date) => {
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
     month: 'short',
@@ -8,4 +8,4 @@ const dateFormate = (date: Date) => {
   return date.toLocaleDateString('en-US', options)
 }
 
-export default dateFormate
+export default getFormattedDate

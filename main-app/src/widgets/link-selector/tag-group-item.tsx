@@ -1,26 +1,14 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
+import { getFormattedDate, type RecordType } from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
-import { LinkRecordType } from '@/shared/types/link-record-type'
 import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar'
 
-export default function TagGroupItem({ link }: { link: LinkRecordType }) {
+export default function TagGroupItem({ link }: { link: RecordType }) {
   const searchParams = useSearchParams()
   const linkUID = searchParams.get('linkUid') ?? ''
   const isActive = linkUID === link.uid
-
-  const formattedDate = () => {
-    const options: Intl.DateTimeFormatOptions = {
-      day: 'numeric',
-      month: 'short',
-    }
-
-    if (link.createDate.getFullYear() !== new Date().getFullYear())
-      options.year = '2-digit'
-
-    return link.createDate.toLocaleDateString('en-US', options)
-  }
 
   return (
     <Link href={{ pathname: '/main', query: { linkUid: link.uid } }}>
@@ -36,7 +24,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
         )}
         <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
-            <AvatarImage src={link.imageURL} alt="link-icon" />
+            <AvatarImage src="" alt="link-icon" />
             <AvatarFallback>{link.title.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
@@ -46,7 +34,7 @@ export default function TagGroupItem({ link }: { link: LinkRecordType }) {
               {link.title}
             </span>
             <span className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-muted-foreground">
-              {formattedDate()}
+              {getFormattedDate(new Date(link.createDt))}
             </span>
           </div>
           <span className="truncate text-left text-xs leading-tight text-muted-foreground">

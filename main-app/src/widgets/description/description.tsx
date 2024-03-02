@@ -15,10 +15,12 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import useShortLink from '@/pages-flat/main/use-short-link'
-import { ApiRecordType } from '@/shared/api/api-record-type'
-import deleteLink from '@/shared/api/delete-link-action'
-import dateFormate from '@/shared/lib/date-formate'
+import {
+  useGetShortLink,
+  RecordType,
+  deleteLinkAction,
+  getFormattedDate,
+} from '@/entities/record'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
@@ -34,21 +36,22 @@ import DescriptionItem from '@/widgets/description/description-item'
 import QrCodeDialog from '@/widgets/description/qr-code-dialog'
 import SocialShareDialog from '@/widgets/description/social-share-dialog'
 
-export default function Description({ record }: { record: ApiRecordType }) {
-  const shortLink = useShortLink(record)
+export default function Description({ record }: { record: RecordType }) {
+  const shortLink = useGetShortLink(record)
   const router = useRouter()
   const { toast } = useToast()
 
-  const createDt = dateFormate(new Date(record.createDt))
+  const createDt = getFormattedDate(new Date(record.createDt))
 
   const deleteRecord = async () => {
-    const { data } = await deleteLink({
+    const { data } = await deleteLinkAction({
       linkUid: record.uid,
     })
     if (data?.failure) {
       toast({
         title: 'Error while deleting',
         description: data.failure,
+        variant: 'destructive',
       })
       return
     }

@@ -1,15 +1,17 @@
 import { useMemo } from 'react'
 
-import { LinkRecordType } from '@/shared/types/link-record-type'
+import { RecordType } from '@/entities/record'
+import {
+  useSearchingString,
+  useSortKey,
+} from '@/widgets/link-selector/selector-context'
 import { SortKey } from '@/widgets/link-selector/sort-key-enum'
 
-import { useSearchingString, useSortKey } from './selector-context'
-
-export default function useFilteredLinks(links: LinkRecordType[]) {
+export default function useFilteredLinks(links: RecordType[]) {
   const { searchingString } = useSearchingString()
   const { sortKey } = useSortKey()
 
-  return useMemo<LinkRecordType[]>(
+  return useMemo<RecordType[]>(
     () =>
       links
         .filter((item) => item.title.includes(searchingString))
@@ -18,7 +20,9 @@ export default function useFilteredLinks(links: LinkRecordType[]) {
             case SortKey.NAME:
               return a.title.localeCompare(b.title)
             case SortKey.DATE:
-              return b.createDate.getTime() - a.createDate.getTime()
+              return (
+                new Date(b.createDt).getTime() - new Date(a.createDt).getTime()
+              )
             default:
               return 0
           }

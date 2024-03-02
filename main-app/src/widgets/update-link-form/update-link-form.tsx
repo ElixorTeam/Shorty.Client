@@ -5,10 +5,9 @@ import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { type RecordType, updateLinkAction } from '@/entities/record'
 import CustomUrlInput from '@/features/custom-url-input'
 import TagSelector, { TagType } from '@/features/tag-selector'
-import { ApiRecordType } from '@/shared/api/api-record-type'
-import updateLink from '@/shared/api/update-link-action'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -24,7 +23,7 @@ import { useToast } from '@/shared/ui/use-toast'
 import FormHeader from '@/widgets/update-link-form/form-header'
 import updateFormSchema from '@/widgets/update-link-form/update-form-scheme'
 
-export default function UpdateLinkForm({ record }: { record: ApiRecordType }) {
+export default function UpdateLinkForm({ record }: { record: RecordType }) {
   const [currentTag, setCurrentTag] = useState<TagType>()
   const { toast } = useToast()
   const tags = [
@@ -51,7 +50,7 @@ export default function UpdateLinkForm({ record }: { record: ApiRecordType }) {
   })
 
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
-    const res = await updateLink({
+    const res = await updateLinkAction({
       uid: record.uid,
       title: values.title,
       password: values.password,
@@ -62,6 +61,7 @@ export default function UpdateLinkForm({ record }: { record: ApiRecordType }) {
       toast({
         title: 'Form error',
         description: data?.failure,
+        variant: 'destructive',
       })
       return
     }

@@ -1,5 +1,5 @@
 import { TokenSet } from '@auth/core/types'
-import NextAuth, { Session } from 'next-auth'
+import NextAuth from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import keycloak from 'next-auth/providers/keycloak'
 
@@ -23,7 +23,7 @@ export const {
   ],
   callbacks: {
     async jwt({ token, account }) {
-      const currentToken = { ...token } as JWT
+      const currentToken = { ...token }
 
       if (account) {
         currentToken.idToken = account.id_token
@@ -44,7 +44,8 @@ export const {
           currentToken.refreshToken ?? ''
         )
         const tokens: TokenSet = await response.json()
-        if (!response.ok) throw new Error(await response.text())
+        if (!response.ok)
+          return { ...currentToken, error: 'RefreshAccessTokenError' }
         return {
           ...currentToken,
           idToken: tokens.id_token,
@@ -53,13 +54,12 @@ export const {
           refreshToken: tokens.refresh_token ?? currentToken.refreshToken,
         }
       } catch (error) {
-        console.log(`Error while refreshing access token: ${error}`)
         return { ...currentToken, error: 'RefreshAccessTokenError' }
       }
     },
     async session({ session, token }) {
-      const currentSession = { ...session } as Session
-      const currentToken = { ...token } as JWT
+      const currentSession = { ...session }
+      const currentToken = { ...token }
       currentSession.accessToken = currentToken.accessToken
       currentSession.user.roles = currentToken.roles
       return currentSession
@@ -70,10 +70,9 @@ export const {
       try {
         // @ts-ignore
         const currentToken = { ...token.token } as JWT
-        const response = await reqSessionLogout(currentToken.idToken ?? '')
-        if (!response.ok) throw new Error(await response.text())
-      } catch (error) {
-        console.log(`Error while log out: ${error}`)
+        await reqSessionLogout(currentToken.idToken ?? '')
+      } catch {
+        // pass
       }
     },
   },

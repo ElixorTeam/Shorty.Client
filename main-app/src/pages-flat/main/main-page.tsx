@@ -4,12 +4,11 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 
+import { getDomains } from '@/entities/domain'
+import { getAllRecords, getCurrentRecord } from '@/entities/record'
 import NavigationHeader from '@/pages-flat/main/navigation-header'
 import Workspace from '@/pages-flat/main/workspace'
 import WorkspaceHeader from '@/pages-flat/main/workspace-header'
-import getCurrentRecord from '@/shared/api/get-current-record'
-import getDomains from '@/shared/api/get-domains'
-import getRecords from '@/shared/api/get-records'
 import cn from '@/shared/lib/tailwind-merge'
 import Selector from '@/widgets/link-selector/link-selector'
 
@@ -17,7 +16,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryFn: getRecords,
+    queryFn: getAllRecords,
     queryKey: ['records'],
   })
 

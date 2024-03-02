@@ -1,10 +1,10 @@
 'use server'
 
-import { ApiRecordType } from '@/shared/api/api-record-type'
+import { type RecordType } from '@/entities/record/record-type'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables/env-server'
 
-const getRecords = async (): Promise<ApiRecordType[]> => {
+const getAllRecords = async (): Promise<RecordType[]> => {
   const session = await auth()
   const records = await fetch(`${envServer.BACKEND_URL}/links`, {
     headers: {
@@ -16,4 +16,4 @@ const getRecords = async (): Promise<ApiRecordType[]> => {
   return records.json()
 }
 
-export default getRecords
+export default getAllRecords

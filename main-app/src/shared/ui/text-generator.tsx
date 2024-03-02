@@ -25,7 +25,7 @@ export default function TextGenerator({
         delay: stagger(0.2),
       }
     )
-  }, [scope.current])
+  }, [animate])
 
   return (
     <motion.div ref={scope}>

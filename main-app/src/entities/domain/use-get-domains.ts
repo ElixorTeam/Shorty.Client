@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 
-import getDomains from '@/shared/api/get-domains'
+import getDomains from '@/entities/domain/get-domains'
 
-const useGetRecords = () =>
+const useGetDomains = () =>
   useQuery({
     queryFn: async () => getDomains(),
     queryKey: ['domains'],
   })
 
-export default useGetRecords
+export default useGetDomains

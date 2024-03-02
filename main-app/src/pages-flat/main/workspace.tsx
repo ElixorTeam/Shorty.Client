@@ -1,10 +1,10 @@
 'use client'
 
-import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
-import useGetCurrentRecord from '@/shared/api/use-get-current-record'
-import { Button } from '@/shared/ui/button'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 
+import { useGetCurrentRecord } from '@/entities/record'
+import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
+import { Button } from '@/shared/ui/button'
 import Dashboard from '@/widgets/dashboard'
 import Description from '@/widgets/description'
 import UpdateLinkForm from '@/widgets/update-link-form'

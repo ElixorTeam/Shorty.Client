@@ -4,8 +4,8 @@ import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 
+import { RecordType } from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
-import { LinkRecordType } from '@/shared/types/link-record-type'
 import TagGroupItem from '@/widgets/link-selector/tag-group-item'
 import useFilteredLinks from '@/widgets/link-selector/use-filtered-list'
 
@@ -14,7 +14,7 @@ export default function SelectorTagGroup({
   links,
 }: {
   tagTitle: string
-  links: LinkRecordType[]
+  links: RecordType[]
 }) {
   const filteredLinks = useFilteredLinks(links)
   const [isOpen, setIsOpen] = useState(true)

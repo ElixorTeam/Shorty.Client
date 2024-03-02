@@ -5,9 +5,9 @@ import { useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { useGetDomains } from '@/entities/domain'
+import { createLinkAction } from '@/entities/record'
 import CustomUrlInput from '@/features/custom-url-input'
-import createLink from '@/shared/api/create-link-action'
-import useGetDomains from '@/shared/api/use-get-domains'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -63,7 +63,7 @@ export default function CreateLinkForm({
   }
 
   const onSubmit = async (values: z.infer<typeof createFormSchema>) => {
-    const res = await createLink({
+    const res = await createLinkAction({
       domainUid: domains && domains.length > 0 ? domains[0].uid : '',
       url: values.urls.length > 0 ? values.urls[0].url : '',
       title: values.title,
@@ -76,6 +76,7 @@ export default function CreateLinkForm({
       toast({
         title: 'Form error',
         description: data?.failure,
+        variant: 'destructive',
       })
       return
     }

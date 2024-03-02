@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 
-import { ApiRecordType } from '@/shared/api/api-record-type'
-import useGetDomains from '@/shared/api/use-get-domains'
+import useGetDomains from '@/entities/domain/use-get-domains'
+import { RecordType } from '@/entities/record/record-type'
 
-const useShortLink = (record: ApiRecordType) => {
+const useGetShortLink = (record: RecordType) => {
   const { data: domains } = useGetDomains()
 
   return useMemo(() => {
@@ -15,4 +15,4 @@ const useShortLink = (record: ApiRecordType) => {
   }, [record, domains])
 }
 
-export default useShortLink
+export default useGetShortLink

@@ -2,29 +2,16 @@
 
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
-import { ApiRecordType } from '@/shared/api/api-record-type'
-import useGetRecords from '@/shared/api/use-get-posts'
-import { LinkRecordType } from '@/shared/types/link-record-type'
+import { useGetAllRecords, useGroupedRecords } from '@/entities/record'
 import { ScrollArea } from '@/shared/ui/scroll-area'
 import SelectorHeader from '@/widgets/link-selector/selector-header'
 import SelectorTagGroup from '@/widgets/link-selector/tag-group'
-import useGroupedLinks from '@/widgets/link-selector/use-grouped-links'
 
 import { LinkSelectorContextProvider } from './selector-context'
 
 export default function Selector() {
-  const { data, isFetching } = useGetRecords()
-
-  const convertToLinkRecord = (apiObject: ApiRecordType): LinkRecordType => ({
-    uid: apiObject.uid,
-    title: apiObject.title,
-    url: apiObject.url,
-    createDate: new Date(apiObject.createDt),
-    tag: apiObject.subdomain,
-    imageURL: '',
-  })
-
-  const groupedLinks = useGroupedLinks(data?.map(convertToLinkRecord) ?? [])
+  const { data, isPending } = useGetAllRecords()
+  const groupedLinks = useGroupedRecords(data ?? [])
   return (
     <LinkSelectorContextProvider>
       <nav className="flex size-full flex-col overflow-hidden">
@@ -41,7 +28,7 @@ export default function Selector() {
           </ScrollArea>
         ) : (
           <div className="flex size-full items-center justify-center">
-            {isFetching ? (
+            {isPending ? (
               <span>Loading...</span>
             ) : (
               <>

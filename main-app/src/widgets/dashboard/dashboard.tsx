@@ -50,25 +50,25 @@ export default function Dashboard() {
           title="Total views"
           Icon={EyeIcon}
           value="1400"
-          subvalue="+20.1% from last day"
+          description="+20.1% from last day"
         />
         <DashboardCard
           title="Unique"
           Icon={UserIcon}
           value="140"
-          subvalue="+20.1% from last day"
+          description="+20.1% from last day"
         />
         <DashboardCard
           title="Trend"
           Icon={ArrowTrendingUpIcon}
           value="30%"
-          subvalue="+4.1% from last day"
+          description="+4.1% from last day"
         />
         <DashboardCard
           title="Time left"
           Icon={ClockIcon}
           value="43 days"
-          subvalue=""
+          description=""
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">

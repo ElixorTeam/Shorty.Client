@@ -41,6 +41,7 @@ export default function QrCodeDialog({ link }: { link: string }) {
         toast({
           title: 'Error copying',
           description: 'Your browser not allow to copy to clipboard',
+          variant: 'destructive',
         })
       }
     })

@@ -1,6 +1,6 @@
 import { decodeToken } from 'react-jwt'
 
-import { RoleType } from '@/shared/types/next-auth'
+import { RoleType } from '@/shared/auth/next-auth'
 
 const getUserRolesByAccessToken = (accessToken: string): RoleType[] => {
   try {

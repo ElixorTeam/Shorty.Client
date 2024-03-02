@@ -1,16 +1,16 @@
-import { IconType } from '@/shared/types/icon-type'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
+import { IconType } from '@/shared/ui/icon-type'
 
 export default function DashboardCard({
   title,
   Icon,
   value,
-  subvalue,
+  description,
 }: {
   title: string
   Icon: IconType
   value: string
-  subvalue: string
+  description: string
 }) {
   return (
     <Card>
@@ -20,7 +20,7 @@ export default function DashboardCard({
       </CardHeader>
       <CardContent>
         <p className="text-2xl font-bold">{value}</p>
-        <span className="text-xs text-muted-foreground">{subvalue}</span>
+        <span className="text-xs text-muted-foreground">{description}</span>
       </CardContent>
     </Card>
   )
