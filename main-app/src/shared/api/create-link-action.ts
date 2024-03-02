@@ -21,7 +21,6 @@ const createLink = action(
   async ({ domainUid, title, subdomain, url, password }) => {
     try {
       const session = await auth()
-      console.log(domainUid, title, subdomain, url, password)
       const response = await fetch(`${envServer.BACKEND_URL}/links`, {
         body: JSON.stringify({
           domainUid,

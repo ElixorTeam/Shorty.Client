@@ -18,7 +18,7 @@ export default async function HomeHeader() {
         </Link>
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          {session ? <AvatarDropdown user={session.user} /> : <SignUpButton />}
+          {session ? <AvatarDropdown /> : <SignUpButton />}
         </div>
       </div>
     </header>

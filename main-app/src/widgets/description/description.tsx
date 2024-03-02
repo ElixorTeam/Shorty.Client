@@ -1,14 +1,12 @@
 'use client'
 
 import {
-  ArrowPathIcon,
   ArrowUpOnSquareIcon,
   CalendarIcon,
   EllipsisHorizontalIcon,
   EyeIcon,
   HandRaisedIcon,
   LinkIcon,
-  PencilSquareIcon,
   QrCodeIcon,
   Squares2X2Icon,
   TagIcon,
@@ -17,12 +15,14 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import useShortLink from '@/pages-flat/main/use-short-link'
+import { ApiRecordType } from '@/shared/api/api-record-type'
 import deleteLink from '@/shared/api/delete-link-action'
-import useGetCurrentRecord from '@/shared/api/use-get-current-record'
-import useGetDomains from '@/shared/api/use-get-domains'
+import dateFormate from '@/shared/lib/date-formate'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
+import { Dialog, DialogTrigger } from '@/shared/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,34 +31,19 @@ import {
 } from '@/shared/ui/dropdown-menu'
 import { useToast } from '@/shared/ui/use-toast'
 import DescriptionItem from '@/widgets/description/description-item'
-import { Dialog, DialogContent, DialogTrigger } from '@/shared/ui/dialog'
-import QrcodeGenerator from '@/widgets/description/qrcode-generator'
+import QrCodeDialog from '@/widgets/description/qr-code-dialog'
+import SocialShareDialog from '@/widgets/description/social-share-dialog'
 
-export default function Description() {
-  const { data: record } = useGetCurrentRecord()
-  const { data: domains } = useGetDomains()
-  const { toast } = useToast()
+export default function Description({ record }: { record: ApiRecordType }) {
+  const shortLink = useShortLink(record)
   const router = useRouter()
-  const getShortLink = () => {
-    const domain = domains?.find((item) => item.uid === record?.domainUid)
-    return `https://${record?.subdomain}.${domain?.value}`
-  }
+  const { toast } = useToast()
 
-  const getFormattedDate = (date: Date) => {
-    const options: Intl.DateTimeFormatOptions = {
-      day: 'numeric',
-      month: 'short',
-    }
-
-    if (date.getFullYear() !== new Date().getFullYear())
-      options.year = '2-digit'
-
-    return date.toLocaleDateString('en-US', options)
-  }
+  const createDt = dateFormate(new Date(record.createDt))
 
   const deleteRecord = async () => {
     const { data } = await deleteLink({
-      linkUid: record?.uid ?? '',
+      linkUid: record.uid,
     })
     if (data?.failure) {
       toast({
@@ -76,26 +61,26 @@ export default function Description() {
         <div className="flex items-center gap-4">
           <Avatar className="size-14">
             <AvatarImage src="" alt="avatar" />
-            <AvatarFallback>{record?.title[0]}</AvatarFallback>
+            <AvatarFallback>{record.title[0]}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <h2 className="truncate text-2xl font-semibold tracking-tight">
-                {record?.title}
+                {record.title}
               </h2>
               <Badge className="mt-[1px]">Single</Badge>
             </div>
             <Link
-              href={getShortLink()}
+              href={shortLink}
               className="truncate text-sm text-muted-foreground hover:underline hover:underline-offset-4"
             >
-              {getShortLink()}
+              {shortLink}
             </Link>
           </div>
         </div>
         <div className="flex gap-2">
           <Button className="hidden xl:flex" asChild>
-            <Link href={getShortLink()}>
+            <Link href={shortLink}>
               <EyeIcon className="mr-2 size-4" />
               Preview
             </Link>
@@ -107,14 +92,17 @@ export default function Description() {
                 QR code
               </Button>
             </DialogTrigger>
-            <DialogContent>
-              <QrcodeGenerator link={getShortLink()} />
-            </DialogContent>
+            <QrCodeDialog link={shortLink} />
           </Dialog>
-          <Button className="hidden xl:flex">
-            <ArrowUpOnSquareIcon className="mr-2 size-4" />
-            Share
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="hidden xl:flex">
+                <ArrowUpOnSquareIcon className="mr-2 size-4" />
+                Share
+              </Button>
+            </DialogTrigger>
+            <SocialShareDialog shortLink={shortLink} />
+          </Dialog>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -122,14 +110,30 @@ export default function Description() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>
-                <PencilSquareIcon className="mr-2 size-4" />
-                <span>Edit</span>
+              <DropdownMenuItem className="xl:hidden" asChild>
+                <Link href={shortLink}>
+                  <EyeIcon className="mr-2 size-4" />
+                  Preview
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <ArrowPathIcon className="mr-2 size-4" />
-                <span>Restore</span>
-              </DropdownMenuItem>
+              <Dialog>
+                <DialogTrigger className="w-full lg:hidden">
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    <QrCodeIcon className="mr-2 size-4" />
+                    QR code
+                  </DropdownMenuItem>
+                </DialogTrigger>
+                <QrCodeDialog link={shortLink} />
+              </Dialog>
+              <Dialog>
+                <DialogTrigger className="w-full xl:hidden">
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    <ArrowUpOnSquareIcon className="mr-2 size-4" />
+                    Share
+                  </DropdownMenuItem>
+                </DialogTrigger>
+                <SocialShareDialog shortLink={shortLink} />
+              </Dialog>
               <DropdownMenuItem>
                 <HandRaisedIcon className="mr-2 size-4" />
                 <span>Disable</span>
@@ -154,13 +158,13 @@ export default function Description() {
         </DescriptionItem>
         <DescriptionItem title="Link" Icon={LinkIcon}>
           <Button variant="link" className="h-6 p-0" asChild>
-            <Link href={record?.url ?? ''} target="_blank">
-              {record?.url}
+            <Link href={record.url} target="_blank">
+              {record.url}
             </Link>
           </Button>
         </DescriptionItem>
         <DescriptionItem title="Created" Icon={CalendarIcon}>
-          {getFormattedDate(new Date(record?.createDt ?? ''))}
+          {createDt}
         </DescriptionItem>
       </div>
     </div>

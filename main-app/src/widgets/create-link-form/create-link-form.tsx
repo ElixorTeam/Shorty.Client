@@ -21,9 +21,9 @@ import {
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
+import { useToast } from '@/shared/ui/use-toast'
 import createFormSchema from '@/widgets/create-link-form/create-form-scheme'
 import generateUrlPath from '@/widgets/create-link-form/generate-url-path'
-import { useToast } from '@/shared/ui/use-toast'
 
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
 

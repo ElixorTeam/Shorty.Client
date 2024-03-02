@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import { Button } from '@/shared/ui/button'
 import {
   Dialog,
@@ -9,7 +11,6 @@ import {
   DialogTrigger,
 } from '@/shared/ui/dialog'
 import CreateLinkForm from '@/widgets/create-link-form/create-link-form'
-import { useState } from 'react'
 
 export default function CreateLinkDialog() {
   const [isOpen, setIsOpen] = useState(false)

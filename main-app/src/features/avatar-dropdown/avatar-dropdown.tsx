@@ -1,5 +1,4 @@
-import { signOut } from '@/shared/auth'
-import { ExtendedUser } from '@/shared/types/next-auth'
+import { auth, signOut } from '@/shared/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import {
   DropdownMenu,
@@ -8,11 +7,9 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 
-export default async function AvatarDropdown({
-  user,
-}: {
-  user?: ExtendedUser
-}) {
+export default async function AvatarDropdown() {
+  const session = await auth()
+  const user = session?.user
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2">

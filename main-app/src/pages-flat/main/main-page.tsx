@@ -5,19 +5,15 @@ import {
 } from '@tanstack/react-query'
 
 import NavigationHeader from '@/pages-flat/main/navigation-header'
-import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
+import Workspace from '@/pages-flat/main/workspace'
 import WorkspaceHeader from '@/pages-flat/main/workspace-header'
-import WorkspaceTabs from '@/pages-flat/main/workspace-tabs'
 import getCurrentRecord from '@/shared/api/get-current-record'
 import getDomains from '@/shared/api/get-domains'
 import getRecords from '@/shared/api/get-records'
-import { auth } from '@/shared/auth'
 import cn from '@/shared/lib/tailwind-merge'
 import Selector from '@/widgets/link-selector/link-selector'
-import LinkSuspense from '@/pages-flat/main/link-suspense'
 
 export default async function MainPage({ linkUid }: { linkUid: string }) {
-  const session = await auth()
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -48,10 +44,8 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
           )}
         >
           <div className="flex size-full flex-col">
-            <LinkSuspense>
-              <WorkspaceHeader linkUID={linkUid} user={session?.user} />
-              <WorkspaceTabs />
-            </LinkSuspense>
+            <WorkspaceHeader />
+            <Workspace />
           </div>
         </div>
       </div>

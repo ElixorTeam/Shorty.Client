@@ -14,7 +14,7 @@ import {
 } from '@/shared/ui/dialog'
 import { useToast } from '@/shared/ui/use-toast'
 
-export default function QrcodeGenerator({ link }: { link: string }) {
+export default function QrCodeDialog({ link }: { link: string }) {
   const { Canvas } = useQRCode()
   const { toast } = useToast()
   const qrcodeContainerRef = useRef<HTMLDivElement>(null)
@@ -36,6 +36,7 @@ export default function QrcodeGenerator({ link }: { link: string }) {
       if (!blob) return
       try {
         navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        toast({ title: 'Successfully copied' })
       } catch {
         toast({
           title: 'Error copying',

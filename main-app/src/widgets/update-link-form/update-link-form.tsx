@@ -7,6 +7,8 @@ import { z } from 'zod'
 
 import CustomUrlInput from '@/features/custom-url-input'
 import TagSelector, { TagType } from '@/features/tag-selector'
+import { ApiRecordType } from '@/shared/api/api-record-type'
+import updateLink from '@/shared/api/update-link-action'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -18,11 +20,13 @@ import {
   FormMessage,
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
+import { useToast } from '@/shared/ui/use-toast'
 import FormHeader from '@/widgets/update-link-form/form-header'
 import updateFormSchema from '@/widgets/update-link-form/update-form-scheme'
 
-export default function UpdateLinkForm() {
+export default function UpdateLinkForm({ record }: { record: ApiRecordType }) {
   const [currentTag, setCurrentTag] = useState<TagType>()
+  const { toast } = useToast()
   const tags = [
     {
       value: 'youtube',
@@ -36,17 +40,36 @@ export default function UpdateLinkForm() {
   const form = useForm<z.infer<typeof updateFormSchema>>({
     resolver: zodResolver(updateFormSchema),
     defaultValues: {
-      title: 'Youtube',
+      title: record.title,
       tag: 'youtube',
-      link: 'https://youtube.com',
-      prefix: '',
+      link: record.url,
+      prefix: record.subdomain,
       domain: 'sh0.su',
       path: '',
+      password: record.password,
     },
   })
 
-  const onSubmit = (values: z.infer<typeof updateFormSchema>) =>
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
+    const res = await updateLink({
+      uid: record.uid,
+      title: values.title,
+      password: values.password,
+    })
+
+    const { data, serverError, validationErrors } = res
+    if (data?.failure || serverError || validationErrors) {
+      toast({
+        title: 'Form error',
+        description: data?.failure,
+      })
+      return
+    }
+
+    toast({
+      title: 'Successfully updated',
+    })
+  }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
@@ -55,7 +78,10 @@ export default function UpdateLinkForm() {
     const validTypes = ['image/jpeg', 'image/png', 'image/webp']
 
     if (!validTypes.includes(file.type)) {
-      alert('Недопустимый тип файла. Допускаются только JPEG, PNG и WEBP')
+      toast({
+        title: 'Loading error',
+        description: 'Invalid file type. Only JPEG, PNG and WEBP are allowed',
+      })
       return
     }
 
@@ -63,7 +89,11 @@ export default function UpdateLinkForm() {
     img.src = URL.createObjectURL(file)
     img.onload = () => {
       if (img.width <= 256 && img.height <= 256) form.setValue('avatar', file)
-      else alert('Размер изображения должен быть не более 256x256')
+      else
+        toast({
+          title: 'Loading error',
+          description: 'The image size should be no more than 256x256',
+        })
     }
   }
 
@@ -146,6 +176,27 @@ export default function UpdateLinkForm() {
               )}
             />
             <CustomUrlInput form={form} />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Enter password..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    The link is initially public, but if you enter a password,
+                    further access will require it
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button type="submit">Update profile</Button>
           </form>
         </Form>
