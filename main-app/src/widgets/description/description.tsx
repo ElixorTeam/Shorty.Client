@@ -31,6 +31,8 @@ import {
 } from '@/shared/ui/dropdown-menu'
 import { useToast } from '@/shared/ui/use-toast'
 import DescriptionItem from '@/widgets/description/description-item'
+import { Dialog, DialogContent, DialogTrigger } from '@/shared/ui/dialog'
+import QrcodeGenerator from '@/widgets/description/qrcode-generator'
 
 export default function Description() {
   const { data: record } = useGetCurrentRecord()
@@ -92,14 +94,23 @@ export default function Description() {
           </div>
         </div>
         <div className="flex gap-2">
-          <Button className="hidden xl:flex">
-            <EyeIcon className="mr-2 size-4" />
-            Preview
+          <Button className="hidden xl:flex" asChild>
+            <Link href={getShortLink()}>
+              <EyeIcon className="mr-2 size-4" />
+              Preview
+            </Link>
           </Button>
-          <Button>
-            <QrCodeIcon className="mr-2 size-4" />
-            QR code
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="hidden lg:flex">
+                <QrCodeIcon className="mr-2 size-4" />
+                QR code
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <QrcodeGenerator link={getShortLink()} />
+            </DialogContent>
+          </Dialog>
           <Button className="hidden xl:flex">
             <ArrowUpOnSquareIcon className="mr-2 size-4" />
             Share
