@@ -24,7 +24,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
-import { Dialog, DialogTrigger } from '@/shared/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -88,24 +87,18 @@ export default function Description({ record }: { record: RecordType }) {
               Preview
             </Link>
           </Button>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="hidden lg:flex">
-                <QrCodeIcon className="mr-2 size-4" />
-                QR code
-              </Button>
-            </DialogTrigger>
-            <QrCodeDialog link={shortLink} />
-          </Dialog>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="hidden xl:flex">
-                <ArrowUpOnSquareIcon className="mr-2 size-4" />
-                Share
-              </Button>
-            </DialogTrigger>
-            <SocialShareDialog shortLink={shortLink} />
-          </Dialog>
+          <QrCodeDialog link={shortLink}>
+            <Button className="hidden lg:flex">
+              <QrCodeIcon className="mr-2 size-4" />
+              QR code
+            </Button>
+          </QrCodeDialog>
+          <SocialShareDialog shortLink={shortLink}>
+            <Button className="hidden xl:flex">
+              <ArrowUpOnSquareIcon className="mr-2 size-4" />
+              Share
+            </Button>
+          </SocialShareDialog>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -119,24 +112,24 @@ export default function Description({ record }: { record: RecordType }) {
                   Preview
                 </Link>
               </DropdownMenuItem>
-              <Dialog>
-                <DialogTrigger className="w-full lg:hidden">
-                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                    <QrCodeIcon className="mr-2 size-4" />
-                    QR code
-                  </DropdownMenuItem>
-                </DialogTrigger>
-                <QrCodeDialog link={shortLink} />
-              </Dialog>
-              <Dialog>
-                <DialogTrigger className="w-full xl:hidden">
-                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                    <ArrowUpOnSquareIcon className="mr-2 size-4" />
-                    Share
-                  </DropdownMenuItem>
-                </DialogTrigger>
-                <SocialShareDialog shortLink={shortLink} />
-              </Dialog>
+              <QrCodeDialog link={shortLink}>
+                <DropdownMenuItem
+                  className="lg:hidden"
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  <QrCodeIcon className="mr-2 size-4" />
+                  QR code
+                </DropdownMenuItem>
+              </QrCodeDialog>
+              <SocialShareDialog shortLink={shortLink}>
+                <DropdownMenuItem
+                  className="xl:hidden"
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  <ArrowUpOnSquareIcon className="mr-2 size-4" />
+                  Share
+                </DropdownMenuItem>
+              </SocialShareDialog>
               <DropdownMenuItem>
                 <HandRaisedIcon className="mr-2 size-4" />
                 <span>Disable</span>
