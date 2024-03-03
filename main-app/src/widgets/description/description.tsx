@@ -63,7 +63,10 @@ export default function Description({ record }: { record: RecordType }) {
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <Avatar className="size-14">
-            <AvatarImage src="" alt="avatar" />
+            <AvatarImage
+              src={`http://www.google.com/s2/favicons?domain=${record.url}`}
+              alt="avatar"
+            />
             <AvatarFallback>{record.title[0]}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">

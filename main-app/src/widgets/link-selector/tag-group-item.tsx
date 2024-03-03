@@ -21,13 +21,16 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
       >
         <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
-            <AvatarImage src="" alt="link-icon" />
+            <AvatarImage
+              src={`http://www.google.com/s2/favicons?domain=${link.url}`}
+              alt="link-icon"
+            />
             <AvatarFallback>{link.title.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
-        <div className="flex h-9 w-full flex-col overflow-hidden text-left">
+        <div className="flex w-full flex-col gap-1 overflow-hidden text-left">
           <div className="flex w-full items-center justify-between gap-2">
-            <span className="line-clamp-1 truncate text-sm font-semibold leading-tight">
+            <span className="truncate text-sm font-semibold leading-tight">
               {link.title}
             </span>
             <span className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-muted-foreground">

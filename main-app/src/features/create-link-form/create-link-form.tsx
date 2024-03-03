@@ -70,10 +70,10 @@ export default function CreateLinkForm({
   const onSubmit = async (values: z.infer<typeof createFormSchema>) => {
     const res = await createLinkAction({
       domainUid: domains && domains.length > 0 ? domains[0].uid : '',
-      url: values.urls.length > 0 ? values.urls[0].url : '',
-      title: values.title,
-      password: values.password,
-      subdomain: values.prefix,
+      url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
+      title: !values.title?.trim() ? 'Untitled' : values.title?.trim(),
+      password: values.password?.trim(),
+      subdomain: values.prefix?.trim(),
     })
 
     const { data, serverError, validationErrors } = res

@@ -1,7 +1,7 @@
 'use client'
 
+import { CalendarDaysIcon } from '@heroicons/react/24/outline'
 import { addDays, format } from 'date-fns'
-import { Calendar as CalendarIcon } from 'lucide-react'
 import { HTMLAttributes, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
@@ -30,7 +30,7 @@ export default function DatePickerWithRange({
               !date && 'text-muted-foreground'
             )}
           >
-            <CalendarIcon className="mr-2 size-4" />
+            <CalendarDaysIcon className="mr-2 size-4" />
             {/* eslint-disable-next-line no-nested-ternary */}
             {date?.from ? (
               date.to ? (

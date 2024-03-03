@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import * as React from 'react'
 import { DayPicker } from 'react-day-picker'
 
@@ -55,9 +55,9 @@ function Calendar({
       }}
       components={{
         // eslint-disable-next-line
-        IconLeft: ({ ...props }) => <ChevronLeft className="size-4" />,
+        IconLeft: ({ ...props }) => <ChevronLeftIcon className="size-4" />,
         // eslint-disable-next-line
-        IconRight: ({ ...props }) => <ChevronRight className="size-4" />,
+        IconRight: ({ ...props }) => <ChevronRightIcon className="size-4" />,
       }}
       {...props}
     />

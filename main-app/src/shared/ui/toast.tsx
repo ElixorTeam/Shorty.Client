@@ -1,6 +1,6 @@
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import * as ToastPrimitives from '@radix-ui/react-toast'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { X } from 'lucide-react'
 import * as React from 'react'
 
 import cn from '@/shared/lib/tailwind-merge'
@@ -79,7 +79,7 @@ const ToastClose = React.forwardRef<
     toast-close=""
     {...props}
   >
-    <X className="size-4" />
+    <XMarkIcon className="size-4" />
   </ToastPrimitives.Close>
 ))
 ToastClose.displayName = ToastPrimitives.Close.displayName
