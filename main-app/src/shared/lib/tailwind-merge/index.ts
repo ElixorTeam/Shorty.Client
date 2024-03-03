@@ -1,3 +1,3 @@
-import { cn } from '@/shared/lib/tailwind-merge/utils'
+import { cn } from './utils'
 
 export default cn

@@ -4,10 +4,10 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 import { useGetAllRecords, useGroupedRecords } from '@/entities/record'
 import { ScrollArea } from '@/shared/ui/scroll-area'
-import SelectorHeader from '@/widgets/link-selector/selector-header'
-import SelectorTagGroup from '@/widgets/link-selector/tag-group'
 
 import { LinkSelectorContextProvider } from './selector-context'
+import SelectorHeader from './selector-header'
+import SelectorTagGroup from './tag-group'
 
 export default function Selector() {
   const { data, isPending } = useGetAllRecords()

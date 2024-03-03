@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
 
+// eslint-disable-next-line no-restricted-imports
 import useGetDomains from '@/entities/domain/use-get-domains'
-import getShortLink from '@/entities/record/get-short-link'
-import { RecordType } from '@/entities/record/record-type'
+
+import getShortLink from './get-short-link'
+import { RecordType } from './record-type'
 
 const useGetShortLink = (record: RecordType) => {
   const { data: domains } = useGetDomains()

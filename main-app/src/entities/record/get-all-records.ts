@@ -1,8 +1,9 @@
 'use server'
 
-import { type RecordType } from '@/entities/record/record-type'
 import { auth } from '@/shared/auth'
-import envServer from '@/shared/lib/env-variables/env-server'
+import envServer from '@/shared/lib/env-variables'
+
+import { type RecordType } from './record-type'
 
 const getAllRecords = async (): Promise<RecordType[]> => {
   const session = await auth()

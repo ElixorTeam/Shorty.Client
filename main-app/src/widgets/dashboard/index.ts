@@ -1,3 +1,3 @@
-import Dashboard from '@/widgets/dashboard/dashboard'
+import Dashboard from './dashboard'
 
 export default Dashboard

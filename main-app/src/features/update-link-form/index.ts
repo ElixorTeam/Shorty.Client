@@ -1,3 +1,3 @@
-import UpdateLinkForm from '@/features/update-link-form/update-link-form'
+import UpdateLinkForm from './update-link-form'
 
 export default UpdateLinkForm

@@ -1,3 +1,3 @@
-import Description from '@/widgets/description/description'
+import Description from './description'
 
 export default Description

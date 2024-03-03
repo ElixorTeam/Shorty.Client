@@ -1,3 +1,3 @@
-import HomePage from '@/pages-flat/home/home-page'
+import HomePage from './home-page'
 
 export default HomePage

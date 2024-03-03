@@ -7,8 +7,9 @@ import Link from 'next/link'
 
 import AvatarDropdown from '@/features/avatar-dropdown'
 import ThemeToggle from '@/features/theme-toggle'
-import LinkSuspense from '@/pages-flat/main/link-suspense'
 import { Button } from '@/shared/ui/button'
+
+import LinkSuspense from './link-suspense'
 
 export default async function WorkspaceHeader() {
   return (

@@ -5,7 +5,6 @@ import {
 } from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
-import { TagType } from '@/features/tag-selector/tag-type'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -16,6 +15,8 @@ import {
   CommandItem,
 } from '@/shared/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
+
+import { type TagType } from './tag-type'
 
 export default function TagSelector({
   currentTag,

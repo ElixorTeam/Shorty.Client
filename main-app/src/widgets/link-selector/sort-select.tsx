@@ -12,8 +12,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
-import { useSortKey } from '@/widgets/link-selector/selector-context'
-import { sortOptions } from '@/widgets/link-selector/sort-key-enum'
+
+import { useSortKey } from './selector-context'
+import { sortOptions } from './sort-key-enum'
 
 export default function SortSelect() {
   const { sortKey, setSortKey } = useSortKey()

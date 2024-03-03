@@ -6,8 +6,9 @@ import { ReactNode } from 'react'
 import './styles.css'
 import { auth } from '@/shared/auth'
 import cn from '@/shared/lib/tailwind-merge'
-import { SessionProvider, ThemeProvider } from '@/shared/providers'
 import QueryProvider from '@/shared/providers/query-provider'
+import SessionProvider from '@/shared/providers/session-provider'
+import ThemeProvider from '@/shared/providers/theme-provider'
 import Toaster from '@/shared/ui/toaster'
 
 const fontSans = FontSans({

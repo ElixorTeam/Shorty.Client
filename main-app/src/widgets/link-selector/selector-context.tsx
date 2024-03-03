@@ -2,7 +2,7 @@
 
 import { createContext, useState, useContext, ReactNode } from 'react'
 
-import { SortKey, SortKeyType } from '@/widgets/link-selector/sort-key-enum'
+import { SortKey, type SortKeyType } from './sort-key-enum'
 
 const useLinkSelectorStore = () => {
   const [searchingString, setSearchingString] = useState<string>('')

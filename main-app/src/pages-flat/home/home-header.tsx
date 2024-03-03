@@ -2,8 +2,9 @@ import Link from 'next/link'
 
 import AvatarDropdown from '@/features/avatar-dropdown'
 import ThemeToggle from '@/features/theme-toggle'
-import SignUpButton from '@/pages-flat/home/sign-up-button'
 import { auth } from '@/shared/auth'
+
+import SignUpButton from './sign-up-button'
 
 export default async function HomeHeader() {
   const session = await auth()

@@ -1,3 +1,3 @@
-import action from '@/shared/lib/safe-action/action-client'
+import action from './action-client'
 
 export default action

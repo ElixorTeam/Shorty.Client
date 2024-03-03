@@ -1,11 +1,9 @@
 import { useMemo } from 'react'
 
-import { RecordType } from '@/entities/record'
-import {
-  useSearchingString,
-  useSortKey,
-} from '@/widgets/link-selector/selector-context'
-import { SortKey } from '@/widgets/link-selector/sort-key-enum'
+import { type RecordType } from '@/entities/record'
+
+import { useSearchingString, useSortKey } from './selector-context'
+import { SortKey } from './sort-key-enum'
 
 export default function useFilteredLinks(links: RecordType[]) {
   const { searchingString } = useSearchingString()

@@ -5,10 +5,6 @@ import {
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
-import ChartExample from '@/pages-flat/home/chart-example'
-import HomeFooter from '@/pages-flat/home/home-footer'
-import HomeHeader from '@/pages-flat/home/home-header'
-import QrcodeExample from '@/pages-flat/home/qrcode-example'
 import { Button } from '@/shared/ui/button'
 import {
   Card,
@@ -19,6 +15,11 @@ import {
 } from '@/shared/ui/card'
 import Spotlight from '@/shared/ui/spotlight'
 import TextGenerator from '@/shared/ui/text-generator'
+
+import ChartExample from './chart-example'
+import HomeFooter from './home-footer'
+import HomeHeader from './home-header'
+import QrcodeExample from './qrcode-example'
 
 export default async function HomePage() {
   return (

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import getDomains from '@/entities/domain/get-domains'
+import getDomains from './get-domains'
 
 const useGetDomains = () =>
   useQuery({

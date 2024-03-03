@@ -1,3 +1,3 @@
-import envServer from '@/shared/lib/env-variables/env-server'
+import envServer from './env-server'
 
 export default envServer

@@ -31,9 +31,10 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 import { useToast } from '@/shared/ui/use-toast'
-import DescriptionItem from '@/widgets/description/description-item'
-import QrCodeDialog from '@/widgets/description/qr-code-dialog'
-import SocialShareDialog from '@/widgets/description/social-share-dialog'
+
+import DescriptionItem from './description-item'
+import QrCodeDialog from './qr-code-dialog'
+import SocialShareDialog from './social-share-dialog'
 
 export default function Description({ record }: { record: RecordType }) {
   const shortLink = useGetShortLink(record)

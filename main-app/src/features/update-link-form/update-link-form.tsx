@@ -11,9 +11,7 @@ import {
   type RecordType,
   updateLinkAction,
 } from '@/entities/record'
-import TagSelector, { TagType } from '@/features/tag-selector'
-import FormHeader from '@/features/update-link-form/form-header'
-import updateFormSchema from '@/features/update-link-form/update-form-scheme'
+import TagSelector, { type TagType } from '@/features/tag-selector'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -27,6 +25,9 @@ import {
 import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
 import { useToast } from '@/shared/ui/use-toast'
+
+import FormHeader from './form-header'
+import updateFormSchema from './update-form-scheme'
 
 export default function UpdateLinkForm({
   record,

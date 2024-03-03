@@ -3,10 +3,11 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
-import { type RecordType } from '@/entities/record/record-type'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import action from '@/shared/lib/safe-action'
+
+import { type RecordType } from '../record-type'
 
 const scheme = z.object({
   uid: z.string().uuid(),

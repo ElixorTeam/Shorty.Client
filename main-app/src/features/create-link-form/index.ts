@@ -1,3 +1,3 @@
-import CreateLinkForm from '@/features/create-link-form/create-link-form'
+import CreateLinkForm from './create-link-form'
 
 export default CreateLinkForm

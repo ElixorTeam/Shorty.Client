@@ -1,3 +1,3 @@
-import AvatarDropdown from '@/features/avatar-dropdown/avatar-dropdown'
+import AvatarDropdown from './avatar-dropdown'
 
 export default AvatarDropdown

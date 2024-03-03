@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { IconType } from '@/shared/ui/icon-type'
+import { type IconType } from '@/shared/ui/icon-type'
 
 export default function DescriptionItem({
   title,

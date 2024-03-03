@@ -1,5 +1,5 @@
-import TagSelector from '@/features/tag-selector/tag-selector'
-import { TagType } from '@/features/tag-selector/tag-type'
+import TagSelector from './tag-selector'
+import { TagType } from './tag-type'
 
 export default TagSelector
 export type { TagType }

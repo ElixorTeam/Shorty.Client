@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react'
 
 import { RecordType, useGetCurrentRecord } from '@/entities/record'
 import UpdateLinkForm from '@/features/update-link-form'
-import NoSelectedWarning from '@/pages-flat/main/no-selected-warning'
 import { Button } from '@/shared/ui/button'
 import Dashboard from '@/widgets/dashboard'
 import Description from '@/widgets/description'
+
+import NoSelectedWarning from './no-selected-warning'
 
 export default function Workspace() {
   const { data, isError } = useGetCurrentRecord()

@@ -6,8 +6,9 @@ import { useState } from 'react'
 
 import { RecordType } from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
-import TagGroupItem from '@/widgets/link-selector/tag-group-item'
-import useFilteredLinks from '@/widgets/link-selector/use-filtered-list'
+
+import TagGroupItem from './tag-group-item'
+import useFilteredLinks from './use-filtered-list'
 
 export default function SelectorTagGroup({
   tagTitle,

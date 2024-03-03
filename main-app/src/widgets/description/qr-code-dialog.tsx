@@ -4,7 +4,7 @@ import FileSaver from 'file-saver'
 import { useQRCode } from 'next-qrcode'
 import { ReactNode, useRef, useState } from 'react'
 
-import useMediaQuery from '@/shared/lib/use-media-query/use-media-query'
+import useMediaQuery from '@/shared/lib/use-media-query'
 import { Button } from '@/shared/ui/button'
 import {
   Dialog,

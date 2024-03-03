@@ -6,11 +6,12 @@ import {
 
 import { getDomains } from '@/entities/domain'
 import { getAllRecords, getCurrentRecord } from '@/entities/record'
-import NavigationHeader from '@/pages-flat/main/navigation-header'
-import Workspace from '@/pages-flat/main/workspace'
-import WorkspaceHeader from '@/pages-flat/main/workspace-header'
 import cn from '@/shared/lib/tailwind-merge'
-import Selector from '@/widgets/link-selector/link-selector'
+import Selector from '@/widgets/link-selector'
+
+import NavigationHeader from './navigation-header'
+import Workspace from './workspace'
+import WorkspaceHeader from './workspace-header'
 
 export default async function MainPage({ linkUid }: { linkUid: string }) {
   const queryClient = new QueryClient()

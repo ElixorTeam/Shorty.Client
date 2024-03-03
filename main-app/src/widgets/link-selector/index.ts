@@ -1,3 +1,3 @@
-import LinkSelector from '@/widgets/link-selector/link-selector'
+import LinkSelector from './link-selector'
 
 export default LinkSelector

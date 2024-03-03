@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import getAllRecords from '@/entities/record/get-all-records'
+import getAllRecords from './get-all-records'
 
 const useGetAllRecords = () =>
   useQuery({

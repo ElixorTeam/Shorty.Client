@@ -1,4 +1,4 @@
-import { type RecordType } from '@/entities/record/index'
+import { type RecordType } from './record-type'
 
 export default function useGroupedRecords(links: RecordType[]) {
   type GroupedLinks = { [key: string]: RecordType[] }

@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { useState } from 'react'
 
-import DatePickerWithRange from '@/features/date-picker-with-range/date-picker-with-range'
+import DatePickerWithRange from '@/features/date-picker-with-range'
 import { Button } from '@/shared/ui/button'
 import {
   Card,
@@ -18,9 +18,10 @@ import {
   CardTitle,
 } from '@/shared/ui/card'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
-import DashboardCard from '@/widgets/dashboard/dashboard-card'
-import RecentViews from '@/widgets/dashboard/recent-views'
-import ViewsDiagram from '@/widgets/dashboard/views-diagram'
+
+import DashboardCard from './dashboard-card'
+import RecentViews from './recent-views'
+import ViewsDiagram from './views-diagram'
 
 export default function Dashboard() {
   const [currentTab, setCurrentTab] = useState<string>('all-time')

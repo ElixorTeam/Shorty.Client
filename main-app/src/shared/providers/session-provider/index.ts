@@ -1,3 +1,3 @@
-import SessionProvider from '@/shared/providers/session-provider/session-provider'
+import SessionProvider from './session-provider'
 
 export default SessionProvider

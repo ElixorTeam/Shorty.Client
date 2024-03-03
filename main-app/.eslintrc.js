@@ -20,7 +20,6 @@ module.exports = {
   rules: {
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
-    'jsx-a11y/control-has-associated-label': 'off',
     'import/no-unresolved': 'error',
     'import/order': [
       'error',
@@ -38,6 +37,36 @@ module.exports = {
           order: 'asc',
           caseInsensitive: true,
         },
+      },
+    ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: [
+              '@/shared/*/*/**',
+              '@/entities/*/**',
+              '@/features/*/**',
+              '@/widgets/*/**',
+              '@/pages-flat/*/**',
+              '@/app/**',
+            ],
+            message:
+              'Direct access to the internal parts of the module is prohibited',
+          },
+          {
+            group: [
+              '../**/shared',
+              '../**/entities',
+              '../**/features',
+              '../**/widgets',
+              '../**/pages-flat',
+              '../**/app',
+            ],
+            message: 'Prefer absolute imports instead of relatives',
+          },
+        ],
       },
     ],
   },

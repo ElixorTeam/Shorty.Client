@@ -24,7 +24,7 @@ import {
   XIcon,
 } from 'react-share'
 
-import useMediaQuery from '@/shared/lib/use-media-query/use-media-query'
+import useMediaQuery from '@/shared/lib/use-media-query'
 import {
   Dialog,
   DialogContent,

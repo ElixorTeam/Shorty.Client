@@ -1,3 +1,3 @@
-import DatePickerWithRange from '@/features/date-picker-with-range/date-picker-with-range'
+import DatePickerWithRange from './date-picker-with-range'
 
 export default DatePickerWithRange

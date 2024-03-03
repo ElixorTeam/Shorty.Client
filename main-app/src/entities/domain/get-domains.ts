@@ -1,8 +1,9 @@
 'use server'
 
-import { DomainType } from '@/entities/domain/domain-type'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
+
+import { DomainType } from './domain-type'
 
 const getDomains = async (): Promise<DomainType[]> => {
   const session = await auth()

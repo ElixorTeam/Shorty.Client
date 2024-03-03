@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 
-import getCurrentRecord from '@/entities/record/get-current-record'
+import getCurrentRecord from './get-current-record'
 
 const useGetCurrentRecord = () => {
   const searchParams = useSearchParams()

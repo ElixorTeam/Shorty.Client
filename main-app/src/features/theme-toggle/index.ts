@@ -1,3 +1,3 @@
-import ThemeToggle from '@/features/theme-toggle/theme-toggle'
+import ThemeToggle from './theme-toggle'
 
 export default ThemeToggle

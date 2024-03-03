@@ -1,3 +1,3 @@
-import MainPage from '@/pages-flat/main/main-page'
+import MainPage from './main-page'
 
 export default MainPage
