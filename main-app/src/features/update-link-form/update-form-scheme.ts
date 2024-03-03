@@ -14,7 +14,10 @@ const updateFormSchema = z.object({
     .max(6, { message: 'Prefix must be no longer than 6 characters' })
     .optional()
     .or(z.literal('')),
-  domain: z.string(),
+  domain: z.object({
+    uid: z.string().uuid(),
+    value: z.string(),
+  }),
   path: z
     .string()
     .min(2, { message: 'Path must be at least 2 characters' })

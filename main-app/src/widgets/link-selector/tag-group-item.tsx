@@ -15,13 +15,10 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
       <button
         type="button"
         className={cn(
-          isActive ? 'relative bg-muted' : 'hover:bg-muted',
+          isActive ? 'bg-muted/[.8]' : 'hover:bg-muted/[.5]',
           'flex w-full items-center justify-center gap-3 py-3 pl-6 pr-4 transition-colors'
         )}
       >
-        {isActive && (
-          <div className="absolute inset-y-0 left-0 w-1 rounded-r-sm bg-muted" />
-        )}
         <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
             <AvatarImage src="" alt="link-icon" />

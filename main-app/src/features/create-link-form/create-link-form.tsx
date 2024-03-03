@@ -6,8 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useGetDomains } from '@/entities/domain'
-import { createLinkAction } from '@/entities/record'
-import CustomUrlInput from '@/features/custom-url-input'
+import { createLinkAction, getShortLink } from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -22,8 +21,9 @@ import {
 import { Input } from '@/shared/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 import { useToast } from '@/shared/ui/use-toast'
-import createFormSchema from '@/widgets/create-link-form/create-form-scheme'
-import generateUrlPath from '@/widgets/create-link-form/generate-url-path'
+
+import createFormSchema from './create-form-scheme'
+import generateUrlPath from './generate-url-path'
 
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
 
@@ -34,7 +34,7 @@ const groupUrls: UrlType[] = [{ url: '' }, { url: '' }]
 export default function CreateLinkForm({
   onFormSubmit,
 }: {
-  onFormSubmit: () => void
+  onFormSubmit?: () => void
 }) {
   const router = useRouter()
   const { toast } = useToast()
@@ -46,7 +46,7 @@ export default function CreateLinkForm({
       title: '',
       urls: singleUrl,
       prefix: '',
-      domain: domains && domains.length > 0 ? domains[0].value : '',
+      domain: domains && domains.length > 0 ? domains[0] : undefined,
       path: generateUrlPath(),
       password: '',
     },
@@ -56,6 +56,11 @@ export default function CreateLinkForm({
     name: 'urls',
     control: form.control,
   })
+
+  const getCurrentShortUrl = () => {
+    const { prefix, domain, path } = form.getValues()
+    return getShortLink({ subdomain: prefix, domain: domain.value, path })
+  }
 
   const handleTypeChange = (value: string) => {
     replace(value === 'single' ? singleUrl : groupUrls)
@@ -81,7 +86,7 @@ export default function CreateLinkForm({
       return
     }
     router.push(`/main?linkUid=${data?.data?.uid}`, { scroll: false })
-    onFormSubmit()
+    if (onFormSubmit) onFormSubmit()
   }
 
   return (
@@ -151,7 +156,51 @@ export default function CreateLinkForm({
             </Button>
           )}
         </div>
-        <CustomUrlInput form={form} />
+        <div className="w-full space-y-2">
+          <div className="flex w-full items-center">
+            <div className="w-1/3">
+              <span className="text-sm font-medium leading-none">Prefix</span>
+            </div>
+            <div className="w-1/3">
+              <span className="text-sm font-medium leading-none">Domain</span>
+            </div>
+            <div className="w-1/3">
+              <span className="text-sm font-medium leading-none">Path</span>
+            </div>
+          </div>
+          <div className="flex w-full">
+            <FormField
+              control={form.control}
+              name="prefix"
+              render={({ field }) => (
+                <FormItem className="w-1/3">
+                  <FormControl>
+                    <Input {...field} className="rounded-r-none" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex h-10 w-1/3 shrink-0 items-center justify-center border-y bg-muted px-4">
+              {form.getValues().domain?.value}
+            </div>
+            <FormField
+              control={form.control}
+              name="path"
+              render={({ field }) => (
+                <FormItem className="w-1/3">
+                  <FormControl>
+                    <Input {...field} className="rounded-l-none" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Final url will be {getCurrentShortUrl()}
+          </p>
+        </div>
         <FormField
           control={form.control}
           name="password"

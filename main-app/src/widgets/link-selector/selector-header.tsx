@@ -1,8 +1,8 @@
 'use client'
 
 import { Input } from '@/shared/ui/input'
-import { CreateLinkDialog } from '@/widgets/create-link-form/'
 
+import CreateLinkDialog from './create-link-dialog'
 import { useSearchingString } from './selector-context'
 import SortSelect from './sort-select'
 

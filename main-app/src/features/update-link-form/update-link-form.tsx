@@ -5,9 +5,15 @@ import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { type RecordType, updateLinkAction } from '@/entities/record'
-import CustomUrlInput from '@/features/custom-url-input'
+import { useGetDomains } from '@/entities/domain'
+import {
+  getShortLink,
+  type RecordType,
+  updateLinkAction,
+} from '@/entities/record'
 import TagSelector, { TagType } from '@/features/tag-selector'
+import FormHeader from '@/features/update-link-form/form-header'
+import updateFormSchema from '@/features/update-link-form/update-form-scheme'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -19,12 +25,18 @@ import {
   FormMessage,
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
+import { Label } from '@/shared/ui/label'
 import { useToast } from '@/shared/ui/use-toast'
-import FormHeader from '@/widgets/update-link-form/form-header'
-import updateFormSchema from '@/widgets/update-link-form/update-form-scheme'
 
-export default function UpdateLinkForm({ record }: { record: RecordType }) {
+export default function UpdateLinkForm({
+  record,
+  onFormSubmit,
+}: {
+  record: RecordType
+  onFormSubmit?: () => void
+}) {
   const [currentTag, setCurrentTag] = useState<TagType>()
+  const { data: domains } = useGetDomains()
   const { toast } = useToast()
   const tags = [
     {
@@ -43,11 +55,16 @@ export default function UpdateLinkForm({ record }: { record: RecordType }) {
       tag: 'youtube',
       link: record.url,
       prefix: record.subdomain,
-      domain: 'sh0.su',
+      domain: domains?.find((item) => item.uid === record.domainUid),
       path: '',
       password: record.password,
     },
   })
+
+  const getCurrentShortUrl = () => {
+    const { prefix, domain, path } = form.getValues()
+    return getShortLink({ subdomain: prefix, domain: domain.value, path })
+  }
 
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
     const res = await updateLinkAction({
@@ -69,6 +86,7 @@ export default function UpdateLinkForm({ record }: { record: RecordType }) {
     toast({
       title: 'Successfully updated',
     })
+    if (onFormSubmit) onFormSubmit()
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -175,7 +193,10 @@ export default function UpdateLinkForm({ record }: { record: RecordType }) {
                 </FormItem>
               )}
             />
-            <CustomUrlInput form={form} />
+            <div className="space-y-2">
+              <Label>Short URL</Label>
+              <Input value={getCurrentShortUrl()} disabled />
+            </div>
             <FormField
               control={form.control}
               name="password"

@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
 import useGetDomains from '@/entities/domain/use-get-domains'
+import getShortLink from '@/entities/record/get-short-link'
 import { RecordType } from '@/entities/record/record-type'
 
 const useGetShortLink = (record: RecordType) => {
@@ -9,9 +10,11 @@ const useGetShortLink = (record: RecordType) => {
   return useMemo(() => {
     if (!record || !domains) return ''
     const domain = domains.find((item) => item.uid === record.domainUid)
-    const subdomain = record.subdomain.trim()
-    const path = ''
-    return `https://${subdomain ? `${subdomain}.` : ''}${domain?.value}${path ? `/${path}` : ''}`
+    return getShortLink({
+      subdomain: record.subdomain,
+      domain: domain?.value,
+      path: '',
+    })
   }, [record, domains])
 }
 
