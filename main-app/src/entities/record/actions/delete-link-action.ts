@@ -21,8 +21,11 @@ const deleteLink = action(scheme, async ({ linkUid }) => {
       method: 'DELETE',
       cache: 'no-store',
     })
-    if (!response.ok)
-      return { failure: `Get error ${(await response.json()).error}` }
+    if (!response.ok) {
+      const text = await response.json()
+      return { failure: `Get error ${text.error}` }
+    }
+
     revalidatePath('/main')
     return { success: 'Link is deleted' }
   } catch (error) {

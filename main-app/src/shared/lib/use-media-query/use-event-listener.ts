@@ -16,7 +16,6 @@ export default function useEventListener(
     const handler = (e: any) => callbackRef.current(e)
     element.addEventListener(eventType, handler)
 
-    // eslint-disable-next-line consistent-return
     return () => element.removeEventListener(eventType, handler)
   }, [eventType, element])
 }

@@ -1,6 +1,6 @@
 import envServer from '@/shared/lib/env-variables'
 
-import getKeycloakProtocolUrl from './getKeycloakProtocolUrl'
+import getKeycloakProtocolUrl from './get-keycloak-protocol-url'
 
 const reqAccessByRefreshToken = (refreshToken: string) =>
   fetch(`${getKeycloakProtocolUrl()}/token`, {

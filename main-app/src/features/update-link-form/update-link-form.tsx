@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
-import { Label } from '@/shared/ui/label'
+import Label from '@/shared/ui/label'
 import { useToast } from '@/shared/ui/use-toast'
 
 import FormHeader from './form-header'
@@ -106,14 +106,14 @@ export default function UpdateLinkForm({
 
     const img = new Image()
     img.src = URL.createObjectURL(file)
-    img.onload = () => {
+    img.addEventListener('load', () => {
       if (img.width <= 256 && img.height <= 256) form.setValue('avatar', file)
       else
         toast({
           title: 'Loading error',
           description: 'The image size should be no more than 256x256',
         })
-    }
+    })
   }
 
   const handleTagChange = (tag: TagType) => {

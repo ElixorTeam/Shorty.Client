@@ -1,11 +1,10 @@
 import { TokenSet } from '@auth/core/types'
 import NextAuth from 'next-auth'
-import { JWT } from 'next-auth/jwt'
 import keycloak from 'next-auth/providers/keycloak'
 
-import getUserRolesByAccessToken from '@/shared/auth/getUserRolesByAccessToken'
-import reqAccessByRefreshToken from '@/shared/auth/reqAccessByRefreshToken'
-import reqSessionLogout from '@/shared/auth/reqSessionLogout'
+import getUserRolesByAccessToken from '@/shared/auth/get-user-roles-by-access-token'
+import reqAccessByRefreshToken from '@/shared/auth/req-access-by-refresh-token'
+import reqSessionLogout from '@/shared/auth/req-session-logout'
 import envServer from '@/shared/lib/env-variables'
 
 export const {
@@ -53,7 +52,7 @@ export const {
           expiresAt: tokens.expires_at,
           refreshToken: tokens.refresh_token ?? currentToken.refreshToken,
         }
-      } catch (error) {
+      } catch {
         return { ...currentToken, error: 'RefreshAccessTokenError' }
       }
     },
@@ -68,9 +67,9 @@ export const {
   events: {
     async signOut(token) {
       try {
-        // @ts-ignore
-        const currentToken = { ...token.token } as JWT
-        await reqSessionLogout(currentToken.idToken ?? '')
+        if (!('token' in token)) return
+        const currentToken = await token.token
+        await reqSessionLogout(currentToken?.idToken ?? '')
       } catch {
         // pass
       }

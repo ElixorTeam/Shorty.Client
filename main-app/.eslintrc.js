@@ -9,9 +9,13 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:@next/next/recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:sonarjs/recommended',
+    'plugin:unicorn/recommended',
+    'plugin:promise/recommended',
     'next/core-web-vitals',
     'prettier',
   ],
+  plugins: ['react', 'jsx-a11y', 'sonarjs', 'unicorn', 'promise'],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
@@ -19,7 +23,14 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js', 'vite.config.ts', 'next.config.js'],
   rules: {
     'react/require-default-props': 'off',
+    'unicorn/prefer-export-from': 'off',
+    'unicorn/prevent-abbreviations': 'off',
+    'unicorn/no-array-reduce': 'off',
+    'unicorn/no-null': 'off',
+    'unicorn/no-array-for-each': 'off',
+    'unicorn/switch-case-braces': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'consistent-return': 'off',
     'import/no-unresolved': 'error',
     'import/order': [
       'error',

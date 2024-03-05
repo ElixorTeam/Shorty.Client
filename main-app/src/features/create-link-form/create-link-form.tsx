@@ -71,7 +71,7 @@ export default function CreateLinkForm({
     const res = await createLinkAction({
       domainUid: domains && domains.length > 0 ? domains[0].uid : '',
       url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
-      title: !values.title?.trim() ? 'Untitled' : values.title?.trim(),
+      title: values.title?.trim() ?? 'Untitled',
       password: values.password?.trim(),
       subdomain: values.prefix?.trim(),
     })
@@ -181,7 +181,7 @@ export default function CreateLinkForm({
                 </FormItem>
               )}
             />
-            <div className="flex h-10 w-1/3 shrink-0 items-center justify-center border-y bg-muted px-4">
+            <div className="-z-10 flex h-10 w-1/3 shrink-0 items-center justify-center border-y bg-muted px-4">
               {form.getValues().domain?.value}
             </div>
             <FormField

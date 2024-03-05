@@ -1,6 +1,7 @@
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
+import { useMemo } from 'react'
 import {
   Controller,
   ControllerProps,
@@ -11,7 +12,7 @@ import {
 } from 'react-hook-form'
 
 import cn from '@/shared/lib/tailwind-merge'
-import { Label } from '@/shared/ui/label'
+import Label from '@/shared/ui/label'
 
 const Form = FormProvider
 
@@ -30,9 +31,9 @@ function FormField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({ ...props }: ControllerProps<TFieldValues, TName>) {
+  const contextValue = useMemo(() => ({ name: props.name }), [props.name])
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <FormFieldContext.Provider value={{ name: props.name }}>
+    <FormFieldContext.Provider value={contextValue}>
       <Controller {...props} />
     </FormFieldContext.Provider>
   )
@@ -74,10 +75,9 @@ const FormItem = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const id = React.useId()
-
+  const contextValue = useMemo(() => ({ id }), [id])
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <FormItemContext.Provider value={{ id }}>
+    <FormItemContext.Provider value={contextValue}>
       <div ref={ref} className={cn('space-y-2', className)} {...props} />
     </FormItemContext.Provider>
   )
@@ -112,9 +112,7 @@ const FormControl = React.forwardRef<
       ref={ref}
       id={formItemId}
       aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
+        error ? `${formDescriptionId} ${formMessageId}` : `${formDescriptionId}`
       }
       aria-invalid={!!error}
       {...props}

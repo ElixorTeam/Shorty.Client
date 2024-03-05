@@ -31,7 +31,6 @@ export default function DatePickerWithRange({
             )}
           >
             <CalendarDaysIcon className="mr-2 size-4" />
-            {/* eslint-disable-next-line no-nested-ternary */}
             {date?.from ? (
               date.to ? (
                 <>

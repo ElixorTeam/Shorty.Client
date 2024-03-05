@@ -1,4 +1,4 @@
-import getKeycloakProtocolUrl from './getKeycloakProtocolUrl'
+import getKeycloakProtocolUrl from './get-keycloak-protocol-url'
 
 const reqSessionLogout = (idToken: string) =>
   fetch(`${getKeycloakProtocolUrl()}/logout`, {

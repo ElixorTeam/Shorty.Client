@@ -64,8 +64,8 @@ export default function TagSelector({
           />
           <CommandEmpty>No language found.</CommandEmpty>
           <CommandGroup>
-            {searchTag.trim().length !== 0 &&
-              !tags.find(
+            {searchTag.trim().length > 0 &&
+              !tags.some(
                 (tag) => tag.value === searchTag.trim().toLowerCase()
               ) && (
                 <CommandItem
