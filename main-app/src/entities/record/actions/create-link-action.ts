@@ -17,15 +17,29 @@ const scheme = z.object({
   password: z.string().optional().or(z.literal('')),
 })
 
+const getTitleOfWebsite = async (url: string): Promise<string> => {
+  try {
+    const response = await fetch(url)
+    const html = await response.text()
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    return doc.querySelector('title')?.textContent ?? ''
+  } catch (error) {
+    console.log(error)
+    return ''
+  }
+}
+
 const createLink = action(
   scheme,
   async ({ domainUid, title, subdomain, url, password }) => {
     try {
       const session = await auth()
+      const newTitle = title ?? (await getTitleOfWebsite(url)) ?? 'Untitled'
       const response = await fetch(`${envServer.BACKEND_URL}/links`, {
         body: JSON.stringify({
           domainUid,
-          title,
+          title: newTitle,
           subdomain,
           url,
           password,

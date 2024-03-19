@@ -3,6 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query'
+import { z } from 'zod'
 
 import { getDomains } from '@/entities/domain'
 import { getAllRecords, getCurrentRecord } from '@/entities/record'
@@ -13,7 +14,9 @@ import NavigationHeader from './navigation-header'
 import Workspace from './workspace'
 import WorkspaceHeader from './workspace-header'
 
+
 export default async function MainPage({ linkUid }: { linkUid: string }) {
+  const isValidUid = z.string().uuid().safeParse(linkUid).success
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -26,6 +29,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
     queryKey: ['domains'],
   })
 
+  // TODO: execute if linkUid is valid
   await queryClient.prefetchQuery({
     queryFn: async () => getCurrentRecord(linkUid),
     queryKey: ['currentRecord', linkUid],
@@ -39,7 +43,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
         </div>
         <div
           className={cn(
-            linkUid ? 'absolute top-0' : 'hidden',
+            isValidUid ? 'absolute top-0' : 'hidden',
             'z-20 w-full overflow-clip bg-background md:relative md:flex md:flex-col'
           )}
         >

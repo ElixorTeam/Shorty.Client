@@ -71,7 +71,7 @@ export default function CreateLinkForm({
     const res = await createLinkAction({
       domainUid: domains && domains.length > 0 ? domains[0].uid : '',
       url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
-      title: values.title?.trim() ?? 'Untitled',
+      title: values.title?.trim() ?? '',
       password: values.password?.trim(),
       subdomain: values.prefix?.trim(),
     })
