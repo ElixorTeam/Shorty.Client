@@ -11,7 +11,10 @@ import {
   type RecordType,
   updateLinkAction,
 } from '@/entities/record'
-import TagSelector, { type TagType } from '@/features/tag-selector'
+import { TagType, useGetAllTags } from '@/entities/tag'
+import TagSelector, {
+  type TagType as SelectorTagType,
+} from '@/features/tag-selector'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -36,29 +39,26 @@ export default function UpdateLinkForm({
   record: RecordType
   onFormSubmit?: () => void
 }) {
-  const [currentTag, setCurrentTag] = useState<TagType>()
+  const tagStubValue = 'Untagged'
+  const { data: tags } = useGetAllTags()
+  const [currentTag, setCurrentTag] = useState<SelectorTagType>(() => {
+    const recordTag = tags?.find((item) => item.value === record.tags[0])
+    if (!recordTag || !recordTag.value)
+      return { value: tagStubValue.toLowerCase(), label: tagStubValue }
+    return { value: recordTag.uid, label: recordTag.value }
+  })
   const { data: domains } = useGetDomains()
   const { toast } = useToast()
-  const tags = [
-    {
-      value: 'youtube',
-      label: 'Youtube',
-    },
-    {
-      value: 'vk',
-      label: 'Vk',
-    },
-  ]
   const form = useForm<z.infer<typeof updateFormSchema>>({
     resolver: zodResolver(updateFormSchema),
     defaultValues: {
       title: record.title,
-      tag: 'youtube',
+      tag: currentTag.label,
       link: record.url,
       prefix: record.subdomain,
       domain: domains?.find((item) => item.uid === record.domainUid),
       path: '',
-      password: record.password,
+      password: record.password ?? '',
     },
   })
 
@@ -67,9 +67,17 @@ export default function UpdateLinkForm({
     return getShortLink({ subdomain: prefix, domain: domain.value, path })
   }
 
+  const convertToSelectTag = (initTags: TagType[]): SelectorTagType[] =>
+    initTags.map((tag) => {
+      if (!tag.value.trim())
+        return { value: tagStubValue.toLowerCase(), label: tagStubValue }
+      return { value: tag.uid, label: tag.value }
+    })
+
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
     const res = await updateLinkAction({
       uid: record.uid,
+      tag: values.tag === tagStubValue ? '' : values.tag,
       title: values.title,
       password: values.password,
     })
@@ -116,9 +124,9 @@ export default function UpdateLinkForm({
     })
   }
 
-  const handleTagChange = (tag: TagType) => {
+  const handleTagChange = (tag: SelectorTagType) => {
     setCurrentTag(tag)
-    form.setValue('tag', tag.value)
+    form.setValue('tag', tag.label)
   }
 
   return (
@@ -174,7 +182,7 @@ export default function UpdateLinkForm({
                     <TagSelector
                       currentTag={currentTag}
                       onCurrentTagChange={handleTagChange}
-                      initialTags={tags}
+                      initialTags={convertToSelectTag(tags ?? [])}
                     />
                   </FormControl>
                   <FormMessage />

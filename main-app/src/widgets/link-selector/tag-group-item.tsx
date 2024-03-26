@@ -33,7 +33,7 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
             <span className="truncate text-sm font-semibold leading-tight">
               {link.title}
             </span>
-            <span className="mt-[1px] shrink-0 text-xs leading-tight tracking-tight text-muted-foreground">
+            <span className="mt-px shrink-0 text-xs leading-tight tracking-tight text-muted-foreground">
               {getFormattedDate(new Date(link.createDt))}
             </span>
           </div>

@@ -3,11 +3,11 @@
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 
-import { type RecordType } from './record-type'
+import { TagType } from './tag-type'
 
-const getAllRecords = async (): Promise<RecordType[]> => {
+const getAllTags = async (): Promise<TagType[]> => {
   const session = await auth()
-  const response = await fetch(`${envServer.BACKEND_URL}/links`, {
+  const response = await fetch(`${envServer.BACKEND_URL}/tags`, {
     headers: {
       Authorization: `Bearer ${session?.accessToken}`,
     },
@@ -19,4 +19,4 @@ const getAllRecords = async (): Promise<RecordType[]> => {
   return data
 }
 
-export default getAllRecords
+export default getAllTags

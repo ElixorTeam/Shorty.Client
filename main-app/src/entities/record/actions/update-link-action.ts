@@ -11,17 +11,19 @@ import { type RecordType } from '../record-type'
 
 const scheme = z.object({
   uid: z.string().uuid(),
+  tag: z.string().optional().or(z.literal('')),
   title: z.string().optional().or(z.literal('')),
   password: z.string().optional().or(z.literal('')),
 })
 
-const updateLink = action(scheme, async ({ uid, title, password }) => {
+const updateLink = action(scheme, async ({ uid, title, password, tag }) => {
   try {
     const session = await auth()
     const response = await fetch(`${envServer.BACKEND_URL}/links/${uid}`, {
       body: JSON.stringify({
         title,
-        password,
+        tags: [tag],
+        password: password || undefined,
       }),
       headers: {
         Accept: 'application/json',

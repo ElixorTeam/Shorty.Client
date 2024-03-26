@@ -74,7 +74,7 @@ export default function Description({ record }: { record: RecordType }) {
               <h2 className="truncate text-2xl font-semibold tracking-tight">
                 {record.title}
               </h2>
-              <Badge className="mt-[1px]">Single</Badge>
+              <Badge className="mt-px">Single</Badge>
             </div>
             <Link
               href={shortLink}
@@ -148,7 +148,11 @@ export default function Description({ record }: { record: RecordType }) {
       </div>
       <div className="grid w-full grid-cols-[auto_1fr] gap-4 pt-1 lg:grid-cols-[auto_1fr_auto_1fr]">
         <DescriptionItem title="Tag" Icon={TagIcon}>
-          <Badge>Youtube</Badge>
+          {record.tags[0] ? (
+            <Badge>{record.tags[0]}</Badge>
+          ) : (
+            <span>No tag</span>
+          )}
         </DescriptionItem>
         <DescriptionItem title="Status" Icon={Squares2X2Icon}>
           <div className="flex w-fit items-center gap-2 overflow-hidden rounded-xl border border-green-300 bg-green-100/[.2] px-3 dark:border-green-600 dark:bg-green-900/[.2]">

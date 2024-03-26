@@ -14,7 +14,9 @@ const getDomains = async (): Promise<DomainType[]> => {
     method: 'GET',
   })
   if (!response.ok) throw new Error('Can not access data')
-  return response.json()
+  const responseData = await response.json()
+  const { data } = responseData
+  return data
 }
 
 export default getDomains

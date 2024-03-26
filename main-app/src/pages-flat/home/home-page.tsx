@@ -90,7 +90,7 @@ export default async function HomePage() {
           </Card>
           <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
             <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden">
-              <div className="size-[14rem] overflow-hidden rounded-xl border bg-white dark:border-white/[.15] dark:bg-neutral-950">
+              <div className="size-56 overflow-hidden rounded-xl border bg-white dark:border-white/[.15] dark:bg-neutral-950">
                 <div className="flex h-16 w-full items-center justify-center gap-2 border-b dark:border-b-white/[.15]">
                   <UserCircleIcon className="size-12 text-muted-foreground" />
                   <div className="mb-1 leading-tight">

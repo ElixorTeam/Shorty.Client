@@ -7,13 +7,13 @@ import { z } from 'zod'
 
 import { getDomains } from '@/entities/domain'
 import { getAllRecords, getCurrentRecord } from '@/entities/record'
+import { getAllTags } from '@/entities/tag'
 import cn from '@/shared/lib/tailwind-merge'
 import Selector from '@/widgets/link-selector'
 
 import NavigationHeader from './navigation-header'
 import Workspace from './workspace'
 import WorkspaceHeader from './workspace-header'
-
 
 export default async function MainPage({ linkUid }: { linkUid: string }) {
   const isValidUid = z.string().uuid().safeParse(linkUid).success
@@ -27,6 +27,11 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
   await queryClient.prefetchQuery({
     queryFn: getDomains,
     queryKey: ['domains'],
+  })
+
+  await queryClient.prefetchQuery({
+    queryFn: getAllTags,
+    queryKey: ['tags'],
   })
 
   // TODO: execute if linkUid is valid
