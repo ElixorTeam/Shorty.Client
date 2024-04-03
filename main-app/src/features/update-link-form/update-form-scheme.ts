@@ -12,6 +12,9 @@ const updateFormSchema = z.object({
     .string()
     .min(2, { message: 'Prefix must be at least 2 characters' })
     .max(6, { message: 'Prefix must be no longer than 6 characters' })
+    .regex(/^[\da-z]+$/, {
+      message: 'Only small Latin letters and numbers are allowed',
+    })
     .optional()
     .or(z.literal('')),
   domain: z.object({

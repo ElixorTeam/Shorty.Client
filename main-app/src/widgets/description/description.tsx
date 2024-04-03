@@ -86,7 +86,7 @@ export default function Description({ record }: { record: RecordType }) {
         </div>
         <div className="flex gap-2">
           <Button className="hidden xl:flex" asChild>
-            <Link href={shortLink}>
+            <Link href={shortLink} target="_blank">
               <EyeIcon className="mr-2 size-4" />
               Preview
             </Link>
@@ -111,7 +111,7 @@ export default function Description({ record }: { record: RecordType }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem className="xl:hidden" asChild>
-                <Link href={shortLink}>
+                <Link href={shortLink} target="_blank">
                   <EyeIcon className="mr-2 size-4" />
                   Preview
                 </Link>

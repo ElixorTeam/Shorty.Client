@@ -85,7 +85,7 @@ export default function CreateLinkForm({
       })
       return
     }
-    router.push(`/main?linkUid=${data?.data?.uid}`, { scroll: false })
+    router.push(`/main?linkUid=${data?.data.uid}`, { scroll: false })
     if (onFormSubmit) onFormSubmit()
   }
 

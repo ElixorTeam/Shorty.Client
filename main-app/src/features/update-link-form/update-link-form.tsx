@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -67,12 +67,16 @@ export default function UpdateLinkForm({
     return getShortLink({ subdomain: prefix, domain: domain.value, path })
   }
 
-  const convertToSelectTag = (initTags: TagType[]): SelectorTagType[] =>
-    initTags.map((tag) => {
-      if (!tag.value.trim())
-        return { value: tagStubValue.toLowerCase(), label: tagStubValue }
-      return { value: tag.uid, label: tag.value }
+  const convertToSelectTag = (initTags: TagType[]): SelectorTagType[] => {
+    const selectorTags: SelectorTagType[] = initTags
+      .filter((tag) => tag.value.trim())
+      .map((tag) => ({ value: tag.uid, label: tag.value }))
+    selectorTags.push({
+      value: tagStubValue.toLowerCase(),
+      label: tagStubValue,
     })
+    return selectorTags
+  }
 
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
     const res = await updateLinkAction({
@@ -98,31 +102,31 @@ export default function UpdateLinkForm({
     if (onFormSubmit) onFormSubmit()
   }
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return
-
-    const file = e.target.files[0]
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp']
-
-    if (!validTypes.includes(file.type)) {
-      toast({
-        title: 'Loading error',
-        description: 'Invalid file type. Only JPEG, PNG and WEBP are allowed',
-      })
-      return
-    }
-
-    const img = new Image()
-    img.src = URL.createObjectURL(file)
-    img.addEventListener('load', () => {
-      if (img.width <= 256 && img.height <= 256) form.setValue('avatar', file)
-      else
-        toast({
-          title: 'Loading error',
-          description: 'The image size should be no more than 256x256',
-        })
-    })
-  }
+  // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   if (!e.target.files) return
+  //
+  //   const file = e.target.files[0]
+  //   const validTypes = ['image/jpeg', 'image/png', 'image/webp']
+  //
+  //   if (!validTypes.includes(file.type)) {
+  //     toast({
+  //       title: 'Loading error',
+  //       description: 'Invalid file type. Only JPEG, PNG and WEBP are allowed',
+  //     })
+  //     return
+  //   }
+  //
+  //   const img = new Image()
+  //   img.src = URL.createObjectURL(file)
+  //   img.addEventListener('load', () => {
+  //     if (img.width <= 256 && img.height <= 256) form.setValue('avatar', file)
+  //     else
+  //       toast({
+  //         title: 'Loading error',
+  //         description: 'The image size should be no more than 256x256',
+  //       })
+  //   })
+  // }
 
   const handleTagChange = (tag: SelectorTagType) => {
     setCurrentTag(tag)
@@ -151,27 +155,27 @@ export default function UpdateLinkForm({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="avatar"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Avatar</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      placeholder="Enter title..."
-                      {...field}
-                      onChange={handleFileChange}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    This name will only be displayed in the application
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {/* <FormField */}
+            {/*  control={form.control} */}
+            {/*  name="avatar" */}
+            {/*  render={({ field }) => ( */}
+            {/*    <FormItem> */}
+            {/*      <FormLabel>Avatar</FormLabel> */}
+            {/*      <FormControl> */}
+            {/*        <Input */}
+            {/*          type="file" */}
+            {/*          placeholder="Enter title..." */}
+            {/*          {...field} */}
+            {/*          onChange={handleFileChange} */}
+            {/*        /> */}
+            {/*      </FormControl> */}
+            {/*      <FormDescription> */}
+            {/*        This name will only be displayed in the application */}
+            {/*      </FormDescription> */}
+            {/*      <FormMessage /> */}
+            {/*    </FormItem> */}
+            {/*  )} */}
+            {/* /> */}
             <FormField
               control={form.control}
               name="tag"

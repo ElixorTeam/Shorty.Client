@@ -1,6 +1,9 @@
 'use client'
 
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import {
+  ArchiveBoxXMarkIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/24/outline'
 
 import { useGetAllRecords, useGroupedRecords } from '@/entities/record'
 import { ScrollArea } from '@/shared/ui/scroll-area'
@@ -11,7 +14,7 @@ import SelectorHeader from './selector-header'
 import SelectorTagGroup from './tag-group'
 
 export default function Selector() {
-  const { data, isPending } = useGetAllRecords()
+  const { data, isPending, isError } = useGetAllRecords()
   const groupedLinks = useGroupedRecords(data ?? [])
   return (
     <LinkSelectorContextProvider>
@@ -34,9 +37,14 @@ export default function Selector() {
                 <Skeleton className="h-24 w-full overflow-hidden rounded-md" />
                 <Skeleton className="h-24 w-full overflow-hidden rounded-md" />
               </div>
+            ) : isError ? (
+              <div className="m-auto flex flex-col items-center gap-y-2 text-destructive">
+                <ExclamationTriangleIcon className="size-10 stroke-[0.8]" />
+                <span>Error while fetching data</span>
+              </div>
             ) : (
-              <div className="m-auto flex flex-col items-center text-destructive">
-                <ExclamationTriangleIcon className="size-12 stroke-[0.8]" />
+              <div className="m-auto flex flex-col items-center gap-y-2">
+                <ArchiveBoxXMarkIcon className="size-10 stroke-[0.8]" />
                 <span>No data found</span>
               </div>
             )}

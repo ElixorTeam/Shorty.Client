@@ -52,10 +52,17 @@ const createLink = action(
         method: 'POST',
         cache: 'no-store',
       })
-      const text = await response.json()
-      if (!response.ok) return { failure: `Get error ${text.error}` }
+      if (!response.ok) {
+        if (response.status === 409)
+          return { failure: 'Error: An object with such data already exists' }
+        if (response.status === 400)
+          return { failure: 'Error: Check the correctness of the data' }
+        return { failure: `Unexpected error: Try again` }
+      }
+      const responseData = await response.json()
+      const { data } = responseData
       revalidatePath('/main')
-      return { data: text as RecordType }
+      return { data: data as RecordType }
     } catch (error) {
       return { failure: `Get error ${error}` }
     }

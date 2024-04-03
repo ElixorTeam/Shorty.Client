@@ -12,7 +12,9 @@ export default function useFilteredLinks(links: RecordType[]) {
   return useMemo<RecordType[]>(
     () =>
       links
-        .filter((item) => item.title.includes(searchingString))
+        .filter((item) =>
+          item.title.toLowerCase().includes(searchingString.toLowerCase())
+        )
         .sort((a, b) => {
           switch (sortKey) {
             case SortKey.NAME:

@@ -1,19 +1,25 @@
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query'
+import Link from 'next/link'
 import { z } from 'zod'
 
 import { getDomains } from '@/entities/domain'
 import { getAllRecords, getCurrentRecord } from '@/entities/record'
 import { getAllTags } from '@/entities/tag'
+import AvatarDropdown from '@/features/avatar-dropdown'
+import ThemeToggle from '@/features/theme-toggle'
 import cn from '@/shared/lib/tailwind-merge'
+import { Button } from '@/shared/ui/button'
 import Selector from '@/widgets/link-selector'
 
 import NavigationHeader from './navigation-header'
+import NoSelectedWarning from './no-selected-warning'
 import Workspace from './workspace'
-import WorkspaceHeader from './workspace-header'
+import WorkspaceHeaderWrapper from './workspace-header-wrapper'
 
 export default async function MainPage({ linkUid }: { linkUid: string }) {
   const isValidUid = z.string().uuid().safeParse(linkUid).success
@@ -34,11 +40,13 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
     queryKey: ['tags'],
   })
 
-  // TODO: execute if linkUid is valid
-  await queryClient.prefetchQuery({
-    queryFn: async () => getCurrentRecord(linkUid),
-    queryKey: ['currentRecord', linkUid],
-  })
+  if (isValidUid) {
+    await queryClient.prefetchQuery({
+      queryFn: async () => getCurrentRecord(linkUid),
+      queryKey: ['currentRecord', linkUid],
+    })
+  }
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="size-full grid-rows-1 divide-x md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[24rem,1fr] min-[1930px]:border-x">
@@ -53,8 +61,28 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
           )}
         >
           <div className="flex size-full flex-col">
-            <WorkspaceHeader />
-            <Workspace />
+            <WorkspaceHeaderWrapper>
+              <div
+                className={cn(
+                  'flex size-full items-center',
+                  isValidUid ? 'justify-between' : 'justify-end'
+                )}
+              >
+                {isValidUid && (
+                  <Button size="sm" variant="outline" asChild>
+                    <Link href="/main">
+                      <ArrowLeftIcon className="mr-2 size-4" />
+                      Back
+                    </Link>
+                  </Button>
+                )}
+                <div className="flex items-center justify-end gap-2 overflow-hidden md:gap-4">
+                  <ThemeToggle />
+                  <AvatarDropdown />
+                </div>
+              </div>
+            </WorkspaceHeaderWrapper>
+            {isValidUid ? <Workspace /> : <NoSelectedWarning />}
           </div>
         </div>
       </div>
