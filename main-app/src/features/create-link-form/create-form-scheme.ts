@@ -28,9 +28,7 @@ const createFormSchema = z.object({
   path: z
     .string()
     .min(2, { message: 'Path must be at least 2 characters' })
-    .max(16, { message: 'Path must be no longer than 16 characters' })
-    .optional()
-    .or(z.literal('')),
+    .max(16, { message: 'Path must be no longer than 16 characters' }),
   password: z
     .string()
     .min(2, { message: 'Password must be at least 2 characters' })

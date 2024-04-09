@@ -20,6 +20,7 @@ import {
   RecordType,
   deleteLinkAction,
   getFormattedDate,
+  updateLinkAction,
 } from '@/entities/record'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
@@ -56,6 +57,28 @@ export default function Description({ record }: { record: RecordType }) {
       return
     }
     router.push('/main')
+  }
+
+  const switchRecordStatus = async () => {
+    const { data, serverError, validationErrors } = await updateLinkAction({
+      uid: record.uid,
+      title: record.title,
+      password: record.password ?? '',
+      tag: record.tags[0] ?? '',
+      isEnable: !record.isEnable,
+    })
+    console.log(data)
+    if (data?.failure || serverError || validationErrors) {
+      toast({
+        title: 'Error while updating',
+        description: data?.failure,
+        variant: 'destructive',
+      })
+      return
+    }
+    toast({
+      title: 'Successfully updated',
+    })
   }
 
   return (
@@ -134,9 +157,9 @@ export default function Description({ record }: { record: RecordType }) {
                   Share
                 </DropdownMenuItem>
               </SocialShareDialog>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={switchRecordStatus}>
                 <HandRaisedIcon className="mr-2 size-4" />
-                <span>Disable</span>
+                <span>{record.isEnable ? 'Disable' : 'Enable'}</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={deleteRecord}>
                 <TrashIcon className="mr-2 size-4" />
@@ -155,10 +178,17 @@ export default function Description({ record }: { record: RecordType }) {
           )}
         </DescriptionItem>
         <DescriptionItem title="Status" Icon={Squares2X2Icon}>
-          <div className="flex w-fit items-center gap-2 overflow-hidden rounded-xl border border-green-300 bg-green-100/[.2] px-3 dark:border-green-600 dark:bg-green-900/[.2]">
-            <div className="size-2 rounded-full bg-green-600" />
-            <span className="text-green-700">Ready</span>
-          </div>
+          {record.isEnable ? (
+            <div className="flex w-fit items-center gap-2 overflow-hidden rounded-xl border border-green-300 bg-green-100/[.2] px-3 dark:border-green-600 dark:bg-green-900/[.2]">
+              <div className="size-2 rounded-full bg-green-600" />
+              <span className="text-green-700">Ready</span>
+            </div>
+          ) : (
+            <div className="flex w-fit items-center gap-2 overflow-hidden rounded-xl border border-red-300 bg-red-100/[.2] px-3 dark:border-red-600 dark:bg-red-900/[.2]">
+              <div className="size-2 rounded-full bg-red-600" />
+              <span className="text-red-700">Disabled</span>
+            </div>
+          )}
         </DescriptionItem>
         <DescriptionItem title="Link" Icon={LinkIcon}>
           <Button variant="link" className="h-6 p-0" asChild>

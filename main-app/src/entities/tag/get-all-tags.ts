@@ -7,7 +7,7 @@ import { TagType } from './tag-type'
 
 const getAllTags = async (): Promise<TagType[]> => {
   const session = await auth()
-  const response = await fetch(`${envServer.BACKEND_URL}/tags`, {
+  const response = await fetch(`${envServer.BACKEND_URL}/user/tags`, {
     headers: {
       Authorization: `Bearer ${session?.accessToken}`,
     },

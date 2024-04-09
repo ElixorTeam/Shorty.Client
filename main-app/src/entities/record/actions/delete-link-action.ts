@@ -14,13 +14,16 @@ const scheme = z.object({
 const deleteLink = action(scheme, async ({ linkUid }) => {
   try {
     const session = await auth()
-    const response = await fetch(`${envServer.BACKEND_URL}/links/${linkUid}`, {
-      headers: {
-        Authorization: `Bearer ${session?.accessToken}`,
-      },
-      method: 'DELETE',
-      cache: 'no-store',
-    })
+    const response = await fetch(
+      `${envServer.BACKEND_URL}/user/links/${linkUid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+        method: 'DELETE',
+        cache: 'no-store',
+      }
+    )
     if (!response.ok) {
       const text = await response.json()
       return { failure: `Get error ${text.error}` }

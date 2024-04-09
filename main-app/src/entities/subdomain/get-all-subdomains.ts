@@ -3,20 +3,27 @@
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 
-import { type RecordType } from './record-type'
+import { SubdomainType } from './subdomain-type'
 
-const getAllRecords = async (): Promise<RecordType[]> => {
+const getAllSubdomains = async (
+  domainUid: string
+): Promise<SubdomainType[]> => {
   const session = await auth()
-  const response = await fetch(`${envServer.BACKEND_URL}/user/links`, {
+  const url = new URL(`${envServer.BACKEND_URL}/user/subdomains`)
+  url.searchParams.append('domainUid', domainUid)
+
+  const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${session?.accessToken}`,
     },
     method: 'GET',
   })
+
   if (!response.ok) throw new Error('Can not access data')
   const responseData = await response.json()
   const { data } = responseData
+  console.log(data)
   return data
 }
 
-export default getAllRecords
+export default getAllSubdomains

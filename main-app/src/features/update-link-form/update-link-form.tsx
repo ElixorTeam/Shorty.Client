@@ -11,6 +11,7 @@ import {
   type RecordType,
   updateLinkAction,
 } from '@/entities/record'
+import { useGetAllSubdomains } from '@/entities/subdomain'
 import { TagType, useGetAllTags } from '@/entities/tag'
 import TagSelector, {
   type TagType as SelectorTagType,
@@ -39,23 +40,28 @@ export default function UpdateLinkForm({
   record: RecordType
   onFormSubmit?: () => void
 }) {
+  const { toast } = useToast()
   const tagStubValue = 'Untagged'
   const { data: tags } = useGetAllTags()
+  const { data: domains } = useGetDomains()
+  const { data: subdomains } = useGetAllSubdomains(record.subdomainUid)
+
   const [currentTag, setCurrentTag] = useState<SelectorTagType>(() => {
     const recordTag = tags?.find((item) => item.value === record.tags[0])
     if (!recordTag || !recordTag.value)
       return { value: tagStubValue.toLowerCase(), label: tagStubValue }
     return { value: recordTag.uid, label: recordTag.value }
   })
-  const { data: domains } = useGetDomains()
-  const { toast } = useToast()
+
   const form = useForm<z.infer<typeof updateFormSchema>>({
     resolver: zodResolver(updateFormSchema),
     defaultValues: {
       title: record.title,
       tag: currentTag.label,
       link: record.url,
-      prefix: record.subdomain,
+      prefix:
+        subdomains?.find((item) => item.uid === record.subdomainUid)?.value ??
+        '',
       domain: domains?.find((item) => item.uid === record.domainUid),
       path: '',
       password: record.password ?? '',
@@ -84,6 +90,7 @@ export default function UpdateLinkForm({
       tag: values.tag === tagStubValue ? '' : values.tag,
       title: values.title,
       password: values.password,
+      isEnable: true,
     })
 
     const { data, serverError, validationErrors } = res

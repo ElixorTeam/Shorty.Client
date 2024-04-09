@@ -10,10 +10,11 @@ import action from '@/shared/lib/safe-action'
 import { type RecordType } from '../record-type'
 
 const scheme = z.object({
-  domainUid: z.string().uuid(),
   title: z.string().min(2).optional().or(z.literal('')),
-  subdomain: z.string().optional().or(z.literal('')),
   url: z.string().url(),
+  path: z.string().min(2).max(16),
+  domainUid: z.string().uuid(),
+  subdomainUid: z.string().optional().or(z.literal('')),
   password: z.string().optional().or(z.literal('')),
 })
 
@@ -32,18 +33,21 @@ const scheme = z.object({
 
 const createLink = action(
   scheme,
-  async ({ domainUid, title, subdomain, url, password }) => {
+  async ({ domainUid, title, subdomainUid, url, password, path }) => {
     try {
       const session = await auth()
-      const response = await fetch(`${envServer.BACKEND_URL}/links`, {
-        body: JSON.stringify({
-          title: title || 'Untitled',
-          subdomain,
-          domainUid,
-          url,
-          tags: [''],
-          password: password || undefined,
-        }),
+      const body = JSON.stringify({
+        title: title || 'Untitled',
+        path,
+        url,
+        subdomainUid: subdomainUid || undefined,
+        domainUid,
+        tags: [],
+        password: password || undefined,
+      })
+      console.log(body)
+      const response = await fetch(`${envServer.BACKEND_URL}/user/links`, {
+        body: body,
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
