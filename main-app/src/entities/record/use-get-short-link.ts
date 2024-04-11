@@ -9,7 +9,7 @@ import { RecordType } from './record-type'
 
 const useGetShortLink = (record: RecordType) => {
   const { data: domains } = useGetDomains()
-  const { data: subdomains } = useGetAllSubdomains(record.subdomainUid)
+  const { data: subdomains } = useGetAllSubdomains(record.domainUid)
 
   return useMemo(() => {
     if (!record || !domains) return ''

@@ -28,7 +28,6 @@ const updateLink = action(
         isEnable,
         password: password || undefined,
       })
-      console.log(body)
       const response = await fetch(
         `${envServer.BACKEND_URL}/user/links/${uid}`,
         {

@@ -67,7 +67,6 @@ export default function Description({ record }: { record: RecordType }) {
       tag: record.tags[0] ?? '',
       isEnable: !record.isEnable,
     })
-    console.log(data)
     if (data?.failure || serverError || validationErrors) {
       toast({
         title: 'Error while updating',
@@ -101,6 +100,7 @@ export default function Description({ record }: { record: RecordType }) {
             </div>
             <Link
               href={shortLink}
+              target="_blank"
               className="truncate text-sm text-muted-foreground hover:underline hover:underline-offset-4"
             >
               {shortLink}

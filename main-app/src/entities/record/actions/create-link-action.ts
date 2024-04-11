@@ -45,9 +45,8 @@ const createLink = action(
         tags: [],
         password: password || undefined,
       })
-      console.log(body)
       const response = await fetch(`${envServer.BACKEND_URL}/user/links`, {
-        body: body,
+        body,
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',

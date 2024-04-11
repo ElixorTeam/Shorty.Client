@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import { z } from 'zod'
 
 import { useGetDomains } from '@/entities/domain'
@@ -13,9 +14,7 @@ import {
 } from '@/entities/record'
 import { useGetAllSubdomains } from '@/entities/subdomain'
 import { TagType, useGetAllTags } from '@/entities/tag'
-import TagSelector, {
-  type TagType as SelectorTagType,
-} from '@/features/tag-selector'
+import TagSelector from '@/features/tag-selector'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -41,29 +40,27 @@ export default function UpdateLinkForm({
   onFormSubmit?: () => void
 }) {
   const { toast } = useToast()
-  const tagStubValue = 'Untagged'
+  const [tagStub] = useState<TagType>({ value: 'Untagged', uid: uuidv4() })
   const { data: tags } = useGetAllTags()
   const { data: domains } = useGetDomains()
-  const { data: subdomains } = useGetAllSubdomains(record.subdomainUid)
+  const { data: subdomains } = useGetAllSubdomains(record.domainUid)
 
-  const [currentTag, setCurrentTag] = useState<SelectorTagType>(() => {
+  const [currentTag, setCurrentTag] = useState<TagType>(() => {
     const recordTag = tags?.find((item) => item.value === record.tags[0])
-    if (!recordTag || !recordTag.value)
-      return { value: tagStubValue.toLowerCase(), label: tagStubValue }
-    return { value: recordTag.uid, label: recordTag.value }
+    return !recordTag || !recordTag.value ? tagStub : recordTag
   })
 
   const form = useForm<z.infer<typeof updateFormSchema>>({
     resolver: zodResolver(updateFormSchema),
     defaultValues: {
       title: record.title,
-      tag: currentTag.label,
+      tag: currentTag.value,
       link: record.url,
       prefix:
         subdomains?.find((item) => item.uid === record.subdomainUid)?.value ??
         '',
       domain: domains?.find((item) => item.uid === record.domainUid),
-      path: '',
+      path: record.path,
       password: record.password ?? '',
     },
   })
@@ -73,21 +70,21 @@ export default function UpdateLinkForm({
     return getShortLink({ subdomain: prefix, domain: domain.value, path })
   }
 
-  const convertToSelectTag = (initTags: TagType[]): SelectorTagType[] => {
-    const selectorTags: SelectorTagType[] = initTags
-      .filter((tag) => tag.value.trim())
-      .map((tag) => ({ value: tag.uid, label: tag.value }))
-    selectorTags.push({
-      value: tagStubValue.toLowerCase(),
-      label: tagStubValue,
-    })
+  const getFilteredTagList = (initTags: TagType[]): TagType[] => {
+    const selectorTags: TagType[] = initTags.filter((tag) => tag.value.trim())
+    selectorTags.push(tagStub)
     return selectorTags
+  }
+
+  const handleTagChange = (tag: TagType) => {
+    setCurrentTag(tag)
+    form.setValue('tag', tag.value)
   }
 
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
     const res = await updateLinkAction({
       uid: record.uid,
-      tag: values.tag === tagStubValue ? '' : values.tag,
+      tag: values.tag === tagStub.value ? '' : values.tag,
       title: values.title,
       password: values.password,
       isEnable: true,
@@ -107,37 +104,6 @@ export default function UpdateLinkForm({
       title: 'Successfully updated',
     })
     if (onFormSubmit) onFormSubmit()
-  }
-
-  // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (!e.target.files) return
-  //
-  //   const file = e.target.files[0]
-  //   const validTypes = ['image/jpeg', 'image/png', 'image/webp']
-  //
-  //   if (!validTypes.includes(file.type)) {
-  //     toast({
-  //       title: 'Loading error',
-  //       description: 'Invalid file type. Only JPEG, PNG and WEBP are allowed',
-  //     })
-  //     return
-  //   }
-  //
-  //   const img = new Image()
-  //   img.src = URL.createObjectURL(file)
-  //   img.addEventListener('load', () => {
-  //     if (img.width <= 256 && img.height <= 256) form.setValue('avatar', file)
-  //     else
-  //       toast({
-  //         title: 'Loading error',
-  //         description: 'The image size should be no more than 256x256',
-  //       })
-  //   })
-  // }
-
-  const handleTagChange = (tag: SelectorTagType) => {
-    setCurrentTag(tag)
-    form.setValue('tag', tag.label)
   }
 
   return (
@@ -162,27 +128,6 @@ export default function UpdateLinkForm({
                 </FormItem>
               )}
             />
-            {/* <FormField */}
-            {/*  control={form.control} */}
-            {/*  name="avatar" */}
-            {/*  render={({ field }) => ( */}
-            {/*    <FormItem> */}
-            {/*      <FormLabel>Avatar</FormLabel> */}
-            {/*      <FormControl> */}
-            {/*        <Input */}
-            {/*          type="file" */}
-            {/*          placeholder="Enter title..." */}
-            {/*          {...field} */}
-            {/*          onChange={handleFileChange} */}
-            {/*        /> */}
-            {/*      </FormControl> */}
-            {/*      <FormDescription> */}
-            {/*        This name will only be displayed in the application */}
-            {/*      </FormDescription> */}
-            {/*      <FormMessage /> */}
-            {/*    </FormItem> */}
-            {/*  )} */}
-            {/* /> */}
             <FormField
               control={form.control}
               name="tag"
@@ -193,7 +138,7 @@ export default function UpdateLinkForm({
                     <TagSelector
                       currentTag={currentTag}
                       onCurrentTagChange={handleTagChange}
-                      initialTags={convertToSelectTag(tags ?? [])}
+                      initialTags={getFilteredTagList(tags ?? [])}
                     />
                   </FormControl>
                   <FormMessage />
@@ -238,7 +183,7 @@ export default function UpdateLinkForm({
                 </FormItem>
               )}
             />
-            <Button type="submit">Update profile</Button>
+            <Button type="submit">Update link</Button>
           </form>
         </Form>
       </div>

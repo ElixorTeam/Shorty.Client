@@ -4,7 +4,9 @@ import {
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
+import { type TagType } from '@/entities/tag'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -15,8 +17,6 @@ import {
   CommandItem,
 } from '@/shared/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
-
-import { type TagType } from './tag-type'
 
 export default function TagSelector({
   currentTag,
@@ -31,9 +31,9 @@ export default function TagSelector({
   const [tags, setTags] = useState<TagType[]>(initialTags)
 
   const handleAddNewTag = () => {
-    const newTag = {
-      value: searchTag.trim().toLowerCase(),
-      label: searchTag.trim(),
+    const newTag: TagType = {
+      value: searchTag.trim(),
+      uid: uuidv4(),
     }
     setTags([...tags, newTag])
     onCurrentTagChange(newTag)
@@ -50,7 +50,7 @@ export default function TagSelector({
           )}
         >
           {currentTag?.value
-            ? tags.find((tag) => tag.value === currentTag?.value)?.label
+            ? tags.find((tag) => tag.value === currentTag?.value)?.value
             : 'Select language'}
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
@@ -78,8 +78,8 @@ export default function TagSelector({
               )}
             {tags.map((tag) => (
               <CommandItem
-                value={tag.label}
-                key={tag.value}
+                value={tag.value}
+                key={tag.uid}
                 onSelect={() => onCurrentTagChange(tag)}
               >
                 <CheckIcon
@@ -90,7 +90,7 @@ export default function TagSelector({
                       : 'opacity-0'
                   )}
                 />
-                {tag.label}
+                {tag.value}
               </CommandItem>
             ))}
           </CommandGroup>

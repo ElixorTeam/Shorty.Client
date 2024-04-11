@@ -1,16 +1,13 @@
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useComputed } from '@preact-signals/safe-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { DomainType, useGetDomains } from '@/entities/domain'
+import { useGetDomains } from '@/entities/domain'
 import { createLinkAction, getShortLink } from '@/entities/record'
-import { SubdomainType, useGetAllSubdomains } from '@/entities/subdomain'
-import SubdomainSelector, {
-  SubdomainType as SelectorSubdomainType,
-} from '@/features/subdomain-selector'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -26,8 +23,10 @@ import { Input } from '@/shared/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 import { useToast } from '@/shared/ui/use-toast'
 
+import { currentSubdomain, subdomainStub } from './create-form-context'
 import createFormSchema from './create-form-scheme'
 import generateUrlPath from './generate-url-path'
+import SubdomainSelector from './subdomain-selector'
 
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
 
@@ -40,29 +39,20 @@ export default function CreateLinkForm({
 }: {
   onFormSubmit?: () => void
 }) {
-  const subdomainStubValue = 'Unselected'
   const { toast } = useToast()
   const router = useRouter()
+  const [type, setType] = useState<string>('single')
 
   const { data: domains } = useGetDomains()
-  const [currentDomain] = useState<DomainType | undefined>(
+  const currentDomain = useComputed(() =>
     domains && domains.length > 0 ? domains[0] : undefined
   )
-  const { data: subdomains } = useGetAllSubdomains(currentDomain?.uid ?? '')
-  const [currentSubdomain, setCurrentSubdomain] =
-    useState<SelectorSubdomainType>({
-      value: subdomainStubValue.replaceAll(' ', ''),
-      label: subdomainStubValue,
-    })
-  const [type, setType] = useState<string>('single')
 
   const form = useForm<z.infer<typeof createFormSchema>>({
     resolver: zodResolver(createFormSchema),
     defaultValues: {
       title: '',
       urls: singleUrl,
-      prefix: '',
-      domain: currentDomain,
       path: generateUrlPath(),
       password: '',
     },
@@ -73,27 +63,15 @@ export default function CreateLinkForm({
     control: form.control,
   })
 
-  const convertToSelectSubdomains = (
-    initSubdomains: SubdomainType[]
-  ): SelectorSubdomainType[] => {
-    const selectorSubdomains: SelectorSubdomainType[] = initSubdomains.map(
-      (item) => ({ value: item.uid, label: item.value })
-    )
-    selectorSubdomains.push({
-      value: subdomainStubValue.replaceAll(' ', ''),
-      label: subdomainStubValue,
-    })
-    return selectorSubdomains
-  }
-
-  const getCurrentShortUrl = () => {
-    const { domain, path } = form.getValues()
+  const shortUrl = useComputed(() => {
+    const { path } = form.getValues()
     const subdomain =
-      currentSubdomain.label === subdomainStubValue
+      currentSubdomain.value === subdomainStub
         ? ''
-        : currentSubdomain.label
-    return getShortLink({ subdomain, domain: domain.value, path })
-  }
+        : currentSubdomain.value.value
+    const domain = currentDomain.value?.value ?? ''
+    return getShortLink({ subdomain, domain, path })
+  })
 
   const handleTypeChange = (value: string) => {
     replace(value === 'single' ? singleUrl : groupUrls)
@@ -102,11 +80,14 @@ export default function CreateLinkForm({
 
   const onSubmit = async (values: z.infer<typeof createFormSchema>) => {
     const res = await createLinkAction({
-      domainUid: currentDomain?.uid ?? '',
+      domainUid: currentDomain.value?.uid ?? '',
       url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
       title: values.title?.trim() ?? '',
       password: values.password?.trim(),
-      subdomainUid: '',
+      subdomainUid:
+        currentSubdomain.value === subdomainStub
+          ? ''
+          : currentSubdomain.value.uid,
       path: values.path.trim(),
     })
 
@@ -205,26 +186,13 @@ export default function CreateLinkForm({
             </div>
           </div>
           <div className="flex w-full">
-            <FormField
-              control={form.control}
-              name="prefix"
-              render={() => (
-                <FormItem className="w-1/3">
-                  <FormControl>
-                    <SubdomainSelector
-                      currentSubdomain={currentSubdomain}
-                      onCurrentSubdomainChange={setCurrentSubdomain}
-                      initialSubdomains={convertToSelectSubdomains(
-                        subdomains ?? []
-                      )}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="w-1/3">
+              <SubdomainSelector
+                currentDomainUid={currentDomain.value?.uid ?? ''}
+              />
+            </div>
             <div className="-z-10 flex h-10 w-1/3 shrink-0 items-center justify-center border-y bg-muted px-4">
-              {form.getValues().domain?.value}
+              {currentDomain.value?.value}
             </div>
             <FormField
               control={form.control}
@@ -240,7 +208,7 @@ export default function CreateLinkForm({
             />
           </div>
           <p className="text-sm text-muted-foreground">
-            Final url will be {getCurrentShortUrl()}
+            Final url will be {shortUrl}
           </p>
         </div>
         <FormField

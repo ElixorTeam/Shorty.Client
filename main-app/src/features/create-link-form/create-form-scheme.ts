@@ -12,19 +12,6 @@ const createFormSchema = z.object({
       url: z.string().url({ message: 'Please enter a valid URL.' }),
     })
   ),
-  prefix: z
-    .string()
-    .min(2, { message: 'Prefix must be at least 2 characters' })
-    .max(6, { message: 'Prefix must be no longer than 6 characters' })
-    .regex(/^[\da-z]+$/, {
-      message: 'Only small Latin letters and numbers are allowed',
-    })
-    .optional()
-    .or(z.literal('')),
-  domain: z.object({
-    uid: z.string().uuid(),
-    value: z.string(),
-  }),
   path: z
     .string()
     .min(2, { message: 'Path must be at least 2 characters' })
