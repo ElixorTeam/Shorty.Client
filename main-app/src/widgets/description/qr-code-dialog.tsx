@@ -1,8 +1,9 @@
 'use client'
 
+import { useSignal } from '@preact-signals/safe-react'
 import FileSaver from 'file-saver'
 import { useQRCode } from 'next-qrcode'
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useRef } from 'react'
 
 import useMediaQuery from '@/shared/lib/use-media-query'
 import { Button } from '@/shared/ui/button'
@@ -35,7 +36,7 @@ export default function QrCodeDialog({
 }) {
   const { Canvas } = useQRCode()
   const { toast } = useToast()
-  const [open, setOpen] = useState(false)
+  const open = useSignal<boolean>(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const qrcodeContainerRef = useRef<HTMLDivElement>(null)
 
@@ -69,7 +70,12 @@ export default function QrCodeDialog({
 
   if (isDesktop)
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog
+        open={open.value}
+        onOpenChange={(value) => {
+          open.value = value
+        }}
+      >
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -100,7 +106,12 @@ export default function QrCodeDialog({
       </Dialog>
     )
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer
+      open={open.value}
+      onOpenChange={(value) => {
+        open.value = value
+      }}
+    >
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent className="pb-10">
         <DrawerHeader className="sm:text-center">

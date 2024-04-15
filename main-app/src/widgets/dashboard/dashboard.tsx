@@ -6,7 +6,7 @@ import {
   EyeIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
-import { useState } from 'react'
+import { useSignal } from '@preact-signals/safe-react'
 
 import DatePickerWithRange from '@/features/date-picker-with-range'
 import { Button } from '@/shared/ui/button'
@@ -24,7 +24,7 @@ import RecentViews from './recent-views'
 import ViewsDiagram from './views-diagram'
 
 export default function Dashboard() {
-  const [currentTab, setCurrentTab] = useState<string>('all-time')
+  const tab = useSignal<string>('all-time')
   return (
     <div className="w-full space-y-4">
       <div className="flex flex-col justify-between space-y-2 pt-4 lg:flex-row lg:space-y-0">
@@ -35,8 +35,10 @@ export default function Dashboard() {
         </div>
       </div>
       <Tabs
-        value={currentTab}
-        onValueChange={setCurrentTab}
+        value={tab.value}
+        onValueChange={(value) => {
+          tab.value = value
+        }}
         className="w-[400px]"
       >
         <TabsList className="grid w-full grid-cols-4">

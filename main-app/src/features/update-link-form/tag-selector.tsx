@@ -4,12 +4,9 @@ import {
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
 import { useComputed, useSignal } from '@preact-signals/safe-react'
+import { v4 as uuidv4 } from 'uuid'
 
-import {
-  createSubdomainAction,
-  type SubdomainType,
-  useGetAllSubdomains,
-} from '@/entities/subdomain'
+import { type TagType, useGetAllTags } from '@/entities/tag'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -20,55 +17,29 @@ import {
   CommandItem,
 } from '@/shared/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
-import Skeleton from '@/shared/ui/skeleton'
-import { useToast } from '@/shared/ui/use-toast'
 
-import { currentSubdomain, subdomainStub } from './create-form-context'
+import { tagStub, currentTag } from './update-form-context'
 
-export default function SubdomainSelector({
-  currentDomainUid,
-}: {
-  currentDomainUid: string
-}) {
-  const { toast } = useToast()
+export default function TagSelector() {
   const search = useSignal<string>('')
-  const { data, isLoading, refetch } = useGetAllSubdomains(currentDomainUid)
+  const createdTags = useSignal<TagType[]>([])
+  const { data: tagsData } = useGetAllTags()
 
-  const subdomains = useComputed<SubdomainType[]>(() => [
-    ...(data ?? []),
-    subdomainStub.value,
+  const tags = useComputed<TagType[]>(() => [
+    ...(tagsData === undefined
+      ? []
+      : tagsData.filter((tag) => tag.value.trim())),
+    ...createdTags.value,
+    tagStub.value,
   ])
 
-  const handleAddSubdomain = async () => {
-    const result = await createSubdomainAction({
+  const handleAddNewTag = () => {
+    const newTag: TagType = {
       value: search.value.trim(),
-      domainUid: currentDomainUid,
-    })
-
-    const { data: actionData, serverError, validationErrors } = result
-
-    if (
-      actionData === undefined ||
-      actionData?.failure ||
-      serverError ||
-      validationErrors
-    ) {
-      toast({
-        title: 'Form error',
-        description: actionData?.failure,
-        variant: 'destructive',
-      })
-      return
+      uid: uuidv4(),
     }
-
-    await refetch()
-    currentSubdomain.value = actionData.data
-  }
-
-  if (isLoading || subdomains === undefined) {
-    return (
-      <Skeleton className="h-10 w-full overflow-hidden rounded-md rounded-r-none border" />
-    )
+    currentTag.value = newTag
+    createdTags.value = [...createdTags.value, newTag]
   }
 
   return (
@@ -77,9 +48,9 @@ export default function SubdomainSelector({
         <Button
           variant="outline"
           role="combobox"
-          className="w-full justify-between rounded-r-none pr-2"
+          className="w-[200px] justify-between"
         >
-          <span className="truncate">{currentSubdomain.value.value}</span>
+          <span className="truncate">{currentTag.value.value}</span>
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -91,35 +62,34 @@ export default function SubdomainSelector({
               search.value = value
             }}
             maxLength={16}
-            placeholder="Search subdomain..."
+            placeholder="Search tag..."
           />
-          <CommandEmpty>No subdomains found.</CommandEmpty>
+          <CommandEmpty>No tag found.</CommandEmpty>
           <CommandGroup>
             {search.value.trim().length > 0 &&
-              subdomains.value.length <= 6 &&
-              !subdomains.value.some(
-                (item) => item.value === search.value.trim().toLowerCase()
+              !tags.value.some(
+                (tag) => tag.value === search.value.trim().toLowerCase()
               ) && (
                 <CommandItem
                   value={search.value.trim().toLowerCase()}
-                  onSelect={handleAddSubdomain}
+                  onSelect={handleAddNewTag}
                 >
                   <PlusCircleIcon className="mr-2 size-4" />
                   {search}
                 </CommandItem>
               )}
-            {subdomains.value.map((item) => (
+            {tags.value.map((item) => (
               <CommandItem
                 value={item.value}
                 key={item.uid}
                 onSelect={() => {
-                  currentSubdomain.value = item
+                  currentTag.value = item
                 }}
               >
                 <CheckIcon
                   className={cn(
                     'mr-2 size-4',
-                    item.value === currentSubdomain.value.value
+                    item.value === currentTag.value.value
                       ? 'visible'
                       : 'invisible'
                   )}

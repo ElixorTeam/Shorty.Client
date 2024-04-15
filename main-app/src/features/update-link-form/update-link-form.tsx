@@ -1,9 +1,8 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid'
 import { z } from 'zod'
 
 import { useGetDomains } from '@/entities/domain'
@@ -13,8 +12,7 @@ import {
   updateLinkAction,
 } from '@/entities/record'
 import { useGetAllSubdomains } from '@/entities/subdomain'
-import { TagType, useGetAllTags } from '@/entities/tag'
-import TagSelector from '@/features/tag-selector'
+import { useGetAllTags } from '@/entities/tag'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -30,6 +28,8 @@ import Label from '@/shared/ui/label'
 import { useToast } from '@/shared/ui/use-toast'
 
 import FormHeader from './form-header'
+import TagSelector from './tag-selector'
+import { currentTag, tagStub } from './update-form-context'
 import updateFormSchema from './update-form-scheme'
 
 export default function UpdateLinkForm({
@@ -40,21 +40,22 @@ export default function UpdateLinkForm({
   onFormSubmit?: () => void
 }) {
   const { toast } = useToast()
-  const [tagStub] = useState<TagType>({ value: 'Untagged', uid: uuidv4() })
   const { data: tags } = useGetAllTags()
   const { data: domains } = useGetDomains()
   const { data: subdomains } = useGetAllSubdomains(record.domainUid)
 
-  const [currentTag, setCurrentTag] = useState<TagType>(() => {
+  useEffect(() => {
     const recordTag = tags?.find((item) => item.value === record.tags[0])
-    return !recordTag || !recordTag.value ? tagStub : recordTag
-  })
+    currentTag.value =
+      !recordTag || !recordTag.value ? tagStub.value : recordTag
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const form = useForm<z.infer<typeof updateFormSchema>>({
     resolver: zodResolver(updateFormSchema),
     defaultValues: {
       title: record.title,
-      tag: currentTag.value,
+      tag: currentTag.value.value,
       link: record.url,
       prefix:
         subdomains?.find((item) => item.uid === record.subdomainUid)?.value ??
@@ -70,21 +71,13 @@ export default function UpdateLinkForm({
     return getShortLink({ subdomain: prefix, domain: domain.value, path })
   }
 
-  const getFilteredTagList = (initTags: TagType[]): TagType[] => {
-    const selectorTags: TagType[] = initTags.filter((tag) => tag.value.trim())
-    selectorTags.push(tagStub)
-    return selectorTags
-  }
-
-  const handleTagChange = (tag: TagType) => {
-    setCurrentTag(tag)
-    form.setValue('tag', tag.value)
-  }
-
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
     const res = await updateLinkAction({
       uid: record.uid,
-      tag: values.tag === tagStub.value ? '' : values.tag,
+      tag:
+        currentTag.value.value === tagStub.value.value
+          ? ''
+          : currentTag.value.value,
       title: values.title,
       password: values.password,
       isEnable: true,
@@ -135,11 +128,7 @@ export default function UpdateLinkForm({
                 <FormItem className="flex flex-col">
                   <FormLabel>Tag</FormLabel>
                   <FormControl>
-                    <TagSelector
-                      currentTag={currentTag}
-                      onCurrentTagChange={handleTagChange}
-                      initialTags={getFilteredTagList(tags ?? [])}
-                    />
+                    <TagSelector />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -1,8 +1,8 @@
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useComputed } from '@preact-signals/safe-react'
+import { useComputed, useSignal } from '@preact-signals/safe-react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -41,7 +41,7 @@ export default function CreateLinkForm({
 }) {
   const { toast } = useToast()
   const router = useRouter()
-  const [type, setType] = useState<string>('single')
+  const type = useSignal<string>('single')
 
   const { data: domains } = useGetDomains()
   const currentDomain = useComputed(() =>
@@ -63,10 +63,14 @@ export default function CreateLinkForm({
     control: form.control,
   })
 
+  useEffect(() => {
+    currentSubdomain.value = subdomainStub.value
+  }, [])
+
   const shortUrl = useComputed(() => {
     const { path } = form.getValues()
     const subdomain =
-      currentSubdomain.value === subdomainStub
+      currentSubdomain.value === subdomainStub.value
         ? ''
         : currentSubdomain.value.value
     const domain = currentDomain.value?.value ?? ''
@@ -75,17 +79,17 @@ export default function CreateLinkForm({
 
   const handleTypeChange = (value: string) => {
     replace(value === 'single' ? singleUrl : groupUrls)
-    setType(value)
+    type.value = value
   }
 
   const onSubmit = async (values: z.infer<typeof createFormSchema>) => {
     const res = await createLinkAction({
-      domainUid: currentDomain.value?.uid ?? '',
-      url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
       title: values.title?.trim() ?? '',
       password: values.password?.trim(),
+      domainUid: currentDomain.value?.uid ?? '',
+      url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
       subdomainUid:
-        currentSubdomain.value === subdomainStub
+        currentSubdomain.value === subdomainStub.value
           ? ''
           : currentSubdomain.value.uid,
       path: values.path.trim(),
@@ -107,7 +111,7 @@ export default function CreateLinkForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-2">
-        <Tabs value={type} onValueChange={handleTypeChange}>
+        <Tabs value={type.value} onValueChange={handleTypeChange}>
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="single">Single</TabsTrigger>
             <TabsTrigger value="group">Group</TabsTrigger>
@@ -143,7 +147,7 @@ export default function CreateLinkForm({
                   <FormControl>
                     <div className="flex gap-2">
                       <Input {...field} />
-                      {type === 'group' && index >= 2 && (
+                      {type.value === 'group' && index >= 2 && (
                         <Button
                           variant="outline"
                           size="icon"
@@ -159,7 +163,7 @@ export default function CreateLinkForm({
               )}
             />
           ))}
-          {type === 'group' && (
+          {type.value === 'group' && (
             <Button
               type="button"
               variant="outline"

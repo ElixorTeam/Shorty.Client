@@ -5,7 +5,7 @@ import getAllSubdomains from './get-all-subdomains'
 const useGetAllSubdomains = (domainUid: string) =>
   useQuery({
     queryFn: async () => getAllSubdomains(domainUid),
-    queryKey: ['subdomains'],
+    queryKey: ['subdomains', domainUid],
   })
 
 export default useGetAllSubdomains

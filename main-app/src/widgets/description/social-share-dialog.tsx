@@ -1,4 +1,5 @@
-import { ReactNode, useState } from 'react'
+import { useSignal } from '@preact-signals/safe-react'
+import { ReactNode } from 'react'
 import {
   EmailIcon,
   EmailShareButton,
@@ -128,12 +129,17 @@ export default function SocialShareDialog({
   shortLink: string
   children: ReactNode
 }) {
-  const [open, setOpen] = useState(false)
+  const open = useSignal<boolean>(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   if (isDesktop)
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog
+        open={open.value}
+        onOpenChange={(value) => {
+          open.value = value
+        }}
+      >
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -148,7 +154,12 @@ export default function SocialShareDialog({
     )
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer
+      open={open.value}
+      onOpenChange={(value) => {
+        open.value = value
+      }}
+    >
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent className="pb-10">
         <DrawerHeader className="sm:text-center">

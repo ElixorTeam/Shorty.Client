@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useSignal } from '@preact-signals/safe-react'
 
 import CreateLinkForm from '@/features/create-link-form'
 import { Button } from '@/shared/ui/button'
@@ -13,9 +13,14 @@ import {
 } from '@/shared/ui/dialog'
 
 export default function CreateLinkDialog() {
-  const [isOpen, setIsOpen] = useState(false)
+  const open = useSignal<boolean>(false)
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog
+      open={open.value}
+      onOpenChange={(value) => {
+        open.value = value
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant="outline">New</Button>
       </DialogTrigger>
@@ -23,7 +28,11 @@ export default function CreateLinkDialog() {
         <DialogHeader>
           <DialogTitle>Create new link</DialogTitle>
         </DialogHeader>
-        <CreateLinkForm onFormSubmit={() => setIsOpen(false)} />
+        <CreateLinkForm
+          onFormSubmit={() => {
+            open.value = false
+          }}
+        />
       </DialogContent>
     </Dialog>
   )
