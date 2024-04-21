@@ -1,6 +1,8 @@
-import { getRecordByUrlPath } from '@/entities/record'
+import { redirect } from 'next/navigation'
+
+import { getRedirectByUrlPath } from '@/entities/redirect'
 
 export default async function MainPage({ path }: { path: string }) {
-  const record = await getRecordByUrlPath(path)
-  return <h1>{record.url}</h1>
+  const record = await getRedirectByUrlPath(path)
+  redirect(record.url)
 }

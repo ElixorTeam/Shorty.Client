@@ -2,11 +2,14 @@ import {
   CheckIcon,
   ChevronUpDownIcon,
   PlusCircleIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline'
-import { useComputed, useSignal } from '@preact-signals/safe-react'
+import { computed, useSignal } from '@preact-signals/safe-react'
+import { useQueryClient } from '@tanstack/react-query'
 
 import {
   createSubdomainAction,
+  deleteSubdomainAction,
   type SubdomainType,
   useGetAllSubdomains,
 } from '@/entities/subdomain'
@@ -31,11 +34,13 @@ export default function SubdomainSelector({
   currentDomainUid: string
 }) {
   const { toast } = useToast()
+  const queryClient = useQueryClient()
   const search = useSignal<string>('')
-  const { data, isLoading, refetch } = useGetAllSubdomains(currentDomainUid)
+  const { data: subdomainsQueryData, isLoading } =
+    useGetAllSubdomains(currentDomainUid)
 
-  const subdomains = useComputed<SubdomainType[]>(() => [
-    ...(data ?? []),
+  const subdomains = computed<SubdomainType[]>(() => [
+    ...(subdomainsQueryData ?? []),
     subdomainStub.value,
   ])
 
@@ -61,8 +66,45 @@ export default function SubdomainSelector({
       return
     }
 
-    await refetch()
+    queryClient.setQueryData(
+      ['subdomains', { id: currentDomainUid }],
+      (oldData: SubdomainType[] | undefined) => [
+        ...(oldData ?? []),
+        actionData.data,
+      ]
+    )
     currentSubdomain.value = actionData.data
+  }
+
+  const handleDeleteSubdomain = async (subdomainUid: string) => {
+    const result = await deleteSubdomainAction({ uid: subdomainUid })
+
+    const { data: actionData, serverError, validationErrors } = result
+
+    if (
+      actionData === undefined ||
+      actionData?.failure ||
+      serverError ||
+      validationErrors
+    ) {
+      toast({
+        title: 'Form error',
+        description: actionData?.failure,
+        variant: 'destructive',
+      })
+      return
+    }
+
+    queryClient.setQueryData(
+      ['subdomains', { id: currentDomainUid }],
+      (oldData: SubdomainType[] | undefined) =>
+        (oldData ?? []).filter((item) => item.uid !== subdomainUid)
+    )
+
+    if (currentSubdomain.value.uid !== subdomainStub.value.uid)
+      currentSubdomain.value = subdomainStub.value
+
+    toast({ title: 'Successfully deleted' })
   }
 
   if (isLoading || subdomains === undefined) {
@@ -115,6 +157,7 @@ export default function SubdomainSelector({
                 onSelect={() => {
                   currentSubdomain.value = item
                 }}
+                className="relative"
               >
                 <CheckIcon
                   className={cn(
@@ -125,6 +168,16 @@ export default function SubdomainSelector({
                   )}
                 />
                 {item.value}
+                {item.uid !== subdomainStub.value.uid && (
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteSubdomain(item.uid)}
+                    className="absolute right-2 top-2"
+                  >
+                    <TrashIcon className="size-4 text-destructive" />
+                    <span className="sr-only">Delete {item.value}</span>
+                  </button>
+                )}
               </CommandItem>
             ))}
           </CommandGroup>

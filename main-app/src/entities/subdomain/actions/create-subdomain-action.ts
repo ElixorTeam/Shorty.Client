@@ -12,7 +12,7 @@ const scheme = z.object({
   domainUid: z.string().uuid(),
 })
 
-const createLink = action(scheme, async ({ value, domainUid }) => {
+const createSubdomainAction = action(scheme, async ({ value, domainUid }) => {
   try {
     const session = await auth()
     const body = JSON.stringify({
@@ -38,4 +38,4 @@ const createLink = action(scheme, async ({ value, domainUid }) => {
   }
 })
 
-export default createLink
+export default createSubdomainAction
