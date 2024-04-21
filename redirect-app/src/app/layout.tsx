@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 
 import cn from '@/shared/lib/tailwind-merge'
 import ThemeProvider from '@/shared/providers/theme-provider'
+import Toaster from '@/shared/ui/toaster'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

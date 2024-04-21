@@ -1,5 +1,9 @@
 'use client'
 
 export default function Error() {
-  return <h1>Error</h1>
+  return (
+    <div className="flex h-screen w-screen items-center justify-center">
+      <h1>Error</h1>
+    </div>
+  )
 }

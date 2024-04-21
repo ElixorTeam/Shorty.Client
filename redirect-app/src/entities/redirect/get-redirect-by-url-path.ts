@@ -1,6 +1,7 @@
 'use server'
 
 import { headers } from 'next/headers'
+import { env } from 'next-runtime-env'
 import hash from 'object-hash'
 
 import envServer from '@/shared/lib/env-variables'
@@ -13,11 +14,11 @@ const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   const subdomain = host && host.includes('.') ? host.split('.')[0] : ''
 
   const url = new URL(`${envServer.BACKEND_URL}/redirects/link`)
-  url.searchParams.append('domain', 'sh0.su')
+  url.searchParams.append('domain', env('DOMAIN') as string)
   if (path) url.searchParams.append('path', path)
   if (subdomain) url.searchParams.append('subdomain', subdomain)
 
-  const response = await fetch(url, { headers: userHeaders })
+  const response = await fetch(url, { headers: userHeaders, cache: 'no-store' })
 
   if (!response.ok) throw new Error('Can not access data')
 
