@@ -1,12 +1,12 @@
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useComputed, useSignal } from '@preact-signals/safe-react'
+import { effect, useComputed, useSignal } from '@preact-signals/safe-react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useGetDomains } from '@/entities/domain'
+import { useGetAllDomains } from '@/entities/domain'
 import { createLinkAction, getShortLink } from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
@@ -23,10 +23,15 @@ import { Input } from '@/shared/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 import { useToast } from '@/shared/ui/use-toast'
 
-import { currentSubdomain, subdomainStub } from './create-form-context'
+import {
+  currentDomain,
+  currentSubdomain,
+  subdomainStub,
+} from './create-form-context'
 import createFormSchema from './create-form-scheme'
 import generateUrlPath from './generate-url-path'
 import SubdomainSelector from './subdomain-selector'
+import DomainSelector from '@/features/create-link-form/domain-selector'
 
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
 
@@ -43,10 +48,7 @@ export default function CreateLinkForm({
   const router = useRouter()
   const type = useSignal<string>('single')
 
-  const { data: domains } = useGetDomains()
-  const currentDomain = useComputed(() =>
-    domains && domains.length > 0 ? domains[0] : undefined
-  )
+  const { data: domains } = useGetAllDomains()
 
   const form = useForm<z.infer<typeof createFormSchema>>({
     resolver: zodResolver(createFormSchema),
@@ -65,6 +67,8 @@ export default function CreateLinkForm({
 
   useEffect(() => {
     currentSubdomain.value = subdomainStub.value
+    currentDomain.value =
+      domains && domains.length > 0 ? domains[0] : currentDomain.value
   }, [])
 
   const shortUrl = useComputed(() => {
@@ -73,7 +77,7 @@ export default function CreateLinkForm({
       currentSubdomain.value === subdomainStub.value
         ? ''
         : currentSubdomain.value.value
-    const domain = currentDomain.value?.value ?? ''
+    const domain = currentDomain.value.value
     return getShortLink({ subdomain, domain, path })
   })
 
@@ -195,8 +199,8 @@ export default function CreateLinkForm({
                 currentDomainUid={currentDomain.value?.uid ?? ''}
               />
             </div>
-            <div className="-z-10 flex h-10 w-1/3 shrink-0 items-center justify-center border-y bg-muted px-4">
-              {currentDomain.value?.value}
+            <div className="w-1/3">
+              <DomainSelector />
             </div>
             <FormField
               control={form.control}

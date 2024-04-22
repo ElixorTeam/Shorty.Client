@@ -1,5 +1,5 @@
 import { DomainType } from './domain-type'
 import getDomains from './get-domains'
-import useGetDomains from './use-get-domains'
+import useGetAllDomains from './use-get-all-domains'
 
-export { getDomains, useGetDomains, type DomainType }
+export { getDomains, useGetAllDomains, type DomainType }

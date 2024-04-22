@@ -17,10 +17,15 @@ const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   url.searchParams.append('domain', env('DOMAIN') as string)
   if (path) url.searchParams.append('path', path)
   if (subdomain) url.searchParams.append('subdomain', subdomain)
+  console.log(url)
 
   const response = await fetch(url, { headers: userHeaders, cache: 'no-store' })
 
-  if (!response.ok) throw new Error('Can not access data')
+  if (!response.ok) {
+    const errorText = await response.json()
+    console.log(errorText)
+    throw new Error('Can not access data')
+  }
 
   const responseData = await response.json()
   if (responseData.password) responseData.password = hash(responseData.password)
