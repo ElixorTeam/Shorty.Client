@@ -2,15 +2,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 
 export default function RecentViews() {
   return (
-    <div className="space-y-8">
+    <div className="max-w-full space-y-8 overflow-hidden">
       <div className="flex items-center">
         <Avatar className="size-9">
           <AvatarImage src="/avatars/01.png" alt="Avatar" />
           <AvatarFallback>OM</AvatarFallback>
         </Avatar>
         <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Olivia Martin</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="truncate text-sm font-medium leading-none">
+            Olivia Martin
+          </p>
+          <p className="truncate text-sm text-muted-foreground">
             olivia.martin@email.com
           </p>
         </div>

@@ -1,6 +1,6 @@
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { effect, useComputed, useSignal } from '@preact-signals/safe-react'
+import { useComputed, useSignal } from '@preact-signals/safe-react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
@@ -29,9 +29,9 @@ import {
   subdomainStub,
 } from './create-form-context'
 import createFormSchema from './create-form-scheme'
+import DomainSelector from './domain-selector'
 import generateUrlPath from './generate-url-path'
 import SubdomainSelector from './subdomain-selector'
-import DomainSelector from '@/features/create-link-form/domain-selector'
 
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
 
@@ -69,6 +69,7 @@ export default function CreateLinkForm({
     currentSubdomain.value = subdomainStub.value
     currentDomain.value =
       domains && domains.length > 0 ? domains[0] : currentDomain.value
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const shortUrl = useComputed(() => {

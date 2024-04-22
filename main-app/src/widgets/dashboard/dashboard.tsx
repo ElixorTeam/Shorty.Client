@@ -6,25 +6,21 @@ import {
   EyeIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
-import { useSignal } from '@preact-signals/safe-react'
 
 import DatePickerWithRange from '@/features/date-picker-with-range'
 import { Button } from '@/shared/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/ui/card'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 
 import DashboardCard from './dashboard-card'
-import RecentViews from './recent-views'
-import ViewsDiagram from './views-diagram'
+import {
+  currentTimePeriod,
+  TimePeriodsEnum,
+  timePeriodsList,
+} from './dashboard-context'
+import DeviceCard from './device-card'
+import ViewsCard from './views-card'
 
 export default function Dashboard() {
-  const tab = useSignal<string>('all-time')
   return (
     <div className="w-full space-y-4">
       <div className="flex flex-col justify-between space-y-2 pt-4 lg:flex-row lg:space-y-0">
@@ -35,17 +31,18 @@ export default function Dashboard() {
         </div>
       </div>
       <Tabs
-        value={tab.value}
+        value={currentTimePeriod.value.toString()}
         onValueChange={(value) => {
-          tab.value = value
+          currentTimePeriod.value = value as unknown as TimePeriodsEnum
         }}
         className="w-[400px]"
       >
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all-time">All time</TabsTrigger>
-          <TabsTrigger value="year">Year</TabsTrigger>
-          <TabsTrigger value="month">Month</TabsTrigger>
-          <TabsTrigger value="week">Week</TabsTrigger>
+          {timePeriodsList.map((item) => (
+            <TabsTrigger value={item.id.toString()} key={item.id}>
+              {item.name}
+            </TabsTrigger>
+          ))}
         </TabsList>
       </Tabs>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -74,24 +71,9 @@ export default function Dashboard() {
           description=""
         />
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Overview</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <ViewsDiagram />
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Recent Sales</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <RecentViews />
-          </CardContent>
-        </Card>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <ViewsCard />
+        <DeviceCard />
       </div>
     </div>
   )
