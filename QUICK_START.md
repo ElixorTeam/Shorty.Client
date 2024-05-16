@@ -1,19 +1,20 @@
 # Quick Start
+
 1. Download [NodeJS](https://nodejs.org/en/download/)
-2. Install pnpm:
+2. Start up main app:
+
 ```bash
-npm i -g pnpm
+cd main-app
+npm install
+npm run dev
 ```
-3. Start up react-client:
+
+3. Start up react-redirect
+
 ```bash
-cd react-client
-pnpm i
-pnpm dev
+cd redirect-app
+npm install
+npm run dev
 ```
-4. Start up react-redirect
-```bash
-cd react-redirect
-pnpm i
-pnpm dev
-```
+
 [Go back](README.md)
