@@ -5,8 +5,8 @@ import { type DialogProps } from '@radix-ui/react-dialog'
 import { Command as CommandPrimitive } from 'cmdk'
 import * as React from 'react'
 
-import cn from '@/shared/lib/tailwind-merge'
-import { Dialog, DialogContent } from '@/shared/ui/dialog'
+import { Dialog, DialogContent } from './dialog'
+import cn from '../lib/tailwind-merge'
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

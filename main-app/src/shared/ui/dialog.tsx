@@ -4,7 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import * as React from 'react'
 
-import cn from '@/shared/lib/tailwind-merge'
+import cn from '../lib/tailwind-merge'
 
 const Dialog = DialogPrimitive.Root
 

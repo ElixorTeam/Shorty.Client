@@ -11,8 +11,8 @@ import {
   useFormContext,
 } from 'react-hook-form'
 
-import cn from '@/shared/lib/tailwind-merge'
-import Label from '@/shared/ui/label'
+import Label from './label'
+import cn from '../lib/tailwind-merge'
 
 const Form = FormProvider
 

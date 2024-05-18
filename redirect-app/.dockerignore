@@ -1,0 +1,14 @@
+.next
+node_modules
+Dockerfile
+
+# Linters
+.prettierignore
+.prettierrc.js
+
+# Git
+.gitignore
+
+.env.dist
+.env.local
+components.json

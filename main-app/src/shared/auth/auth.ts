@@ -2,10 +2,10 @@ import { TokenSet } from '@auth/core/types'
 import NextAuth from 'next-auth'
 import keycloak from 'next-auth/providers/keycloak'
 
-import getUserRolesByAccessToken from '@/shared/auth/get-user-roles-by-access-token'
-import reqAccessByRefreshToken from '@/shared/auth/req-access-by-refresh-token'
-import reqSessionLogout from '@/shared/auth/req-session-logout'
-import envServer from '@/shared/lib/env-variables'
+import getUserRolesByAccessToken from './get-user-roles-by-access-token'
+import reqAccessByRefreshToken from './req-access-by-refresh-token'
+import reqSessionLogout from './req-session-logout'
+import envServer from '../lib/env-variables'
 
 export const {
   handlers: { GET, POST },

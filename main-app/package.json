@@ -2,12 +2,13 @@
   "name": "main-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "tdev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src",
     "format": "prettier src --write"
   },
   "dependencies": {
@@ -65,6 +66,7 @@
     "typescript": "^5.4.5"
   },
   "optionalDependencies": {
+    "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
     "@next/eslint-plugin-next": "^14.1.4",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",

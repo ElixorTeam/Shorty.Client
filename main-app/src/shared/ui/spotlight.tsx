@@ -1,4 +1,4 @@
-import cn from '@/shared/lib/tailwind-merge'
+import cn from '../lib/tailwind-merge'
 
 export default function Spotlight({
   className,

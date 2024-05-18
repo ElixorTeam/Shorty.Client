@@ -2,10 +2,11 @@
 
 import { z } from 'zod'
 
-import { type SubdomainType } from '@/entities/subdomain'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import action from '@/shared/lib/safe-action'
+
+import { type SubdomainType } from '../subdomain-type'
 
 const scheme = z.object({
   value: z.string().min(2).max(16),

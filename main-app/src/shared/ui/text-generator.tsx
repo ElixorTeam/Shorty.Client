@@ -3,7 +3,7 @@
 import { motion, stagger, useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 
-import cn from '@/shared/lib/tailwind-merge'
+import cn from '../lib/tailwind-merge'
 
 export default function TextGenerator({
   words,

@@ -1,1 +1,1 @@
-export * from '@/shared/auth/auth'
+export * from './auth'

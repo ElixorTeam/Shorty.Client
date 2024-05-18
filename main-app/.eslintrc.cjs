@@ -9,6 +9,7 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:@next/next/recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:@conarti/feature-sliced/recommended',
     'plugin:sonarjs/recommended',
     'plugin:unicorn/recommended',
     'plugin:promise/recommended',
@@ -48,36 +49,6 @@ module.exports = {
           order: 'asc',
           caseInsensitive: true,
         },
-      },
-    ],
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: [
-          {
-            group: [
-              '@/shared/*/*/**',
-              '@/entities/*/**',
-              '@/features/*/**',
-              '@/widgets/*/**',
-              '@/pages-flat/*/**',
-              '@/app/**',
-            ],
-            message:
-              'Direct access to the internal parts of the module is prohibited',
-          },
-          {
-            group: [
-              '../**/shared',
-              '../**/entities',
-              '../**/features',
-              '../**/widgets',
-              '../**/pages-flat',
-              '../**/app',
-            ],
-            message: 'Prefer absolute imports instead of relatives',
-          },
-        ],
       },
     ],
   },

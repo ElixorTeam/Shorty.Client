@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 
-// eslint-disable-next-line no-restricted-imports
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import useGetAllDomains from '@/entities/domain/use-get-all-domains'
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { useGetAllSubdomains } from '@/entities/subdomain'
 
 import getShortLink from './get-short-link'
