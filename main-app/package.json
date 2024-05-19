@@ -8,7 +8,7 @@
     "tdev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src",
+    "lint": "oxlint src & eslint src",
     "format": "prettier src --write"
   },
   "dependencies": {
@@ -67,25 +67,27 @@
   },
   "optionalDependencies": {
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
-    "@next/eslint-plugin-next": "^14.1.4",
-    "@typescript-eslint/eslint-plugin": "^7.6.0",
-    "@typescript-eslint/parser": "^7.6.0",
-    "@typescript-eslint/typescript-estree": "^7.6.0",
+    "@next/eslint-plugin-next": "^14.2.3",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "@typescript-eslint/parser": "^7.9.0",
+    "@typescript-eslint/typescript-estree": "^7.9.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-config-next": "^14.1.4",
+    "eslint-config-next": "^14.2.3",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "npm:eslint-plugin-i@^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-oxlint": "^0.2.9",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-sonarjs": "^0.25.1",
-    "eslint-plugin-tailwindcss": "^3.15.1",
-    "eslint-plugin-unicorn": "^52.0.0",
+    "eslint-plugin-tailwindcss": "^3.15.2",
+    "eslint-plugin-unicorn": "^53.0.0",
+    "oxlint": "^0.3.5",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.13"
+    "prettier-plugin-tailwindcss": "^0.5.14"
   }
 }

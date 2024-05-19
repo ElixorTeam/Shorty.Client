@@ -35,7 +35,10 @@ export const {
         return currentToken
       }
 
-      if (Date.now() < currentToken.expiresAt! * 1000 - 15 * 1000)
+      if (
+        currentToken.expiresAt &&
+        Date.now() < currentToken.expiresAt * 1000 - 15 * 1000
+      )
         return currentToken
 
       try {

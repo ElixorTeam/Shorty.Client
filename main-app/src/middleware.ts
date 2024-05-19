@@ -6,12 +6,11 @@ import envServer from '@/shared/lib/env-variables'
 const publicRoutes = new Set(['/'])
 const apiAuthPrefix = '/api/auth'
 
-// @ts-ignore
 export default auth(async (req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
   const authResponse = Response.redirect(new URL('/api/auth/signin', nextUrl))
-  // @ts-ignore
+  // @ts-expect-error get token type wrong
   const session = await getToken({ req, secret: envServer.AUTH_SECRET })
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)

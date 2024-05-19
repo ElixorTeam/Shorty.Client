@@ -14,7 +14,7 @@ export default async function AvatarDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2">
         <Avatar className="size-8">
-          <AvatarImage src={user?.image!} alt="user-avatar" />
+          <AvatarImage src={user?.image ?? ''} alt="user-avatar" />
           <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

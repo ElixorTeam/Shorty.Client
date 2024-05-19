@@ -26,7 +26,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-grid-black/[.03] dark:bg-grid-white/[.02]">
       <HomeHeader />
       <main className="relative mx-auto size-full max-w-screen-xl grow">
-        <Spotlight className="-top-96 left-20 hidden dark:block md:-top-60 md:left-52" />
+        <Spotlight className="-top-96 left-20 hidden md:-top-60 md:left-52 dark:block" />
         <div className="my-16 flex flex-col items-center justify-center gap-6 px-6 text-center md:my-32">
           <TextGenerator
             words="Shorten, Manage, Analyze. Your key to efficient links."

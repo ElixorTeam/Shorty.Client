@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 
 export default function useEventListener(
   eventType: string,
-  callback: (e: any) => void,
+  callback: (e: Event) => void,
   element?: MediaQueryList | null
 ) {
   const callbackRef = useRef(callback)
@@ -13,7 +13,7 @@ export default function useEventListener(
 
   useEffect(() => {
     if (element == null) return
-    const handler = (e: any) => callbackRef.current(e)
+    const handler = (e: Event) => callbackRef.current(e)
     element.addEventListener(eventType, handler)
 
     return () => element.removeEventListener(eventType, handler)
