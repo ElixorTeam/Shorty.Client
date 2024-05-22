@@ -69,10 +69,9 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
                 )}
               >
                 {isValidUid && (
-                  <Button size="sm" variant="outline" asChild>
+                  <Button size="sm" variant="ghost" asChild>
                     <Link href="/main">
-                      <ArrowLeftIcon className="mr-2 size-4" />
-                      Back
+                      <ArrowLeftIcon className="size-4" />
                     </Link>
                   </Button>
                 )}

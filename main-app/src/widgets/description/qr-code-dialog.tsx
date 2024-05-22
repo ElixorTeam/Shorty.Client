@@ -4,8 +4,8 @@ import { useSignal } from '@preact-signals/safe-react'
 import FileSaver from 'file-saver'
 import { useQRCode } from 'next-qrcode'
 import { ReactNode, useRef } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 
-import useMediaQuery from '@/shared/lib/use-media-query'
 import { Button } from '@/shared/ui/button'
 import {
   Dialog,

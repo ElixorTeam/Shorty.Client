@@ -24,8 +24,8 @@ import {
   WhatsappShareButton,
   XIcon,
 } from 'react-share'
+import { useMediaQuery } from 'usehooks-ts'
 
-import useMediaQuery from '@/shared/lib/use-media-query'
 import {
   Dialog,
   DialogContent,
