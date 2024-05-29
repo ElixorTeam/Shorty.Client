@@ -1,28 +1,42 @@
 module.exports = {
   root: true,
-  extends: [
-    'airbnb',
-    'airbnb-typescript',
-    'airbnb/hooks',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/strict',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'plugin:@next/next/recommended',
-    'plugin:tailwindcss/recommended',
-    'plugin:@conarti/feature-sliced/recommended',
-    'plugin:sonarjs/recommended',
-    'plugin:unicorn/recommended',
-    'plugin:promise/recommended',
-    'plugin:oxlint/recommended',
-    'next/core-web-vitals',
-    'prettier',
-  ],
-  plugins: ['react', 'jsx-a11y', 'sonarjs', 'unicorn', 'promise', '@typescript-eslint'],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: true
+    },
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/strict',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:sonarjs/recommended-legacy',
+    'plugin:unicorn/recommended',
+    'plugin:promise/recommended',
+    'plugin:tailwindcss/recommended',
+    'plugin:@conarti/feature-sliced/recommended',
+    'plugin:oxlint/recommended',
+    'next',
+    'prettier',
+  ],
+  plugins: [
+    'react',
+    'jsx-a11y',
+    'sonarjs',
+    'unicorn',
+    'promise',
+    '@typescript-eslint'
+  ],
   rules: {
     'react/require-default-props': 'off',
     'unicorn/prefer-export-from': 'off',
@@ -36,7 +50,7 @@ module.exports = {
     'consistent-return': 'off',
     'import/no-unresolved': 'error',
     'import/order': [
-      'error',
+      'warn',
       {
         groups: [
           'builtin',
@@ -53,16 +67,5 @@ module.exports = {
         },
       },
     ],
-  },
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-        project: './tsconfig.json',
-      },
-    },
   },
 }

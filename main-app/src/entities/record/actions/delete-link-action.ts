@@ -1,6 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 import { auth } from '@/shared/auth'
@@ -28,8 +27,6 @@ const deleteLink = action(scheme, async ({ linkUid }) => {
       const text = await response.json()
       return { failure: `Get error ${text.error}` }
     }
-
-    revalidatePath('/main')
     return { success: 'Link is deleted' }
   } catch (error) {
     return { failure: `Get error ${error}` }

@@ -1,6 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 import { auth } from '@/shared/auth'
@@ -49,7 +48,6 @@ const updateLink = action(
           return { failure: 'Error: Check the correctness of the data' }
         return { failure: `Unexpected error: Try again` }
       }
-      revalidatePath('/main')
       return { data: text as RecordType }
     } catch (error) {
       return { failure: `Get error ${error}` }

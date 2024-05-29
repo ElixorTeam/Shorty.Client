@@ -1,6 +1,5 @@
 'use client'
 
-// Inspired by react-hot-toast library
 import * as React from 'react'
 
 import type { ToastActionElement, ToastProps } from './toast'
@@ -62,7 +61,6 @@ const addToRemoveQueue = (toastId: string) => {
 
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId)
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     dispatch({
       type: 'REMOVE_TOAST',
       toastId,
@@ -73,7 +71,6 @@ const addToRemoveQueue = (toastId: string) => {
 }
 
 export const reducer = (state: State, action: Action): State => {
-  // eslint-disable-next-line default-case
   switch (action.type) {
     case 'ADD_TOAST':
       return {
@@ -97,7 +94,6 @@ export const reducer = (state: State, action: Action): State => {
       if (toastId) {
         addToRemoveQueue(toastId)
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
         state.toasts.forEach((toast) => {
           addToRemoveQueue(toast.id)
         })
@@ -145,7 +141,6 @@ type Toast = Omit<ToasterToast, 'id'>
 function toast({ ...props }: Toast) {
   const id = genId()
 
-  // eslint-disable-next-line @typescript-eslint/no-shadow
   const update = (props: ToasterToast) =>
     dispatch({
       type: 'UPDATE_TOAST',

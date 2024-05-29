@@ -1,5 +1,5 @@
-import { fontFamily } from 'tailwindcss/defaultTheme'
 import svgToDataUri from 'mini-svg-data-uri'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 import tailwindAnimate from 'tailwindcss-animate'
 

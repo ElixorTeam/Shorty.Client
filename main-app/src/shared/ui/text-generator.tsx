@@ -30,7 +30,6 @@ export default function TextGenerator({
   return (
     <motion.div ref={scope}>
       {wordsArray.map((word, idx) => (
-        // eslint-disable-next-line react/no-array-index-key
         <motion.span key={word + idx} className={cn('opacity-0', className)}>
           {word}{' '}
         </motion.span>

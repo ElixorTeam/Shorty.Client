@@ -31,7 +31,6 @@ function FormField<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({ ...props }: ControllerProps<TFieldValues, TName>) {
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
     </FormFieldContext.Provider>
@@ -40,7 +39,6 @@ function FormField<
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const itemContext = React.useContext(FormItemContext)
   const { getFieldState, formState } = useFormContext()
 
@@ -77,7 +75,6 @@ const FormItem = React.forwardRef<
   const id = React.useId()
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <FormItemContext.Provider value={{ id }}>
       <div ref={ref} className={cn('space-y-2', className)} {...props} />
     </FormItemContext.Provider>

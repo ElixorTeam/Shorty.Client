@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { auth, signOut } from '@/shared/auth'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import {
@@ -20,7 +22,9 @@ export default async function AvatarDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {user && user.roles.includes('admin') && (
-          <DropdownMenuItem>Admin</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/admin">Admin</Link>
+          </DropdownMenuItem>
         )}
         <form
           action={async () => {

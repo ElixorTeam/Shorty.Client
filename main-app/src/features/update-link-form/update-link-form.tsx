@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -40,6 +41,7 @@ export default function UpdateLinkForm({
   onFormSubmit?: () => void
 }) {
   const { toast } = useToast()
+  const queryClient = useQueryClient()
   const { data: tags } = useGetAllTags()
   const { data: domains } = useGetAllDomains()
   const { data: subdomains } = useGetAllSubdomains(record.domainUid)
@@ -96,6 +98,8 @@ export default function UpdateLinkForm({
     toast({
       title: 'Successfully updated',
     })
+    queryClient.invalidateQueries({ queryKey: ['currentRecord'] })
+    queryClient.invalidateQueries({ queryKey: ['records'] })
     if (onFormSubmit) onFormSubmit()
   }
 

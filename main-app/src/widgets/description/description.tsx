@@ -12,6 +12,7 @@ import {
   TagIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline'
+import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -40,6 +41,7 @@ import SocialShareDialog from './social-share-dialog'
 export default function Description({ record }: { record: RecordType }) {
   const shortLink = useGetShortLink(record)
   const router = useRouter()
+  const queryClient = useQueryClient()
   const { toast } = useToast()
 
   const createDt = getFormattedDate(new Date(record.createDt))
@@ -75,6 +77,8 @@ export default function Description({ record }: { record: RecordType }) {
       })
       return
     }
+    queryClient.invalidateQueries({ queryKey: ['currentRecord'] })
+    queryClient.invalidateQueries({ queryKey: ['records'] })
     toast({
       title: 'Successfully updated',
     })

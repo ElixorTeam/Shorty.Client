@@ -1,6 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 import { auth } from '@/shared/auth'
@@ -17,19 +16,6 @@ const scheme = z.object({
   subdomainUid: z.string().optional().or(z.literal('')),
   password: z.string().optional().or(z.literal('')),
 })
-
-// const getTitleOfWebsite = async (url: string): Promise<string> => {
-//   try {
-//     const response = await fetch(url)
-//     const html = await response.text()
-//     const parser = new DOMParser()
-//     const doc = parser.parseFromString(html, 'text/html')
-//     return doc.querySelector('title')?.textContent ?? ''
-//   } catch (error) {
-//     console.log(error)
-//     return ''
-//   }
-// }
 
 const createLink = action(
   scheme,
@@ -64,7 +50,6 @@ const createLink = action(
       }
       const responseData = await response.json()
       const { data } = responseData
-      revalidatePath('/main')
       return { data: data as RecordType }
     } catch (error) {
       return { failure: `Get error ${error}` }

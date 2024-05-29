@@ -1,13 +1,10 @@
 import { NextURL } from 'next/dist/server/web/next-url'
-import { notFound } from 'next/navigation'
 import { NextRequest, NextResponse, userAgent } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
+import z from 'zod'
 
-type UserAgent = {
-  device: string | undefined
-  os: string | undefined
-  browser: string | undefined
-}
+const isUrl = (value: string): boolean =>
+  z.string().url().safeParse(value).success
 
 type SplittedUrl = {
   domain: string
@@ -17,36 +14,51 @@ type SplittedUrl = {
 
 const splitUrl = (url: NextURL): SplittedUrl => {
   const domain = url.hostname
-  const subdomain = domain.split('.').slice(0, -2).join('.') ?? undefined
-  const path = url.pathname
+  const subdomain = domain.split('.').slice(0, -2).join('.') || undefined
+  const path = url.pathname.slice(1)
   return { domain, subdomain, path }
 }
 
-const sendAnalytics = async (
-  agent: UserAgent,
-  userKey: string,
-  urlParts: SplittedUrl
-) => {
-  const body = JSON.stringify({ ...agent, ...urlParts, userKey })
-  fetch(`${process.env.BACKEND_URL}/analytics`, {body, method: "POST"})
+const getIp = (headers: Headers): string => {
+  const forwardedForIp = headers.get('x-forwarded-for')?.split(',')[0]
+  if (forwardedForIp && isUrl(forwardedForIp)) return forwardedForIp
+
+  const realIp = headers.get('x-real-ip')
+  return realIp && isUrl(realIp) ? realIp : '0.0.0.0'
 }
 
 export default async function middleware(request: NextRequest) {
-  const urlParts = splitUrl(request.nextUrl)
-  const response = NextResponse.next()
+  const { device, os, isBot } = userAgent(request)
+  if (isBot) return NextResponse.error()
+
+  const deviceType = device.type === 'mobile' ? 'mobile' : 'desktop'
   const userKey = request.cookies.get('userKey')?.value ?? uuidv4()
+  const urlParts = splitUrl(request.nextUrl)
+  const ip = getIp(request.headers)
+
+  const response = NextResponse.next()
   response.cookies.set('userKey', userKey)
 
-  const { device, os, browser, isBot } = userAgent(request)
-  if (isBot) notFound()
-  await sendAnalytics(
-    { device: device.model, os: os.name, browser: browser.name },
+  const body = JSON.stringify({
+    device: deviceType,
+    os: os.name ?? 'Unknown',
+    ip,
     userKey,
-    urlParts
-  )
+    ...urlParts,
+  })
+  console.log(body)
+  try {
+    await fetch(`${process.env.BACKEND_URL}/analytics`, {
+      body,
+      method: 'POST',
+    })
+  } catch {
+    // pass
+  }
+
   return response
 }
 
 export const config = {
-  matcher: ['/:path'],
+  matcher: '/((?!_next/static|_next/image|favicon.ico|__nextjs)[^/]*)',
 }
