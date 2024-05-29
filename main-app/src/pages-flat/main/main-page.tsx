@@ -7,7 +7,7 @@ import {
 import Link from 'next/link'
 import { z } from 'zod'
 
-import { getDomains } from '@/entities/domain'
+import { getClientDomains } from '@/entities/domain'
 import { getAllRecords, getCurrentRecord } from '@/entities/record'
 import { getAllTags } from '@/entities/tag'
 import AvatarDropdown from '@/features/avatar-dropdown'
@@ -31,7 +31,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
   })
 
   await queryClient.prefetchQuery({
-    queryFn: getDomains,
+    queryFn: getClientDomains,
     queryKey: ['domains'],
   })
 

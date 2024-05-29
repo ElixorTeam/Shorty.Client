@@ -36,11 +36,12 @@ export default function SubdomainSelector({
   const { toast } = useToast()
   const queryClient = useQueryClient()
   const search = useSignal<string>('')
-  const { data: subdomainsQueryData, isLoading } =
-    useGetAllSubdomains(currentDomainUid)
+  const { data: subdomainsQueryData, isLoading } = useGetAllSubdomains()
 
   const subdomains = computed<SubdomainType[]>(() => [
-    ...(subdomainsQueryData ?? []),
+    ...(subdomainsQueryData?.filter(
+      (item) => item.domainUid == currentDomainUid
+    ) ?? []),
     subdomainStub.value,
   ])
 
@@ -67,7 +68,7 @@ export default function SubdomainSelector({
     }
 
     queryClient.setQueryData(
-      ['subdomains', { id: currentDomainUid }],
+      ['subdomains'],
       (oldData: SubdomainType[] | undefined) => [
         ...(oldData ?? []),
         actionData.data,
@@ -96,7 +97,7 @@ export default function SubdomainSelector({
     }
 
     queryClient.setQueryData(
-      ['subdomains', { id: currentDomainUid }],
+      ['subdomains'],
       (oldData: SubdomainType[] | undefined) =>
         (oldData ?? []).filter((item) => item.uid !== subdomainUid)
     )

@@ -1,20 +1,13 @@
 'use server'
 
-import { validate } from 'uuid'
-
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 
-import { SubdomainType } from './subdomain-type'
+import { SubdomainResponseObjectType, SubdomainType } from './subdomain-type'
 
-const getAllSubdomains = async (
-  domainUid: string
-): Promise<SubdomainType[]> => {
-  if (!validate(domainUid)) throw new Error('Unvalid domain uuid')
-
+const getAllSubdomains = async (): Promise<SubdomainType[]> => {
   const session = await auth()
   const url = new URL(`${envServer.BACKEND_URL}/user/subdomains`)
-  url.searchParams.append('domainUid', domainUid)
 
   const response = await fetch(url, {
     headers: {
@@ -23,12 +16,16 @@ const getAllSubdomains = async (
     method: 'GET',
   })
 
-  if (!response.ok) {
-    throw new Error('Can not access data')
+  if (!response.ok) throw new Error('Can not access data')
+  const responseData = (await response.json()) as {
+    data: SubdomainResponseObjectType[]
   }
-  const responseData = await response.json()
-  const { data } = responseData
-  return data
+  return responseData.data.flatMap((domain) =>
+    domain.subdomains.map((subdomain) => ({
+      ...subdomain,
+      domainUid: domain.domainUid,
+    }))
+  )
 }
 
 export default getAllSubdomains

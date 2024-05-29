@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query'
 
-import { getDomains } from '@/entities/domain'
+import { getAdminDomains } from '@/entities/domain'
 
 import CreateDomainDialog from './create-domain-dialog'
 import DomainsTable from './domains-table'
@@ -9,7 +9,7 @@ export default async function DomainsPage() {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryFn: getDomains,
+    queryFn: getAdminDomains,
     queryKey: ['domains'],
   })
 

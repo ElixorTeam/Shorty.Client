@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useGetAllDomains } from '@/entities/domain'
+import { useGetClientDomains } from '@/entities/domain'
 import {
   getShortLink,
   type RecordType,
@@ -43,8 +43,8 @@ export default function UpdateLinkForm({
   const { toast } = useToast()
   const queryClient = useQueryClient()
   const { data: tags } = useGetAllTags()
-  const { data: domains } = useGetAllDomains()
-  const { data: subdomains } = useGetAllSubdomains(record.domainUid)
+  const { data: domains } = useGetClientDomains()
+  const { data: subdomains } = useGetAllSubdomains()
 
   useEffect(() => {
     const recordTag = tags?.find((item) => item.value === record.tags[0])

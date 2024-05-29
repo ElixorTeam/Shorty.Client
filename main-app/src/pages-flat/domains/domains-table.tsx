@@ -3,7 +3,7 @@
 import { TrashIcon } from '@heroicons/react/24/solid'
 import { useQueryClient } from '@tanstack/react-query'
 
-import { deleteDomainAction, useGetAllDomains } from '@/entities/domain'
+import { deleteDomainAction, useGetClientDomains } from '@/entities/domain'
 import { Button } from '@/shared/ui/button'
 import {
   Table,
@@ -16,7 +16,7 @@ import {
 import { useToast } from '@/shared/ui/use-toast'
 
 export default function DomainsTable() {
-  const { data } = useGetAllDomains()
+  const { data } = useGetClientDomains()
   const { toast } = useToast()
   const queryClient = useQueryClient()
 

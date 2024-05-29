@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useGetAllDomains } from '@/entities/domain'
+import { useGetClientDomains } from '@/entities/domain'
 import { createLinkAction, getShortLink } from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
@@ -48,7 +48,7 @@ export default function CreateLinkForm({
   const router = useRouter()
   const type = useSignal<string>('single')
 
-  const { data: domains } = useGetAllDomains()
+  const { data: domains } = useGetClientDomains()
 
   const form = useForm<z.infer<typeof createFormSchema>>({
     resolver: zodResolver(createFormSchema),

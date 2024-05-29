@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 // eslint-disable-next-line @conarti/feature-sliced/layers-slices
-import useGetAllDomains from '@/entities/domain/use-get-all-domains'
+import { useGetClientDomains } from '@/entities/domain'
 // eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { useGetAllSubdomains } from '@/entities/subdomain'
 
@@ -9,8 +9,8 @@ import getShortLink from './get-short-link'
 import { RecordType } from './record-type'
 
 const useGetShortLink = (record: RecordType) => {
-  const { data: domains } = useGetAllDomains()
-  const { data: subdomains } = useGetAllSubdomains(record.domainUid)
+  const { data: domains } = useGetClientDomains()
+  const { data: subdomains } = useGetAllSubdomains()
 
   return useMemo(() => {
     if (!record || !domains) return ''

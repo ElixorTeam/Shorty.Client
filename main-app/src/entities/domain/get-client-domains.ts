@@ -1,5 +1,7 @@
 'use server'
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
+import { SubdomainResponseObjectType } from '@/entities/subdomain'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 
@@ -7,16 +9,20 @@ import { DomainType } from './domain-type'
 
 const getDomains = async (): Promise<DomainType[]> => {
   const session = await auth()
-  const response = await fetch(`${envServer.BACKEND_URL}/domains`, {
+  const response = await fetch(`${envServer.BACKEND_URL}/user/subdomains`, {
     headers: {
       Authorization: `Bearer ${session?.accessToken}`,
     },
     method: 'GET',
   })
   if (!response.ok) throw new Error('Can not access data')
-  const responseData = await response.json()
-  const { data } = responseData
-  return data
+  const responseData = (await response.json()) as {
+    data: SubdomainResponseObjectType[]
+  }
+  return responseData.data.map((domain) => ({
+    uid: domain.domainUid,
+    value: domain.domainValue,
+  }))
 }
 
 export default getDomains

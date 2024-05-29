@@ -1,7 +1,7 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
 import { useSignal } from '@preact-signals/safe-react'
 
-import { useGetAllDomains } from '@/entities/domain'
+import { useGetClientDomains } from '@/entities/domain'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -22,7 +22,7 @@ import {
 
 export default function DomainSelector() {
   const search = useSignal<string>('')
-  const { data: domains, isLoading } = useGetAllDomains()
+  const { data: domains, isLoading } = useGetClientDomains()
 
   if (isLoading || domains === undefined) {
     return (

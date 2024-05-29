@@ -1,12 +1,16 @@
 import createDomainAction from './actions/create-domain-action'
 import deleteDomainAction from './actions/delete-domain-action'
 import { DomainType } from './domain-type'
-import getDomains from './get-domains'
-import useGetAllDomains from './use-get-all-domains'
+import getAdminDomains from './get-admin-domains'
+import getClientDomains from './get-client-domains'
+import useGetAdminDomains from './use-get-admin-domains'
+import useGetClientDomains from './use-get-client-domains'
 
 export {
-  getDomains,
-  useGetAllDomains,
+  getAdminDomains,
+  getClientDomains,
+  useGetClientDomains,
+  useGetAdminDomains,
   createDomainAction,
   deleteDomainAction,
   type DomainType,
