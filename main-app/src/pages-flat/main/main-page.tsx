@@ -7,6 +7,7 @@ import {
 import Link from 'next/link'
 import { z } from 'zod'
 
+import { getAnalyticsByLink, PeriodsEnum } from '@/entities/analytics'
 import { getClientDomains } from '@/entities/domain'
 import { getAllRecords, getCurrentRecord } from '@/entities/record'
 import { getAllTags } from '@/entities/tag'
@@ -44,6 +45,11 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
     await queryClient.prefetchQuery({
       queryFn: async () => getCurrentRecord(linkUid),
       queryKey: ['currentRecord', linkUid],
+    })
+
+    await queryClient.prefetchQuery({
+      queryFn: async () => getAnalyticsByLink(linkUid, PeriodsEnum.Week),
+      queryKey: ['currentRecord', linkUid, PeriodsEnum.Week],
     })
   }
 

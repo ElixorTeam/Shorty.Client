@@ -6,63 +6,106 @@ import {
   EyeIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
+import { useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 
+import {
+  PeriodsEnum,
+  deleteLinkAnalytics,
+  useGetAnalyticsByLink,
+} from '@/entities/analytics'
+import { useGetCurrentRecord } from '@/entities/record'
 import DatePickerWithRange from '@/features/date-picker-with-range'
 import { Button } from '@/shared/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
+import { useToast } from '@/shared/ui/use-toast'
 
 import DashboardCard from './dashboard-card'
-import {
-  currentTimePeriod,
-  TimePeriodsEnum,
-  timePeriodsList,
-} from './dashboard-context'
 import DeviceCard from './device-card'
 import ViewsCard from './views-card'
 
+
+
 export default function Dashboard() {
+  const [period, setPeriod] = useState<PeriodsEnum>(PeriodsEnum.Week)
+  const { toast } = useToast()
+  const queryClient = useQueryClient()
+  const { data: record } = useGetCurrentRecord()
+  const { data: analytics } = useGetAnalyticsByLink(period)
+
+  const getUniqueRation = () => {
+    if (!analytics) return '100%'
+    const stats = analytics.statistics
+    return `${(stats.uniqueViews / stats.views) * 100}%`
+  }
+
+  const deleteAnalytics = async () => {
+    const { data, serverError, validationErrors } = await deleteLinkAnalytics({
+      linkUid: record?.uid ?? '',
+    })
+    if (data?.failure || serverError || validationErrors) {
+      toast({
+        title: 'Error while reseting',
+        description: data?.failure,
+        variant: 'destructive',
+      })
+      return
+    }
+    queryClient.invalidateQueries({ queryKey: ['domains'] })
+    toast({
+      title: 'Successfully reseted',
+    })
+  }
+
   return (
     <div className="w-full space-y-4">
       <div className="flex flex-col justify-between space-y-2 pt-4 lg:flex-row lg:space-y-0">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <div className="flex gap-4">
+          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+          <Button onClick={deleteAnalytics} variant="outline">
+            Reset
+          </Button>
+        </div>
         <div className="flex gap-3">
           <DatePickerWithRange />
           <Button>Download</Button>
         </div>
       </div>
       <Tabs
-        value={currentTimePeriod.value.toString()}
+        value={period}
         onValueChange={(value) => {
-          currentTimePeriod.value = value as unknown as TimePeriodsEnum
+          setPeriod(value as PeriodsEnum)
         }}
-        className="w-[400px]"
+        className="w-[300px]"
       >
-        <TabsList className="grid w-full grid-cols-4">
-          {timePeriodsList.map((item) => (
-            <TabsTrigger value={item.id.toString()} key={item.id}>
-              {item.name}
-            </TabsTrigger>
-          ))}
+        <TabsList className="grid w-full grid-cols-3">
+          {(Object.keys(PeriodsEnum) as Array<keyof typeof PeriodsEnum>).map(
+            (item) => (
+              <TabsTrigger value={item.toLowerCase()} key={item}>
+                {item}
+              </TabsTrigger>
+            )
+          )}
         </TabsList>
       </Tabs>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <DashboardCard
           title="Total views"
           Icon={EyeIcon}
-          value="1400"
-          description="+20.1% from last day"
+          value={analytics?.statistics.views.toString() ?? '0'}
+          description=""
         />
         <DashboardCard
           title="Unique"
           Icon={UserIcon}
-          value="140"
-          description="+20.1% from last day"
+          value={analytics?.statistics.uniqueViews.toString() ?? '0'}
+          description=""
         />
         <DashboardCard
-          title="Trend"
+          title="Ratio"
           Icon={ArrowTrendingUpIcon}
-          value="30%"
-          description="+4.1% from last day"
+          value={getUniqueRation()}
+          description=""
         />
         <DashboardCard
           title="Time left"
@@ -72,8 +115,8 @@ export default function Dashboard() {
         />
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
-        <ViewsCard />
-        <DeviceCard />
+        <ViewsCard data={analytics?.viewsData ?? []} />
+        <DeviceCard data={analytics?.devicesData} />
       </div>
     </div>
   )

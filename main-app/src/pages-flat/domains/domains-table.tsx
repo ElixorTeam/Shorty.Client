@@ -26,7 +26,7 @@ export default function DomainsTable() {
     })
     if (data?.failure || serverError || validationErrors) {
       toast({
-        title: 'Error while updating',
+        title: 'Error while deleting',
         description: data?.failure,
         variant: 'destructive',
       })
@@ -34,7 +34,7 @@ export default function DomainsTable() {
     }
     queryClient.invalidateQueries({ queryKey: ['domains'] })
     toast({
-      title: 'Successfully updated',
+      title: 'Successfully deleted',
     })
   }
   return (

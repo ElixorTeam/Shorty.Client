@@ -1,6 +1,8 @@
-import { useSignal } from '@preact-signals/safe-react'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { computed, useSignal } from '@preact-signals/safe-react'
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 
+import { DevicesData } from '@/entities/analytics'
 import {
   Card,
   CardContent,
@@ -15,51 +17,45 @@ import {
   SelectTrigger,
 } from '@/shared/ui/select'
 
-type DeviceDataType = {
-  value: string
-  name: string
+enum DeviceOptionEnum {
+  OS = 'OS',
+  Device = 'Device',
 }
 
-const deviceTypes: DeviceDataType[] = [
-  { value: 'ua', name: 'User agent' },
-  { value: 'os', name: 'OS' },
-  { value: 'browser', name: 'Browser' },
-]
+export default function DeviceCard({
+  data,
+}: {
+  data: DevicesData | undefined
+}) {
+  const currentDeviceOption = useSignal<DeviceOptionEnum>(DeviceOptionEnum.OS)
 
-const testData = [
-  { name: 'Group A', value: Math.floor(Math.random() * 50) + 100 },
-  { name: 'Group B', value: Math.floor(Math.random() * 50) + 100 },
-  { name: 'Group C', value: Math.floor(Math.random() * 50) + 100 },
-  { name: 'Group D', value: Math.floor(Math.random() * 50) + 100 },
-  { name: 'Group E', value: Math.floor(Math.random() * 50) + 100 },
-  { name: 'Group F', value: Math.floor(Math.random() * 50) + 100 },
-]
-
-export default function DeviceCard() {
-  const currentDeviceType = useSignal<DeviceDataType>(deviceTypes[0])
-
+  const analyticsData = computed(() => {
+    if (currentDeviceOption.value == DeviceOptionEnum.OS) return data?.os ?? []
+    return data?.device ?? []
+  })
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="pt-4">
         <CardTitle>
           <div className="flex items-center justify-between">
             <span className="truncate">Device information</span>
             <Select
-              value={currentDeviceType.value.value}
+              value={currentDeviceOption.value}
               onValueChange={(value) => {
-                const deviceType = deviceTypes.find(
-                  (itemToFind) => itemToFind.value === value
-                )
-                if (deviceType) currentDeviceType.value = deviceType
+                currentDeviceOption.value = value as DeviceOptionEnum
               }}
             >
               <SelectTrigger className="w-[180px]">
-                {currentDeviceType.value.name}
+                {currentDeviceOption.value}
               </SelectTrigger>
               <SelectContent>
-                {deviceTypes.map((item) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.name}
+                {(
+                  Object.keys(DeviceOptionEnum) as Array<
+                    keyof typeof DeviceOptionEnum
+                  >
+                ).map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {item}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -71,29 +67,36 @@ export default function DeviceCard() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={350}>
-          <BarChart data={testData}>
-            <XAxis
-              dataKey="name"
-              stroke="#888888"
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-            />
-            <YAxis
-              stroke="#888888"
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-            />
-            <Bar
-              dataKey="value"
-              fill="currentColor"
-              radius={[4, 4, 0, 0]}
-              className="fill-primary"
-            />
-          </BarChart>
-        </ResponsiveContainer>
+        {analyticsData.value.length ? (
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={analyticsData.value}>
+              <XAxis
+                dataKey="label"
+                stroke="#888888"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="#888888"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <Bar
+                dataKey="value"
+                fill="currentColor"
+                radius={[4, 4, 0, 0]}
+                className="fill-primary"
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="flex h-[350px] w-full flex-col items-center justify-center gap-3">
+            <ExclamationTriangleIcon className="size-10 text-amber-500" />
+            <span>No analytics found</span>
+          </div>
+        )}
       </CardContent>
     </Card>
   )
