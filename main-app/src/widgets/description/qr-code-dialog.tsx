@@ -1,7 +1,7 @@
 'use client'
 
 import { useSignal } from '@preact-signals/safe-react'
-import FileSaver from 'file-saver'
+import { saveAs } from 'file-saver'
 import { useQRCode } from 'next-qrcode'
 import { ReactNode, useRef } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
@@ -45,7 +45,7 @@ export default function QrCodeDialog({
     if (!canvas) return
 
     canvas.toBlob((blob) => {
-      if (blob) FileSaver.saveAs(blob, 'qrcode.png')
+      if (blob) saveAs(blob, 'qrcode.png')
     })
   }
 

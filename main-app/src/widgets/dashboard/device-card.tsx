@@ -67,7 +67,7 @@ export default function DeviceCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {analyticsData.value.length ? (
+        {analyticsData.value.length > 0 ? (
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={analyticsData.value}>
               <XAxis

@@ -23,8 +23,6 @@ const getAnalyticsByLink = async (
   if (!response.ok) throw new Error('Can not access data')
   const responseData = (await response.json()) as { data: AnalyticsType }
   const { data } = responseData
-  console.log(data)
-  console.log(data.devicesData)
   return data
 }
 

@@ -24,8 +24,6 @@ import DashboardCard from './dashboard-card'
 import DeviceCard from './device-card'
 import ViewsCard from './views-card'
 
-
-
 export default function Dashboard() {
   const [period, setPeriod] = useState<PeriodsEnum>(PeriodsEnum.Week)
   const { toast } = useToast()
@@ -34,9 +32,9 @@ export default function Dashboard() {
   const { data: analytics } = useGetAnalyticsByLink(period)
 
   const getUniqueRation = () => {
-    if (!analytics) return '100%'
+    if (!analytics || analytics.statistics.views == 0) return '100%'
     const stats = analytics.statistics
-    return `${(stats.uniqueViews / stats.views) * 100}%`
+    return `${((stats.uniqueViews / stats.views) * 100).toFixed(0)}%`
   }
 
   const deleteAnalytics = async () => {
@@ -110,7 +108,7 @@ export default function Dashboard() {
         <DashboardCard
           title="Time left"
           Icon={ClockIcon}
-          value="43 days"
+          value="&#8734; days"
           description=""
         />
       </div>

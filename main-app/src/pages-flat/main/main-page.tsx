@@ -49,7 +49,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
 
     await queryClient.prefetchQuery({
       queryFn: async () => getAnalyticsByLink(linkUid, PeriodsEnum.Week),
-      queryKey: ['currentRecord', linkUid, PeriodsEnum.Week],
+      queryKey: ['analytics', linkUid, PeriodsEnum.Week],
     })
   }
 

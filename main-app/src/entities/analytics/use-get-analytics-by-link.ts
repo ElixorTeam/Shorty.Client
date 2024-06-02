@@ -12,8 +12,6 @@ const useGetAnalyticsByLink = (period: PeriodsEnum) => {
   return useQuery({
     queryFn: async () => getAnalyticsByLink(linkUid, period),
     queryKey: ['analytics', linkUid, period],
-    staleTime: 150,
-    refetchInterval: 150,
   })
 }
 

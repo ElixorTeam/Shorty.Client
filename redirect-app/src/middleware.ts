@@ -13,7 +13,7 @@ type SplittedUrl = {
 }
 
 const splitUrl = (url: NextURL): SplittedUrl => {
-  const domain = url.hostname
+  const domain = url.host
   const subdomain = domain.split('.').slice(0, -2).join('.') || undefined
   const path = url.pathname.slice(1)
   return { domain, subdomain, path }
@@ -46,10 +46,13 @@ export default async function middleware(request: NextRequest) {
     userKey,
     ...urlParts,
   })
-  console.log(body)
   try {
-    await fetch(`${process.env.BACKEND_URL}/analytics`, {
+    await fetch(`${process.env.BACKEND_URL}/redirects`, {
       body,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
     })
   } catch {

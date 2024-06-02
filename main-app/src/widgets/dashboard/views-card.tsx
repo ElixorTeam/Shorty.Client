@@ -25,7 +25,7 @@ export default function ViewsCard({ data }: { data: AnalyticsItem[] }) {
         <CardDescription>Views data for selected period</CardDescription>
       </CardHeader>
       <CardContent className="pl-2">
-        {data.length ? (
+        {data.length > 0 ? (
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={data}>
               <XAxis
