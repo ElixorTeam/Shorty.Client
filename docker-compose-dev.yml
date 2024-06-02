@@ -1,16 +1,23 @@
-version: "3"
 services:
-  react-client:
-    container_name: ShortyAppClient
-    build: main-app
+  main-app:
+    container_name: ShortyApp
+    build: ./main-app
     environment:
       KEYCLOAK_BASE_URL: http://172.16.2.9:8180
-      KEYCLOAK_CLIENT_SECRET: ikl4rejQwgUXoS9RYvPA59sif0LFHRXV
       KEYCLOAK_CLIENT_ID: shorty-client
+      KEYCLOAK_CLIENT_SECRET: 4pNtsFCKScTRhHGOlKaIVgHA9gCI9MFz
       KEYCLOAK_REALM: shorty
-      AUTH_SECRET: VrGrBwdw6fJ6yqu0CplImHJTFf9aLyA+x7GffAMQnQk=
-      AUTH_URL: http://localhost:3000/api/auth
+      AUTH_SECRET: SGVsbG8sIHdvcmxkIQ==
       BACKEND_URL: http://172.16.2.9:2000/api/v1
-      HOSTNAME: 0.0.0.0
+      PORT: 3000
     ports:
       - "3000:3000"
+  redirect-app:
+    container_name: ShortyRedirectApp
+    build: ./redirect-app
+    environment:
+      BACKEND_URL: http://172.16.2.9:2000/api/v1
+      PORT: 3001
+      DOMAIN: localhost:3001
+    ports:
+      - "3001:3001"

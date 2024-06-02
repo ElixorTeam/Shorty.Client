@@ -1,16 +1,9 @@
-FROM oven/bun:alpine as deps
+FROM oven/bun:alpine as build
 
 WORKDIR /app
-COPY bun.lockb package.json ./
-RUN bun install --frozen-lockfile
-
-FROM node:20-alpine as build
-
-WORKDIR /app
-
 COPY . .
-COPY --from=deps /app .
-RUN npm run build
+RUN bun install --frozen-lockfile
+RUN bun run build
 
 FROM node:20-alpine as run
 

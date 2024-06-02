@@ -12,6 +12,7 @@ export const currentDomain = signal<DomainType>({
 export const subdomainStub = signal<SubdomainType>({
   value: 'Unselected',
   uid: uuidv4(),
+  domainUid: ''
 })
 
 export const currentSubdomain = signal<SubdomainType>(subdomainStub.value)

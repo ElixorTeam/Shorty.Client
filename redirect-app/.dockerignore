@@ -3,8 +3,9 @@ node_modules
 Dockerfile
 
 # Linters
+prettier.config.js
 .prettierignore
-.prettierrc.js
+.eslintrc.cjs
 
 # Git
 .gitignore
