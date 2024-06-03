@@ -15,11 +15,11 @@ import {
   useGetAnalyticsByLink,
 } from '@/entities/analytics'
 import { useGetCurrentRecord } from '@/entities/record'
-import DatePickerWithRange from '@/features/date-picker-with-range'
 import { Button } from '@/shared/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs'
 import { useToast } from '@/shared/ui/use-toast'
 
+import CsvGenerateForm from './csv-generate-form'
 import DashboardCard from './dashboard-card'
 import DeviceCard from './device-card'
 import ViewsCard from './views-card'
@@ -64,10 +64,7 @@ export default function Dashboard() {
             Reset
           </Button>
         </div>
-        <div className="flex gap-3">
-          <DatePickerWithRange />
-          <Button>Download</Button>
-        </div>
+        <CsvGenerateForm />
       </div>
       <Tabs
         value={period}
