@@ -31,7 +31,7 @@ export default async function middleware(request: NextRequest) {
   const { device, os, isBot } = userAgent(request)
   if (isBot) return NextResponse.error()
 
-  const deviceType = device.type === 'mobile' ? 'mobile' : 'desktop'
+  const deviceType = device.type === 'mobile' ? 'Mobile' : 'Desktop'
   const userKey = request.cookies.get('userKey')?.value ?? uuidv4()
   const urlParts = splitUrl(request.nextUrl)
   const ip = getIp(request.headers)

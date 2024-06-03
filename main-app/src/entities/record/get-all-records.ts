@@ -3,7 +3,8 @@
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 
-import { type RecordType } from './record-type'
+import { RecordResponseType, type RecordType } from './record-type'
+import { RecordTypesEnum } from './record-types-enum'
 
 const getAllRecords = async (): Promise<RecordType[]> => {
   const session = await auth()
@@ -14,9 +15,13 @@ const getAllRecords = async (): Promise<RecordType[]> => {
     method: 'GET',
   })
   if (!response.ok) throw new Error('Can not access data')
-  const responseData = await response.json()
+  const responseData = (await response.json()) as { data: RecordResponseType[] }
   const { data } = responseData
-  return data
+  return data.map((record) => ({
+    ...record,
+    type:
+      record.urls.length > 1 ? RecordTypesEnum.GROUP : RecordTypesEnum.SINGLE,
+  }))
 }
 
 export default getAllRecords

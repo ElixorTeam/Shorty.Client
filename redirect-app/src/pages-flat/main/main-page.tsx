@@ -1,12 +1,17 @@
 import { redirect } from 'next/navigation'
 
-import { getRedirectByUrlPath } from '@/entities/redirect'
+import { RedirectTypesEnum, getRedirectByUrlPath } from '@/entities/redirect'
+import GroupRecordView from '@/widgets/group-record-view'
 import PasswordForm from '@/widgets/password-form'
 
 export default async function MainPage({ path }: { path: string }) {
   const record = await getRedirectByUrlPath(path)
 
-  if (record.url && !record.password) return redirect(record.url)
+  if (record.type === RedirectTypesEnum.SINGLE && !record.password)
+    return redirect(record.urls[0])
+
+  if (record.type === RedirectTypesEnum.GROUP && !record.password)
+    return <GroupRecordView urls={record.urls} />
 
   if (record.password) return <PasswordForm redirect={record} />
 

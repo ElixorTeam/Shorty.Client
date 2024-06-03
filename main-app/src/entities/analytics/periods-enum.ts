@@ -1,5 +1,5 @@
 export enum PeriodsEnum {
-  Year = 'year',
-  Month = 'month',
-  Week = 'week',
+  Year = 'Year',
+  Month = 'Month',
+  Week = 'Week',
 }

@@ -6,7 +6,8 @@ import hash from 'object-hash'
 
 import envServer from '@/shared/lib/env-variables'
 
-import { RedirectType } from './redirect-type'
+import { RedirectResponseType, RedirectType } from './redirect-type'
+import { RedirectTypesEnum } from './redirect-types-enum'
 
 const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   const userHeaders = headers()
@@ -21,9 +22,16 @@ const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   const response = await fetch(url, { headers: userHeaders, cache: 'no-store' })
   if (!response.ok) throw new Error('Can not access data')
 
-  const responseData = await response.json()
-  if (responseData.password) responseData.password = hash(responseData.password)
-  return responseData
+  const responseData = (await response.json()) as RedirectResponseType
+  const data: RedirectType = {
+    ...responseData,
+    type:
+      responseData.urls.length > 1
+        ? RedirectTypesEnum.GROUP
+        : RedirectTypesEnum.SINGLE,
+  }
+  if (data.password) data.password = hash(data.password)
+  return data
 }
 
 export default getRedirectByUrlPath

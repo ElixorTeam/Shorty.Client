@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-import { getFormattedDate, type RecordType } from '@/entities/record'
+import {
+  RecordTypesEnum,
+  getFormattedDate,
+  type RecordType,
+} from '@/entities/record'
 import cn from '@/shared/lib/tailwind-merge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar'
 
@@ -22,7 +26,7 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
         <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
             <AvatarImage
-              src={`http://www.google.com/s2/favicons?domain=${link.url}`}
+              src={`http://www.google.com/s2/favicons?domain=${link.urls[0]}`}
               alt="link-icon"
             />
             <AvatarFallback>{link.title.charAt(0)}</AvatarFallback>
@@ -38,7 +42,9 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
             </span>
           </div>
           <span className="truncate text-left text-xs leading-tight text-muted-foreground">
-            {link.url}
+            {link.type === RecordTypesEnum.SINGLE
+              ? link.urls[0]
+              : `${link.urls.length} urls`}
           </span>
         </div>
       </button>

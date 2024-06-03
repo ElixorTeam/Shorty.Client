@@ -76,7 +76,7 @@ export default function Dashboard() {
         <TabsList className="grid w-full grid-cols-3">
           {(Object.keys(PeriodsEnum) as Array<keyof typeof PeriodsEnum>).map(
             (item) => (
-              <TabsTrigger value={item.toLowerCase()} key={item}>
+              <TabsTrigger value={item} key={item}>
                 {item}
               </TabsTrigger>
             )

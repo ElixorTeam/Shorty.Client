@@ -7,7 +7,7 @@ const updateFormSchema = z.object({
     .max(64, { message: 'Title must be no longer than 64 characters' }),
   avatar: z.any().optional(),
   tag: z.string(),
-  link: z.string().url(),
+  urls: z.string().url().array(),
   prefix: z
     .string()
     .min(2, { message: 'Prefix must be at least 2 characters' })

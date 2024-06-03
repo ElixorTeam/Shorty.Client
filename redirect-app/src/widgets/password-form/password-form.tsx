@@ -3,10 +3,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import hash from 'object-hash'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { RedirectType } from '@/entities/redirect'
+import { RedirectType, RedirectTypesEnum } from '@/entities/redirect'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -18,6 +19,9 @@ import {
 } from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
 import { useToast } from '@/shared/ui/use-toast'
+
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
+import GroupRecordView from '../group-record-view'
 
 const passwordFormScheme = z.object({
   password: z.string().min(2).max(16),
@@ -32,17 +36,23 @@ export default function PasswordForm({ redirect }: { redirect: RedirectType }) {
       password: '',
     },
   })
+  const [isCompleted, setIsCompleted] = useState(false)
 
   const onSubmit = (values: z.infer<typeof passwordFormScheme>) => {
     const passwordHash = hash(values.password)
 
     if (passwordHash === redirect.password) {
-      router.push(redirect.url)
+      if (redirect.type == RedirectTypesEnum.SINGLE)
+        router.push(redirect.urls[0])
+      else setIsCompleted(true)
       return
     }
 
     toast({ title: 'Form error', description: 'Wrong password' })
   }
+
+  if (isCompleted && redirect.type == RedirectTypesEnum.GROUP)
+    return <GroupRecordView urls={redirect.urls} />
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">

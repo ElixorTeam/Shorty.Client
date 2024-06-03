@@ -6,11 +6,12 @@ import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import action from '@/shared/lib/safe-action'
 
-import { type RecordType } from '../record-type'
+import { RecordResponseType } from '../record-type'
+import { RecordTypesEnum } from '../record-types-enum'
 
 const scheme = z.object({
   title: z.string().min(2).optional().or(z.literal('')),
-  url: z.string().url(),
+  urls: z.string().url().array().max(5).min(1),
   path: z.string().min(2).max(16),
   domainUid: z.string().uuid(),
   subdomainUid: z.string().optional().or(z.literal('')),
@@ -19,13 +20,13 @@ const scheme = z.object({
 
 const createLink = action(
   scheme,
-  async ({ domainUid, title, subdomainUid, url, password, path }) => {
+  async ({ domainUid, title, subdomainUid, urls, password, path }) => {
     try {
       const session = await auth()
       const body = JSON.stringify({
         title: title || 'Untitled',
         path,
-        url,
+        urls,
         subdomainUid: subdomainUid || undefined,
         domainUid,
         tags: [],
@@ -48,9 +49,15 @@ const createLink = action(
           return { failure: 'Error: Check the correctness of the data' }
         return { failure: `Unexpected error: Try again` }
       }
-      const responseData = await response.json()
+      const responseData = (await response.json()) as {
+        data: RecordResponseType
+      }
       const { data } = responseData
-      return { data: data as RecordType }
+      return {
+        ...data,
+        type:
+          data.urls.length > 1 ? RecordTypesEnum.GROUP : RecordTypesEnum.SINGLE,
+      }
     } catch (error) {
       return { failure: `Get error ${error}` }
     }

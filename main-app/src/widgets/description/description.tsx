@@ -22,6 +22,7 @@ import {
   deleteLinkAction,
   getFormattedDate,
   updateLinkAction,
+  RecordTypesEnum,
 } from '@/entities/record'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
@@ -90,7 +91,7 @@ export default function Description({ record }: { record: RecordType }) {
         <div className="flex items-center gap-4">
           <Avatar className="size-14">
             <AvatarImage
-              src={`http://www.google.com/s2/favicons?domain=${record.url}`}
+              src={`http://www.google.com/s2/favicons?domain=${record.urls[0]}`}
               alt="avatar"
             />
             <AvatarFallback>{record.title[0]}</AvatarFallback>
@@ -100,7 +101,9 @@ export default function Description({ record }: { record: RecordType }) {
               <h2 className="truncate text-2xl font-semibold tracking-tight">
                 {record.title}
               </h2>
-              <Badge className="mt-px">Single</Badge>
+              <Badge className="mt-px">
+                {record.type === RecordTypesEnum.SINGLE ? 'Single' : 'Group'}
+              </Badge>
             </div>
             <Link
               href={shortLink}
@@ -194,12 +197,16 @@ export default function Description({ record }: { record: RecordType }) {
             </div>
           )}
         </DescriptionItem>
-        <DescriptionItem title="Link" Icon={LinkIcon}>
-          <Button variant="link" className="h-6 p-0" asChild>
-            <Link href={record.url} target="_blank">
-              {record.url}
-            </Link>
-          </Button>
+        <DescriptionItem title="Urls" Icon={LinkIcon}>
+          {record.type == RecordTypesEnum.SINGLE ? (
+            <Button variant="link" className="h-6 p-0" asChild>
+              <Link href={record.urls[0]} target="_blank">
+                {record.urls[0]}
+              </Link>
+            </Button>
+          ) : (
+            <Badge>{record.urls.length} urls</Badge>
+          )}
         </DescriptionItem>
         <DescriptionItem title="Created" Icon={CalendarIcon}>
           {createDt}

@@ -6,7 +6,8 @@ import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import action from '@/shared/lib/safe-action'
 
-import { type RecordType } from '../record-type'
+import { RecordResponseType } from '../record-type'
+import { RecordTypesEnum } from '../record-types-enum'
 
 const scheme = z.object({
   uid: z.string().uuid(),
@@ -40,7 +41,6 @@ const updateLink = action(
           cache: 'no-store',
         }
       )
-      const text = await response.json()
       if (!response.ok) {
         if (response.status === 409)
           return { failure: 'Error: An object with such data already exists' }
@@ -48,7 +48,15 @@ const updateLink = action(
           return { failure: 'Error: Check the correctness of the data' }
         return { failure: `Unexpected error: Try again` }
       }
-      return { data: text as RecordType }
+      const responseData = (await response.json()) as {
+        data: RecordResponseType
+      }
+      const { data } = responseData
+      return {
+        ...data,
+        type:
+          data.urls.length > 1 ? RecordTypesEnum.GROUP : RecordTypesEnum.SINGLE,
+      }
     } catch (error) {
       return { failure: `Get error ${error}` }
     }

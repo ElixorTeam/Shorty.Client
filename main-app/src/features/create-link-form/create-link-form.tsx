@@ -92,7 +92,7 @@ export default function CreateLinkForm({
       title: values.title?.trim() ?? '',
       password: values.password?.trim(),
       domainUid: currentDomain.value?.uid ?? '',
-      url: values.urls.length > 0 ? values.urls[0].url?.trim() : '',
+      urls: values.urls.map((item) => item.url.trim()),
       subdomainUid:
         currentSubdomain.value === subdomainStub.value
           ? ''
@@ -109,7 +109,7 @@ export default function CreateLinkForm({
       })
       return
     }
-    router.push(`/main?linkUid=${data?.data.uid}`, { scroll: false })
+    router.push(`/main?linkUid=${data?.uid}`, { scroll: false })
     if (onFormSubmit) onFormSubmit()
   }
 

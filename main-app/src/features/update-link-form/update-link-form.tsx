@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useGetClientDomains } from '@/entities/domain'
@@ -14,6 +14,7 @@ import {
 } from '@/entities/record'
 import { useGetAllSubdomains } from '@/entities/subdomain'
 import { useGetAllTags } from '@/entities/tag'
+import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
   Form,
@@ -58,7 +59,7 @@ export default function UpdateLinkForm({
     defaultValues: {
       title: record.title,
       tag: currentTag.value.value,
-      link: record.url,
+      urls: record.urls,
       prefix:
         subdomains?.find((item) => item.uid === record.subdomainUid)?.value ??
         '',
@@ -66,6 +67,11 @@ export default function UpdateLinkForm({
       path: record.path,
       password: record.password ?? '',
     },
+  })
+
+  const { fields } = useFieldArray({
+    name: 'urls',
+    control: form.control,
   })
 
   const getCurrentShortUrl = () => {
@@ -138,19 +144,26 @@ export default function UpdateLinkForm({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="link"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Link</FormLabel>
-                  <FormControl>
-                    <Input {...field} disabled />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div>
+              {fields.map((url_field, index) => (
+                <FormField
+                  control={form.control}
+                  key={url_field.id}
+                  name={`urls.${index}`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={cn(index !== 0 && 'sr-only')}>
+                        URLs
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} disabled />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+            </div>
             <div className="space-y-2">
               <Label>Short URL</Label>
               <Input value={getCurrentShortUrl()} disabled />
