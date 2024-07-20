@@ -14,11 +14,26 @@ export const {
   signOut,
 } = NextAuth({
   trustHost: true,
+  cookies: {
+    csrfToken: {
+      name: 'next-auth.csrf-token',
+      options: {
+        secure: envServer.NODE_ENV === 'production',
+      },
+    },
+    pkceCodeVerifier: {
+      name: 'next-auth.pkce.code_verifier',
+      options: {
+        secure: envServer.NODE_ENV === 'production',
+      },
+    },
+  },
   providers: [
     keycloak({
       clientId: envServer.KEYCLOAK_CLIENT_ID,
       clientSecret: envServer.KEYCLOAK_CLIENT_SECRET,
       issuer: `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}`,
+      checks: ["pkce"]
     }),
   ],
   callbacks: {
