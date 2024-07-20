@@ -6,14 +6,14 @@ import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useGetClientDomains } from '@/entities/domain'
+import { DomainType, useGetClientDomains } from '@/entities/domain'
 import {
   getShortLink,
   type RecordType,
   updateLinkAction,
 } from '@/entities/record'
-import { useGetAllSubdomains } from '@/entities/subdomain'
-import { useGetAllTags } from '@/entities/tag'
+import { SubdomainType, useGetAllSubdomains } from '@/entities/subdomain'
+import { TagType, useGetAllTags } from '@/entities/tag'
 import cn from '@/shared/lib/tailwind-merge'
 import { Button } from '@/shared/ui/button'
 import {
@@ -48,7 +48,9 @@ export default function UpdateLinkForm({
   const { data: subdomains } = useGetAllSubdomains()
 
   useEffect(() => {
-    const recordTag = tags?.find((item) => item.value === record.tags[0])
+    const recordTag = tags?.find(
+      (item: TagType) => item.value === record.tags[0]
+    )
     currentTag.value =
       !recordTag || !recordTag.value ? tagStub.value : recordTag
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,9 +63,12 @@ export default function UpdateLinkForm({
       tag: currentTag.value.value,
       urls: record.urls,
       prefix:
-        subdomains?.find((item) => item.uid === record.subdomainUid)?.value ??
-        '',
-      domain: domains?.find((item) => item.uid === record.domainUid),
+        subdomains?.find(
+          (item: SubdomainType) => item.uid === record.subdomainUid
+        )?.value ?? '',
+      domain: domains?.find(
+        (item: DomainType) => item.uid === record.domainUid
+      ),
       path: record.path,
       password: record.password ?? '',
     },

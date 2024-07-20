@@ -6,7 +6,6 @@ const envServerSchema = z.object({
   KEYCLOAK_CLIENT_ID: z.string().trim().min(1),
   KEYCLOAK_REALM: z.string().trim().min(1),
   AUTH_SECRET: z.string().trim().min(1),
-  AUTH_URL: z.string().trim().min(1),
 
   BACKEND_URL: z.string().trim().min(1),
 

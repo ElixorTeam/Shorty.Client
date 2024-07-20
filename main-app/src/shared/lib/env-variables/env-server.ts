@@ -6,7 +6,6 @@ const envServer = {
   KEYCLOAK_CLIENT_ID: env('KEYCLOAK_CLIENT_ID') as string,
   KEYCLOAK_REALM: env('KEYCLOAK_REALM') as string,
   AUTH_SECRET: env('AUTH_SECRET') as string,
-  AUTH_URL: env('AUTH_URL') as string,
 
   BACKEND_URL: env('BACKEND_URL') as string,
 
