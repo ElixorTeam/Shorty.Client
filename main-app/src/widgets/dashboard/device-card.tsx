@@ -34,7 +34,7 @@ export default function DeviceCard({
     return data?.device ?? []
   })
   return (
-    <Card>
+    <Card className="w-full overflow-hidden">
       <CardHeader className="pt-4">
         <CardTitle>
           <div className="flex items-center justify-between">
@@ -45,7 +45,7 @@ export default function DeviceCard({
                 currentDeviceOption.value = value as DeviceOptionEnum
               }}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-28 sm:w-52">
                 {currentDeviceOption.value}
               </SelectTrigger>
               <SelectContent>

@@ -113,7 +113,7 @@ export default function QrCodeDialog({
       }}
     >
       <DrawerTrigger asChild>{children}</DrawerTrigger>
-      <DrawerContent className="pb-10">
+      <DrawerContent>
         <DrawerHeader className="sm:text-center">
           <DrawerTitle>QR Code</DrawerTitle>
           <DrawerDescription>
@@ -121,7 +121,7 @@ export default function QrCodeDialog({
           </DrawerDescription>
         </DrawerHeader>
         <div
-          className="mx-auto my-6 overflow-hidden rounded-md border"
+          className="mx-auto my-2 overflow-hidden rounded-md border"
           ref={qrcodeContainerRef}
         >
           <Canvas
@@ -136,7 +136,9 @@ export default function QrCodeDialog({
         </div>
         <DrawerFooter>
           <Button onClick={downloadQRCode}>Download</Button>
-          <Button onClick={copyQRCode}>Copy</Button>
+          <Button onClick={copyQRCode} variant="outline">
+            Copy
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

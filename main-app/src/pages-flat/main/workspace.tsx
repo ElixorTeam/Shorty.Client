@@ -38,7 +38,7 @@ export default function Workspace() {
         </TabsPrimitive.TabsTrigger>
       </TabsPrimitive.TabsList>
       <TabsPrimitive.TabsContent value="overview">
-        <div className="size-full grow space-y-4 p-8 pt-6">
+        <div className="size-full grow space-y-4 p-5 sm:p-8 sm:pt-6">
           <Description record={data} />
           <Dashboard />
         </div>

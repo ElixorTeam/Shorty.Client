@@ -48,7 +48,7 @@ export default function TagSelector() {
         <Button
           variant="outline"
           role="combobox"
-          className="w-[200px] justify-between"
+          className="w-full justify-between sm:w-72"
         >
           <span className="truncate">{currentTag.value.value}</span>
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />

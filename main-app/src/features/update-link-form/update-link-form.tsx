@@ -115,9 +115,9 @@ export default function UpdateLinkForm({
   }
 
   return (
-    <div className="size-full p-10">
+    <div className="size-full p-5 sm:p-10">
       <FormHeader />
-      <div className="w-full max-w-2xl py-8">
+      <div className="w-full max-w-2xl py-4 sm:py-8">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -194,7 +194,9 @@ export default function UpdateLinkForm({
                 </FormItem>
               )}
             />
-            <Button type="submit">Update link</Button>
+            <div className="flex w-full justify-end lg:justify-start">
+              <Button type="submit">Update link</Button>
+            </div>
           </form>
         </Form>
       </div>

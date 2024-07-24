@@ -8,7 +8,7 @@ services:
       KEYCLOAK_CLIENT_SECRET: 4pNtsFCKScTRhHGOlKaIVgHA9gCI9MFz
       KEYCLOAK_REALM: shorty
       AUTH_SECRET: SGVsbG8sIHdvcmxkIQ==
-      BACKEND_URL: http://172.16.2.9:2000/api/v1
+      BACKEND_URL: http://172.16.2.9:2001/api/v1
       PORT: 3000
     ports:
       - "3000:3000"
@@ -16,7 +16,7 @@ services:
     container_name: ShortyRedirectApp
     build: ./redirect-app
     environment:
-      BACKEND_URL: http://172.16.2.9:2000/api/v1
+      BACKEND_URL: http://172.16.2.9:2001/api/v1
       PORT: 3001
       DOMAIN: localhost:3001
     ports:

@@ -19,7 +19,7 @@ import {
 
 export default function ViewsCard({ data }: { data: AnalyticsItem[] }) {
   return (
-    <Card>
+    <Card className="w-full overflow-hidden">
       <CardHeader className="gap-2">
         <CardTitle>Overview</CardTitle>
         <CardDescription>Views data for selected period</CardDescription>

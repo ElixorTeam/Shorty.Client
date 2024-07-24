@@ -1,19 +1,20 @@
-import { decodeToken } from 'react-jwt'
+import { jwtDecode } from 'jwt-decode'
 
 import { RoleType } from './next-auth'
+import envServer from '../lib/env-variables'
 
-const CLIENT_NAME = 'shorty-client'
+const CLIENT_NAME = envServer.KEYCLOAK_CLIENT_ID
 
 type DecodedToken = {
   resource_access: {
-    [CLIENT_NAME]: {
+    [key: string]: {
       roles: RoleType[]
     }
   }
 }
 
 const getUserRolesByAccessToken = (accessToken: string): RoleType[] => {
-  const decodedToken = decodeToken<DecodedToken>(accessToken)
+  const decodedToken = jwtDecode<DecodedToken>(accessToken)
   if (
     decodedToken &&
     decodedToken.resource_access &&

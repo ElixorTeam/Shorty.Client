@@ -71,7 +71,7 @@ export default function Dashboard() {
         onValueChange={(value) => {
           setPeriod(value as PeriodsEnum)
         }}
-        className="w-[300px]"
+        className="w-72"
       >
         <TabsList className="grid w-full grid-cols-3">
           {(Object.keys(PeriodsEnum) as Array<keyof typeof PeriodsEnum>).map(

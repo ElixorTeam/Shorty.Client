@@ -1,4 +1,4 @@
-import { CalendarDaysIcon } from '@heroicons/react/24/outline'
+import { ArrowDownIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { addDays, format } from 'date-fns'
 import { useForm } from 'react-hook-form'
@@ -90,7 +90,7 @@ export default function CsvGenerateForm() {
                         id="date"
                         variant="outline"
                         className={cn(
-                          'w-[300px] justify-start text-left font-normal',
+                          'justify-start text-left font-normal sm:w-72',
                           !field.value && 'text-muted-foreground'
                         )}
                       >
@@ -127,7 +127,12 @@ export default function CsvGenerateForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Download</Button>
+        <Button type="submit" size="icon" className="shrink-0 sm:hidden">
+          <ArrowDownIcon className="size-5" />
+        </Button>
+        <Button type="submit" className="hidden sm:block">
+          Download
+        </Button>
       </form>
     </Form>
   )
