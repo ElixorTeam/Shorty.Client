@@ -5,52 +5,30 @@ on:
     branches:
       - main
       - develop
+      - features/monorepo
 
 jobs:
-  build-main-app:
+  build:
+    name: Lint and build
+    timeout-minutes: 15
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout to the repository
-        uses: actions/checkout@v3
-
-      - name: Set up NodeJS environment
-        uses: actions/setup-node@v3
+      - name: Check out code
+        uses: actions/checkout@v4
         with:
-          node-version: 20.x
+          fetch-depth: 2
 
-      - name: Install package dependencies for main-app
-        run: npm install
-        working-directory: main-app
-
-      - name: Check linting for main-app
-        run: npm run lint
-        working-directory: main-app
-
-      - name: Build React app for main-app
-        run: npm run build
-        working-directory: main-app
-
-  build-redirect-app:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout to the repository
-        uses: actions/checkout@v3
-
-      - name: Set up NodeJS environment
-        uses: actions/setup-node@v3
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20.x
+          bun-version: latest
 
-      - name: Install package dependencies for redirect-app
-        run: npm install
-        working-directory: redirect-app
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
 
-      - name: Check linting for redirect-app
-        run: npm run lint
-        working-directory: redirect-app
+      - name: Lint all projects
+        run: bun run lint
 
-      - name: Build React app for redirect-app
-        run: npm run build
-        working-directory: redirect-app
+      - name: Build all projects
+        run: bun run build
