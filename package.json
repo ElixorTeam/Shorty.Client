@@ -6,9 +6,14 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs}\"",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.1.4",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "turbo": "^2.0.9"
