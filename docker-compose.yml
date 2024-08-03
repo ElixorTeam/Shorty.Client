@@ -1,9 +1,14 @@
-version: "3"
 services:
-  react-client:
-    container_name: ShortyAppClient
-    build: main-app
+  shorty-web:
+    build: ./apps/web
     env_file:
       - .env
     ports:
-      - "3000:3000"
+      - '3000:3000'
+
+  shorty-redirect:
+    build: ./apps/redirect
+    env_file:
+      - .env
+    ports:
+      - '3001:3001'

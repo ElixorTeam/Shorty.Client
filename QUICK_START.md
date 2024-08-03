@@ -1,26 +1,27 @@
 # Quick Start
 
 1. Download [NodeJS](https://nodejs.org/en/download/)
-2. Install bun (optional)
+2. Install bun
 
 ```bash
 npm i -g bun
 ```
 
-3. Start up main app:
+3. Start up app:
 
 ```bash
-cd main-app
-npm install
-npm run dev
+bun run dev
 ```
 
-4. Start up react-redirect
+# Docker
+
+1. Download docker
+2. Add copy and rename .env.example to .env
+3. Fill environment variables
+4. Start up docker compose
 
 ```bash
-cd redirect-app
-npm install
-npm run dev
+docker compose up
 ```
 
 [Go back](README.md)
