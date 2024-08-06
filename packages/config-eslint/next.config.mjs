@@ -10,10 +10,12 @@ export default [
   ...reactConfig,
   ...pluginQuery.configs['flat/recommended'],
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: { '@next/next': nextPlugin },
     rules: {
       ...nextPlugin.configs['recommended'].rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
+      '@next/next/no-duplicate-head': 'off',
     },
   },
 ]

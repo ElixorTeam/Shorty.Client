@@ -42,7 +42,7 @@ export default function Dashboard() {
       linkUid: record?.uid ?? '',
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Error while reseting',
         description: result?.data?.failure,

@@ -11,6 +11,7 @@ import pluginSonarJs from 'eslint-plugin-sonarjs'
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.stylisticTypeCheckedOnly,
   pluginPromise.configs['flat/recommended'],
   pluginSonarJs.configs.recommended,
   {
@@ -28,6 +29,8 @@ export default tseslint.config(
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
+      "@typescript-eslint/non-nullable-type-assertion-style": "off",
+      "@typescript-eslint/consistent-type-definitions": "off"
     },
   }
 )

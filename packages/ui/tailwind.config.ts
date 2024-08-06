@@ -6,7 +6,7 @@ import svgToDataUri from 'mini-svg-data-uri'
 
 const config = {
   darkMode: 'selector',
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{tsx,ts}', '../../packages/ui/src/**/*.{tsx,ts}'],
   theme: {
     container: {
       center: true,

@@ -1,4 +1,9 @@
+'use client'
+
+import { useToast } from '@repo/ui/use-toast'
+
 export default function HomeFooter() {
+  const { toast } = useToast()
   return (
     <footer className="w-full">
       <div className="mx-auto max-w-7xl p-6 md:flex md:items-center md:justify-between lg:px-8">

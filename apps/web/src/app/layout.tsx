@@ -1,8 +1,7 @@
-import './styles.css'
-import '@repo/ui/styles.css'
+import '@repo/ui/global.css'
 
-import { cn } from '@repo/ui/lib/utils'
 import { Toaster } from '@repo/ui/toaster'
+import { cn } from '@repo/ui/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import { PublicEnvScript } from 'next-runtime-env'

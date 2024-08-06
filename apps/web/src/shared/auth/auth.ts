@@ -33,7 +33,6 @@ export const {
         currentToken.roles = getUserRolesByAccessToken(
           account.access_token ?? ''
         )
-        console.log(currentToken)
         return currentToken
       }
 
@@ -47,7 +46,7 @@ export const {
         const response = await reqAccessByRefreshToken(
           currentToken.refreshToken ?? ''
         )
-        const tokens: TokenSet = await response.json()
+        const tokens = (await response.json()) as TokenSet
         if (!response.ok)
           return { ...currentToken, error: 'RefreshAccessTokenError' }
         return {
@@ -61,7 +60,7 @@ export const {
         return { ...currentToken, error: 'RefreshAccessTokenError' }
       }
     },
-    async session({ session, token }) {
+    session({ session, token }) {
       const currentSession = { ...session }
       const currentToken = { ...token }
       currentSession.accessToken = currentToken.accessToken
@@ -73,7 +72,7 @@ export const {
     async signOut(token) {
       try {
         if (!('token' in token)) return
-        const currentToken = await token.token
+        const currentToken = token.token
         await reqSessionLogout(currentToken?.idToken ?? '')
       } catch {
         // pass

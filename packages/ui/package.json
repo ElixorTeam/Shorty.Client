@@ -1,20 +1,18 @@
 {
   "name": "@repo/ui",
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
-    "lint": "eslint src",
-    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
-    "type-check": "tsc --noEmit"
+    "ui:add": "bunx shadcn-ui@latest add",
+    "lint": "eslint src"
   },
   "peerDependencies": {
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/react": "^18.2.61",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",
@@ -48,16 +46,10 @@
     "vaul": "^0.9.1",
     "zod": "^3.23.8"
   },
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "files": [
-    "dist"
-  ],
   "exports": {
-    "./styles.css": "./dist/index.css",
-    "./postcss.config.mjs": "./postcss.config.mjs",
-    "./tailwind.config.ts": "./tailwind.config.ts",
+    "./global.css": "./src/global.css",
+    "./postcss.config": "./postcss.config.mjs",
+    "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./*": [
       "./src/components/ui/*.tsx",

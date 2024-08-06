@@ -1,5 +1,4 @@
-import './styles.css'
-import '@repo/ui/styles.css'
+import '@repo/ui/global.css'
 
 import { cn } from '@repo/ui/lib/utils'
 import { Toaster } from '@repo/ui/toaster'

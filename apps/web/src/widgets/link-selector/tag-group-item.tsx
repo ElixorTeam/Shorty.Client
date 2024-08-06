@@ -26,7 +26,7 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
         <div className="size-10 shrink-0 overflow-hidden rounded-full">
           <Avatar>
             <AvatarImage
-              src={`http://www.google.com/s2/favicons?domain=${link.urls[0]}`}
+              src={`http://www.google.com/s2/favicons?domain=${link.urls[0] ?? ''}`}
               alt="link-icon"
             />
             <AvatarFallback>{link.title.charAt(0)}</AvatarFallback>

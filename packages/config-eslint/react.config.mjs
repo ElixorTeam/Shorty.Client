@@ -13,6 +13,7 @@ export default [
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-hooks': patchedReactHooksPlugin,
     },

@@ -45,7 +45,6 @@ export default function CsvGenerateForm() {
   })
 
   const onSubmit = (values: z.infer<typeof analyticsFormScheme>) => {
-    console.log(values)
     toast({
       title: 'Values',
       description: `from: ${values.date.from.toString()}\nto: ${values.date.to.toString()}`,
@@ -67,8 +66,6 @@ export default function CsvGenerateForm() {
       ].join(';')
       csvContent += row + '\n'
     })
-
-    console.log(csvContent)
     return encodeURI(csvContent)
   }
 

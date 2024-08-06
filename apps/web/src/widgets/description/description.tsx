@@ -51,7 +51,7 @@ export default function Description({ record }: { record: RecordType }) {
     const result = await deleteLinkAction({
       linkUid: record.uid,
     })
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Error while deleting',
         description: result?.data?.failure,
@@ -71,7 +71,7 @@ export default function Description({ record }: { record: RecordType }) {
       isEnable: !record.isEnable,
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Error while updating',
         description: result?.data?.failure,
@@ -93,7 +93,7 @@ export default function Description({ record }: { record: RecordType }) {
         <div className="flex items-center gap-4">
           <Avatar className="size-14">
             <AvatarImage
-              src={`http://www.google.com/s2/favicons?domain=${record.urls[0]}`}
+              src={`http://www.google.com/s2/favicons?domain=${record.urls[0] ?? ''}`}
               alt="avatar"
             />
             <AvatarFallback>{record.title[0]}</AvatarFallback>
@@ -206,7 +206,7 @@ export default function Description({ record }: { record: RecordType }) {
         <DescriptionItem title="Urls" Icon={LinkIcon}>
           {record.type == RecordTypesEnum.SINGLE ? (
             <Button variant="link" className="h-6 p-0" asChild>
-              <Link href={record.urls[0]} target="_blank">
+              <Link href={record.urls[0] ?? ''} target="_blank">
                 {record.urls[0]}
               </Link>
             </Button>
