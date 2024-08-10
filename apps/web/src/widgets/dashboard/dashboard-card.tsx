@@ -16,11 +16,11 @@ export default function DashboardCard({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="text-muted-foreground size-4" />
+        <Icon className="size-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
         <p className="text-2xl font-bold">{value}</p>
-        <span className="text-muted-foreground text-xs">{description}</span>
+        <span className="text-xs text-muted-foreground">{description}</span>
       </CardContent>
     </Card>
   )

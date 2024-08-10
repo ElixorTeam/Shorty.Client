@@ -1,7 +1,7 @@
 import '@repo/ui/global.css'
 
-import { Toaster } from '@repo/ui/toaster'
 import { cn } from '@repo/ui/lib/utils'
+import { Toaster } from '@repo/ui/toaster'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import { PublicEnvScript } from 'next-runtime-env'
@@ -35,7 +35,7 @@ export default async function RootLayout({
       </head>
       <body
         className={cn(
-          'bg-background min-h-screen overscroll-none font-sans antialiased',
+          'min-h-screen overscroll-none bg-background font-sans antialiased',
           fontSans.variable
         )}
       >

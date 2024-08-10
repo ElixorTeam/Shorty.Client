@@ -51,8 +51,7 @@ export default function UpdateLinkForm({
     const recordTag = tags?.find(
       (item: TagType) => item.value === record.tags[0]
     )
-    currentTag.value =
-      !recordTag || !recordTag.value ? tagStub.value : recordTag
+    currentTag.value = !recordTag?.value ? tagStub.value : recordTag
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -70,7 +69,7 @@ export default function UpdateLinkForm({
         (item: DomainType) => item.uid === record.domainUid
       ),
       path: record.path,
-      password: record.password ?? '',
+      password: record.password,
     },
   })
 
@@ -96,7 +95,7 @@ export default function UpdateLinkForm({
       isEnable: true,
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Form error',
         description: result?.data?.failure,
@@ -108,8 +107,8 @@ export default function UpdateLinkForm({
     toast({
       title: 'Successfully updated',
     })
-    queryClient.invalidateQueries({ queryKey: ['currentRecord'] })
-    queryClient.invalidateQueries({ queryKey: ['records'] })
+    await queryClient.invalidateQueries({ queryKey: ['currentRecord'] })
+    await queryClient.invalidateQueries({ queryKey: ['records'] })
     if (onFormSubmit) onFormSubmit()
   }
 

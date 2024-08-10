@@ -2,12 +2,12 @@
 
 import { z } from 'zod'
 
+import { RecordTypesEnum } from '@/entities/record'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import actionClient from '@/shared/lib/safe-action'
 
 import { RecordResponseType } from '../record-type'
-import { RecordTypesEnum } from '../record-types-enum'
 
 const schema = z.object({
   uid: z.string().uuid(),
@@ -26,7 +26,7 @@ const updateLink = actionClient
         title,
         tags: [tag],
         isEnable,
-        password: password || undefined,
+        password: password ?? undefined,
       })
       const response = await fetch(
         `${envServer.BACKEND_URL}/user/links/${uid}`,
@@ -35,7 +35,7 @@ const updateLink = actionClient
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${session?.accessToken}`,
+            Authorization: `Bearer ${session?.accessToken ?? ''}`,
           },
           method: 'PUT',
           cache: 'no-store',
@@ -57,8 +57,8 @@ const updateLink = actionClient
         type:
           data.urls.length > 1 ? RecordTypesEnum.GROUP : RecordTypesEnum.SINGLE,
       }
-    } catch (error) {
-      return { failure: `Get error ${error}` }
+    } catch {
+      return { failure: 'Get error' }
     }
   })
 

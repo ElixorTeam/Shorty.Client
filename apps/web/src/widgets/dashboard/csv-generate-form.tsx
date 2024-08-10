@@ -86,11 +86,14 @@ export default function CsvGenerateForm() {
                         variant="outline"
                         className={cn(
                           'justify-start text-left font-normal sm:w-72',
+                          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                           !field.value && 'text-muted-foreground'
                         )}
                       >
                         <CalendarDaysIcon className="mr-2 size-4" />
+                        {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                         {field.value.from ? (
+                          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                           field.value.to ? (
                             <>
                               {format(field.value.from, 'LLL dd, y')} -{' '}

@@ -7,8 +7,10 @@ import PasswordForm from '@/widgets/password-form'
 export default async function MainPage({ path }: { path: string }) {
   const record = await getRedirectByUrlPath(path)
 
+  if (record.urls.length == 0) return <h1>Error</h1>
+
   if (record.type === RedirectTypesEnum.SINGLE && !record.password)
-    return redirect(record.urls[0])
+    return redirect(record.urls.at(1) as string)
 
   if (record.type === RedirectTypesEnum.GROUP && !record.password)
     return <GroupRecordView urls={record.urls} />

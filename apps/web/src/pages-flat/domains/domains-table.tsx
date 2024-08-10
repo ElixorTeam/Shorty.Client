@@ -25,7 +25,7 @@ export default function DomainsTable() {
       uuid,
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Error while deleting',
         description: result?.data?.failure,
@@ -34,7 +34,7 @@ export default function DomainsTable() {
       return
     }
 
-    queryClient.invalidateQueries({ queryKey: ['domains'] })
+    await queryClient.invalidateQueries({ queryKey: ['domains'] })
     toast({
       title: 'Successfully deleted',
     })

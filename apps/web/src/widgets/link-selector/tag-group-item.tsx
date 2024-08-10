@@ -37,11 +37,11 @@ export default function TagGroupItem({ link }: { link: RecordType }) {
             <span className="truncate text-sm font-semibold leading-tight">
               {link.title}
             </span>
-            <span className="text-muted-foreground mt-px shrink-0 text-xs leading-tight tracking-tight">
+            <span className="mt-px shrink-0 text-xs leading-tight tracking-tight text-muted-foreground">
               {getFormattedDate(new Date(link.createDt))}
             </span>
           </div>
-          <span className="text-muted-foreground truncate text-left text-xs leading-tight">
+          <span className="truncate text-left text-xs leading-tight text-muted-foreground">
             {link.type === RecordTypesEnum.SINGLE
               ? link.urls[0]
               : `${link.urls.length.toString()} urls`}

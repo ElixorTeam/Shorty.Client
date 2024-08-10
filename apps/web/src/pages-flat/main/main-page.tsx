@@ -63,7 +63,7 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
         <div
           className={cn(
             isValidUid ? 'absolute top-0' : 'hidden',
-            'bg-background z-20 w-full overflow-clip md:relative md:flex md:flex-col'
+            'z-20 w-full overflow-clip bg-background md:relative md:flex md:flex-col'
           )}
         >
           <div className="flex size-full flex-col">

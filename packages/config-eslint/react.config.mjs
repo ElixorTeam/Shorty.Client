@@ -2,6 +2,7 @@
 
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import tailwindPlugin from 'eslint-plugin-tailwindcss'
 import { fixupPluginRules } from '@eslint/compat'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 
@@ -12,6 +13,7 @@ export default [
   jsxA11y.flatConfigs.strict,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
+  ...tailwindPlugin.configs['flat/recommended'],
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
@@ -20,6 +22,9 @@ export default [
     settings: {
       react: {
         version: 'detect',
+      },
+      tailwindcss: {
+        callees: ['classnames', 'cn', 'clsx', 'cva'],
       },
     },
     languageOptions: {
@@ -32,6 +37,7 @@ export default [
     rules: {
       ...reactHooksPlugin.configs.recommended.rules,
       '@typescript-eslint/no-misused-promises': 'off',
+      'tailwindcss/migration-from-tailwind-2': 'off',
     },
   },
 ]

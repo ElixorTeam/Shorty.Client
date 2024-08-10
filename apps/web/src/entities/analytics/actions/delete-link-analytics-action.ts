@@ -19,19 +19,19 @@ const deleteLinkAnalytics = actionClient
         `${envServer.BACKEND_URL}/user/links/${linkUid}/analytics`,
         {
           headers: {
-            Authorization: `Bearer ${session?.accessToken}`,
+            Authorization: `Bearer ${session?.accessToken ?? ''}`,
           },
           method: 'DELETE',
           cache: 'no-store',
         }
       )
       if (!response.ok) {
-        const text = await response.json()
+        const text = (await response.json()) as { error: string }
         return { failure: `Get error ${text.error}` }
       }
       return { success: 'Analytics is reseted' }
-    } catch (error) {
-      return { failure: `Get error ${error}` }
+    } catch {
+      return { failure: 'Get error' }
     }
   })
 

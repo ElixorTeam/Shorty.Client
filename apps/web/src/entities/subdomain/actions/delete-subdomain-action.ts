@@ -21,7 +21,7 @@ const deleteSubdomainAction = actionClient
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${session?.accessToken}`,
+            Authorization: `Bearer ${session?.accessToken ?? ''}`,
           },
           method: 'DELETE',
           cache: 'no-store',
@@ -31,12 +31,12 @@ const deleteSubdomainAction = actionClient
       if (!response.ok) {
         if (response.status === 409)
           return { failure: 'Error: Some links use this subdomain' }
-        return { failure: await response.json() }
+        return { failure: 'Get error' }
       }
 
       return { success: 'Link is deleted' }
-    } catch (error) {
-      return { failure: `Get error ${error}` }
+    } catch {
+      return { failure: 'Get error' }
     }
   })
 

@@ -1,6 +1,5 @@
 'use server'
 
-// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { SubdomainResponseObjectType } from '@/entities/subdomain'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
@@ -11,7 +10,7 @@ const getDomains = async (): Promise<DomainType[]> => {
   const session = await auth()
   const response = await fetch(`${envServer.BACKEND_URL}/user/subdomains`, {
     headers: {
-      Authorization: `Bearer ${session?.accessToken}`,
+      Authorization: `Bearer ${session?.accessToken ?? ''}`,
     },
     method: 'GET',
   })

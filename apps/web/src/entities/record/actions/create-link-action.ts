@@ -2,12 +2,12 @@
 
 import { z } from 'zod'
 
+import { RecordTypesEnum } from '@/entities/record'
 import { auth } from '@/shared/auth'
 import envServer from '@/shared/lib/env-variables'
 import actionClient from '@/shared/lib/safe-action'
 
 import { RecordResponseType } from '../record-type'
-import { RecordTypesEnum } from '../record-types-enum'
 
 const schema = z.object({
   title: z.string().min(2).optional().or(z.literal('')),
@@ -27,24 +27,25 @@ const createLink = actionClient
       try {
         const session = await auth()
         const body = JSON.stringify({
-          title: title || 'Untitled',
+          title: title ?? 'Untitled',
           path,
           urls,
-          subdomainUid: subdomainUid || undefined,
+          subdomainUid: subdomainUid ?? undefined,
           domainUid,
           tags: [],
-          password: password || undefined,
+          password: password ?? undefined,
         })
         const response = await fetch(`${envServer.BACKEND_URL}/user/links`, {
           body,
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${session?.accessToken}`,
+            Authorization: `Bearer ${session?.accessToken ?? ''}`,
           },
           method: 'POST',
           cache: 'no-store',
         })
+
         if (!response.ok) {
           if (response.status === 409)
             return { failure: 'Error: An object with such data already exists' }
@@ -63,8 +64,8 @@ const createLink = actionClient
               ? RecordTypesEnum.GROUP
               : RecordTypesEnum.SINGLE,
         }
-      } catch (error) {
-        return { failure: `Get error ${error}` }
+      } catch {
+        return { failure: 'Get error' }
       }
     }
   )

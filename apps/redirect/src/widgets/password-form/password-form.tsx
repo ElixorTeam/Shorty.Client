@@ -42,7 +42,7 @@ export default function PasswordForm({ redirect }: { redirect: RedirectType }) {
 
     if (passwordHash === redirect.password) {
       if (redirect.type == RedirectTypesEnum.SINGLE)
-        router.push(redirect.urls[0])
+        router.push(redirect.urls[0] ?? '/')
       else setIsCompleted(true)
       return
     }

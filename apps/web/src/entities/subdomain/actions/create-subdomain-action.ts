@@ -27,17 +27,16 @@ const createSubdomainAction = actionClient
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${session?.accessToken}`,
+          Authorization: `Bearer ${session?.accessToken ?? ''}`,
         },
         method: 'POST',
         cache: 'no-store',
       })
       if (!response.ok) return { failure: `Unexpected error: Try again` }
-      const responseData = await response.json()
-      const { data } = responseData
-      return { data: data as SubdomainType }
-    } catch (error) {
-      return { failure: `Get error ${error}` }
+      const responseData = (await response.json()) as { data: SubdomainType }
+      return { data: responseData.data }
+    } catch {
+      return { failure: 'Get error' }
     }
   })
 

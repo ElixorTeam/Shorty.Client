@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useComputed, useSignal } from '@preact-signals/safe-react'
@@ -67,6 +69,7 @@ export default function CreateLinkForm({
 
   useEffect(() => {
     currentSubdomain.value = subdomainStub.value
+    // @ts-expect-error preact signals warning
     currentDomain.value =
       domains && domains.length > 0 ? domains[0] : currentDomain.value
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,7 +103,7 @@ export default function CreateLinkForm({
       path: values.path.trim(),
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Form error',
         description: result?.data?.failure,
@@ -220,8 +223,8 @@ export default function CreateLinkForm({
               )}
             />
           </div>
-          <p className="text-muted-foreground text-sm">
-            Final url will be {shortUrl}
+          <p className="text-sm text-muted-foreground">
+            Final url will be {shortUrl.toString()}
           </p>
         </div>
         <FormField

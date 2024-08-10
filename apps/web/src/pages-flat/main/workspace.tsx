@@ -31,7 +31,7 @@ export default function Workspace() {
         setCurrentTab(value)
       }}
     >
-      <TabsPrimitive.TabsList className="bg-background/[.95] supports-[backdrop-filter]:bg-background/[.6] sticky top-14 z-20 flex h-10 w-full shrink-0 items-center justify-center border-b backdrop-blur">
+      <TabsPrimitive.TabsList className="sticky top-14 z-20 flex h-10 w-full shrink-0 items-center justify-center border-b bg-background/[.95] backdrop-blur supports-[backdrop-filter]:bg-background/[.6]">
         <TabsPrimitive.TabsTrigger value="overview" asChild>
           <Button variant="link">Overview</Button>
         </TabsPrimitive.TabsTrigger>

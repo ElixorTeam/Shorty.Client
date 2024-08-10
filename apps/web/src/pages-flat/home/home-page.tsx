@@ -1,3 +1,5 @@
+/* eslint-disable tailwindcss/classnames-order */
+
 import {
   CursorArrowRaysIcon,
   LockClosedIcon,
@@ -11,14 +13,14 @@ import {
   CardFooter,
   CardTitle,
 } from '@repo/ui/card'
-import Spotlight from '@repo/ui/spotlight'
-import TextGenerator from '@repo/ui/text-generator'
 import Link from 'next/link'
 
 import ChartExample from './chart-example'
 import HomeFooter from './home-footer'
 import HomeHeader from './home-header'
 import QrcodeExample from './qrcode-example'
+import Spotlight from './spotlight'
+import TextGenerator from './text-generator'
 
 export default async function HomePage() {
   return (
@@ -29,37 +31,37 @@ export default async function HomePage() {
         <div className="my-16 flex flex-col items-center justify-center gap-6 px-6 text-center md:my-32">
           <TextGenerator
             words="Shorten, Manage, Analyze. Your key to efficient links."
-            className="from-primary to-muted-foreground bg-gradient-to-b bg-clip-text text-2xl font-semibold text-transparent lg:text-5xl"
+            className="bg-gradient-to-b from-primary to-muted-foreground bg-clip-text text-2xl font-semibold text-transparent lg:text-5xl"
           />
           <div className="max-w-screen-md">
             <TextGenerator
               words="Unlock the power of efficient linking. Our service offers a simple,
               user-friendly platform for shortening, managing, and analyzing your
               links."
-              className="text-muted-foreground font-light lg:text-xl"
+              className="font-light text-muted-foreground lg:text-xl"
             />
           </div>
           <Button size="lg" variant="outline" type="button" asChild>
             <Link href="/main">Get Started</Link>
           </Button>
         </div>
-        <h2 className="text-primary pb-10 text-center text-xl font-extralight tracking-tight lg:text-3xl">
+        <h2 className="pb-10 text-center text-xl font-extralight tracking-tight text-primary lg:text-3xl">
           What does <span className="font-bold">Shorty</span> gives you?
         </h2>
         <div className="flex flex-wrap gap-6 px-6 py-10">
           <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
             <CardContent className="flex h-full flex-col items-center justify-center">
-              <h3 className="text-primary text-center text-3xl font-extralight tracking-tighter">
+              <h3 className="text-center text-3xl font-extralight tracking-tighter text-primary">
                 This link is{' '}
                 <span className="font-bold tracking-normal">private</span>
               </h3>
               <div className="mt-4 flex h-8 w-52 items-center gap-2 overflow-hidden rounded-lg border">
                 <input
                   type="text"
-                  className="placeholder:text-primary size-full border-none bg-transparent px-2 text-sm font-light focus:outline-none"
+                  className="size-full border-none bg-transparent px-2 text-sm font-light placeholder:text-primary focus:outline-none"
                   placeholder="Enter password..."
                 />
-                <LockClosedIcon className="text-primary mr-2 size-4" />
+                <LockClosedIcon className="mr-2 size-4 text-primary" />
               </div>
             </CardContent>
             <CardFooter className="flex flex-col items-start space-y-2">
@@ -71,9 +73,9 @@ export default async function HomePage() {
           </Card>
           <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
             <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden">
-              <CursorArrowRaysIcon className="text-primary absolute left-44 top-40 z-30 size-12 stroke-[0.8]" />
+              <CursorArrowRaysIcon className="absolute left-44 top-40 z-30 size-12 stroke-[0.8] text-primary" />
               <div className="absolute left-20 top-28 flex h-20 w-[50rem] items-center overflow-hidden rounded-2xl border bg-white px-4 dark:border-white/[.15] dark:bg-neutral-950">
-                <p className="text-muted text-5xl">
+                <p className="text-5xl text-muted">
                   <span className="text-primary">elixor</span>
                   .sh0.su/custom
                 </p>
@@ -91,7 +93,7 @@ export default async function HomePage() {
             <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden">
               <div className="size-56 overflow-hidden rounded-xl border bg-white dark:border-white/[.15] dark:bg-neutral-950">
                 <div className="flex h-16 w-full items-center justify-center gap-2 border-b dark:border-b-white/[.15]">
-                  <UserCircleIcon className="text-muted-foreground size-12" />
+                  <UserCircleIcon className="size-12 text-muted-foreground" />
                   <div className="mb-1 leading-tight">
                     <p>User</p>
                     <p className="text-xs text-neutral-700">Account</p>
@@ -105,7 +107,7 @@ export default async function HomePage() {
                           xmlns="http://www.w3.org/2000/svg"
                           version="1.0"
                           viewBox="0 0 2048 2048"
-                          className="text-muted size-8 pb-1"
+                          className="size-8 pb-1 text-muted"
                         >
                           <path d="M1029.5 128.5c1.18-.219 2.18.114 3 1l1002 1737c-669 1.33-1338 1.33-2007 0 47.8737-83.25 95.874-166.42 144-249.5 478.667-.33 957.33-.67 1436-1-192.29-332.75-384.46-665.585-576.5-998.5-143.581 249.497-287.414 498.83-431.5 748-94.333 1.33-188.667 1.33-283 0 237.943-412.225 475.61-824.558 713-1237Z" />
                         </svg>

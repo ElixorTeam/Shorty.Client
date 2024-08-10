@@ -40,7 +40,7 @@ export default function CreateDomainForm({
       value: values.value,
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Form error',
         description: result?.data?.failure,
@@ -49,7 +49,7 @@ export default function CreateDomainForm({
       return
     }
 
-    queryClient.invalidateQueries({ queryKey: ['domains'] })
+    await queryClient.invalidateQueries({ queryKey: ['domains'] })
     if (onFormSubmit) onFormSubmit()
   }
 

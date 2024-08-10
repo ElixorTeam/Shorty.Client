@@ -23,7 +23,7 @@ const createDomain = actionClient
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${session?.accessToken}`,
+          Authorization: `Bearer ${session?.accessToken ?? ''}`,
         },
         method: 'POST',
         cache: 'no-store',
@@ -35,11 +35,10 @@ const createDomain = actionClient
           return { failure: 'Error: Check the correctness of the data' }
         return { failure: `Unexpected error: Try again` }
       }
-      const responseData = await response.json()
-      const { data } = responseData
-      return { data: data as DomainType }
-    } catch (error) {
-      return { failure: `Get error ${error}` }
+      const responseData = (await response.json()) as { data: DomainType }
+      return { data: responseData.data }
+    } catch {
+      return { failure: 'Get error' }
     }
   })
 

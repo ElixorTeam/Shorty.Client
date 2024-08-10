@@ -51,7 +51,7 @@ export default function SubdomainSelector({
       domainUid: currentDomainUid,
     })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Form error',
         description: result?.data?.failure,
@@ -73,7 +73,7 @@ export default function SubdomainSelector({
   const handleDeleteSubdomain = async (subdomainUid: string) => {
     const result = await deleteSubdomainAction({ uid: subdomainUid })
 
-    if (!result || !result.data || 'failure' in result.data) {
+    if (!result?.data || 'failure' in result.data) {
       toast({
         title: 'Form error',
         description: result?.data?.failure,
@@ -94,7 +94,7 @@ export default function SubdomainSelector({
     toast({ title: 'Successfully deleted' })
   }
 
-  if (isLoading || subdomains === undefined) {
+  if (isLoading) {
     return (
       <Skeleton className="h-10 w-full overflow-hidden rounded-md rounded-r-none border" />
     )
@@ -161,7 +161,7 @@ export default function SubdomainSelector({
                     onClick={() => handleDeleteSubdomain(item.uid)}
                     className="absolute right-2 top-2"
                   >
-                    <TrashIcon className="text-destructive size-4" />
+                    <TrashIcon className="size-4 text-destructive" />
                     <span className="sr-only">Delete {item.value}</span>
                   </button>
                 )}

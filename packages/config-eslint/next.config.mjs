@@ -16,6 +16,8 @@ export default [
       ...nextPlugin.configs['recommended'].rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
       '@next/next/no-duplicate-head': 'off',
+      '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
     },
   },
 ]

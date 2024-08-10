@@ -10,7 +10,8 @@
     "lint": "turbo lint",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs}\"",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "types": "turbo type-check"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

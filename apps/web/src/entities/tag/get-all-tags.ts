@@ -9,14 +9,13 @@ const getAllTags = async (): Promise<TagType[]> => {
   const session = await auth()
   const response = await fetch(`${envServer.BACKEND_URL}/user/tags`, {
     headers: {
-      Authorization: `Bearer ${session?.accessToken}`,
+      Authorization: `Bearer ${session?.accessToken ?? ''}`,
     },
     method: 'GET',
   })
   if (!response.ok) throw new Error('Can not access data')
-  const responseData = await response.json()
-  const { data } = responseData
-  return data
+  const responseData = (await response.json()) as { data: TagType[] }
+  return responseData.data
 }
 
 export default getAllTags

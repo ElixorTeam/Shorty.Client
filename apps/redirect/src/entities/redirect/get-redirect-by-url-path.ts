@@ -12,7 +12,7 @@ import { RedirectTypesEnum } from './redirect-types-enum'
 const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   const userHeaders = headers()
   const host = userHeaders.get('host') ?? ''
-  const subdomain = host && host.includes('.') ? host.split('.')[0] : ''
+  const subdomain = host.includes('.') ? host.split('.')[0] : ''
 
   const url = new URL(`${envServer.BACKEND_URL}/redirects/link`)
   url.searchParams.append('domain', env('DOMAIN') as string)

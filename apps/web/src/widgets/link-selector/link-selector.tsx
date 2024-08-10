@@ -38,7 +38,7 @@ export default function Selector() {
                 <Skeleton className="h-24 w-full overflow-hidden rounded-md" />
               </div>
             ) : isError ? (
-              <div className="text-destructive m-auto flex flex-col items-center gap-y-2">
+              <div className="m-auto flex flex-col items-center gap-y-2 text-destructive">
                 <ExclamationTriangleIcon className="size-10 stroke-[0.8]" />
                 <span>Error while fetching data</span>
               </div>

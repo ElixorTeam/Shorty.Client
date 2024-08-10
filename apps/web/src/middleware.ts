@@ -18,12 +18,11 @@ export default auth(async (req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix)
   const isPublicRoute = publicRoutes.has(nextUrl.pathname)
-  const isAdmin = !!(session?.roles.find((x) => x == 'admin') ? true : false)
+  const isAdmin = !!session?.roles.find((x) => x == 'admin')
   const isTokenExpire = session?.error === 'RefreshAccessTokenError'
 
   if (isAdminRoute && !isAdmin)
     return NextResponse.redirect(new URL('/', req.url))
-  // eslint-disable-next-line unicorn/no-useless-undefined
   if (isApiAuthRoute) return undefined
   if (isTokenExpire) return authResponse
   if (!isPublicRoute && !isLoggedIn) return authResponse

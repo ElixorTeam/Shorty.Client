@@ -29,8 +29,8 @@ export default tseslint.config(
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
-      "@typescript-eslint/non-nullable-type-assertion-style": "off",
-      "@typescript-eslint/consistent-type-definitions": "off"
+      '@typescript-eslint/non-nullable-type-assertion-style': 'off',
+      '@typescript-eslint/consistent-type-definitions': 'off',
     },
   }
 )

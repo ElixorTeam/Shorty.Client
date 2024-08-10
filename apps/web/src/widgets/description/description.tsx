@@ -110,7 +110,7 @@ export default function Description({ record }: { record: RecordType }) {
             <Link
               href={shortLink}
               target="_blank"
-              className="text-muted-foreground truncate text-sm hover:underline hover:underline-offset-4"
+              className="truncate text-sm text-muted-foreground hover:underline hover:underline-offset-4"
             >
               {shortLink}
             </Link>

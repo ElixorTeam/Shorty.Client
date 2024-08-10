@@ -4,7 +4,8 @@ const generateUrlPath = (length: number = 6): string => {
 
   for (let i: number = 0; i < length; i += 1) {
     const randomIndex: number = Math.floor(Math.random() * characters.length)
-    result += characters[randomIndex]
+    const randomCharacter: string = characters.charAt(randomIndex)
+    result += randomCharacter
   }
 
   return result

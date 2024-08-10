@@ -1,8 +1,6 @@
 import { useMemo } from 'react'
 
-// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { useGetClientDomains } from '@/entities/domain'
-// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { useGetAllSubdomains } from '@/entities/subdomain'
 
 import getShortLink from './get-short-link'
@@ -13,7 +11,7 @@ const useGetShortLink = (record: RecordType) => {
   const { data: subdomains } = useGetAllSubdomains()
 
   return useMemo(() => {
-    if (!record || !domains) return ''
+    if (!domains) return ''
     const domain = domains.find((item) => item.uid === record.domainUid)
     return getShortLink({
       subdomain:

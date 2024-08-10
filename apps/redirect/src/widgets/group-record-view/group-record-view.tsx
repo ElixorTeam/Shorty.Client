@@ -21,7 +21,7 @@ export default function GroupRecordView({ urls }: { urls: string[] }) {
                     {new URL(url).hostname}
                   </h3>
                   <a
-                    className="text-muted-foreground truncate text-sm hover:underline"
+                    className="truncate text-sm text-muted-foreground hover:underline"
                     href={url}
                   >
                     {url}

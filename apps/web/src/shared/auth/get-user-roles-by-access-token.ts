@@ -6,9 +6,12 @@ import { RoleType } from './next-auth'
 const CLIENT_NAME = envServer.KEYCLOAK_CLIENT_ID
 
 type DecodedToken = {
-  resource_access: Record<string, {
+  resource_access: Record<
+    string,
+    {
       roles: RoleType[]
-    }>
+    }
+  >
 }
 
 const getUserRolesByAccessToken = (accessToken: string): RoleType[] => {

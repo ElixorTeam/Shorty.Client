@@ -17,7 +17,7 @@ const deleteDomain = actionClient
       const session = await auth()
       const response = await fetch(`${envServer.BACKEND_URL}/domains/${uuid}`, {
         headers: {
-          Authorization: `Bearer ${session?.accessToken}`,
+          Authorization: `Bearer ${session?.accessToken ?? ''}`,
         },
         method: 'DELETE',
         cache: 'no-store',
@@ -30,8 +30,8 @@ const deleteDomain = actionClient
         return { failure: `Unexpected error: Try again` }
       }
       return { success: 'Link is deleted' }
-    } catch (error) {
-      return { failure: `Get error ${error}` }
+    } catch {
+      return { failure: 'Get error' }
     }
   })
 
