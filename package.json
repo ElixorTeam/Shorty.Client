@@ -14,20 +14,17 @@
     "types": "turbo type-check"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@commitlint/cli": "^19.3.0",
+    "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "husky": "^9.1.4",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.6.5",
-    "turbo": "^2.0.9",
-    "eslint": "^9.8.0"
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "turbo": "^2.0.12"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "bun@1.1.21",
+  "packageManager": "yarn@1.22.19",
   "workspaces": [
     "apps/*",
     "packages/*"

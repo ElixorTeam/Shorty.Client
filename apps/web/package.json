@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@preact-signals/safe-react": "^0.6.1",
-    "@repo/ui": "workspace:*",
+    "@repo/ui": "*",
     "@tanstack/react-query": "^5.51.18",
     "file-saver": "^2.0.5",
     "framer-motion": "^11.3.22",
@@ -32,8 +32,8 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",

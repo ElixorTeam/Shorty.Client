@@ -7,6 +7,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from '@repo/ui/command'
 import { cn } from '@repo/ui/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
@@ -52,30 +53,33 @@ export default function DomainSelector() {
             maxLength={16}
             placeholder="Search subdomain..."
           />
-          <CommandEmpty>No domains found.</CommandEmpty>
-          <CommandGroup>
-            {domains.map((item) => (
-              <CommandItem
-                value={item.value}
-                key={item.uid}
-                onSelect={() => {
-                  if (currentDomain.value === item) return
-                  currentDomain.value = item
-                  currentSubdomain.value = subdomainStub.value
-                }}
-              >
-                <CheckIcon
-                  className={cn(
-                    'mr-2 size-4',
-                    item.value === currentDomain.value.value
-                      ? 'visible'
-                      : 'invisible'
-                  )}
-                />
-                {item.value}
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandList>
+            <CommandEmpty>No domains found.</CommandEmpty>
+            <CommandGroup>
+              {domains.map((item) => (
+                <CommandItem
+                  value={item.value}
+                  key={item.uid}
+                  onSelect={() => {
+                    if (currentDomain.value === item) return
+                    currentDomain.value = item
+                    currentSubdomain.value = subdomainStub.value
+                  }}
+                  disabled={false}
+                >
+                  <CheckIcon
+                    className={cn(
+                      'mr-2 size-4',
+                      item.value === currentDomain.value.value
+                        ? 'visible'
+                        : 'invisible'
+                    )}
+                  />
+                  {item.value}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>

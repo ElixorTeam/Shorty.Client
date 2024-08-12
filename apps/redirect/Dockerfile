@@ -1,22 +1,35 @@
-FROM oven/bun:alpine as build
+FROM node:22-alpine AS base
+
+ARG APP_NAME=redirect
+RUN apk update && apk add --no-cache libc6-compat
+
+FROM base AS build
 
 WORKDIR /app
+RUN yarn global add turbo@^2
 COPY . .
-RUN bun install --frozen-lockfile
-RUN bun run build
+RUN turbo prune ${APP_NAME} --docker
 
-FROM node:20-alpine as run
+FROM base AS install
 
 WORKDIR /app
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=production
+COPY --from=build /app/out/json/ .
+COPY --from=build /app/out/yarn.lock .
+RUN yarn install --frozen-lockfile
+COPY --from=build /app/out/full/ .
+RUN yarn turbo build --filter=${APP_NAME}
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+FROM base AS run
 
-COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+WORKDIR /app
 
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-CMD ["node", "server.js"]
+COPY --from=install --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/standalone ./
+COPY --from=install --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
+
+ENV APP_MAIN_FILE=apps/${APP_NAME}/server.js
+
+CMD node ${APP_MAIN_FILE}

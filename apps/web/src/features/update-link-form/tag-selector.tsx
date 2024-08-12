@@ -11,6 +11,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from '@repo/ui/command'
 import { cn } from '@repo/ui/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
@@ -54,7 +55,7 @@ export default function TagSelector() {
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-72 p-0">
         <Command>
           <CommandInput
             value={search.value}
@@ -64,40 +65,42 @@ export default function TagSelector() {
             maxLength={16}
             placeholder="Search tag..."
           />
-          <CommandEmpty>No tag found.</CommandEmpty>
-          <CommandGroup>
-            {search.value.trim().length > 0 &&
-              !tags.value.some(
-                (tag) => tag.value === search.value.trim().toLowerCase()
-              ) && (
+          <CommandList>
+            <CommandEmpty>No tag found.</CommandEmpty>
+            <CommandGroup>
+              {search.value.trim().length > 0 &&
+                !tags.value.some(
+                  (tag) => tag.value === search.value.trim().toLowerCase()
+                ) && (
+                  <CommandItem
+                    value={search.value.trim().toLowerCase()}
+                    onSelect={handleAddNewTag}
+                  >
+                    <PlusCircleIcon className="mr-2 size-4" />
+                    {search}
+                  </CommandItem>
+                )}
+              {tags.value.map((item) => (
                 <CommandItem
-                  value={search.value.trim().toLowerCase()}
-                  onSelect={handleAddNewTag}
+                  value={item.value}
+                  key={item.uid}
+                  onSelect={() => {
+                    currentTag.value = item
+                  }}
                 >
-                  <PlusCircleIcon className="mr-2 size-4" />
-                  {search}
+                  <CheckIcon
+                    className={cn(
+                      'mr-2 size-4',
+                      item.value === currentTag.value.value
+                        ? 'visible'
+                        : 'invisible'
+                    )}
+                  />
+                  {item.value}
                 </CommandItem>
-              )}
-            {tags.value.map((item) => (
-              <CommandItem
-                value={item.value}
-                key={item.uid}
-                onSelect={() => {
-                  currentTag.value = item
-                }}
-              >
-                <CheckIcon
-                  className={cn(
-                    'mr-2 size-4',
-                    item.value === currentTag.value.value
-                      ? 'visible'
-                      : 'invisible'
-                  )}
-                />
-                {item.value}
-              </CommandItem>
-            ))}
-          </CommandGroup>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>

@@ -12,6 +12,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from '@repo/ui/command'
 import { cn } from '@repo/ui/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
@@ -122,52 +123,54 @@ export default function SubdomainSelector({
             maxLength={16}
             placeholder="Search subdomain..."
           />
-          <CommandEmpty>No subdomains found.</CommandEmpty>
-          <CommandGroup>
-            {search.value.trim().length > 0 &&
-              subdomains.value.length <= 6 &&
-              !subdomains.value.some(
-                (item) => item.value === search.value.trim().toLowerCase()
-              ) && (
-                <CommandItem
-                  value={search.value.trim().toLowerCase()}
-                  onSelect={handleAddSubdomain}
-                >
-                  <PlusCircleIcon className="mr-2 size-4" />
-                  {search}
-                </CommandItem>
-              )}
-            {subdomains.value.map((item) => (
-              <CommandItem
-                value={item.value}
-                key={item.uid}
-                onSelect={() => {
-                  currentSubdomain.value = item
-                }}
-                className="relative"
-              >
-                <CheckIcon
-                  className={cn(
-                    'mr-2 size-4',
-                    item.value === currentSubdomain.value.value
-                      ? 'visible'
-                      : 'invisible'
-                  )}
-                />
-                {item.value}
-                {item.uid !== subdomainStub.value.uid && (
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteSubdomain(item.uid)}
-                    className="absolute right-2 top-2"
+          <CommandList>
+            <CommandEmpty>No subdomains found.</CommandEmpty>
+            <CommandGroup>
+              {search.value.trim().length > 0 &&
+                subdomains.value.length <= 6 &&
+                !subdomains.value.some(
+                  (item) => item.value === search.value.trim().toLowerCase()
+                ) && (
+                  <CommandItem
+                    value={search.value.trim().toLowerCase()}
+                    onSelect={handleAddSubdomain}
                   >
-                    <TrashIcon className="size-4 text-destructive" />
-                    <span className="sr-only">Delete {item.value}</span>
-                  </button>
+                    <PlusCircleIcon className="mr-2 size-4" />
+                    {search}
+                  </CommandItem>
                 )}
-              </CommandItem>
-            ))}
-          </CommandGroup>
+              {subdomains.value.map((item) => (
+                <CommandItem
+                  value={item.value}
+                  key={item.uid}
+                  onSelect={() => {
+                    currentSubdomain.value = item
+                  }}
+                  className="relative"
+                >
+                  <CheckIcon
+                    className={cn(
+                      'mr-2 size-4',
+                      item.value === currentSubdomain.value.value
+                        ? 'visible'
+                        : 'invisible'
+                    )}
+                  />
+                  {item.value}
+                  {item.uid !== subdomainStub.value.uid && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteSubdomain(item.uid)}
+                      className="absolute right-2 top-2"
+                    >
+                      <TrashIcon className="size-4 text-destructive" />
+                      <span className="sr-only">Delete {item.value}</span>
+                    </button>
+                  )}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>

@@ -31,14 +31,14 @@ export default async function HomePage() {
         <div className="my-16 flex flex-col items-center justify-center gap-6 px-6 text-center md:my-32">
           <TextGenerator
             words="Shorten, Manage, Analyze. Your key to efficient links."
-            className="bg-gradient-to-b from-primary to-muted-foreground bg-clip-text text-2xl font-semibold text-transparent lg:text-5xl"
+            className="bg-gradient-to-b from-primary to-muted-foreground bg-clip-text text-2xl font-semibold text-transparent lg:text-4xl"
           />
           <div className="max-w-screen-md">
             <TextGenerator
               words="Unlock the power of efficient linking. Our service offers a simple,
               user-friendly platform for shortening, managing, and analyzing your
               links."
-              className="font-light text-muted-foreground lg:text-xl"
+              className="font-light text-muted-foreground lg:text-lg"
             />
           </div>
           <Button size="lg" variant="outline" type="button" asChild>
