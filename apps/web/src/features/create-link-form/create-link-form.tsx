@@ -237,6 +237,7 @@ export default function CreateLinkForm({
                 <Input
                   type="password"
                   placeholder="Enter password..."
+                  autoComplete="off"
                   {...field}
                 />
               </FormControl>

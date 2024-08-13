@@ -181,6 +181,7 @@ export default function UpdateLinkForm({
                     <Input
                       type="password"
                       placeholder="Enter password..."
+                      autoComplete="off"
                       {...field}
                     />
                   </FormControl>
