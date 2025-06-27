@@ -19,6 +19,7 @@ export const {
       clientId: envServer.KEYCLOAK_CLIENT_ID,
       clientSecret: envServer.KEYCLOAK_CLIENT_SECRET,
       issuer: `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}`,
+      checks: [],
     }),
   ],
   callbacks: {

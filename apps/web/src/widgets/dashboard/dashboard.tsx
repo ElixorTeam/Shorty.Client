@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Button } from '@repo/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@repo/ui/tabs'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
@@ -26,7 +26,6 @@ import ViewsCard from './views-card'
 
 export default function Dashboard() {
   const [period, setPeriod] = useState<PeriodsEnum>(PeriodsEnum.Week)
-  const { toast } = useToast()
   const queryClient = useQueryClient()
   const { data: record } = useGetCurrentRecord()
   const { data: analytics } = useGetAnalyticsByLink(period)

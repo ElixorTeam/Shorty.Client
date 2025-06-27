@@ -1,6 +1,5 @@
 'use client'
 
-import { useSignal } from '@preact-signals/safe-react'
 import { Button } from '@repo/ui/button'
 import {
   Dialog,
@@ -11,14 +10,15 @@ import {
 } from '@repo/ui/dialog'
 
 import CreateDomainForm from '@/features/create-domain-form'
+import { useState } from 'react'
 
 export default function CreateDomainDialog() {
-  const open = useSignal<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   return (
     <Dialog
-      open={open.value}
+      open={open}
       onOpenChange={(value) => {
-        open.value = value
+        setOpen(value)
       }}
     >
       <DialogTrigger asChild>
@@ -30,7 +30,7 @@ export default function CreateDomainDialog() {
         </DialogHeader>
         <CreateDomainForm
           onFormSubmit={() => {
-            open.value = false
+            setOpen(false)
           }}
         />
       </DialogContent>

@@ -26,15 +26,22 @@ const createLink = actionClient
     }) => {
       try {
         const session = await auth()
-        const body = JSON.stringify({
-          title: title ?? 'Untitled',
+        const trimmedTitle = title?.trim()
+        const trimmedPassword = password?.trim()
+
+        const bodyObj: Record<string, any> = {
+          title: trimmedTitle || 'Untitled',
           path,
           urls,
-          subdomainUid: subdomainUid ?? undefined,
           domainUid,
           tags: [],
-          password: password ?? undefined,
-        })
+          ...(subdomainUid ? { subdomainUid } : {}),
+          ...(trimmedPassword ? { password: trimmedPassword } : {}),
+        }
+
+        const body = JSON.stringify(bodyObj)
+
+        console.log(body, trimmedPassword, !trimmedPassword)
         const response = await fetch(`${envServer.BACKEND_URL}/user/links`, {
           body,
           headers: {
@@ -47,6 +54,7 @@ const createLink = actionClient
         })
 
         if (!response.ok) {
+          console.log(await response.text())
           if (response.status === 409)
             return { failure: 'Error: An object with such data already exists' }
           if (response.status === 400)

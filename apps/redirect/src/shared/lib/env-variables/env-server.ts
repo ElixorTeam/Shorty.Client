@@ -1,10 +1,8 @@
-import { env } from 'next-runtime-env'
-
 const envServer = {
-  BACKEND_URL: env('BACKEND_URL') as string,
+  BACKEND_URL: process.env.BACKEND_URL as string,
 
-  PORT: env('PORT') as unknown as number,
-  NODE_ENV: env('NODE_ENV') as string,
+  PORT: process.env.PORT as unknown as number,
+  NODE_ENV: process.env.NODE_ENV as string,
 }
 
 export default envServer

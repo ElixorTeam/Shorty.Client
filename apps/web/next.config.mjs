@@ -6,16 +6,6 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    swcPlugins: [
-      [
-        '@preact-signals/safe-react/swc',
-        {
-          mode: 'auto',
-        },
-      ],
-    ],
-  },
 }
 
 export default config

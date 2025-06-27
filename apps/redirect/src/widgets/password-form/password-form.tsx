@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from '@repo/ui/form'
 import { Input } from '@repo/ui/input'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import hash from 'object-hash'
 import { useState } from 'react'
@@ -27,7 +27,6 @@ const passwordFormScheme = z.object({
 })
 
 export default function PasswordForm({ redirect }: { redirect: RedirectType }) {
-  const { toast } = useToast()
   const router = useRouter()
   const form = useForm<z.infer<typeof passwordFormScheme>>({
     resolver: zodResolver(passwordFormScheme),

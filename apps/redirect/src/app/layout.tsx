@@ -4,7 +4,6 @@ import { cn } from '@repo/ui/lib/utils'
 import { Toaster } from '@repo/ui/toaster'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
-import { PublicEnvScript } from 'next-runtime-env'
 import { ReactNode } from 'react'
 
 import ThemeProvider from '@/shared/providers/theme-provider'
@@ -26,9 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <PublicEnvScript />
-      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',

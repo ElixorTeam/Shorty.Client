@@ -5,7 +5,7 @@ import { Calendar } from '@repo/ui/calendar'
 import { Form, FormControl, FormField, FormItem } from '@repo/ui/form'
 import { cn } from '@repo/ui/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { addDays, format } from 'date-fns'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -33,7 +33,6 @@ const analyticsFormScheme = z.object({
 })
 
 export default function CsvGenerateForm() {
-  const { toast } = useToast()
   const form = useForm<z.infer<typeof analyticsFormScheme>>({
     resolver: zodResolver(analyticsFormScheme),
     defaultValues: {

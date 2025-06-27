@@ -1,6 +1,5 @@
 'use client'
 
-import { useSignal } from '@preact-signals/safe-react'
 import { Button } from '@repo/ui/button'
 import {
   Dialog,
@@ -20,10 +19,10 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@repo/ui/drawer'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { saveAs } from 'file-saver'
 import { useQRCode } from 'next-qrcode'
-import { ReactNode, useRef } from 'react'
+import { ReactNode, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
 export default function QrCodeDialog({
@@ -34,8 +33,7 @@ export default function QrCodeDialog({
   children: ReactNode
 }) {
   const { Canvas } = useQRCode()
-  const { toast } = useToast()
-  const open = useSignal<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const qrcodeContainerRef = useRef<HTMLDivElement>(null)
 
@@ -70,9 +68,9 @@ export default function QrCodeDialog({
   if (isDesktop)
     return (
       <Dialog
-        open={open.value}
+        open={open}
         onOpenChange={(value) => {
-          open.value = value
+          setOpen(value)
         }}
       >
         <DialogTrigger asChild>{children}</DialogTrigger>
@@ -106,9 +104,9 @@ export default function QrCodeDialog({
     )
   return (
     <Drawer
-      open={open.value}
+      open={open}
       onOpenChange={(value) => {
-        open.value = value
+        setOpen(value)
       }}
     >
       <DrawerTrigger asChild>{children}</DrawerTrigger>

@@ -4,20 +4,20 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@eslint/compat": "^1.1.1",
-    "@eslint/js": "^9.8.0",
-    "@next/eslint-plugin-next": "^14.2.5",
-    "@tanstack/eslint-plugin-query": "^5.51.15",
+    "@eslint/compat": "^1.2.6",
+    "@eslint/js": "^9.19.0",
+    "@next/eslint-plugin-next": "^14.2.23",
+    "@tanstack/eslint-plugin-query": "^5.66.0",
     "@types/eslint__js": "^8.42.3",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-promise": "^7.0.0",
-    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-sonarjs": "^1.0.4",
-    "eslint-plugin-tailwindcss": "^3.17.4",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-unicorn": "^55.0.0",
-    "globals": "^15.8.0",
-    "typescript-eslint": "^8.0.0-alpha.60"
+    "globals": "^15.14.0",
+    "typescript-eslint": "^8.22.0"
   }
 }

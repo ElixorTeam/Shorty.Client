@@ -9,6 +9,8 @@ const getShortLink = ({
 }) => {
   const subdomainStr = subdomain ? `${subdomain}.` : ''
   const pathStr = path ? `/${path}` : ''
-  return `https://${subdomainStr}${domain}${pathStr}`
+  const protocol = domain?.includes('localhost') ? 'http://' : 'https://'
+  return protocol + subdomainStr + domain + pathStr
 }
+
 export default getShortLink

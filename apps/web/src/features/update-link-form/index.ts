@@ -1,3 +1,4 @@
 import UpdateLinkForm from './update-link-form'
+import { TagProvider } from './update-form-context'
 
-export default UpdateLinkForm
+export { UpdateLinkForm, TagProvider }

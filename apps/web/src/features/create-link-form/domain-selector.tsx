@@ -1,5 +1,4 @@
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
-import { useSignal } from '@preact-signals/safe-react'
 import { Button } from '@repo/ui/button'
 import {
   Command,
@@ -14,15 +13,17 @@ import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
 import { Skeleton } from '@repo/ui/skeleton'
 
 import { useGetClientDomains } from '@/entities/domain'
-
-import {
-  currentDomain,
-  currentSubdomain,
-  subdomainStub,
-} from './create-form-context'
+import { useFormContext } from './create-form-context'
+import { useState } from 'react'
 
 export default function DomainSelector() {
-  const search = useSignal<string>('')
+  const [search, setSearch] = useState<string>('')
+  const {
+    currentDomain,
+    setCurrentDomain,
+    setCurrentSubdomain,
+    subdomainStub,
+  } = useFormContext()
   const { data: domains, isLoading } = useGetClientDomains()
 
   if (isLoading || domains === undefined) {
@@ -39,16 +40,16 @@ export default function DomainSelector() {
           role="combobox"
           className="w-full justify-between rounded-none border-x-0 pr-2"
         >
-          <span className="truncate">{currentDomain.value.value}</span>
+          <span className="truncate">{currentDomain.value}</span>
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandInput
-            value={search.value}
+            value={search}
             onValueChange={(value) => {
-              search.value = value
+              setSearch(value)
             }}
             maxLength={16}
             placeholder="Search subdomain..."
@@ -61,16 +62,16 @@ export default function DomainSelector() {
                   value={item.value}
                   key={item.uid}
                   onSelect={() => {
-                    if (currentDomain.value === item) return
-                    currentDomain.value = item
-                    currentSubdomain.value = subdomainStub.value
+                    if (currentDomain === item) return
+                    setCurrentDomain(item)
+                    setCurrentSubdomain(subdomainStub)
                   }}
                   disabled={false}
                 >
                   <CheckIcon
                     className={cn(
                       'mr-2 size-4',
-                      item.value === currentDomain.value.value
+                      item.value === currentDomain.value
                         ? 'visible'
                         : 'invisible'
                     )}

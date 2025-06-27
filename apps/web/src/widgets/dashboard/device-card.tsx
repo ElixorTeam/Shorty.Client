@@ -1,5 +1,4 @@
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import { computed, useSignal } from '@preact-signals/safe-react'
 import {
   Card,
   CardContent,
@@ -16,6 +15,7 @@ import {
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 
 import { DevicesData } from '@/entities/analytics'
+import { useMemo, useState } from 'react'
 
 enum DeviceOptionEnum {
   OS = 'OS',
@@ -27,12 +27,14 @@ export default function DeviceCard({
 }: {
   data: DevicesData | undefined
 }) {
-  const currentDeviceOption = useSignal<DeviceOptionEnum>(DeviceOptionEnum.OS)
+  const [currentDeviceOption, setCurrentDeviceOption] =
+    useState<DeviceOptionEnum>(DeviceOptionEnum.OS)
 
-  const analyticsData = computed(() => {
-    if (currentDeviceOption.value == DeviceOptionEnum.OS) return data?.os ?? []
-    return data?.device ?? []
-  })
+  const analyticsData = useMemo(() => {
+    return currentDeviceOption === DeviceOptionEnum.OS
+      ? (data?.os ?? [])
+      : (data?.device ?? [])
+  }, [currentDeviceOption, data])
   return (
     <Card className="w-full overflow-hidden">
       <CardHeader className="pt-4">
@@ -40,13 +42,13 @@ export default function DeviceCard({
           <div className="flex items-center justify-between">
             <span className="truncate">Device information</span>
             <Select
-              value={currentDeviceOption.value}
+              value={currentDeviceOption}
               onValueChange={(value) => {
-                currentDeviceOption.value = value as DeviceOptionEnum
+                setCurrentDeviceOption(value as DeviceOptionEnum)
               }}
             >
               <SelectTrigger className="w-28 sm:w-52">
-                {currentDeviceOption.value}
+                {currentDeviceOption}
               </SelectTrigger>
               <SelectContent>
                 {(
@@ -67,9 +69,9 @@ export default function DeviceCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {analyticsData.value.length > 0 ? (
+        {analyticsData.length > 0 ? (
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={analyticsData.value}>
+            <BarChart data={analyticsData}>
               <XAxis
                 dataKey="label"
                 stroke="#888888"

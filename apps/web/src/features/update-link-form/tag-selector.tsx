@@ -3,7 +3,6 @@ import {
   ChevronUpDownIcon,
   PlusCircleIcon,
 } from '@heroicons/react/24/outline'
-import { useComputed, useSignal } from '@preact-signals/safe-react'
 import { Button } from '@repo/ui/button'
 import {
   Command,
@@ -17,30 +16,29 @@ import { cn } from '@repo/ui/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
 import { v4 as uuidv4 } from 'uuid'
 
-import { type TagType, useGetAllTags } from '@/entities/tag'
+import { useTagContext } from './update-form-context'
 
-import { currentTag, tagStub } from './update-form-context'
+import { type TagType, useGetAllTags } from '@/entities/tag'
+import { useMemo, useState } from 'react'
 
 export default function TagSelector() {
-  const search = useSignal<string>('')
-  const createdTags = useSignal<TagType[]>([])
+  const [search, setSearch] = useState<string>('')
+  const [createdTags, setCreatedTags] = useState<TagType[]>([])
+  const { currentTag, setCurrentTag, tagStub } = useTagContext()
   const { data: tagsData } = useGetAllTags()
 
-  const tags = useComputed<TagType[]>(() => [
-    ...(tagsData === undefined
-      ? []
-      : tagsData.filter((tag) => tag.value.trim())),
-    ...createdTags.value,
-    tagStub.value,
-  ])
+  const tags = useMemo<TagType[]>(() => {
+    const cleanedTags = tagsData?.filter((tag) => tag.value.trim()) ?? []
+    return [...cleanedTags, ...createdTags, tagStub]
+  }, [tagsData, createdTags])
 
   const handleAddNewTag = () => {
     const newTag: TagType = {
-      value: search.value.trim(),
+      value: search.trim(),
       uid: uuidv4(),
     }
-    currentTag.value = newTag
-    createdTags.value = [...createdTags.value, newTag]
+    setCurrentTag(newTag)
+    setCreatedTags((prev) => [...prev, newTag])
   }
 
   return (
@@ -51,16 +49,16 @@ export default function TagSelector() {
           role="combobox"
           className="w-full justify-between sm:w-72"
         >
-          <span className="truncate">{currentTag.value.value}</span>
+          <span className="truncate">{currentTag.value}</span>
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-72 p-0">
         <Command>
           <CommandInput
-            value={search.value}
+            value={search}
             onValueChange={(value) => {
-              search.value = value
+              setSearch(value)
             }}
             maxLength={16}
             placeholder="Search tag..."
@@ -68,32 +66,30 @@ export default function TagSelector() {
           <CommandList>
             <CommandEmpty>No tag found.</CommandEmpty>
             <CommandGroup>
-              {search.value.trim().length > 0 &&
-                !tags.value.some(
-                  (tag) => tag.value === search.value.trim().toLowerCase()
+              {search.trim().length > 0 &&
+                !tags.some(
+                  (tag) => tag.value === search.trim().toLowerCase()
                 ) && (
                   <CommandItem
-                    value={search.value.trim().toLowerCase()}
+                    value={search.trim().toLowerCase()}
                     onSelect={handleAddNewTag}
                   >
                     <PlusCircleIcon className="mr-2 size-4" />
                     {search}
                   </CommandItem>
                 )}
-              {tags.value.map((item) => (
+              {tags.map((item) => (
                 <CommandItem
                   value={item.value}
                   key={item.uid}
                   onSelect={() => {
-                    currentTag.value = item
+                    setCurrentTag(item)
                   }}
                 >
                   <CheckIcon
                     className={cn(
                       'mr-2 size-4',
-                      item.value === currentTag.value.value
-                        ? 'visible'
-                        : 'invisible'
+                      item.value === currentTag.value ? 'visible' : 'invisible'
                     )}
                   />
                   {item.value}

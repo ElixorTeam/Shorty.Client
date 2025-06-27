@@ -1,11 +1,10 @@
 import '@repo/ui/global.css'
 
 import { cn } from '@repo/ui/lib/utils'
-import { Toaster } from '@repo/ui/toaster'
+import { Toaster } from '@repo/ui/sonner'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
-import { PublicEnvScript } from 'next-runtime-env'
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 import { auth } from '@/shared/auth'
 import QueryProvider from '@/shared/providers/query-provider'
@@ -29,10 +28,7 @@ export default async function RootLayout({
 }>) {
   const session = await auth()
   return (
-    <html lang="en">
-      <head>
-        <PublicEnvScript />
-      </head>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen overscroll-none bg-background font-sans antialiased',
@@ -46,6 +42,7 @@ export default async function RootLayout({
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
+              enableColorScheme
             >
               {children}
               <Toaster />

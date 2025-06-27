@@ -5,11 +5,11 @@ import { Button } from '@repo/ui/button'
 import { useEffect, useState } from 'react'
 
 import { RecordType, useGetCurrentRecord } from '@/entities/record'
-import UpdateLinkForm from '@/features/update-link-form'
 import Dashboard from '@/widgets/dashboard'
 import Description from '@/widgets/description'
 
 import NoSelectedWarning from './no-selected-warning'
+import { TagProvider, UpdateLinkForm } from '@/features/update-link-form'
 
 export default function Workspace() {
   const { data, isError } = useGetCurrentRecord()
@@ -46,12 +46,14 @@ export default function Workspace() {
         </div>
       </TabsPrimitive.TabsContent>
       <TabsPrimitive.TabsContent value="edit">
-        <UpdateLinkForm
-          record={data}
-          onFormSubmit={() => {
-            setCurrentTab('overview')
-          }}
-        />
+        <TagProvider>
+          <UpdateLinkForm
+            record={data}
+            onFormSubmit={() => {
+              setCurrentTab('overview')
+            }}
+          />
+        </TagProvider>
       </TabsPrimitive.TabsContent>
     </TabsPrimitive.Tabs>
   )

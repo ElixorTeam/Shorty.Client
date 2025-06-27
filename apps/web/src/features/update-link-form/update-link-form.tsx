@@ -14,7 +14,7 @@ import {
 import { Input } from '@repo/ui/input'
 import { Label } from '@repo/ui/label'
 import { cn } from '@repo/ui/lib/utils'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
@@ -31,7 +31,7 @@ import { TagType, useGetAllTags } from '@/entities/tag'
 
 import FormHeader from './form-header'
 import TagSelector from './tag-selector'
-import { currentTag, tagStub } from './update-form-context'
+import { useTagContext } from './update-form-context'
 import updateFormSchema from './update-form-scheme'
 
 export default function UpdateLinkForm({
@@ -41,9 +41,9 @@ export default function UpdateLinkForm({
   record: RecordType
   onFormSubmit?: () => void
 }) {
-  const { toast } = useToast()
   const queryClient = useQueryClient()
   const { data: tags } = useGetAllTags()
+  const { currentTag, setCurrentTag, tagStub } = useTagContext()
   const { data: domains } = useGetClientDomains()
   const { data: subdomains } = useGetAllSubdomains()
 
@@ -51,15 +51,14 @@ export default function UpdateLinkForm({
     const recordTag = tags?.find(
       (item: TagType) => item.value === record.tags[0]
     )
-    currentTag.value = !recordTag?.value ? tagStub.value : recordTag
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCurrentTag(!recordTag ? tagStub : recordTag)
   }, [])
 
   const form = useForm<z.infer<typeof updateFormSchema>>({
     resolver: zodResolver(updateFormSchema),
     defaultValues: {
       title: record.title,
-      tag: currentTag.value.value,
+      tag: currentTag.value,
       urls: record.urls,
       prefix:
         subdomains?.find(
@@ -86,10 +85,7 @@ export default function UpdateLinkForm({
   const onSubmit = async (values: z.infer<typeof updateFormSchema>) => {
     const result = await updateLinkAction({
       uid: record.uid,
-      tag:
-        currentTag.value.value === tagStub.value.value
-          ? ''
-          : currentTag.value.value,
+      tag: currentTag.value === tagStub.value ? '' : currentTag.value,
       title: values.title,
       password: values.password,
       isEnable: true,

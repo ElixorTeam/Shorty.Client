@@ -4,44 +4,46 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@preact-signals/safe-react": "^0.6.1",
     "@repo/ui": "*",
-    "@tanstack/react-query": "^5.51.18",
+    "@tanstack/react-query": "^5.81.2",
     "file-saver": "^2.0.5",
-    "framer-motion": "^11.3.22",
+    "framer-motion": "^11.18.2",
     "jwt-decode": "^4.0.0",
     "mini-svg-data-uri": "^1.4.4",
-    "next": "^14.2.3",
-    "next-auth": "^5.0.0-beta.20",
+    "next": "15.3.4",
+    "next-auth": "5.0.0-beta.29",
     "next-qrcode": "^2.5.1",
-    "next-runtime-env": "^3.2.2",
-    "next-safe-action": "^7.4.3",
-    "next-themes": "^0.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-share": "^5.1.0",
-    "recharts": "^2.12.7",
-    "usehooks-ts": "^3.1.0",
-    "uuid": "^10.0.0"
+    "next-safe-action": "^7.10.8",
+    "next-themes": "^0.4.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-share": "^5.2.2",
+    "recharts": "^2.15.4",
+    "usehooks-ts": "^3.1.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
+    "@types/node": "^20.19.1",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
     "@types/uuid": "^10.0.0",
-    "autoprefixer": "^10.4.18",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3"
+  },
+  "overrides": {
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6"
   }
 }

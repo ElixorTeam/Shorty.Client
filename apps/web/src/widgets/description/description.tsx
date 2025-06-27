@@ -21,7 +21,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/ui/dropdown-menu'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -43,7 +43,6 @@ export default function Description({ record }: { record: RecordType }) {
   const shortLink = useGetShortLink(record)
   const router = useRouter()
   const queryClient = useQueryClient()
-  const { toast } = useToast()
 
   const createDt = getFormattedDate(new Date(record.createDt))
 

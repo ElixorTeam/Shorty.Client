@@ -55,8 +55,8 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="size-full grid-rows-1 divide-x md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[24rem,1fr] min-[1930px]:border-x">
-        <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden">
+      <div className="size-full grid-rows-1 divide-x md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[21rem,1fr] min-[1930px]:border-x">
+        <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden bg-secondary/40">
           <NavigationHeader />
           <Selector />
         </div>

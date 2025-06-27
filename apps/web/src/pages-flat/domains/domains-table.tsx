@@ -10,14 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from '@repo/ui/table'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { deleteDomainAction, useGetClientDomains } from '@/entities/domain'
 
 export default function DomainsTable() {
   const { data } = useGetClientDomains()
-  const { toast } = useToast()
   const queryClient = useQueryClient()
 
   const deleteDomain = async (uuid: string) => {

@@ -1,4 +1,3 @@
-import { useSignal } from '@preact-signals/safe-react'
 import {
   Dialog,
   DialogContent,
@@ -16,7 +15,7 @@ import {
   DrawerTrigger,
 } from '@repo/ui/drawer'
 import { ScrollArea, ScrollBar } from '@repo/ui/scroll-area'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import {
   EmailIcon,
   EmailShareButton,
@@ -128,15 +127,15 @@ export default function SocialShareDialog({
   shortLink: string
   children: ReactNode
 }) {
-  const open = useSignal<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   if (isDesktop)
     return (
       <Dialog
-        open={open.value}
+        open={open}
         onOpenChange={(value) => {
-          open.value = value
+          setOpen(value)
         }}
       >
         <DialogTrigger asChild>{children}</DialogTrigger>
@@ -154,9 +153,9 @@ export default function SocialShareDialog({
 
   return (
     <Drawer
-      open={open.value}
+      open={open}
       onOpenChange={(value) => {
-        open.value = value
+        setOpen(value)
       }}
     >
       <DrawerTrigger asChild>{children}</DrawerTrigger>

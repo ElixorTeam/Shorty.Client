@@ -4,7 +4,6 @@ import {
   PlusCircleIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline'
-import { computed, useSignal } from '@preact-signals/safe-react'
 import { Button } from '@repo/ui/button'
 import {
   Command,
@@ -17,7 +16,7 @@ import {
 import { cn } from '@repo/ui/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover'
 import { Skeleton } from '@repo/ui/skeleton'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
 
 import {
@@ -26,29 +25,33 @@ import {
   type SubdomainType,
   useGetAllSubdomains,
 } from '@/entities/subdomain'
-
-import { currentSubdomain, subdomainStub } from './create-form-context'
+import { useFormContext } from './create-form-context'
+import { useMemo, useState } from 'react'
 
 export default function SubdomainSelector({
   currentDomainUid,
 }: {
   currentDomainUid: string
 }) {
-  const { toast } = useToast()
   const queryClient = useQueryClient()
-  const search = useSignal<string>('')
+  const [search, setSearch] = useState<string>('')
+  const { currentSubdomain, setCurrentSubdomain, subdomainStub } =
+    useFormContext()
   const { data: subdomainsQueryData, isLoading } = useGetAllSubdomains()
 
-  const subdomains = computed<SubdomainType[]>(() => [
-    ...(subdomainsQueryData?.filter(
-      (item) => item.domainUid == currentDomainUid
-    ) ?? []),
-    subdomainStub.value,
-  ])
+  const subdomains = useMemo(
+    () => [
+      ...(subdomainsQueryData?.filter(
+        (item) => item.domainUid == currentDomainUid
+      ) ?? []),
+      subdomainStub,
+    ],
+    [subdomainsQueryData, currentDomainUid]
+  )
 
   const handleAddSubdomain = async () => {
     const result = await createSubdomainAction({
-      value: search.value.trim(),
+      value: search.trim(),
       domainUid: currentDomainUid,
     })
 
@@ -68,7 +71,7 @@ export default function SubdomainSelector({
         result.data,
       ]
     )
-    currentSubdomain.value = result.data.data
+    setCurrentSubdomain(result.data.data)
   }
 
   const handleDeleteSubdomain = async (subdomainUid: string) => {
@@ -89,8 +92,8 @@ export default function SubdomainSelector({
         (oldData ?? []).filter((item) => item.uid !== subdomainUid)
     )
 
-    if (currentSubdomain.value.uid !== subdomainStub.value.uid)
-      currentSubdomain.value = subdomainStub.value
+    if (currentSubdomain.uid !== subdomainStub.uid)
+      setCurrentSubdomain(subdomainStub)
 
     toast({ title: 'Successfully deleted' })
   }
@@ -109,16 +112,16 @@ export default function SubdomainSelector({
           role="combobox"
           className="w-full justify-between rounded-r-none pr-2"
         >
-          <span className="truncate">{currentSubdomain.value.value}</span>
+          <span className="truncate">{currentSubdomain.value}</span>
           <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandInput
-            value={search.value}
+            value={search}
             onValueChange={(value) => {
-              search.value = value
+              setSearch(value)
             }}
             maxLength={16}
             placeholder="Search subdomain..."
@@ -126,38 +129,38 @@ export default function SubdomainSelector({
           <CommandList>
             <CommandEmpty>No subdomains found.</CommandEmpty>
             <CommandGroup>
-              {search.value.trim().length > 0 &&
-                subdomains.value.length <= 6 &&
-                !subdomains.value.some(
-                  (item) => item.value === search.value.trim().toLowerCase()
+              {search.trim().length > 0 &&
+                subdomains.length <= 6 &&
+                !subdomains.some(
+                  (item) => item.value === search.trim().toLowerCase()
                 ) && (
                   <CommandItem
-                    value={search.value.trim().toLowerCase()}
+                    value={search.trim().toLowerCase()}
                     onSelect={handleAddSubdomain}
                   >
                     <PlusCircleIcon className="mr-2 size-4" />
                     {search}
                   </CommandItem>
                 )}
-              {subdomains.value.map((item) => (
+              {subdomains.map((item) => (
                 <CommandItem
                   value={item.value}
                   key={item.uid}
                   onSelect={() => {
-                    currentSubdomain.value = item
+                    setCurrentSubdomain(item)
                   }}
                   className="relative"
                 >
                   <CheckIcon
                     className={cn(
                       'mr-2 size-4',
-                      item.value === currentSubdomain.value.value
+                      item.value === currentSubdomain.value
                         ? 'visible'
                         : 'invisible'
                     )}
                   />
                   {item.value}
-                  {item.uid !== subdomainStub.value.uid && (
+                  {item.uid !== subdomainStub.uid && (
                     <button
                       type="button"
                       onClick={() => handleDeleteSubdomain(item.uid)}

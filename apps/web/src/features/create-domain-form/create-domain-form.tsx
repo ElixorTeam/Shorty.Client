@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from '@repo/ui/form'
 import { Input } from '@repo/ui/input'
-import { useToast } from '@repo/ui/use-toast'
+import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -25,7 +25,6 @@ export default function CreateDomainForm({
 }: {
   onFormSubmit?: () => void
 }) {
-  const { toast } = useToast()
   const queryClient = useQueryClient()
 
   const form = useForm<z.infer<typeof createFormSchema>>({

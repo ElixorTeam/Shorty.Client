@@ -17,7 +17,7 @@ type DecodedToken = {
 const getUserRolesByAccessToken = (accessToken: string): RoleType[] => {
   const decodedToken = jwtDecode<DecodedToken>(accessToken)
   const clientRoles = decodedToken.resource_access[CLIENT_NAME]?.roles
-  return clientRoles ? clientRoles : ['user']
+  return clientRoles ?? ['user']
 }
 
 export default getUserRolesByAccessToken
