@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  ComputerDesktopIcon,
-  MoonIcon,
-  SunIcon,
-} from '@heroicons/react/24/solid'
+import { ComputerIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   DropdownMenu,
@@ -21,8 +17,8 @@ export default function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="shrink-0">
-          <SunIcon className="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <SunIcon className="size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+          <MoonIcon className="absolute size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
@@ -48,7 +44,7 @@ export default function ThemeToggle() {
             setTheme('system')
           }}
         >
-          <ComputerDesktopIcon className="mr-2 size-4" />
+          <ComputerIcon className="mr-2 size-4" />
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

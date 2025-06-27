@@ -1,4 +1,4 @@
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { TriangleAlertIcon } from 'lucide-react'
 import {
   Card,
   CardContent,
@@ -51,7 +51,7 @@ export default function ViewsCard({ data }: { data: AnalyticsItem[] }) {
           </ResponsiveContainer>
         ) : (
           <div className="flex h-[350px] w-full flex-col items-center justify-center gap-3">
-            <ExclamationTriangleIcon className="size-10 text-amber-500" />
+            <TriangleAlertIcon className="size-10 text-amber-500" />
             <span>No analytics found</span>
           </div>
         )}

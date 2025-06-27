@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-
-import { TrashIcon } from '@heroicons/react/24/outline'
+import { TrashIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@repo/ui/button'
 import {
@@ -98,11 +96,7 @@ export default function CreateLinkForm({
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Form error',
-        description: result?.data?.failure,
-        variant: 'destructive',
-      })
+      toast('Form error', { description: result?.data?.failure })
       return
     }
 
@@ -184,15 +178,15 @@ export default function CreateLinkForm({
         <div className="w-full space-y-2">
           <div className="flex w-full items-center">
             <div className="w-1/3">
-              <span className="text-sm font-medium leading-none">
+              <span className="text-sm leading-none font-medium">
                 Subdomain
               </span>
             </div>
             <div className="w-1/3">
-              <span className="text-sm font-medium leading-none">Domain</span>
+              <span className="text-sm leading-none font-medium">Domain</span>
             </div>
             <div className="w-1/3">
-              <span className="text-sm font-medium leading-none">Path</span>
+              <span className="text-sm leading-none font-medium">Path</span>
             </div>
           </div>
           <div className="flex w-full">
@@ -215,7 +209,7 @@ export default function CreateLinkForm({
               )}
             />
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Final url will be {shortUrl.toString()}
           </p>
         </div>

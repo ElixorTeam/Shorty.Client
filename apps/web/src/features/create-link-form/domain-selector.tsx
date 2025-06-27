@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, ChevronsDownUpIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   Command,
@@ -41,7 +41,7 @@ export default function DomainSelector() {
           className="w-full justify-between rounded-none border-x-0 pr-2"
         >
           <span className="truncate">{currentDomain.value}</span>
-          <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
+          <ChevronsDownUpIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">

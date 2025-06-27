@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  ArchiveBoxXMarkIcon,
-  ExclamationTriangleIcon,
-} from '@heroicons/react/24/outline'
+import { ArchiveXIcon, TriangleAlertIcon } from 'lucide-react'
 import { ScrollArea } from '@repo/ui/scroll-area'
 import { Skeleton } from '@repo/ui/skeleton'
 
@@ -38,13 +35,13 @@ export default function Selector() {
                 <Skeleton className="h-24 w-full overflow-hidden rounded-md" />
               </div>
             ) : isError ? (
-              <div className="m-auto flex flex-col items-center gap-y-2 text-destructive">
-                <ExclamationTriangleIcon className="size-10 stroke-[0.8]" />
+              <div className="text-destructive m-auto flex flex-col items-center gap-y-2">
+                <TriangleAlertIcon className="size-10 stroke-[0.8]" />
                 <span>Error while fetching data</span>
               </div>
             ) : (
               <div className="m-auto flex flex-col items-center gap-y-2">
-                <ArchiveBoxXMarkIcon className="size-10 stroke-[0.8]" />
+                <ArchiveXIcon className="size-10 stroke-[0.8]" />
                 <span>No data found</span>
               </div>
             )}

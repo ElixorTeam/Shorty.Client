@@ -1,4 +1,4 @@
-import { ArrowDownIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
+import { ArrowDownIcon, CalendarDaysIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@repo/ui/button'
 import { Calendar } from '@repo/ui/calendar'
@@ -44,8 +44,7 @@ export default function CsvGenerateForm() {
   })
 
   const onSubmit = (values: z.infer<typeof analyticsFormScheme>) => {
-    toast({
-      title: 'Values',
+    toast('Values', {
       description: `from: ${values.date.from.toString()}\nto: ${values.date.to.toString()}`,
     })
     window.open(generateCsv())
@@ -85,14 +84,11 @@ export default function CsvGenerateForm() {
                         variant="outline"
                         className={cn(
                           'justify-start text-left font-normal sm:w-72',
-                          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                           !field.value && 'text-muted-foreground'
                         )}
                       >
                         <CalendarDaysIcon className="mr-2 size-4" />
-                        {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                         {field.value.from ? (
-                          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                           field.value.to ? (
                             <>
                               {format(field.value.from, 'LLL dd, y')} -{' '}

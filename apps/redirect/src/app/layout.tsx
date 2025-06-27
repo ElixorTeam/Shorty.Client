@@ -1,7 +1,7 @@
 import '@repo/ui/global.css'
 
 import { cn } from '@repo/ui/lib/utils'
-import { Toaster } from '@repo/ui/toaster'
+import { Toaster } from '@repo/ui/sonner'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -24,10 +24,10 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
+          'bg-background min-h-screen font-sans antialiased',
           fontSans.variable
         )}
       >

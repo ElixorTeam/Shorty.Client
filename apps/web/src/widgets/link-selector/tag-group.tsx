@@ -1,7 +1,6 @@
 'use client'
 
-import { ChevronUpIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 import { cn } from '@repo/ui/lib/utils'
 
 import { RecordType } from '@/entities/record'
@@ -23,7 +22,7 @@ export default function SelectorTagGroup({
     <div
       className={cn(
         filteredLinks.length > 0 ? 'flex' : 'hidden',
-        'w-full flex-col overflow-hidden rounded-md border bg-background'
+        'bg-background w-full flex-col overflow-hidden rounded-md border'
       )}
     >
       <div className="h-8 w-full">

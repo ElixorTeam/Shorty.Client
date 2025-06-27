@@ -1,17 +1,17 @@
 'use client'
 
 import {
-  ArrowUpOnSquareIcon,
+  ArrowDownSquareIcon,
   CalendarIcon,
-  EllipsisHorizontalIcon,
+  EllipsisVerticalIcon,
   EyeIcon,
-  HandRaisedIcon,
+  HandHeartIcon,
   LinkIcon,
   QrCodeIcon,
-  Squares2X2Icon,
+  SquareXIcon,
   TagIcon,
   TrashIcon,
-} from '@heroicons/react/24/outline'
+} from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/avatar'
 import { Badge } from '@repo/ui/badge'
 import { Button } from '@repo/ui/button'
@@ -51,11 +51,7 @@ export default function Description({ record }: { record: RecordType }) {
       linkUid: record.uid,
     })
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Error while deleting',
-        description: result?.data?.failure,
-        variant: 'destructive',
-      })
+      toast('Error while deleting', { description: result?.data?.failure })
       return
     }
     router.push('/main')
@@ -71,19 +67,13 @@ export default function Description({ record }: { record: RecordType }) {
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Error while updating',
-        description: result?.data?.failure,
-        variant: 'destructive',
-      })
+      toast('Error while updating', { description: result?.data?.failure })
       return
     }
 
     await queryClient.invalidateQueries({ queryKey: ['currentRecord'] })
     await queryClient.invalidateQueries({ queryKey: ['records'] })
-    toast({
-      title: 'Successfully updated',
-    })
+    toast('Successfully updated')
   }
 
   return (
@@ -109,7 +99,7 @@ export default function Description({ record }: { record: RecordType }) {
             <Link
               href={shortLink}
               target="_blank"
-              className="truncate text-sm text-muted-foreground hover:underline hover:underline-offset-4"
+              className="text-muted-foreground truncate text-sm hover:underline hover:underline-offset-4"
             >
               {shortLink}
             </Link>
@@ -130,14 +120,14 @@ export default function Description({ record }: { record: RecordType }) {
           </QrCodeDialog>
           <SocialShareDialog shortLink={shortLink}>
             <Button className="hidden xl:flex">
-              <ArrowUpOnSquareIcon className="mr-2 size-4" />
+              <ArrowDownSquareIcon className="mr-2 size-4" />
               Share
             </Button>
           </SocialShareDialog>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
-                <EllipsisHorizontalIcon className="size-4" />
+                <EllipsisVerticalIcon className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -165,12 +155,12 @@ export default function Description({ record }: { record: RecordType }) {
                     e.preventDefault()
                   }}
                 >
-                  <ArrowUpOnSquareIcon className="mr-2 size-4" />
+                  <ArrowDownSquareIcon className="mr-2 size-4" />
                   Share
                 </DropdownMenuItem>
               </SocialShareDialog>
               <DropdownMenuItem onClick={switchRecordStatus}>
-                <HandRaisedIcon className="mr-2 size-4" />
+                <HandHeartIcon className="mr-2 size-4" />
                 <span>{record.isEnable ? 'Disable' : 'Enable'}</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={deleteRecord}>
@@ -189,7 +179,7 @@ export default function Description({ record }: { record: RecordType }) {
             <span>No tag</span>
           )}
         </DescriptionItem>
-        <DescriptionItem title="Status" Icon={Squares2X2Icon}>
+        <DescriptionItem title="Status" Icon={SquareXIcon}>
           {record.isEnable ? (
             <div className="flex w-fit items-center gap-2 overflow-hidden rounded-xl border border-green-300 bg-green-100/[.2] px-3 dark:border-green-600 dark:bg-green-900/[.2]">
               <div className="size-2 rounded-full bg-green-600" />

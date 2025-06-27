@@ -1,4 +1,4 @@
-import { ArrowLeftEndOnRectangleIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftFromLineIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import Link from 'next/link'
 import { ReactNode } from 'react'
@@ -19,7 +19,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
             <div className="flex size-full grow justify-center px-4 py-3">
               <Link href="/admin/domains">Domains</Link>
             </div>
-            <div className="flex h-14 w-full shrink-0 items-center justify-between border-t pl-5 pr-3">
+            <div className="flex h-14 w-full shrink-0 items-center justify-between border-t pr-3 pl-5">
               {user?.name ?? 'Unknown'}
               <div className="flex items-center gap-1">
                 <form
@@ -30,7 +30,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
                   }}
                 >
                   <Button variant="ghost" size="icon" type="submit">
-                    <ArrowLeftEndOnRectangleIcon className="size-5" />
+                    <ArrowLeftFromLineIcon className="size-5" />
                   </Button>
                 </form>
                 <ThemeToggle />

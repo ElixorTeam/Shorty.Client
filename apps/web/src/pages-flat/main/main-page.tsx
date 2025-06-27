@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import { cn } from '@repo/ui/lib/utils'
 import {
@@ -55,15 +55,15 @@ export default async function MainPage({ linkUid }: { linkUid: string }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="size-full grid-rows-1 divide-x md:grid md:grid-cols-[18rem,1fr] lg:grid-cols-[21rem,1fr] min-[1930px]:border-x">
-        <div className="sticky top-0 flex h-screen w-full grow flex-col overflow-hidden bg-secondary/40">
+      <div className="size-full grid-rows-1 divide-x min-[1930px]:border-x md:grid md:grid-cols-[18rem_1fr] lg:grid-cols-[18rem_1fr]">
+        <div className="bg-secondary/40 sticky top-0 flex h-screen w-full grow flex-col overflow-hidden">
           <NavigationHeader />
           <Selector />
         </div>
         <div
           className={cn(
             isValidUid ? 'absolute top-0' : 'hidden',
-            'z-20 w-full overflow-clip bg-background md:relative md:flex md:flex-col'
+            'bg-background z-20 w-full overflow-clip md:relative md:flex md:flex-col'
           )}
         >
           <div className="flex size-full flex-col">

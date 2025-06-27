@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  ArrowTrendingUpIcon,
-  ClockIcon,
-  EyeIcon,
-  UserIcon,
-} from '@heroicons/react/24/outline'
+import { ArrowUpIcon, ClockIcon, EyeIcon, UserIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@repo/ui/tabs'
 import { toast } from 'sonner'
@@ -42,18 +37,12 @@ export default function Dashboard() {
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Error while reseting',
-        description: result?.data?.failure,
-        variant: 'destructive',
-      })
+      toast('Error while reseting', { description: result?.data?.failure })
       return
     }
 
     await queryClient.invalidateQueries({ queryKey: ['domains'] })
-    toast({
-      title: 'Successfully reseted',
-    })
+    toast('Successfully reseted')
   }
 
   return (
@@ -99,7 +88,7 @@ export default function Dashboard() {
         />
         <DashboardCard
           title="Ratio"
-          Icon={ArrowTrendingUpIcon}
+          Icon={ArrowUpIcon}
           value={getUniqueRation()}
           description=""
         />

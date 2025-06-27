@@ -54,12 +54,10 @@ export default function QrCodeDialog({
       if (!blob) return
       navigator.clipboard
         .write([new ClipboardItem({ 'image/png': blob })])
-        .then(() => toast({ title: 'Successfully copied' }))
+        .then(() => toast('Successfully copied'))
         .catch(() =>
-          toast({
-            title: 'Error copying',
+          toast('Error copying', {
             description: 'Your browser does not allow copying to the clipboard',
-            variant: 'destructive',
           })
         )
     })

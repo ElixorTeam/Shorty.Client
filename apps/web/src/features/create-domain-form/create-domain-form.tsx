@@ -40,11 +40,7 @@ export default function CreateDomainForm({
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Form error',
-        description: result?.data?.failure,
-        variant: 'destructive',
-      })
+      toast('Form error', { description: result?.data?.failure })
       return
     }
 

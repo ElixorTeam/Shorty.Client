@@ -1,8 +1,4 @@
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-  PlusCircleIcon,
-} from '@heroicons/react/24/outline'
+import { CheckIcon, ChevronsUpDownIcon, PlusCircleIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   Command,
@@ -50,7 +46,7 @@ export default function TagSelector() {
           className="w-full justify-between sm:w-72"
         >
           <span className="truncate">{currentTag.value}</span>
-          <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
+          <ChevronsUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-72 p-0">

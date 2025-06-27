@@ -17,8 +17,10 @@ export const {
   providers: [
     keycloak({
       clientId: envServer.KEYCLOAK_CLIENT_ID,
-      clientSecret: envServer.KEYCLOAK_CLIENT_SECRET,
-      issuer: `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}`,
+      clientSecret: 's7bJkXvMXQIp1rJ4XxmtqEcViKtc5Nzh',
+      // clientSecret: envServer.KEYCLOAK_CLIENT_SECRET,
+      issuer: 'http://172.18.1.90:8080/realms/shorty',
+      // issuer: `${envServer.KEYCLOAK_BASE_URL}/realms/${envServer.KEYCLOAK_REALM}`,
       checks: [],
     }),
   ],

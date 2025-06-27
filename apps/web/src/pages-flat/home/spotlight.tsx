@@ -1,7 +1,5 @@
 import { cn } from '@repo/ui/lib/utils'
 
-/* eslint-disable tailwindcss/classnames-order */
-
 export default function Spotlight({
   className,
   fill,

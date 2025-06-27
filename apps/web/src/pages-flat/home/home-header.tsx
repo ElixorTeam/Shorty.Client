@@ -9,8 +9,8 @@ import SignUpButton from './sign-up-button'
 export default async function HomeHeader() {
   const session = await auth()
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/[.4] bg-background/[.95] backdrop-blur supports-[backdrop-filter]:bg-background/[.6]">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="border-border/[.4] bg-background/[.95] supports-[backdrop-filter]:bg-background/[.6] sticky top-0 z-40 w-full border-b backdrop-blur">
+      <div className="container mx-auto flex h-16 items-center justify-between">
         <Link href="/">
           <span className="text-2xl font-extrabold">
             Sho<span className="tracking-wide">r</span>

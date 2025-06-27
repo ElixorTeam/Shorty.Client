@@ -46,7 +46,7 @@ export default function PasswordForm({ redirect }: { redirect: RedirectType }) {
       return
     }
 
-    toast({ title: 'Form error', description: 'Wrong password' })
+    toast('Form error', { description: 'Wrong password' })
   }
 
   if (isCompleted && redirect.type == RedirectTypesEnum.GROUP)

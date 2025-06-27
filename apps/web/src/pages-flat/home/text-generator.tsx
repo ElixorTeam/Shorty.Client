@@ -29,7 +29,6 @@ export default function TextGenerateEffect({
         delay: stagger(0.2),
       }
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scope.current])
 
   const renderWords = () => {
@@ -55,7 +54,7 @@ export default function TextGenerateEffect({
   return (
     <div
       className={cn(
-        'text-2xl font-bold leading-snug tracking-wide text-black dark:text-white',
+        'text-2xl leading-snug font-bold tracking-wide text-black dark:text-white',
         className
       )}
     >

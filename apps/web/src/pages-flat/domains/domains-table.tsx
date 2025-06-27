@@ -1,6 +1,6 @@
 'use client'
 
-import { TrashIcon } from '@heroicons/react/24/solid'
+import { TrashIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   Table,
@@ -25,18 +25,14 @@ export default function DomainsTable() {
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Error while deleting',
+      toast('Error while deleting', {
         description: result?.data?.failure,
-        variant: 'destructive',
       })
       return
     }
 
     await queryClient.invalidateQueries({ queryKey: ['domains'] })
-    toast({
-      title: 'Successfully deleted',
-    })
+    toast('Successfully deleted')
   }
   return (
     <div className="w-full overflow-hidden rounded-md border">

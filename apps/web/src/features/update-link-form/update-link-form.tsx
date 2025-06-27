@@ -92,17 +92,13 @@ export default function UpdateLinkForm({
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Form error',
+      toast('Form error', {
         description: result?.data?.failure,
-        variant: 'destructive',
       })
       return
     }
 
-    toast({
-      title: 'Successfully updated',
-    })
+    toast('Successfully updated')
     await queryClient.invalidateQueries({ queryKey: ['currentRecord'] })
     await queryClient.invalidateQueries({ queryKey: ['records'] })
     if (onFormSubmit) onFormSubmit()

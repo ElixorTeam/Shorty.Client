@@ -1,9 +1,9 @@
 import {
   CheckIcon,
-  ChevronUpDownIcon,
+  ChevronsDownUpIcon,
   PlusCircleIcon,
   TrashIcon,
-} from '@heroicons/react/24/outline'
+} from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   Command,
@@ -56,10 +56,8 @@ export default function SubdomainSelector({
     })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Form error',
+      toast('Form error', {
         description: result?.data?.failure,
-        variant: 'destructive',
       })
       return
     }
@@ -78,10 +76,8 @@ export default function SubdomainSelector({
     const result = await deleteSubdomainAction({ uid: subdomainUid })
 
     if (!result?.data || 'failure' in result.data) {
-      toast({
-        title: 'Form error',
+      toast('Form error', {
         description: result?.data?.failure,
-        variant: 'destructive',
       })
       return
     }
@@ -95,7 +91,7 @@ export default function SubdomainSelector({
     if (currentSubdomain.uid !== subdomainStub.uid)
       setCurrentSubdomain(subdomainStub)
 
-    toast({ title: 'Successfully deleted' })
+    toast('Successfully deleted')
   }
 
   if (isLoading) {
@@ -113,7 +109,7 @@ export default function SubdomainSelector({
           className="w-full justify-between rounded-r-none pr-2"
         >
           <span className="truncate">{currentSubdomain.value}</span>
-          <ChevronUpDownIcon className="ml-2 size-4 shrink-0 opacity-50" />
+          <ChevronsDownUpIcon className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -164,9 +160,9 @@ export default function SubdomainSelector({
                     <button
                       type="button"
                       onClick={() => handleDeleteSubdomain(item.uid)}
-                      className="absolute right-2 top-2"
+                      className="absolute top-2 right-2"
                     >
-                      <TrashIcon className="size-4 text-destructive" />
+                      <TrashIcon className="text-destructive size-4" />
                       <span className="sr-only">Delete {item.value}</span>
                     </button>
                   )}

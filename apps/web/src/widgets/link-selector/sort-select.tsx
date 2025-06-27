@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
+import { ArrowUpDownIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   DropdownMenu,
@@ -21,7 +21,7 @@ export default function SortSelect() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <ArrowsUpDownIcon className="size-4" />
+          <ArrowUpDownIcon className="size-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-44">
