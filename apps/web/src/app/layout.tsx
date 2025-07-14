@@ -1,19 +1,21 @@
 import '@repo/ui/global.css'
 
-import { cn } from '@repo/ui/lib/utils'
 import { Toaster } from '@repo/ui/sonner'
 import type { Metadata } from 'next'
-import { Inter as FontSans } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { type ReactNode } from 'react'
 
 import { auth } from '@/shared/auth'
-import QueryProvider from '@/shared/providers/query-provider'
-import SessionProvider from '@/shared/providers/session-provider'
-import ThemeProvider from '@/shared/providers/theme-provider'
+import Providers from '@/shared/providers'
 
-const fontSans = FontSans({
+const fontSans = Geist({
   subsets: ['latin'],
   variable: '--font-sans',
+})
+
+const fontMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
@@ -30,25 +32,12 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          'min-h-screen overscroll-none bg-background font-sans antialiased',
-          fontSans.variable
-        )}
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
       >
-        <SessionProvider session={session}>
-          <QueryProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-              enableColorScheme
-            >
-              {children}
-              <Toaster />
-            </ThemeProvider>
-          </QueryProvider>
-        </SessionProvider>
+        <Providers session={session}>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   )

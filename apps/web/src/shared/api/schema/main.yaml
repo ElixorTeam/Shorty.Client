@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Shorty API
+  version: 1.0.0
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /user/tags:
+    get:
+      $ref: './endpoints/tags.yaml#/getAllTags'
+
+  /user/subdomains:
+    get:
+      $ref: './endpoints/subdomains.yaml#/getAllSubdomainsAndDomains'
+    post:
+      $ref: './endpoints/subdomains.yaml#/createSubdomain'
+
+  /user/subdomains/{id}:
+    delete:
+      $ref: './endpoints/subdomains.yaml#/deleteSubdomain'
+
+  /user/links:
+    get:
+      $ref: './endpoints/records.yaml#/getAllRecords'
+    post:
+      $ref: './endpoints/records.yaml#/createRecord'
+
+  /user/links/{id}:
+    get:
+      $ref: './endpoints/records.yaml#/getRecord'
+    put:
+      $ref: './endpoints/records.yaml#/updateRecord'
+    delete:
+      $ref: './endpoints/records.yaml#/deleteRecord'
+
+  /user/links/{id}/analytics:
+    get:
+      $ref: './endpoints/records.yaml#/getRecordAnalytics'
+    delete:
+      $ref: './endpoints/records.yaml#/resetRecordAnalytics'
+
+  /domains:
+    get:
+      $ref: './endpoints/domains.yaml#/getAllDomains'
+    post:
+      $ref: './endpoints/domains.yaml#/createDomain'
+
+  /domains/{id}:
+    delete:
+      $ref: './endpoints/domains.yaml#/deleteDomain'

@@ -1,0 +1,32 @@
+schemas:
+  Error:
+    type: object
+    required:
+      - message
+      - code
+    properties:
+      message:
+        type: string
+      code:
+        type: string
+
+UnauthorizedError:
+  description: Unauthorized error
+  content:
+    application/json:
+      schema:
+        $ref: '#/schemas/Error'
+
+NotFoundError:
+  description: Not found error
+  content:
+    application/json:
+      schema:
+        $ref: '#/schemas/Error'
+
+BadRequestError:
+  description: Bad request error
+  content:
+    application/json:
+      schema:
+        $ref: '#/schemas/Error'

@@ -1,18 +1,7 @@
-import { QueryClient } from '@tanstack/react-query'
-
-import { getAdminDomains } from '@/entities/domain'
-
 import CreateDomainDialog from './create-domain-dialog'
 import DomainsTable from './domains-table'
 
 export default async function DomainsPage() {
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery({
-    queryFn: getAdminDomains,
-    queryKey: ['domains'],
-  })
-
   return (
     <div className="size-full p-4">
       <div className="mb-2 flex items-center gap-2">

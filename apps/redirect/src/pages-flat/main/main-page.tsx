@@ -10,7 +10,7 @@ export default async function MainPage({ path }: { path: string }) {
   if (record.urls.length == 0) return <h1>Error</h1>
 
   if (record.type === RedirectTypesEnum.SINGLE && !record.password)
-    return redirect(record.urls.at(1) as string)
+    return redirect(record.urls.at(0) as string)
 
   if (record.type === RedirectTypesEnum.GROUP && !record.password)
     return <GroupRecordView urls={record.urls} />

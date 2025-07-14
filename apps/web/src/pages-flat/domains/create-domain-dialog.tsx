@@ -8,9 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@repo/ui/dialog'
-
-import CreateDomainForm from '@/features/create-domain-form'
 import { useState } from 'react'
+
+import CreateDomainForm from './create-domain-form'
 
 export default function CreateDomainDialog() {
   const [open, setOpen] = useState<boolean>(false)

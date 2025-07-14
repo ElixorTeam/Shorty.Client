@@ -47,7 +47,7 @@ export default async function middleware(request: NextRequest) {
     ...urlParts,
   })
   try {
-    await fetch(`${process.env.BACKEND_URL ?? ''}/redirects`, {
+    await fetch(`${process.env.API_URL ?? ''}/redirects`, {
       body,
       headers: {
         Accept: 'application/json',

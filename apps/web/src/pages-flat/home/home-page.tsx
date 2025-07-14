@@ -1,4 +1,3 @@
-import { TextCursorIcon, LockIcon, UserCircleIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   Card,
@@ -7,7 +6,11 @@ import {
   CardFooter,
   CardTitle,
 } from '@repo/ui/card'
+import { cn } from '@repo/ui/lib/utils'
+import { LockIcon, TextCursorIcon, UserCircleIcon } from 'lucide-react'
 import Link from 'next/link'
+
+import ROUTES from '@/shared/routes'
 
 import ChartExample from './chart-example'
 import HomeFooter from './home-footer'
@@ -15,11 +18,10 @@ import HomeHeader from './home-header'
 import QrcodeExample from './qrcode-example'
 import Spotlight from './spotlight'
 import TextGenerator from './text-generator'
-import { cn } from '@repo/ui/lib/utils'
 
 export default async function HomePage() {
   return (
-    <div className="bg-grid-black/[.03] dark:bg-grid-white/[.02] min-h-screen">
+    <div className="bg-grid-black/[.03] dark:bg-grid-white/[.02] min-h-screen w-full">
       <div
         className={cn(
           'absolute inset-0',
@@ -46,7 +48,7 @@ export default async function HomePage() {
             />
           </div>
           <Button size="lg" variant="secondary" type="button" asChild>
-            <Link href="/main">Get Started</Link>
+            <Link href={ROUTES.LINKS}>Get Started</Link>
           </Button>
         </div>
         <h2 className="text-primary pb-10 text-center text-xl font-extralight tracking-tight lg:text-3xl">

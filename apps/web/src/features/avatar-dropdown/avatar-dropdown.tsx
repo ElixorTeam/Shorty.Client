@@ -15,7 +15,7 @@ export default async function AvatarDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2">
-        <Avatar className="size-8">
+        <Avatar className="size-8 hover:cursor-pointer">
           <AvatarImage src={user?.image ?? ''} alt="user-avatar" />
           <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
@@ -36,7 +36,7 @@ export default async function AvatarDropdown() {
           <DropdownMenuItem asChild>
             <button
               type="submit"
-              className="relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+              className="focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
             >
               Sign out
             </button>

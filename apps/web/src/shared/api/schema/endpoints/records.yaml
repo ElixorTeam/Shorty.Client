@@ -1,0 +1,323 @@
+schemas:
+  RecordCreateRequest:
+    type: object
+    properties:
+      title:
+        type: string
+        minLength: 2
+      urls:
+        type: array
+        items:
+          type: string
+          format: url
+        maxItems: 5
+        minItems: 1
+      tags:
+        type: array
+        items:
+          type: string
+      path:
+        type: string
+        minLength: 2
+        maxLength: 16
+      domainUid:
+        type: string
+        format: uuid
+      subdomainUid:
+        type: string
+      password:
+        type: string
+    required:
+      - tags
+      - title
+      - urls
+      - path
+      - domainUid
+  Record:
+    type: object
+    properties:
+      uid:
+        type: string
+        format: uuid
+      title:
+        type: string
+      urls:
+        type: array
+        items:
+          type: string
+      path:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      subdomainUid:
+        type: string
+        format: uuid
+      domainUid:
+        type: string
+        format: uuid
+      password:
+        type: string
+      isEnable:
+        type: boolean
+      updateDt:
+        type: string
+        format: date-time
+      createDt:
+        type: string
+        format: date-time
+    required:
+      - uid
+      - title
+      - urls
+      - path
+      - tags
+      - subdomainUid
+      - domainUid
+      - password
+      - isEnable
+      - updateDt
+      - createDt
+  AnalyticsItem:
+    type: object
+    properties:
+      label:
+        type: string
+      value:
+        type: integer
+    required:
+      - label
+      - value
+  RecordAnalytics:
+    type: object
+    properties:
+      statistics:
+        type: object
+        properties:
+          views:
+            type: integer
+          uniqueViews:
+            type: integer
+      devicesData:
+        type: object
+        properties:
+          os:
+            type: array
+            items:
+              $ref: '#/schemas/AnalyticsItem'
+          device:
+            type: array
+            items:
+              $ref: '#/schemas/AnalyticsItem'
+      viewsData:
+        type: array
+        items:
+          $ref: '#/schemas/AnalyticsItem'
+    required:
+      - statistics
+      - devicesData
+      - viewsData
+
+getAllRecords:
+  summary: Get all records
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: A list of records
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/schemas/Record'
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'
+
+getRecord:
+  summary: Get a record by ID
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: A record
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/schemas/Record'
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'
+
+createRecord:
+  summary: Create a new record
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/schemas/RecordCreateRequest'
+  responses:
+    '201':
+      description: Record created successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/schemas/Record'
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'
+
+updateRecord:
+  summary: Update a record
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            uid:
+              type: string
+              format: uuid
+            tag:
+              type: string
+              format: uuid
+            title:
+              type: string
+              minLength: 2
+            password:
+              type: string
+              format: uuid
+            isEnable:
+              type: boolean
+          required:
+            - uid
+            - isEnable
+  responses:
+    '200':
+      description: Record updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/schemas/Record'
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'
+
+deleteRecord:
+  summary: Delete a record
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '204':
+      description: Record deleted successfully
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'
+
+getRecordAnalytics:
+  summary: Get analytics for a record
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: period
+      in: query
+      required: true
+      schema:
+        type: string
+        enum: [Week, Month, Year]
+  responses:
+    '200':
+      description: Analytics retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/schemas/RecordAnalytics'
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'
+
+resetRecordAnalytics:
+  summary: Reset analytics for a record
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '204':
+      description: Analytics reset successfully
+    '400':
+      $ref: '../shared/responses.yaml#/BadRequestError'
+    '401':
+      $ref: '../shared/responses.yaml#/UnauthorizedError'
+    '404':
+      $ref: '../shared/responses.yaml#/NotFoundError'

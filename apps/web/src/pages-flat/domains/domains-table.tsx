@@ -1,6 +1,5 @@
 'use client'
 
-import { TrashIcon } from 'lucide-react'
 import { Button } from '@repo/ui/button'
 import {
   Table,
@@ -10,29 +9,31 @@ import {
   TableHeader,
   TableRow,
 } from '@repo/ui/table'
-import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
+import { TrashIcon } from 'lucide-react'
+import { toast } from 'sonner'
 
-import { deleteDomainAction, useGetClientDomains } from '@/entities/domain'
+import { rqClient } from '@/shared/api/instance'
 
 export default function DomainsTable() {
-  const { data } = useGetClientDomains()
+  const { data } = rqClient.useQuery('get', '/domains')
   const queryClient = useQueryClient()
 
   const deleteDomain = async (uuid: string) => {
-    const result = await deleteDomainAction({
-      uuid,
-    })
+    toast('form error')
+    // const result = await deleteDomainAction({
+    //   uuid,
+    // })
 
-    if (!result?.data || 'failure' in result.data) {
-      toast('Error while deleting', {
-        description: result?.data?.failure,
-      })
-      return
-    }
+    // if (!result?.data || 'failure' in result.data) {
+    //   toast('Error while deleting', {
+    //     description: result?.data?.failure,
+    //   })
+    //   return
+    // }
 
-    await queryClient.invalidateQueries({ queryKey: ['domains'] })
-    toast('Successfully deleted')
+    // await queryClient.invalidateQueries({ queryKey: ['domains'] })
+    // toast('Successfully deleted')
   }
   return (
     <div className="w-full overflow-hidden rounded-md border">
@@ -45,7 +46,7 @@ export default function DomainsTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((item, index) => (
+          {data?.data?.map((item, index) => (
             <TableRow key={index}>
               <TableCell className="font-medium">{index + 1}</TableCell>
               <TableCell>{item.value}</TableCell>

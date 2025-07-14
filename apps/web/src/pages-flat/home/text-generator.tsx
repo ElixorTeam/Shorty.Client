@@ -54,7 +54,7 @@ export default function TextGenerateEffect({
   return (
     <div
       className={cn(
-        'text-2xl leading-snug font-bold tracking-wide text-black dark:text-white',
+        'text-2xl font-bold leading-snug tracking-wide text-black dark:text-white',
         className
       )}
     >
