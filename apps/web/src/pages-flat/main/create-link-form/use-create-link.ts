@@ -6,7 +6,7 @@ export function useCreateLink() {
   const create = async (data: ApiSchemas['RecordCreateRequest']) =>
     createMutation.mutateAsync({ body: data })
   const errorMessage = createMutation.isError
-    ? createMutation.error?.message
+    ? createMutation.error.message
     : undefined
   return {
     create,

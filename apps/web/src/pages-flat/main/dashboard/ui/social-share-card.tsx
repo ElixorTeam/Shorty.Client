@@ -27,11 +27,11 @@ import {
   XIcon,
 } from 'react-share'
 
+import { useLinkUidContext } from '../../models/link-uid-context'
 import useGetShortLink from '../models/use-get-short-link'
 
-export default function SocialShareCard({
-  linkUid,
-}: Readonly<{ linkUid: string }>) {
+export default function SocialShareCard() {
+  const linkUid = useLinkUidContext()
   const shortUrl = useGetShortLink({ linkUid })
   return (
     <Card className="gap-2">

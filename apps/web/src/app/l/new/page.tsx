@@ -9,10 +9,7 @@ import { Separator } from '@repo/ui/separator'
 import { SidebarTrigger } from '@repo/ui/sidebar'
 import Link from 'next/link'
 
-import {
-  CreateLinkForm,
-  FormProvider,
-} from '@/pages-flat/main/create-link-form'
+import { CreateLinkForm } from '@/pages-flat/main/create-link-form'
 import ROUTES from '@/shared/routes'
 
 export default async function Page() {
@@ -44,9 +41,7 @@ export default async function Page() {
               Fill in the details to create a new link.
             </p>
           </div>
-          <FormProvider>
-            <CreateLinkForm />
-          </FormProvider>
+          <CreateLinkForm />
         </div>
       </div>
     </>

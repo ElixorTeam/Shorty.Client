@@ -11,9 +11,11 @@ import { useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { toast } from 'sonner'
 
+import { useLinkUidContext } from '../../models/link-uid-context'
 import useGetShortLink from '../models/use-get-short-link'
 
-export default function QrCodeCard({ linkUid }: { linkUid: string }) {
+export default function QrCodeCard() {
+  const linkUid = useLinkUidContext()
   const shortLink = useGetShortLink({ linkUid })
   const [mainColorValue, setMainColorValue] = useState<string>('#000')
   const [mainColorOpen, setMainColorOpen] = useState<boolean>(false)
@@ -51,16 +53,18 @@ export default function QrCodeCard({ linkUid }: { linkUid: string }) {
   return (
     <Card ref={qrcodeContainerRef}>
       <CardContent className="flex flex-col gap-6 sm:flex-row">
-        <div className="mx-auto w-fit rounded-md border bg-white p-4 sm:mx-0">
+        <div className="mx-auto w-fit sm:mx-0">
           {!shortLink ? (
-            <Skeleton className="size-32" />
+            <Skeleton className="size-[162px] border" />
           ) : (
-            <QRCodeCanvas
-              value={shortLink}
-              size={128}
-              bgColor={bgColorValue}
-              fgColor={mainColorValue}
-            />
+            <div className="rounded-md border bg-white p-4">
+              <QRCodeCanvas
+                value={shortLink}
+                size={128}
+                bgColor={bgColorValue}
+                fgColor={mainColorValue}
+              />
+            </div>
           )}
         </div>
         <div className="flex w-full flex-col justify-center gap-2 overflow-hidden">

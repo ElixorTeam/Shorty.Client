@@ -79,6 +79,27 @@ schemas:
       - isEnable
       - updateDt
       - createDt
+  RecordUpdateRequest:
+    type: object
+    properties:
+      uid:
+        type: string
+        format: uuid
+      title:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      password:
+        type: string
+      isEnable:
+        type: boolean
+    required:
+      - uid
+      - title
+      - tags
+      - isEnable
   AnalyticsItem:
     type: object
     properties:
@@ -135,6 +156,8 @@ getAllRecords:
                 type: array
                 items:
                   $ref: '#/schemas/Record'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':
@@ -163,6 +186,8 @@ getRecord:
             properties:
               data:
                 $ref: '#/schemas/Record'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':
@@ -213,32 +238,17 @@ updateRecord:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            uid:
-              type: string
-              format: uuid
-            tag:
-              type: string
-              format: uuid
-            title:
-              type: string
-              minLength: 2
-            password:
-              type: string
-              format: uuid
-            isEnable:
-              type: boolean
-          required:
-            - uid
-            - isEnable
+          $ref: '#/schemas/RecordUpdateRequest'
   responses:
     '200':
       description: Record updated successfully
       content:
         application/json:
           schema:
-            $ref: '#/schemas/Record'
+            type: object
+            properties:
+              data:
+                $ref: '#/schemas/Record'
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':

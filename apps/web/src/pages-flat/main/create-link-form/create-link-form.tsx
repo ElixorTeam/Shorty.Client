@@ -14,11 +14,13 @@ import {
 import { Input } from '@repo/ui/input'
 import { Label } from '@repo/ui/label'
 import { cn } from '@repo/ui/lib/utils'
+import { RadioGroup, RadioGroupItem } from '@repo/ui/radio-group'
+import { Skeleton } from '@repo/ui/skeleton'
 import { Tabs, TabsList, TabsTrigger } from '@repo/ui/tabs'
 import { useQueryClient } from '@tanstack/react-query'
-import { TrashIcon } from 'lucide-react'
+import { RefreshCwIcon, TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -26,33 +28,32 @@ import { rqClient } from '@/shared/api/instance'
 import { ApiSchemas } from '@/shared/api/schema'
 import ROUTES from '@/shared/routes'
 
-import { useFormContext } from './create-form-context'
 import createFormSchema from './create-form-scheme'
-import DomainSelector from './domain-selector'
-import generateUrlPath from './generate-url-path'
-import SubdomainSelector from './subdomain-selector'
 import { useCreateLink } from './use-create-link'
 
+const generateUrlPath = (length: number = 6): string => {
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyz'
+  const array = new Uint8Array(length)
+  crypto.getRandomValues(array)
+  return Array.from(array, (byte) => chars[byte % chars.length]).join('')
+}
+
 type UrlType = z.infer<typeof createFormSchema>['urls'][number]
-
-const singleUrl: UrlType[] = [{ url: '' }]
-
-const groupUrls: UrlType[] = [{ url: '' }, { url: '' }]
+const DEFAULT_SINGLE_URL: UrlType[] = [{ url: '' }]
+const DEFAULT_GROUP_URL: UrlType[] = [{ url: '' }, { url: '' }]
 
 export default function CreateLinkForm() {
-  const { currentDomain, currentSubdomain } = useFormContext()
   const router = useRouter()
   const queryClient = useQueryClient()
   const [type, setType] = useState<string>('single')
+  const { data: domains } = rqClient.useQuery('get', '/user/subdomains')
   const { create, isPending } = useCreateLink()
 
   const form = useForm({
     resolver: zodResolver(createFormSchema),
     defaultValues: {
-      title: '',
-      urls: singleUrl,
+      urls: DEFAULT_SINGLE_URL,
       path: generateUrlPath(),
-      password: '',
     },
   })
 
@@ -61,36 +62,36 @@ export default function CreateLinkForm() {
     control: form.control,
   })
 
-  const shortUrl = useMemo(() => {
-    const { path } = form.getValues()
-    const subdomain = currentSubdomain?.value ?? ''
-    const domain = currentDomain?.value ?? ''
-    const protocol = domain.includes('localhost') ? 'http://' : 'https://'
-    return `${protocol}${subdomain}${domain}/${path}`
-  }, [form, currentDomain, currentSubdomain])
-
   const handleTypeChange = (value: string) => {
-    replace(value === 'single' ? singleUrl : groupUrls)
+    replace(value === 'single' ? DEFAULT_SINGLE_URL : DEFAULT_GROUP_URL)
     setType(value)
   }
 
-  const onSubmit = form.handleSubmit(async (values) => {
-    if (!currentDomain?.uid) return
+  useEffect(() => {
+    if (!form.getValues('domain') && domains?.data?.[0])
+      form.setValue('domain', domains.data[0].domainUid)
+  }, [domains?.data, form])
 
+  const onSubmit = form.handleSubmit(async (values) => {
     const payload: ApiSchemas['RecordCreateRequest'] = {
-      title: values.title || '',
+      title: values.urls
+        .slice(0, 3)
+        .map((item) => new URL(item.url).hostname)
+        .join(', '),
       urls: values.urls.map((u) => u.url),
       path: values.path,
-      domainUid: currentDomain.uid,
+      domainUid: values.domain,
       tags: [],
-      subdomainUid: currentSubdomain?.uid,
+      subdomainUid: undefined,
       password: values.password || undefined,
     }
 
     try {
       const request = await create(payload)
-      queryClient.invalidateQueries(rqClient.queryOptions('get', '/user/links'))
-      router.push(`${ROUTES.LINKS}/${request?.data?.uid}`)
+      await queryClient.invalidateQueries(
+        rqClient.queryOptions('get', '/user/links')
+      )
+      router.push(`${ROUTES.LINKS}/${request.data?.uid}`)
     } catch (error) {
       console.log(error)
     }
@@ -98,33 +99,17 @@ export default function CreateLinkForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="space-y-6 py-2">
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter title..." {...field} />
-              </FormControl>
-              <FormDescription>
-                This name will only be displayed in the application
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={onSubmit} className="space-y-6 pt-2 pb-4">
         <div className="space-y-2">
           <Label>Type</Label>
           <Tabs value={type} onValueChange={handleTypeChange}>
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="bg-secondary dark:bg-sidebar/80 grid w-full grid-cols-2">
               <TabsTrigger value="single">Single</TabsTrigger>
               <TabsTrigger value="group">Group</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
-        <div className="bg-secondary dark:bg-sidebar/80 rounded-md p-4">
+        <div className="bg-secondary dark:bg-sidebar/80 rounded-md px-4 py-3">
           {fields.map((url_field, index) => (
             <FormField
               control={form.control}
@@ -169,50 +154,89 @@ export default function CreateLinkForm() {
             </Button>
           )}
         </div>
-        <div className="w-full space-y-2">
-          <div className="flex w-full items-center">
-            <div className="w-1/3">
-              <span className="text-sm leading-none font-medium">
-                Subdomain
-              </span>
-            </div>
-            <div className="w-1/3">
-              <span className="text-sm leading-none font-medium">Domain</span>
-            </div>
-            <div className="w-1/3">
-              <span className="text-sm leading-none font-medium">Path</span>
-            </div>
-          </div>
-          <div className="flex w-full">
-            <div className="w-1/3">
-              <SubdomainSelector currentDomainUid={currentDomain?.uid ?? ''} />
-            </div>
-            <div className="w-1/3">
-              <DomainSelector />
-            </div>
-            <FormField
-              control={form.control}
-              name="path"
-              render={({ field }) => (
-                <FormItem className="w-1/3">
-                  <FormControl>
-                    <Input {...field} className="rounded-l-none" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <p className="text-muted-foreground text-sm">
-            Final url will be {shortUrl.toString()}
-          </p>
-        </div>
+
+        <FormField
+          control={form.control}
+          name="domain"
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>Domain</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  className="flex flex-col"
+                >
+                  {domains?.data.map((domain) => (
+                    <FormItem
+                      key={domain.domainUid}
+                      className="flex items-center gap-3"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={domain.domainUid} />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        {domain.domainValue}
+                      </FormLabel>
+                    </FormItem>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="path"
+          render={({ field }) => (
+            <FormItem className="gap-0.5">
+              <FormLabel>Path</FormLabel>
+              <FormControl>
+                <div className="flex items-center gap-1.5">
+                  {!domains?.data || !form.getValues('domain') ? (
+                    <Skeleton className="h-9 w-36" />
+                  ) : (
+                    <span className="text-sm">
+                      {
+                        domains.data.find(
+                          (domain) =>
+                            domain.domainUid === form.getValues('domain')
+                        )?.domainValue
+                      }
+                    </span>
+                  )}
+                  <span className="text-sm">/</span>
+                  <Input placeholder="Enter title..." {...field} />
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    type="button"
+                    onClick={() => {
+                      form.setValue('path', generateUrlPath())
+                    }}
+                  >
+                    <RefreshCwIcon />
+                  </Button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>
+                Password
+                <span className="text-muted-foreground text-xs">
+                  (Optional)
+                </span>
+              </FormLabel>
               <FormControl>
                 <Input
                   type="password"

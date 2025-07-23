@@ -5,7 +5,7 @@ export function useDeleteLink() {
   const del = async (uid: string) =>
     deleteMutation.mutateAsync({ params: { path: { id: uid } } })
   const errorMessage = deleteMutation.isError
-    ? deleteMutation.error?.message
+    ? deleteMutation.error.message
     : undefined
   return {
     del,

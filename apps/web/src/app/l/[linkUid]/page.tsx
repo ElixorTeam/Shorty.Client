@@ -15,9 +15,9 @@ import ROUTES from '@/shared/routes'
 
 export default async function Page({
   params,
-}: {
+}: Readonly<{
   params: Promise<{ linkUid: string }>
-}) {
+}>) {
   const { linkUid } = await params
   return (
     <>

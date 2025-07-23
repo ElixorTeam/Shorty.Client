@@ -19,7 +19,7 @@ export default function SidebarLinkItem({
     <SidebarMenuButton asChild isActive={currentPathUid === link.uid}>
       <Link href={`${ROUTES.LINKS}/${link.uid}`}>
         {link.urls.length === 1 ? (
-          <Avatar className="mx-0.5 size-4 rounded-none">
+          <Avatar className="mx-0.5 size-4 shrink-0 rounded-none">
             <AvatarImage
               src={`http://www.google.com/s2/favicons?domain=${link.urls[0] ?? ''}`}
               alt="avatar"
@@ -27,7 +27,7 @@ export default function SidebarLinkItem({
             <AvatarFallback>{link.title[0]}</AvatarFallback>
           </Avatar>
         ) : (
-          <div className="bg-secondary flex size-5 items-center justify-center overflow-hidden rounded-full">
+          <div className="bg-secondary flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full">
             <span className="text-xs">{link.urls.length}</span>
           </div>
         )}

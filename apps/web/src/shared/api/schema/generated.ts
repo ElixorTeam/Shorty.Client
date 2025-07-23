@@ -67,7 +67,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["DomainsAndSubdomains"];
+                            data: components["schemas"]["DomainsAndSubdomains"];
                         };
                     };
                 };
@@ -180,7 +180,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["Record"][];
+                            data: components["schemas"]["Record"][];
                         };
                     };
                 };
@@ -252,7 +252,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["Record"];
+                            data: components["schemas"]["Record"];
                         };
                     };
                 };
@@ -273,16 +273,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": {
-                        /** Format: uuid */
-                        uid: string;
-                        /** Format: uuid */
-                        tag?: string;
-                        title?: string;
-                        /** Format: uuid */
-                        password?: string;
-                        isEnable: boolean;
-                    };
+                    "application/json": components["schemas"]["RecordUpdateRequest"];
                 };
             };
             responses: {
@@ -292,7 +283,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Record"];
+                        "application/json": {
+                            data?: components["schemas"]["Record"];
+                        };
                     };
                 };
                 400: components["responses"]["BadRequestError"];
@@ -422,7 +415,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["Domain"][];
+                            data: components["schemas"]["Domain"][];
                         };
                     };
                 };
@@ -562,6 +555,14 @@ export interface components {
             domainUid: string;
             subdomainUid?: string;
             password?: string;
+        };
+        RecordUpdateRequest: {
+            /** Format: uuid */
+            uid: string;
+            title: string;
+            tags: string[];
+            password?: string;
+            isEnable: boolean;
         };
         AnalyticsItem: {
             label: string;

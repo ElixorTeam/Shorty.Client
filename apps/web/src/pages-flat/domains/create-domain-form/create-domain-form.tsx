@@ -42,7 +42,9 @@ export default function CreateDomainForm({
 
     try {
       await createMutation.mutateAsync({ body: payload })
-      queryClient.invalidateQueries(rqClient.queryOptions('get', '/domains'))
+      await queryClient.invalidateQueries(
+        rqClient.queryOptions('get', '/domains')
+      )
       onFormSubmit?.()
     } catch (error) {
       console.log(error)

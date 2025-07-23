@@ -38,6 +38,7 @@ export default [
       ...reactHooksPlugin.configs.recommended.rules,
       '@typescript-eslint/no-misused-promises': 'off',
       'tailwindcss/migration-from-tailwind-2': 'off',
+      'tailwindcss/no-custom-classname': 'off',
     },
   },
 ]

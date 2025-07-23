@@ -79,8 +79,8 @@ export default async function HomePage() {
           </Card>
           <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
             <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden">
-              <TextCursorIcon className="text-primary absolute top-40 left-44 z-30 size-12 stroke-[0.8]" />
-              <div className="absolute top-28 left-20 flex h-20 w-[50rem] items-center overflow-hidden rounded-2xl border bg-white px-4 dark:border-white/[.15] dark:bg-neutral-950">
+              <TextCursorIcon className="text-primary absolute left-44 top-40 z-30 size-12 stroke-[0.8]" />
+              <div className="absolute left-20 top-28 flex h-20 w-[50rem] items-center overflow-hidden rounded-2xl border bg-white px-4 dark:border-white/[.15] dark:bg-neutral-950">
                 <p className="text-muted text-5xl">
                   <span className="text-primary">elixor</span>
                   .sh0.su/custom

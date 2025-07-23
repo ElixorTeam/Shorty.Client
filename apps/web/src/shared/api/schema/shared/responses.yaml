@@ -30,3 +30,21 @@ BadRequestError:
     application/json:
       schema:
         $ref: '#/schemas/Error'
+
+BodyNotValidError:
+  description: Body not valid error
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - error
+          - invalidFields
+        properties:
+          error:
+            type: string
+            const: 'BODY_NOT_VALID'
+          invalidFields:
+            type: array
+            items:
+              type: string

@@ -17,6 +17,9 @@ export const {
   signOut,
 } = NextAuth({
   trustHost: true,
+  pages: {
+    signIn: '/api/auth',
+  },
   providers: [
     keycloak({
       clientId: config.KEYCLOAK_CLIENT_ID,
@@ -27,49 +30,52 @@ export const {
   ],
   callbacks: {
     async jwt({ token, account }) {
-      const currentToken = { ...token }
-
-      if (account) {
-        currentToken.idToken = account.id_token
-        currentToken.accessToken = account.access_token
-        currentToken.refreshToken = account.refresh_token
-        currentToken.expiresAt = account.expires_at
-        currentToken.roles = getUserRolesByAccessToken(
-          account.access_token || ''
-        )
-        return currentToken
-      }
+      if (account)
+        return {
+          ...token,
+          id_token: account.id_token,
+          access_token: account.access_token,
+          refresh_token: account.refresh_token,
+          expires_at: account.expires_at,
+          roles: getUserRolesByAccessToken(account.access_token || ''),
+        }
 
       if (
-        currentToken.expiresAt &&
-        Date.now() < currentToken.expiresAt * 1000 - EXPIRES_COMPROMISE
+        token.expires_at &&
+        Date.now() < token.expires_at * 1000 - EXPIRES_COMPROMISE
       )
-        return currentToken
+        return token
+
+      const response = await reqAccessByRefreshToken(token.refresh_token || '')
+
+      if (response.status === 400 || response.status === 401) {
+        console.error(await response.json())
+        return { ...token, error: 'RefreshTokenError' }
+      }
 
       try {
-        const response = await reqAccessByRefreshToken(
-          currentToken.refreshToken || ''
-        )
-        const tokens = (await response.json()) as TokenSet
-        if (!response.ok)
-          return { ...currentToken, error: 'RefreshAccessTokenError' }
+        const newToken = (await response.json()) as TokenSet
         return {
-          ...currentToken,
-          idToken: tokens.id_token,
-          accessToken: tokens.access_token,
-          expiresAt: tokens.expires_at,
-          refreshToken: tokens.refresh_token || currentToken.refreshToken,
+          ...token,
+          id_token: newToken.id_token,
+          access_token: newToken.access_token,
+          refresh_token: newToken.refresh_token || token.refreshToken,
+          expires_at: newToken.expires_at,
         }
-      } catch {
-        return { ...currentToken, error: 'RefreshAccessTokenError' }
+      } catch (error) {
+        console.error(error)
+        return { ...token, error: 'RefreshTokenError' }
       }
     },
     session({ session, token }) {
-      const currentSession = { ...session }
-      const currentToken = { ...token }
-      currentSession.accessToken = currentToken.accessToken
-      currentSession.user.roles = currentToken.roles
-      return currentSession
+      return {
+        ...session,
+        access_token: token.access_token,
+        user: {
+          ...session.user,
+          roles: token.roles,
+        },
+      }
     },
   },
   events: {
@@ -77,7 +83,7 @@ export const {
       try {
         if (!('token' in token)) return
         const currentToken = token.token
-        await reqSessionLogout(currentToken?.idToken ?? '')
+        await reqSessionLogout(currentToken?.id_token ?? '')
       } catch {
         // pass
       }

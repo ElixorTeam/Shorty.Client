@@ -1,4 +1,7 @@
-import { RedirectTypesEnum } from './redirect-types-enum'
+export enum RedirectTypesEnum {
+  SINGLE = 'single',
+  GROUP = 'group',
+}
 
 export type RedirectResponseType = {
   uid: string

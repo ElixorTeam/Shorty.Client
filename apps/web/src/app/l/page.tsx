@@ -30,7 +30,7 @@ export default async function Page() {
           </BreadcrumbList>
         </Breadcrumb>
       </header>
-      <div className="bg-sidebar flex size-full grow flex-col items-center justify-center">
+      <div className="flex size-full grow flex-col items-center justify-center">
         <WelcomeBlock />
       </div>
     </>

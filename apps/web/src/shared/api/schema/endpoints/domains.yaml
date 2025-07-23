@@ -34,6 +34,8 @@ getAllDomains:
                 type: array
                 items:
                   $ref: '#/schemas/Domain'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':

@@ -3,14 +3,14 @@ import { NextRequest, NextResponse, userAgent } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 import z from 'zod'
 
-const isUrl = (value: string): boolean =>
-  z.string().url().safeParse(value).success
-
 type SplittedUrl = {
   domain: string
   subdomain: string | undefined
   path: string
 }
+
+const isUrl = (value: string): boolean =>
+  z.string().url().safeParse(value).success
 
 const splitUrl = (url: NextURL): SplittedUrl => {
   const domain = url.host
@@ -20,10 +20,10 @@ const splitUrl = (url: NextURL): SplittedUrl => {
 }
 
 const getIp = (headers: Headers): string => {
-  const forwardedForIp = headers.get('x-forwarded-for')?.split(',')[0]
+  const forwardedForIp = headers.get('x-forwarded-for')?.split(',')[0]?.trim()
   if (forwardedForIp && isUrl(forwardedForIp)) return forwardedForIp
 
-  const realIp = headers.get('x-real-ip')
+  const realIp = headers.get('x-real-ip')?.trim()
   return realIp && isUrl(realIp) ? realIp : '0.0.0.0'
 }
 

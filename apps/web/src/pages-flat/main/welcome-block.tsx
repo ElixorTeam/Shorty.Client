@@ -19,7 +19,7 @@ export default function WelcomeBlock() {
         <Skeleton className="h-9 w-64" />
       ) : (
         <Tabs value={theme} onValueChange={setTheme}>
-          <TabsList className="h-8 w-64">
+          <TabsList className="bg-secondary dark:bg-sidebar/80 h-8 w-64">
             <TabsTrigger value="light" className="w-1/3 text-xs">
               <SunIcon className="size-3.5" />
               Light

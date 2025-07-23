@@ -28,6 +28,8 @@ import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 
 import { rqClient } from '@/shared/api/instance'
 
+import { useLinkUidContext } from '../../models/link-uid-context'
+
 export const description = 'An interactive area chart'
 
 const chartConfig = {
@@ -41,9 +43,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function ChartAreaInteractive({ linkUid }: { linkUid: string }) {
+export function ChartAreaInteractive() {
   const isMobile = useIsMobile()
+  const linkUid = useLinkUidContext()
   const [timeRange, setTimeRange] = React.useState<'Month' | 'Week'>('Month')
+
+  const { data: link } = rqClient.useQuery('get', '/user/links/{id}', {
+    params: { path: { id: linkUid } },
+  })
 
   const { data } = rqClient.useQuery('get', '/user/links/{id}/analytics', {
     params: { path: { id: linkUid }, query: { period: timeRange } },
@@ -55,26 +62,48 @@ export function ChartAreaInteractive({ linkUid }: { linkUid: string }) {
     }
   }, [isMobile])
 
-  const filteredData = data?.data?.viewsData.filter((item) => {
-    const date = new Date(item.label)
-    const referenceDate = new Date('2024-06-30')
-    let daysToSubtract = 90
-    if (timeRange === 'Month') {
-      daysToSubtract = 30
-    } else if (timeRange === 'Week') {
-      daysToSubtract = 7
+  const filteredData = React.useMemo(() => {
+    if (!data?.data?.viewsData || !link?.data?.createDt) return []
+
+    const now = new Date()
+    const createDate = new Date(link.data.createDt)
+    const daysToSubtract = timeRange === 'Month' ? 30 : 7
+    const rangeStart = new Date(now)
+    rangeStart.setDate(rangeStart.getDate() - daysToSubtract + 1)
+    const startDate = createDate > rangeStart ? createDate : rangeStart
+    const endDate = now
+
+    const fullRange: { label: string; value: number }[] = []
+    const current = new Date(startDate)
+    while (current <= endDate) {
+      fullRange.push({
+        label: current.toISOString().slice(0, 10), // YYYY-MM-DD
+        value: 0,
+      })
+      current.setDate(current.getDate() + 1)
     }
-    const startDate = new Date(referenceDate)
-    startDate.setDate(startDate.getDate() - daysToSubtract)
-    return date >= startDate
-  })
+
+    const realDataMap = new Map<string, number>()
+    data.data.viewsData.forEach((item) => {
+      realDataMap.set(item.label, item.value)
+    })
+
+    const merged = fullRange.map((item) => ({
+      label: item.label,
+      value: realDataMap.get(item.label) ?? 0,
+    }))
+
+    return merged.sort(
+      (a, b) => new Date(a.label).getTime() - new Date(b.label).getTime()
+    )
+  }, [data, link, timeRange])
 
   return (
     <Card className="@container/card">
       <CardHeader>
         <CardTitle>Total Visitors</CardTitle>
         <CardDescription>
-          <span className="@[540px]/card:block hidden">
+          <span className="hidden @[540px]/card:block">
             Total for the last 3 months
           </span>
           <span className="@[540px]/card:hidden">Last 3 months</span>
@@ -88,7 +117,7 @@ export function ChartAreaInteractive({ linkUid }: { linkUid: string }) {
               setTimeRange(value as 'Month' | 'Week')
             }}
             variant="outline"
-            className="@[767px]/card:flex hidden *:data-[slot=toggle-group-item]:!px-4"
+            className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex"
           >
             <ToggleGroupItem value="Month">Last 30 days</ToggleGroupItem>
             <ToggleGroupItem value="Week">Last 7 days</ToggleGroupItem>
@@ -96,13 +125,12 @@ export function ChartAreaInteractive({ linkUid }: { linkUid: string }) {
           <Select
             value={timeRange}
             onValueChange={(value) => {
-              console.log(value)
               if (!['Month', 'Week'].includes(value)) return
               setTimeRange(value as 'Month' | 'Week')
             }}
           >
             <SelectTrigger
-              className="**:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden flex w-40"
+              className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
               size="sm"
               aria-label="Select a value"
             >

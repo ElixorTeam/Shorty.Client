@@ -19,7 +19,7 @@ export default auth(async (req) => {
   const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix)
   const isPublicRoute = publicRoutes.has(nextUrl.pathname)
   const isAdmin = !!session?.roles.find((x) => x == 'admin')
-  const isTokenExpire = session?.error === 'RefreshAccessTokenError'
+  const isTokenExpire = !!session?.error
 
   if (isAdminRoute && !isAdmin)
     return NextResponse.redirect(new URL('/', req.url))

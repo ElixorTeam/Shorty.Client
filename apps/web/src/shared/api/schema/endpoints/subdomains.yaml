@@ -57,6 +57,8 @@ getAllSubdomainsAndDomains:
             properties:
               data:
                 $ref: '#/schemas/DomainsAndSubdomains'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':
