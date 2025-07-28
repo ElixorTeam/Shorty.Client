@@ -4,4 +4,4 @@ const config = {
   NODE_ENV: process.env.NODE_ENV as string,
 }
 
-export default config
+export { config }

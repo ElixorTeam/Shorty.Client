@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { type ReactNode } from 'react'
 
 import { auth } from '@/shared/auth'
-import Providers from '@/shared/providers'
+import { Providers } from '@/shared/providers'
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -31,6 +31,9 @@ export default async function RootLayout({
   const session = await auth()
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
+      </head>
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
       >

@@ -1,11 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/avatar'
 import { Button } from '@repo/ui/button'
-import { ArrowLeft, LinkIcon } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-export default function GroupRecordView({
-  urls,
-}: Readonly<{ urls: string[] }>) {
+export function GroupRecordView({ urls }: Readonly<{ urls: string[] }>) {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div className="flex w-full max-w-xs flex-col items-center justify-center gap-2 overflow-hidden">

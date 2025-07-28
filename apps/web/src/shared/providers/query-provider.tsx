@@ -4,7 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 
 import { queryClient } from '../api/query-client'
 
-export default function QueryProvider({
+export function QueryProvider({
   children,
 }: Readonly<{
   children: React.ReactNode

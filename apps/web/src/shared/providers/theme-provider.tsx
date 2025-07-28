@@ -1,9 +1,9 @@
 'use client'
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import * as React from 'react'
+import React from 'react'
 
-export default function ThemeProvider({
+export function ThemeProvider({
   children,
 }: Readonly<{
   children: React.ReactNode

@@ -215,6 +215,8 @@ createRecord:
             properties:
               data:
                 $ref: '#/schemas/Record'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':
@@ -249,6 +251,8 @@ updateRecord:
             properties:
               data:
                 $ref: '#/schemas/Record'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':
@@ -304,6 +308,8 @@ getRecordAnalytics:
             properties:
               data:
                 $ref: '#/schemas/RecordAnalytics'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':

@@ -1,9 +1,9 @@
 import createFetchClient from 'openapi-fetch'
 import createClient from 'openapi-react-query'
 
-import config from '@/shared/config'
+import { config } from '@/shared/consts/config'
 
-import { getAccessToken } from './model/get-acces-token'
+import { getAccessToken } from './lib/get-acces-token'
 import { ApiPaths, ApiSchemas } from './schema'
 
 export const fetchClient = createFetchClient<ApiPaths>({

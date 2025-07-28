@@ -1,8 +1,8 @@
-import getRedirectByUrlPath from '../models/get-redirect-by-url-path'
-import LinkView from './link-view'
-import PasswordSuspense from './password-suspense'
+import getRedirectByUrlPath from '../api/get-redirect-by-url-path'
+import { LinkView } from './link-view'
+import { PasswordSuspense } from './password-suspense'
 
-export default async function Page({ path }: Readonly<{ path: string }>) {
+export async function MainPage({ path }: Readonly<{ path: string }>) {
   const record = await getRedirectByUrlPath(path)
   return (
     <PasswordSuspense passHash={record.password}>

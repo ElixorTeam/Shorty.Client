@@ -1,11 +1,13 @@
-import { ReactNode } from 'react'
+import React from 'react'
 
-import Sidebar from '@/pages-flat/main/sidebar'
+import { LinkSidebar } from '@/widgets/app-layout'
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Sidebar />
+      <LinkSidebar />
       <main className="flex min-h-screen w-full flex-col">{children}</main>
     </>
   )

@@ -1,6 +1,6 @@
-import ThemeProvider from './theme-provider'
+import { ThemeProvider } from './theme-provider'
 
-export default function Providers({
+export function Providers({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (

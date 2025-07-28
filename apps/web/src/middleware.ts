@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
 import { auth } from '@/shared/auth'
-
-import globalConfig from './shared/config'
+import { config as globalConfig } from '@/shared/consts/config'
 
 const publicRoutes = new Set(['/'])
 const apiAuthPrefix = '/api/auth'

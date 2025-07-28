@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 
-import PasswordForm from './password-form'
+import { PasswordForm } from './password-form'
 
-export default function PasswordSuspense({
+export function PasswordSuspense({
   children,
   passHash,
 }: Readonly<{

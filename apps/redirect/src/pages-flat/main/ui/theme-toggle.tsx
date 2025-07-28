@@ -10,7 +10,7 @@ import {
 } from '@repo/ui/dropdown-menu'
 import { useTheme } from 'next-themes'
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   const { setTheme } = useTheme()
 
   return (

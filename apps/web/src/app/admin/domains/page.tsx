@@ -1,4 +1,4 @@
-import DomainsPage from '@/pages-flat/domains/domains-page'
+import { DomainsPage } from '@/pages-flat/admin/domains'
 
 export default function Page() {
   return <DomainsPage />

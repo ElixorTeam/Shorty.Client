@@ -211,7 +211,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["Record"];
+                            data: components["schemas"]["Record"];
                         };
                     };
                 };
@@ -284,7 +284,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["Record"];
+                            data: components["schemas"]["Record"];
                         };
                     };
                 };
@@ -351,7 +351,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            data?: components["schemas"]["RecordAnalytics"];
+                            data: components["schemas"]["RecordAnalytics"];
                         };
                     };
                 };

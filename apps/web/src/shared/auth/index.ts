@@ -2,11 +2,11 @@ import { TokenSet } from '@auth/core/types'
 import NextAuth from 'next-auth'
 import keycloak from 'next-auth/providers/keycloak'
 
-import config from '@/shared/config'
+import { config } from '@/shared/consts/config'
 
-import getUserRolesByAccessToken from './requests/get-user-roles-by-access-token'
-import reqAccessByRefreshToken from './requests/req-access-by-refresh-token'
-import reqSessionLogout from './requests/req-session-logout'
+import reqAccessByRefreshToken from './api/req-access-by-refresh-token'
+import reqSessionLogout from './api/req-session-logout'
+import getUserRolesByAccessToken from './lib/get-user-roles-by-access-token'
 
 const EXPIRES_COMPROMISE = 3 * 1000
 
