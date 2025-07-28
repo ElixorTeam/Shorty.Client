@@ -31,9 +31,6 @@ export default async function RootLayout({
   const session = await auth()
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
-      </head>
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
       >

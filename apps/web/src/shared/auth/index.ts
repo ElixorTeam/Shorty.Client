@@ -59,12 +59,16 @@ export const {
           ...token,
           id_token: newToken.id_token,
           access_token: newToken.access_token,
-          refresh_token: newToken.refresh_token || token.refreshToken,
+          refresh_token: newToken.refresh_token || token.refresh_token,
           expires_at: newToken.expires_at,
+          roles: getUserRolesByAccessToken(newToken.access_token || ''),
         }
       } catch (error) {
         console.error(error)
-        return { ...token, error: 'RefreshTokenError' }
+        return {
+          ...token,
+          error: 'RefreshTokenError',
+        }
       }
     },
     session({ session, token }) {
