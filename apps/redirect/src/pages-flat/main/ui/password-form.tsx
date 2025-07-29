@@ -12,10 +12,11 @@ import {
 } from '@repo/ui/form'
 import { Input } from '@repo/ui/input'
 import { CheckIcon } from 'lucide-react'
-import hash from 'object-hash'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
+
+import { textToSha256 } from '../lib/hash'
 
 const passwordFormScheme = z.object({
   password: z.string().min(2).max(16),
@@ -32,8 +33,8 @@ export function PasswordForm({
     },
   })
 
-  const onSubmit = (values: z.infer<typeof passwordFormScheme>) => {
-    if (passHash !== hash(values.password)) {
+  const onSubmit = async (values: z.infer<typeof passwordFormScheme>) => {
+    if (passHash !== (await textToSha256(values.password))) {
       toast('Form error', { description: 'Wrong password' })
       return
     }

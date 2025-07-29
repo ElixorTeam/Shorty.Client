@@ -1,10 +1,10 @@
 'use server'
 
 import { headers } from 'next/headers'
-import hash from 'object-hash'
 
 import { config } from '@/shared/config'
 
+import { textToSha256 } from '../lib/hash'
 import {
   RedirectResponseType,
   RedirectType,
@@ -32,7 +32,7 @@ const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
         ? RedirectTypesEnum.GROUP
         : RedirectTypesEnum.SINGLE,
   }
-  if (data.password) data.password = hash(data.password)
+  if (data.password) data.password = await textToSha256(data.password)
   return data
 }
 

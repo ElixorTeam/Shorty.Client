@@ -1,6 +1,6 @@
+import { randomUUID } from 'crypto'
 import { NextURL } from 'next/dist/server/web/next-url'
 import { NextRequest, NextResponse, userAgent } from 'next/server'
-import { v4 as uuidv4 } from 'uuid'
 import z from 'zod'
 
 type SplittedUrl = {
@@ -32,7 +32,7 @@ export default async function middleware(request: NextRequest) {
   if (isBot) return NextResponse.error()
 
   const deviceType = device.type === 'mobile' ? 'Mobile' : 'Desktop'
-  const userKey = request.cookies.get('userKey')?.value ?? uuidv4()
+  const userKey = request.cookies.get('userKey')?.value ?? randomUUID()
   const urlParts = splitUrl(request.nextUrl)
   const ip = getIp(request.headers)
 
