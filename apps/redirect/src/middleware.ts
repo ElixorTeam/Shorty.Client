@@ -1,5 +1,5 @@
-import { randomUUID } from 'crypto'
-import { NextURL } from 'next/dist/server/web/next-url'
+import { v4 as uuidv4 } from 'uuid'
+import { type NextURL } from 'next/dist/server/web/next-url'
 import { NextRequest, NextResponse, userAgent } from 'next/server'
 import z from 'zod'
 
@@ -32,7 +32,7 @@ export default async function middleware(request: NextRequest) {
   if (isBot) return NextResponse.error()
 
   const deviceType = device.type === 'mobile' ? 'Mobile' : 'Desktop'
-  const userKey = request.cookies.get('userKey')?.value ?? randomUUID()
+  const userKey = request.cookies.get('userKey')?.value ?? uuidv4()
   const urlParts = splitUrl(request.nextUrl)
   const ip = getIp(request.headers)
 
@@ -47,7 +47,7 @@ export default async function middleware(request: NextRequest) {
     ...urlParts,
   })
   try {
-    await fetch(`${process.env.API_URL ?? ''}/redirects`, {
+    await fetch(`${process.env.API_BASE_URL ?? ''}/redirects`, {
       body,
       headers: {
         Accept: 'application/json',

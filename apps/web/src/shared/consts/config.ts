@@ -5,7 +5,7 @@ const config = {
   KEYCLOAK_REALM: process.env.KEYCLOAK_REALM as string,
   AUTH_SECRET: process.env.AUTH_SECRET as string,
 
-  API_URL: process.env.NEXT_PUBLIC_API_URL as string,
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL as string,
 
   PORT: process.env.PORT as unknown as number,
   NODE_ENV: process.env.NODE_ENV as string,

@@ -7,7 +7,7 @@ import { getAccessToken } from './lib/get-acces-token'
 import { ApiPaths, ApiSchemas } from './schema'
 
 export const fetchClient = createFetchClient<ApiPaths>({
-  baseUrl: config.API_URL,
+  baseUrl: config.API_BASE_URL,
 })
 
 fetchClient.use({

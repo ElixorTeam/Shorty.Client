@@ -16,7 +16,7 @@ const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   const host = userHeaders.get('host') ?? ''
   const subdomain = host.includes('.') ? host.split('.')[0] : ''
 
-  const url = new URL(`${config.API_URL}/redirects/link`)
+  const url = new URL(`${config.API_BASE_URL}/redirects/link`)
   url.searchParams.append('domain', process.env.REDIRECT_DOMAIN as string)
   if (path) url.searchParams.append('path', path)
   if (subdomain) url.searchParams.append('subdomain', subdomain)

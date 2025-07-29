@@ -1,12 +1,18 @@
 FROM oven/bun:1.2-alpine AS base
 
 ARG APP_NAME=redirect
+ARG NEXT_PUBLIC_API_BASE_URL=""
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV TURBO_TELEMETRY_DISABLED=1
+
 RUN apk update && apk add --no-cache libc6-compat
 
 FROM base AS build
 
 WORKDIR /app
-RUN bun add -g turbo@2
+RUN bun add -g turbo@2.5.5
 COPY . .
 RUN turbo prune ${APP_NAME} --docker
 
@@ -31,5 +37,7 @@ COPY --from=install --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/standalone
 COPY --from=install --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
 
 ENV APP_MAIN_FILE=apps/${APP_NAME}/server.js
+
+EXPOSE 3000
 
 CMD node ${APP_MAIN_FILE}
