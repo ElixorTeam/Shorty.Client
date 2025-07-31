@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { type NextURL } from 'next/dist/server/web/next-url'
 import { NextRequest, NextResponse, userAgent } from 'next/server'
+import { config as globalConfig } from '@/shared/config'
 import z from 'zod'
 
 type SplittedUrl = {
@@ -13,9 +14,9 @@ const isUrl = (value: string): boolean =>
   z.string().url().safeParse(value).success
 
 const splitUrl = (url: NextURL): SplittedUrl => {
-  const domain = url.host
-  const subdomain = domain.split('.').slice(0, -2).join('.') || undefined
+  const domain = new URL(globalConfig.REDIRECT_DOMAIN).host
   const path = url.pathname.slice(1)
+  const subdomain = undefined
   return { domain, subdomain, path }
 }
 
@@ -28,6 +29,7 @@ const getIp = (headers: Headers): string => {
 }
 
 export default async function middleware(request: NextRequest) {
+  console.log('middleware')
   const { device, os, isBot } = userAgent(request)
   if (isBot) return NextResponse.error()
 
@@ -46,6 +48,8 @@ export default async function middleware(request: NextRequest) {
     userKey,
     ...urlParts,
   })
+
+  console.log(body)
   try {
     await fetch(`${process.env.API_BASE_URL ?? ''}/redirects`, {
       body,
@@ -58,6 +62,8 @@ export default async function middleware(request: NextRequest) {
   } catch {
     // pass
   }
+
+  console.log('end middleware')
 
   return response
 }

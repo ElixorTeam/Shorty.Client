@@ -1,7 +1,5 @@
 'use server'
 
-import { headers } from 'next/headers'
-
 import { config } from '@/shared/config'
 
 import { textToSha256 } from '../lib/hash'
@@ -12,14 +10,11 @@ import {
 } from './redirect-type'
 
 const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
-  const userHeaders = await headers()
-  const host = userHeaders.get('host') ?? ''
-  const subdomain = host.includes('.') ? host.split('.')[0] : ''
-
   const url = new URL(`${config.API_BASE_URL}/redirects/link`)
-  url.searchParams.append('domain', process.env.REDIRECT_DOMAIN as string)
+  url.searchParams.append('domain', config.REDIRECT_DOMAIN as string)
   if (path) url.searchParams.append('path', path)
-  if (subdomain) url.searchParams.append('subdomain', subdomain)
+
+  console.log(url)
 
   const response = await fetch(url)
   if (!response.ok) throw new Error(await response.text())
