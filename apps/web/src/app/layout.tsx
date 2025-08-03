@@ -20,7 +20,7 @@ const fontMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Shorty',
-  description: 'App to short links',
+  description: 'Link shortening app',
 }
 
 export default async function RootLayout({

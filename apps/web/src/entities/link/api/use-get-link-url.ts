@@ -6,8 +6,11 @@ import { createUrl } from '@/shared/lib/url'
 const useGetLinkUrl = (uid: string) => {
   const linkQuery = rqClient.useQuery('get', '/user/links/{id}', {
     params: { path: { id: uid } },
+    enabled: !!uid,
   })
-  const domainQuery = rqClient.useQuery('get', '/user/subdomains')
+  const domainQuery = rqClient.useQuery('get', '/user/subdomains', {
+    enabled: !!uid,
+  })
 
   const url = useMemo(() => {
     if (!linkQuery.data?.data || !domainQuery.data?.data) return undefined
@@ -22,7 +25,7 @@ const useGetLinkUrl = (uid: string) => {
       (item) => item.uid === subdomainUid
     )
     return createUrl(domainItem.domainValue, subdomainItem?.value, path)
-  }, [linkQuery, domainQuery])
+  }, [linkQuery.data, domainQuery.data])
 
   return { url, isLoading: linkQuery.isLoading || domainQuery.isLoading }
 }

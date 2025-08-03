@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSkeleton,
 } from '@repo/ui/sidebar'
+import { useMemo } from 'react'
 
 import { useGetLinks } from '@/entities/link'
 
@@ -19,6 +20,14 @@ export function LinkNavigation({
   ...props
 }: React.ComponentProps<typeof SidebarGroup>) {
   const { data: links } = useGetLinks()
+
+  const sortedLinks = useMemo(() => {
+    if (!links) return null
+    return [...links].sort(
+      (a, b) => b.createDt.getTime() - a.createDt.getTime()
+    )
+  }, [links])
+
   return (
     <SidebarGroup
       className={cn('pt-0 group-data-[collapsible=icon]:hidden', className)}
@@ -38,7 +47,7 @@ export function LinkNavigation({
           </SidebarMenu>
         ) : (
           <SidebarMenu className="gap-px">
-            {links.map((link) => (
+            {sortedLinks?.map((link) => (
               <SidebarMenuItem key={link.uid}>
                 <LinkNavigationItem link={link} />
               </SidebarMenuItem>

@@ -57,7 +57,7 @@ export function CreateLinkForm() {
       domainUid: values.domain,
       tags: [],
       subdomainUid: undefined,
-      password: values.password || undefined,
+      password: values.password === '' ? undefined : values.password,
     }
 
     try {
@@ -70,7 +70,7 @@ export function CreateLinkForm() {
           return request
         }
       )
-      router.push(ROUTES.LINK_DETAIL(request.data?.uid ?? ''))
+      router.push(ROUTES.LINK_DETAIL(request.data.uid))
 
       queryClient.setQueryData(
         rqClient.queryOptions('get', '/user/links').queryKey,
@@ -84,8 +84,8 @@ export function CreateLinkForm() {
       await queryClient.invalidateQueries(
         rqClient.queryOptions('get', '/user/links')
       )
-    } catch (error) {
-      console.log(error)
+    } catch {
+      // pass
     }
   })
 

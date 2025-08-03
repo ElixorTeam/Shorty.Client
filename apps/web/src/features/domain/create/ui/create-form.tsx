@@ -51,8 +51,8 @@ export function CreateDomainForm({
         rqClient.queryOptions('get', '/domains')
       )
       onFormSubmit?.()
-    } catch (error) {
-      console.log(error)
+    } catch {
+      // pass
     }
   })
 

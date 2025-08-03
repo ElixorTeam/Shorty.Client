@@ -19,7 +19,9 @@ export function EmptyAdminPage() {
         <div className="bg-background flex flex-col gap-2 rounded-lg border p-4 shadow">
           <h2 className="text-center text-sm">App theme</h2>
           <ThemeSwitch />
-          <h2 className="mt-2 text-center text-sm">Don't you want to back?</h2>
+          <h2 className="mt-2 text-center text-sm">
+            Don&apos;t you want to back?
+          </h2>
           <Button
             variant="outline"
             size="sm"

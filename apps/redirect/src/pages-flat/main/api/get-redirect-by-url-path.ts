@@ -11,24 +11,23 @@ import {
 
 const getRedirectByUrlPath = async (path: string): Promise<RedirectType> => {
   const url = new URL(`${config.API_BASE_URL}/redirects/link`)
-  url.searchParams.append('domain', config.REDIRECT_DOMAIN as string)
-  if (path) url.searchParams.append('path', path)
-
-  console.log(url)
+  url.searchParams.append('domain', config.REDIRECT_DOMAIN)
+  url.searchParams.append('path', path)
 
   const response = await fetch(url)
   if (!response.ok) throw new Error(await response.text())
 
   const responseData = (await response.json()) as RedirectResponseType
-  const data: RedirectType = {
+  return {
     ...responseData,
+    password: responseData.password
+      ? await textToSha256(responseData.password)
+      : null,
     type:
       responseData.urls.length > 1
         ? RedirectTypesEnum.GROUP
         : RedirectTypesEnum.SINGLE,
   }
-  if (data.password) data.password = await textToSha256(data.password)
-  return data
 }
 
 export default getRedirectByUrlPath

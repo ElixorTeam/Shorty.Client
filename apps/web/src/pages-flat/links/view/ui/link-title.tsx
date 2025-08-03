@@ -79,8 +79,7 @@ export function LinkTitle({ linkUid }: Readonly<{ linkUid: string }>) {
           }
         }
       )
-    } catch (error) {
-      console.log(error)
+    } catch {
       toast('Failed to update title', {
         description: 'Please try again later.',
       })

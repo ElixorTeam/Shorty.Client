@@ -1,31 +1,25 @@
-<h1 align="center">Shorty</h1>
+## 🔗 Shorty
 
-<p align="center">
-  <img alt="" src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" />
-  <img alt="" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
-  <img alt="" src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
-  <img alt="" src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" />
-  <img alt="" src="https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white" />
-  <img alt="" src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white" />
-  <img alt="" src="https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white" />
-  <img alt="" src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" />
-</p>
+> Shorty is a modern URL shortening service designed for simplicity and efficiency. Create short, shareable links, track detailed analytics, and manage them seamlessly—all in one place.
 
-## Overview
+![](./assets/screenshoot.jpeg)
 
-Shorty is a service for URL shortening, analytics, and short link management. With Shorty, you can easily create short links, track their statistics, and manage them all in one place.
+## ✨ Features
 
-This repository is part of the overall Shorty project. To find out about the backend components of the site, look at **[Shorty Server](https://github.com/Bagger-sTeam/ShortyRestApi)**.
+- URL Shortening: Generate concise, shareable links in seconds.
+- Analytics Dashboard: Track clicks, locations, and other metrics for your links.
+- Link Management: Organize and manage all your short links in a user-friendly interface.
+- Modern Tech Stack: Built with Next.js, React, TypeScript, and Tailwind CSS for a robust and scalable experience.
 
-## Installation
+## 🚀 Getting Started
 
-1. [Quick start](QUICK_START.md)
-2. Install by **docker-compose**
+Use this [GUIDE](QUICK_START.md) to get started with Shorty easily.
 
-```bash
-docker compose up
-```
+## 🛠️ Related Repositories
 
-## Support
+Shorty is a full-stack application. The backend API is maintained in a separate repository:
+- [Shorty Server](https://github.com/ElixorTeam/Shorty.Server): The REST API powering Shorty’s backend.
 
-Please click the `star` button, if this tool was helpful to you.
+## 🤝 Support
+
+If you find Shorty useful, please give us a ⭐ by clicking the "Star" button on this repository! For issues or feature requests, open a ticket on the Issues page.

@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+const PATH_CHARS = '0123456789abcdefghijklmnopqrstuvwxyz'
+
 const createUrl = (
   domain: string,
   subdomain: string | undefined,
@@ -14,10 +16,11 @@ const createUrl = (
 }
 
 const generateRandomPath = (length: number = 6): string => {
-  const chars = '0123456789abcdefghijklmnopqrstuvwxyz'
   const array = new Uint8Array(length)
   crypto.getRandomValues(array)
-  return Array.from(array, (byte) => chars[byte % chars.length]).join('')
+  return Array.from(array, (byte) => PATH_CHARS[byte % PATH_CHARS.length]).join(
+    ''
+  )
 }
 
 export { createUrl, generateRandomPath }

@@ -16,7 +16,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  trustHost: true,
+  session: { strategy: 'jwt' },
   pages: {
     signIn: '/api/auth',
   },
@@ -37,7 +37,7 @@ export const {
           access_token: account.access_token,
           refresh_token: account.refresh_token,
           expires_at: account.expires_at,
-          roles: getUserRolesByAccessToken(account.access_token || ''),
+          roles: getUserRolesByAccessToken(account.access_token ?? ''),
         }
 
       if (
@@ -46,7 +46,7 @@ export const {
       )
         return token
 
-      const response = await reqAccessByRefreshToken(token.refresh_token || '')
+      const response = await reqAccessByRefreshToken(token.refresh_token ?? '')
 
       if (response.status === 400 || response.status === 401) {
         console.error(await response.json())
@@ -59,9 +59,11 @@ export const {
           ...token,
           id_token: newToken.id_token,
           access_token: newToken.access_token,
-          refresh_token: newToken.refresh_token || token.refresh_token,
+          refresh_token: newToken.refresh_token ?? token.refresh_token,
           expires_at: newToken.expires_at,
-          roles: getUserRolesByAccessToken(newToken.access_token || ''),
+          roles: newToken.access_token
+            ? getUserRolesByAccessToken(newToken.access_token)
+            : token.roles,
         }
       } catch (error) {
         console.error(error)

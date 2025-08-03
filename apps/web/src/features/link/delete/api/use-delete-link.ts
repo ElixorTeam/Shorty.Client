@@ -1,12 +1,24 @@
 import { rqClient } from '@/shared/api'
 
 const useDeleteLink = () => {
-  const deleteMutation = rqClient.useMutation('delete', '/user/links/{id}')
-  const del = async (uid: string) =>
-    deleteMutation.mutateAsync({ params: { path: { id: uid } } })
+  const deleteLinkMutation = rqClient.useMutation('delete', '/user/links/{id}')
+  const resetLinkAnalyticsMutation = rqClient.useMutation(
+    'delete',
+    '/user/links/{id}/analytics'
+  )
+  const del = async (uid: string) => {
+    await resetLinkAnalyticsMutation.mutateAsync({
+      params: { path: { id: uid } },
+    })
+    await deleteLinkMutation.mutateAsync({ params: { path: { id: uid } } })
+  }
+
   return {
     del,
-    ...deleteMutation,
+    isError: deleteLinkMutation.isError || resetLinkAnalyticsMutation.isError,
+    isPending:
+      deleteLinkMutation.isPending || resetLinkAnalyticsMutation.isPending,
+    error: deleteLinkMutation.error ?? resetLinkAnalyticsMutation.error,
   }
 }
 

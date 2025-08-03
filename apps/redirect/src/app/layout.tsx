@@ -15,7 +15,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: 'Shorty',
-  description: 'App to short links',
+  description: 'Link shortening app',
 }
 
 export default function RootLayout({

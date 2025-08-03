@@ -1,6 +1,6 @@
 {
   "name": "shorty",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
   "license": "MIT",
@@ -10,7 +10,6 @@
     "lint": "turbo lint",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs}\"",
-    "commitlint": "commitlint --edit",
     "types": "turbo type-check"
   },
   "devDependencies": {

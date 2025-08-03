@@ -37,7 +37,9 @@ COPY --from=install --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/standalone
 COPY --from=install --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
 
 ENV APP_MAIN_FILE=apps/${APP_NAME}/server.js
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=3000
 
 EXPOSE 3000
 
-CMD node ${APP_MAIN_FILE}
+CMD bun run ${APP_MAIN_FILE}
