@@ -31,6 +31,7 @@ export default tseslint.config(
       'simple-import-sort/exports': 'error',
       '@typescript-eslint/non-nullable-type-assertion-style': 'off',
       '@typescript-eslint/consistent-type-definitions': 'off',
+      'sonarjs/prefer-read-only-props': 'off',
     },
   }
 )

@@ -36,7 +36,6 @@ export default [
       '@typescript-eslint/no-misused-promises': 'off',
       'tailwindcss/migration-from-tailwind-2': 'off',
       'tailwindcss/no-custom-classname': 'off',
-      'sonarjs/prefer-read-only-props': 'off',
     },
   },
 ]
