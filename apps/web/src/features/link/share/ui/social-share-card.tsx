@@ -29,7 +29,7 @@ import {
 
 import { useGetLinkUrl } from '@/entities/link'
 
-export function SocialShareCard({ linkUid }: Readonly<{ linkUid: string }>) {
+export function SocialShareCard({ linkUid }: { linkUid: string }) {
   const { url } = useGetLinkUrl(linkUid)
   const urlString = url?.toString() ?? ''
   return (

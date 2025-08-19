@@ -1,184 +1,156 @@
+import { Badge } from '@repo/ui/badge'
+import {
+  Bento,
+  BentoContent,
+  BentoDescription,
+  BentoTitle,
+} from '@repo/ui/bento'
 import { Button } from '@repo/ui/button'
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-} from '@repo/ui/card'
-import { cn } from '@repo/ui/lib/utils'
-import { LockIcon, TextCursorIcon, UserCircleIcon } from 'lucide-react'
+  ArrowRightIcon,
+  BoxesIcon,
+  LockIcon,
+  QrCodeIcon,
+  SquareChartGanttIcon,
+} from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
+import ShortyScreenshot from '@/public/shorty-screenshot.png'
 import { ROUTES } from '@/shared/consts/routes'
 
 import { ChartExample } from './chart-example'
-import { HomeFooter } from './home-footer'
-import { HomeHeader } from './home-header'
+import { NavigationBar } from './navigation-bar'
 import { QrcodeExample } from './qrcode-example'
-import { Spotlight } from './spotlight'
-import { TextGenerator } from './text-generator'
 
 export async function Page() {
   return (
-    <div className="bg-grid-black/[.03] dark:bg-grid-white/[.02] min-h-screen w-full">
-      <div
-        className={cn(
-          'absolute inset-0',
-          '[background-size:20px_20px]',
-          '[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]',
-          'dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]'
-        )}
-      />
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_1%,black)] dark:bg-black"></div>
-      <HomeHeader />
-      <main className="relative mx-auto size-full max-w-screen-xl grow">
-        <Spotlight className="-top-96 left-20 hidden md:-top-60 md:left-52 dark:block" />
-        <div className="my-16 flex flex-col items-center justify-center gap-6 px-6 text-center md:my-32">
-          <TextGenerator
-            words="Shorten, Manage, Analyze. Your key to efficient links."
-            className="from-primary to-muted-foreground bg-gradient-to-b bg-clip-text text-2xl font-semibold text-transparent lg:text-4xl"
-          />
-          <div className="max-w-screen-md">
-            <TextGenerator
-              words="Unlock the power of efficient linking. Our service offers a simple,
-              user-friendly platform for shortening, managing, and analyzing your
-              links."
-              className="text-muted-foreground font-light lg:text-lg"
-            />
-          </div>
-          <Button size="lg" variant="secondary" type="button" asChild>
-            <Link href={ROUTES.LINKS}>Get Started</Link>
+    <div className="relative size-full">
+      <NavigationBar />
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-center px-4 pt-24 pb-10 md:pt-40 md:pb-20 xl:border-x">
+        <div className="absolute inset-0 -z-10 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]" />
+        <div className="bg-background pointer-events-none absolute inset-0 -z-10 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+        <Badge variant="outline" className="bg-background">
+          Short every link <ArrowRightIcon className="size-2.5" />
+        </Badge>
+        <h1 className="mt-4 text-center text-3xl tracking-tight md:text-4xl lg:text-6xl">
+          For those who don’t <br /> agree with looong{' '}
+          <span className="font-extrabold">links</span>
+        </h1>
+        <h2 className="text-muted-foreground mx-auto mt-6 max-w-lg text-center text-sm tracking-tight md:text-sm lg:text-base">
+          Shorten. Share. Analyze. All in one place.
+        </h2>
+        <div className="mt-6 flex items-center gap-4">
+          <Button asChild>
+            <Link href={ROUTES.LINKS}>Get started</Link>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link href="#features">Learn more</Link>
           </Button>
         </div>
-        <h2 className="text-primary pb-10 text-center text-xl font-extralight tracking-tight lg:text-3xl">
-          What does <span className="font-bold">Shorty</span> gives you?
-        </h2>
-        <div className="flex flex-wrap gap-6 px-6 py-10">
-          <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
-            <CardContent className="flex h-full flex-col items-center justify-center">
-              <h3 className="text-primary text-center text-3xl font-extralight tracking-tighter">
-                This link is{' '}
-                <span className="font-bold tracking-normal">private</span>
-              </h3>
-              <div className="mt-4 flex h-8 w-52 items-center gap-2 overflow-hidden rounded-lg border">
-                <input
-                  type="text"
-                  className="placeholder:text-primary size-full border-none bg-transparent px-2 text-sm font-light focus:outline-none"
-                  placeholder="Enter password..."
-                />
-                <LockIcon className="text-primary mr-2 size-4" />
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col items-start space-y-2">
-              <CardTitle>Private links</CardTitle>
-              <CardDescription>
-                Make links private so that only right people get access
-              </CardDescription>
-            </CardFooter>
-          </Card>
-          <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
-            <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden">
-              <TextCursorIcon className="text-primary absolute top-40 left-44 z-30 size-12 stroke-[0.8]" />
-              <div className="absolute top-28 left-20 flex h-20 w-[50rem] items-center overflow-hidden rounded-2xl border bg-white px-4 dark:border-white/[.15] dark:bg-neutral-950">
-                <p className="text-muted text-5xl">
-                  <span className="text-primary">elixor</span>
-                  .sh0.su/custom
-                </p>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col items-start space-y-2">
-              <CardTitle>Custom prefix</CardTitle>
-              <CardDescription>
-                Add your own prefix to the link so that everyone knows that this
-                is your link
-              </CardDescription>
-            </CardFooter>
-          </Card>
-          <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
-            <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden">
-              <div className="size-56 overflow-hidden rounded-xl border bg-white dark:border-white/[.15] dark:bg-neutral-950">
-                <div className="flex h-16 w-full items-center justify-center gap-2 border-b dark:border-b-white/[.15]">
-                  <UserCircleIcon className="text-muted-foreground size-12" />
-                  <div className="mb-1 leading-tight">
-                    <p>User</p>
-                    <p className="text-xs text-neutral-700">Account</p>
-                  </div>
-                </div>
-                <div className="flex size-full">
-                  <ul className="flex w-full flex-col gap-6 py-4">
-                    <li className="flex w-full gap-3 px-4">
-                      <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full border">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          version="1.0"
-                          viewBox="0 0 2048 2048"
-                          className="text-muted size-8 pb-1"
-                        >
-                          <path d="M1029.5 128.5c1.18-.219 2.18.114 3 1l1002 1737c-669 1.33-1338 1.33-2007 0 47.8737-83.25 95.874-166.42 144-249.5 478.667-.33 957.33-.67 1436-1-192.29-332.75-384.46-665.585-576.5-998.5-143.581 249.497-287.414 498.83-431.5 748-94.333 1.33-188.667 1.33-283 0 237.943-412.225 475.61-824.558 713-1237Z" />
-                        </svg>
-                      </div>
-                      <div className="w-full">
-                        <div className="flex w-full items-center justify-between gap-2">
-                          <p className="font-semibold">Elixor</p>
-                          <p className="text-xs">9 Oct.</p>
-                        </div>
-                        <p className="text-xs">https://sh0.su/fVdcg</p>
-                      </div>
-                    </li>
-                    <li className="flex w-full gap-3 px-4">
-                      <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-red-200 text-center">
-                        <p className="text-3xl text-white">Y</p>
-                      </div>
-                      <div className="w-full">
-                        <div className="flex w-full items-center justify-between gap-2">
-                          <p className="font-semibold">Youtube</p>
-                          <p className="text-xs">10 Oct.</p>
-                        </div>
-                        <p className="line-clamp-1 text-xs">
-                          https://sh0.su/c6fcg
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col items-start space-y-2">
-              <CardTitle>Grouped link</CardTitle>
-              <CardDescription>
-                Create beautiful group links for easy access to your information
-                resources (e.g. social networks)
-              </CardDescription>
-            </CardFooter>
-          </Card>
-          <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
-            <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden p-6">
-              <ChartExample />
-            </CardContent>
-            <CardFooter className="flex flex-col items-start space-y-2">
-              <CardTitle>Analytics</CardTitle>
-              <CardDescription>
-                Get information about unique clicks, os, browser, device, total
-                views and trends
-              </CardDescription>
-            </CardFooter>
-          </Card>
-          <Card className="flex h-96 w-full grow flex-col justify-self-center md:basis-80">
-            <CardContent className="relative flex h-full flex-col items-center justify-center overflow-hidden p-6">
-              <QrcodeExample />
-            </CardContent>
-            <CardFooter className="flex flex-col items-start space-y-2">
-              <CardTitle>QR Code</CardTitle>
-              <CardDescription>
-                On the website you can easily create a QR code for your link and
-                immediately share it on social networks
-              </CardDescription>
-            </CardFooter>
-          </Card>
+      </div>
+
+      <div className="bg-border h-px w-full"></div>
+
+      <div className="bg-muted dark:bg-muted/10 relative mx-auto flex max-w-7xl items-start justify-start p-2 perspective-distant md:p-4 lg:p-8 xl:border-x">
+        <div className="overflow-hidden rounded-sm border shadow-xs sm:rounded-lg">
+          <Image
+            src={ShortyScreenshot}
+            alt="Shorty Screenshot"
+            className="dark:invert"
+          />
         </div>
-      </main>
-      <HomeFooter />
+      </div>
+
+      <div className="bg-border h-px w-full"></div>
+
+      <div className="mx-auto max-w-7xl xl:border-x" id="features">
+        <div className="flex flex-col items-center py-16">
+          <Badge>Features</Badge>
+          <h1 className="mt-4 text-center text-2xl tracking-tight md:text-3xl lg:text-4xl">
+            Built to make linking simple
+          </h1>
+          <h2 className="text-muted-foreground mx-auto mt-3 max-w-lg px-2 text-center text-sm font-light tracking-tight md:text-sm">
+            Shorty takes the pain out of sharing links. No clutter, no confusion
+            — just fast, reliable short links you can create and share in
+            seconds.
+          </h2>
+        </div>
+      </div>
+
+      <div className="bg-border h-px w-full"></div>
+
+      <div className="mx-auto flex size-full max-w-7xl items-center justify-between">
+        <div className="grid w-full grid-cols-1 divide-y lg:grid-cols-8 lg:divide-x lg:border-l">
+          <Bento className="bg-background col-span-1 lg:col-span-5 lg:border-r">
+            <BentoTitle className="flex items-center gap-2">
+              <SquareChartGanttIcon className="size-5" />
+              Easily analyze visitors
+            </BentoTitle>
+            <BentoDescription>
+              Track every click in real time — see what devices your visitors
+              use and how your links perform.
+            </BentoDescription>
+            <BentoContent className="h-56 pt-6 lg:pt-12">
+              <ChartExample />
+            </BentoContent>
+          </Bento>
+          <Bento className="bg-background col-span-1 lg:col-span-3 lg:border-r">
+            <BentoTitle className="flex items-center gap-2">
+              <QrCodeIcon className="size-5" />
+              Share links anywhere
+            </BentoTitle>
+            <BentoDescription>
+              Instantly generate QR codes for offline sharing or use built-in
+              social share tools.
+            </BentoDescription>
+            <BentoContent className="flex items-center justify-center py-3">
+              <QrcodeExample />
+            </BentoContent>
+          </Bento>
+          <Bento className="bg-background col-span-1 lg:col-span-4 lg:border-r lg:border-b-0">
+            <BentoTitle className="flex items-center gap-2">
+              <BoxesIcon className="size-5" />
+              Group your links
+            </BentoTitle>
+            <BentoDescription>
+              Organize your short links into collections. Perfect for managing
+              campaigns, projects, or simply keeping your personal links tidy
+              and easy to find.
+            </BentoDescription>
+          </Bento>
+          <Bento className="bg-background col-span-1 lg:col-span-4 lg:border-r">
+            <BentoTitle className="flex items-center gap-2">
+              <LockIcon className="size-4.5" />
+              Keep links private
+            </BentoTitle>
+            <BentoDescription>
+              Protect your links with a password or make them visible only to
+              you. Share only what you want, with the people you choose.
+            </BentoDescription>
+          </Bento>
+        </div>
+      </div>
+
+      <div className="bg-border h-px w-full"></div>
+
+      <div className="mx-auto flex size-full max-w-7xl lg:border-x">
+        <div className="mt-6 mb-4 flex w-full flex-row items-center justify-between px-4 sm:px-8">
+          <p className="text-muted-foreground text-sm">
+            © 2025 Elixor Company. All rights reserved.
+          </p>
+          <Link href="https://github.com/ElixorTeam/Shorty.Client">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              viewBox="0 0 24 24"
+              className="size-5"
+            >
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+            </svg>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

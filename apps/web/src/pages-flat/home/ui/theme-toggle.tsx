@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/ui/dropdown-menu'
-import { MoonIcon, SunIcon } from 'lucide-react'
+import { ComputerIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 export function ThemeToggle() {
@@ -28,6 +28,7 @@ export function ThemeToggle() {
             setTheme('light')
           }}
         >
+          <SunIcon />
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -35,6 +36,7 @@ export function ThemeToggle() {
             setTheme('dark')
           }}
         >
+          <MoonIcon />
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -42,6 +44,7 @@ export function ThemeToggle() {
             setTheme('system')
           }}
         >
+          <ComputerIcon />
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

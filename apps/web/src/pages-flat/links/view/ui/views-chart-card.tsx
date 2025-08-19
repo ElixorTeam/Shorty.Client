@@ -6,7 +6,6 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from '@repo/ui/card'
 import {
   ChartConfig,
@@ -23,7 +22,8 @@ import {
   SelectValue,
 } from '@repo/ui/select'
 import { ToggleGroup, ToggleGroupItem } from '@repo/ui/toggle-group'
-import * as React from 'react'
+import { ChartNoAxesCombinedIcon } from 'lucide-react'
+import { useState } from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 
 import { useGetLinkViews } from '@/entities/link'
@@ -41,49 +41,44 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function ViewsChartCard({ linkUid }: Readonly<{ linkUid: string }>) {
+export function ViewsChartCard({ linkUid }: { linkUid: string }) {
   const isMobile = useIsMobile()
-  const [timeRange, setTimeRange] = React.useState<'Month' | 'Week'>('Month')
+  const [timeRange, setTimeRange] = useState<'Year' | 'Month'>('Year')
   const { data: views } = useGetLinkViews({
     linkUid: linkUid,
     timeRange: timeRange,
   })
 
-  React.useEffect(() => {
-    if (isMobile) {
-      setTimeRange('Week')
-    }
-  }, [isMobile])
-
   return (
-    <Card className="@container/card">
-      <CardHeader>
-        <CardTitle>Total Visitors</CardTitle>
-        <CardDescription>
-          <span className="hidden @[540px]/card:block">
-            Total for the last 3 months
-          </span>
-          <span className="@[540px]/card:hidden">Last 3 months</span>
+    <Card className="@container/card gap-0 overflow-hidden pt-0 pb-4">
+      <CardHeader className="dark:bg-secondary/50 flex items-center justify-between border-b px-4 pt-1.5 [.border-b]:pb-1.5">
+        <CardDescription className="flex items-center gap-1.5">
+          <ChartNoAxesCombinedIcon className="size-3.5" />
+          <span>Views data</span>
         </CardDescription>
         <CardAction>
           <ToggleGroup
             type="single"
             value={timeRange}
             onValueChange={(value) => {
-              if (!['Month', 'Week'].includes(value)) return
-              setTimeRange(value as 'Month' | 'Week')
+              if (!['Year', 'Month'].includes(value)) return
+              setTimeRange(value as 'Year' | 'Month')
             }}
             variant="outline"
-            className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex"
+            className="bg-background/20 hidden *:data-[slot=toggle-group-item]:!px-2.5 @[767px]/card:flex"
           >
-            <ToggleGroupItem value="Month">Last 30 days</ToggleGroupItem>
-            <ToggleGroupItem value="Week">Last 7 days</ToggleGroupItem>
+            <ToggleGroupItem value="Year" className="h-7 text-xs">
+              Last 365 days
+            </ToggleGroupItem>
+            <ToggleGroupItem value="Month" className="h-7 text-xs">
+              Last 30 days
+            </ToggleGroupItem>
           </ToggleGroup>
           <Select
             value={timeRange}
             onValueChange={(value) => {
-              if (!['Month', 'Week'].includes(value)) return
-              setTimeRange(value as 'Month' | 'Week')
+              if (!['Year', 'Month'].includes(value)) return
+              setTimeRange(value as 'Year' | 'Month')
             }}
           >
             <SelectTrigger
@@ -94,11 +89,11 @@ export function ViewsChartCard({ linkUid }: Readonly<{ linkUid: string }>) {
               <SelectValue placeholder="Last 3 months" />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
+              <SelectItem value="Year" className="rounded-lg">
+                Last 365 days
+              </SelectItem>
               <SelectItem value="Month" className="rounded-lg">
                 Last 30 days
-              </SelectItem>
-              <SelectItem value="Week" className="rounded-lg">
-                Last 7 days
               </SelectItem>
             </SelectContent>
           </Select>

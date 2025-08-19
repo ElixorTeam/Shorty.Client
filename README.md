@@ -1,6 +1,6 @@
 ## 🔗 Shorty
 
-> Shorty is a modern URL shortening service designed for simplicity and efficiency. Create short, shareable links, track detailed analytics, and manage them seamlessly—all in one place.
+> Shorty is a URL shortening service designed for simplicity and efficiency. Create short, shareable links, track detailed analytics, and manage them seamlessly—all in one place.
 
 ![](./assets/screenshoot.jpeg)
 
@@ -17,8 +17,7 @@ Use this [GUIDE](QUICK_START.md) to get started with Shorty easily.
 
 ## 🛠️ Related Repositories
 
-Shorty is a full-stack application. The backend API is maintained in a separate repository:
-- [Shorty Server](https://github.com/ElixorTeam/Shorty.Server): The REST API powering Shorty’s backend.
+Shorty is a full-stack application. The backend API is maintained in a separate repository [Shorty Server](https://github.com/ElixorTeam/Shorty.Server).
 
 ## 🤝 Support
 

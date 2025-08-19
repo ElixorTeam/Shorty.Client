@@ -7,10 +7,10 @@ import { PasswordForm } from './password-form'
 export function PasswordSuspense({
   children,
   passHash,
-}: Readonly<{
+}: {
   children: React.ReactNode | undefined
   passHash: string | null
-}>) {
+}) {
   const [isCompleted, setIsCompleted] = useState(false)
   if (!passHash || isCompleted) return <>{children}</>
   return (

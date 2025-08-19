@@ -52,17 +52,14 @@ const parseAnalytics = ({
 }) => {
   if (!views.length) return []
 
-  // Устанавливаем даты диапазона
   const endDate = new Date()
   const daysToSubtract = AnalyticsPeriodDays[period]
   const rangeStart = new Date(endDate)
   rangeStart.setDate(endDate.getDate() - daysToSubtract + 1)
   const startDate = createDt > rangeStart ? createDt : rangeStart
 
-  // Создаем мапу реальных данных для быстрого доступа
   const viewsMap = new Map(views.map((view) => [view.label, view.value]))
 
-  // Генерируем полный диапазон дат с значениями
   const result = []
   for (
     let current = new Date(startDate);

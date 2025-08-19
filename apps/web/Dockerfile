@@ -23,6 +23,7 @@ WORKDIR /app
 COPY --from=build /app/out/json/ .
 COPY --from=build /app/out/bun.lock .
 RUN bun install --frozen-lockfile
+
 COPY --from=build /app/out/full/ .
 RUN bun run turbo build --filter=${APP_NAME}
 

@@ -1,4 +1,5 @@
 import { Button } from '@repo/ui/button'
+import { Logo } from '@repo/ui/logo'
 import { SidebarMenu, SidebarMenuItem } from '@repo/ui/sidebar'
 import Link from 'next/link'
 
@@ -15,9 +16,7 @@ export function SidebarLogo() {
           className="flex shrink-0 items-center justify-start p-2 px-3 group-data-[collapsible=icon]:px-2"
         >
           <Link href={ROUTES.HOME}>
-            <span className="text-left font-[system-ui] text-base tracking-[0.07rem] font-stretch-ultra-expanded group-data-[collapsible=icon]:hidden">
-              shorty
-            </span>
+            <Logo className="size-18" />
             <span className="hidden pl-[2px] font-[system-ui] text-base tracking-[0.07rem] font-stretch-ultra-expanded group-data-[collapsible=icon]:block">
               s
             </span>

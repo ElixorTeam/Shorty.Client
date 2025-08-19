@@ -445,7 +445,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Domain"];
+                        "application/json": {
+                            data: components["schemas"]["Domain"];
+                        };
                     };
                 };
                 400: components["responses"]["BadRequestError"];
@@ -570,12 +572,12 @@ export interface components {
         };
         RecordAnalytics: {
             statistics: {
-                views?: number;
-                uniqueViews?: number;
+                views: number;
+                uniqueViews: number;
             };
             devicesData: {
-                os?: components["schemas"]["AnalyticsItem"][];
-                device?: components["schemas"]["AnalyticsItem"][];
+                os: components["schemas"]["AnalyticsItem"][];
+                device: components["schemas"]["AnalyticsItem"][];
             };
             viewsData: components["schemas"]["AnalyticsItem"][];
         };

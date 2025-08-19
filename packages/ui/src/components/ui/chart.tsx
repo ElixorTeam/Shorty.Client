@@ -1,9 +1,8 @@
 'use client'
 
+import { cn } from '@repo/ui/lib/utils'
 import * as React from 'react'
 import * as RechartsPrimitive from 'recharts'
-
-import { cn } from '@repo/ui/lib/utils'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
@@ -138,7 +137,7 @@ function ChartTooltipContent({
     const itemConfig = getPayloadConfigFromPayload(config, item, key)
     const value =
       !labelKey && typeof label === 'string'
-        ? config[label as keyof typeof config]?.label || label
+        ? config[label]?.label || label
         : itemConfig?.label
 
     if (labelFormatter) {
@@ -340,14 +339,14 @@ function getPayloadConfigFromPayload(
 
   return configLabelKey in config
     ? config[configLabelKey]
-    : config[key as keyof typeof config]
+    : config[key]
 }
 
 export {
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
+  ChartTooltip,
+  ChartTooltipContent,
 }

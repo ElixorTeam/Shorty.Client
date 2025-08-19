@@ -13,7 +13,7 @@ import { useGetLinkUrl } from '@/entities/link'
 import { copyCanvasToClipboard, downloadCanvas } from '../lib/canvas'
 import { ColorPicker } from './color-picker'
 
-export function QrCodeCard({ linkUid }: Readonly<{ linkUid: string }>) {
+export function QrCodeCard({ linkUid }: { linkUid: string }) {
   const { url } = useGetLinkUrl(linkUid)
   const qrcodeContainerRef = useRef<HTMLDivElement>(null)
   const [mainColor, setMainColor] = useState<string>('#000')

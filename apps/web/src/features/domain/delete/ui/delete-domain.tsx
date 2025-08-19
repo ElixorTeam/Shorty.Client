@@ -36,7 +36,7 @@ export function DeleteDomainButton({
       await del(domainUid)
       setOpen(false)
       queryClient.setQueryData(
-        rqClient.queryOptions('get', '/domains').queryKey,
+        rqClient.queryOptions('get', '/domains', {}).queryKey,
         (oldData: { data: ApiSchemas['Domain'][] } | undefined) => {
           if (!oldData) return oldData
           return {
@@ -44,9 +44,6 @@ export function DeleteDomainButton({
             data: oldData.data.filter((item) => item.uid !== domainUid),
           }
         }
-      )
-      await queryClient.invalidateQueries(
-        rqClient.queryOptions('get', '/domains')
       )
       onSuccess?.()
     } catch {

@@ -25,7 +25,10 @@ const passwordFormScheme = z.object({
 export function PasswordForm({
   passHash,
   onSuccess,
-}: Readonly<{ passHash: string; onSuccess?: () => void }>) {
+}: {
+  passHash: string
+  onSuccess?: () => void
+}) {
   const form = useForm<z.infer<typeof passwordFormScheme>>({
     resolver: zodResolver(passwordFormScheme),
     defaultValues: {

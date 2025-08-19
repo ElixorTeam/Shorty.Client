@@ -18,10 +18,10 @@ import { type ApiSchemas, rqClient } from '@/shared/api'
 import useUpdateLink from '../api/use-update-link'
 
 const schema = z.object({
-  title: z.string().min(4).max(32),
+  title: z.string().min(2).max(64),
 })
 
-export function LinkTitle({ linkUid }: Readonly<{ linkUid: string }>) {
+export function LinkTitle({ linkUid }: { linkUid: string }) {
   const { data: link } = useGetLink(linkUid)
   const { update, isPending } = useUpdateLink()
   const queryClient = useQueryClient()
@@ -51,7 +51,7 @@ export function LinkTitle({ linkUid }: Readonly<{ linkUid: string }>) {
         tags: [],
       })
 
-      await queryClient.setQueryData(
+      queryClient.setQueryData(
         rqClient.queryOptions('get', '/user/links/{id}', {
           params: { path: { id: link.uid } },
         }).queryKey,
@@ -67,9 +67,10 @@ export function LinkTitle({ linkUid }: Readonly<{ linkUid: string }>) {
         }
       )
 
-      await queryClient.setQueryData(
-        rqClient.queryOptions('get', '/user/links').queryKey,
+      queryClient.setQueryData(
+        rqClient.queryOptions('get', '/user/links', {}).queryKey,
         (oldData: { data: ApiSchemas['Record'][] } | undefined) => {
+          console.log(oldData)
           if (!oldData) return oldData
           return {
             ...oldData,
@@ -120,7 +121,9 @@ export function LinkTitle({ linkUid }: Readonly<{ linkUid: string }>) {
                           setIsEditing(false)
                         }
                       }}
-                      className="h-7 w-48"
+                      className="h-7 w-48 px-2"
+                      // eslint-disable-next-line jsx-a11y/no-autofocus
+                      autoFocus
                     />
                   </FormControl>
                 </FormItem>
@@ -130,7 +133,7 @@ export function LinkTitle({ linkUid }: Readonly<{ linkUid: string }>) {
         </Form>
       ) : (
         <div className="flex w-full items-center gap-2 overflow-hidden">
-          <h1 className="text-medium text-left font-[system-ui] text-lg leading-5 font-stretch-ultra-expanded">
+          <h1 className="text-left font-[system-ui] text-xl leading-5">
             {link.title}
           </h1>
           <Button

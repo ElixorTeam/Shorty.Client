@@ -23,9 +23,9 @@ const DEFAULT_GROUP_URL: UrlType[] = [{ url: '' }, { url: '' }]
 
 export function UrlsInput({
   control,
-}: Readonly<{
+}: {
   control: Control<z.infer<typeof createFormSchema>>
-}>) {
+}) {
   const [type, setType] = useState<string>('single')
 
   const { fields, append, replace, remove } = useFieldArray({

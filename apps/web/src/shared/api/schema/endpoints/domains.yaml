@@ -59,7 +59,12 @@ createDomain:
       content:
         application/json:
           schema:
-            $ref: '#/schemas/Domain'
+            type: object
+            properties:
+              data:
+                $ref: '#/schemas/Domain'
+            required:
+              - data
     '400':
       $ref: '../shared/responses.yaml#/BadRequestError'
     '401':

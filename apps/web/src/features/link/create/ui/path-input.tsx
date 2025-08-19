@@ -20,9 +20,9 @@ import createFormSchema from '../model/create-form-scheme'
 
 export function PathInput({
   form,
-}: Readonly<{
+}: {
   form: UseFormReturn<z.infer<typeof createFormSchema>>
-}>) {
+}) {
   const { data: domains } = rqClient.useQuery('get', '/user/subdomains')
 
   const watchedDomain = useWatch({

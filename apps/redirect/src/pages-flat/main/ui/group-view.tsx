@@ -1,16 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/avatar'
 import { Button } from '@repo/ui/button'
+import { Logo } from '@repo/ui/logo'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-export function GroupRecordView({ urls }: Readonly<{ urls: string[] }>) {
+export function GroupRecordView({ urls }: { urls: string[] }) {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div className="flex w-full max-w-xs flex-col items-center justify-center gap-2 overflow-hidden">
-        <div className="flex flex-col gap-1 text-center">
-          <h1 className="font-[system-ui] text-xl font-stretch-ultra-expanded">
-            shorty
-          </h1>
+        <div className="flex flex-col items-center text-center">
+          <Logo stroke="currentColor" className="w-18 stroke-[0.05]" />
           <span className="text-muted-foreground mx-auto text-xs">
             Choose a desired link
           </span>

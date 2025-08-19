@@ -2,9 +2,7 @@ import React from 'react'
 
 import { LinkSidebar } from '@/widgets/app-layout'
 
-export default function Layout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <LinkSidebar />

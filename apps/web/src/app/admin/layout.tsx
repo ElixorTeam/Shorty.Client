@@ -2,9 +2,7 @@ import React from 'react'
 
 import { AdminSidebar } from '@/widgets/app-layout'
 
-export default function Layout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <AdminSidebar />

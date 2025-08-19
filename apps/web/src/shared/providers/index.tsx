@@ -8,10 +8,10 @@ import { ThemeProvider } from './theme-provider'
 export function Providers({
   children,
   session,
-}: Readonly<{
+}: {
   children: React.ReactNode
   session: Session | null
-}>) {
+}) {
   return (
     <SessionProvider session={session}>
       <QueryProvider>

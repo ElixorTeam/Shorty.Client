@@ -27,9 +27,9 @@ const createFormSchema = z.object({
 
 export function CreateDomainForm({
   onFormSubmit,
-}: Readonly<{
+}: {
   onFormSubmit?: () => void
-}>) {
+}) {
   const queryClient = useQueryClient()
   const { create, isPending } = useCreateDomain()
 
@@ -46,9 +46,15 @@ export function CreateDomainForm({
     }
 
     try {
-      await create(payload)
-      await queryClient.invalidateQueries(
-        rqClient.queryOptions('get', '/domains')
+      const request = await create(payload)
+      queryClient.setQueryData(
+        rqClient.queryOptions('get', '/domains', {}).queryKey,
+        (oldData: { data: ApiSchemas['Record'][] } | undefined) => {
+          if (!oldData) return oldData
+          return {
+            data: [...oldData.data, request.data],
+          }
+        }
       )
       onFormSubmit?.()
     } catch {

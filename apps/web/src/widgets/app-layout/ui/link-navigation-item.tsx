@@ -1,6 +1,6 @@
 'use client'
 
-import { SidebarMenuButton } from '@repo/ui/sidebar'
+import { SidebarMenuButton, useSidebar } from '@repo/ui/sidebar'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
@@ -18,8 +18,12 @@ export function LinkNavigationItem({
   }
 } & React.ComponentProps<typeof SidebarMenuButton>) {
   const { uid: currentPathUid } = useParams<{ uid: string }>()
+  const { setOpenMobile } = useSidebar()
   return (
     <SidebarMenuButton
+      onClick={() => {
+        setOpenMobile(false)
+      }}
       asChild
       isActive={currentPathUid === link.uid}
       {...props}

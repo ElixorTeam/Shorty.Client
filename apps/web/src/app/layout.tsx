@@ -25,9 +25,9 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: ReactNode
-}>) {
+}) {
   const session = await auth()
   return (
     <html lang="en" suppressHydrationWarning>

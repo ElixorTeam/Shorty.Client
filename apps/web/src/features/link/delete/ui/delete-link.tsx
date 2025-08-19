@@ -37,7 +37,7 @@ export function DeleteLinkButton({
       await del(linkUid)
       setOpen(false)
       queryClient.setQueryData(
-        rqClient.queryOptions('get', '/user/links').queryKey,
+        rqClient.queryOptions('get', '/user/links', {}).queryKey,
         (oldData: { data: ApiSchemas['Record'][] } | undefined) => {
           if (!oldData) return oldData
           return {
@@ -46,15 +46,14 @@ export function DeleteLinkButton({
           }
         }
       )
-      onSuccess?.()
-      await queryClient.invalidateQueries(
+
+      queryClient.removeQueries(
         rqClient.queryOptions('get', '/user/links/{id}', {
           params: { path: { id: linkUid } },
         })
       )
-      await queryClient.invalidateQueries(
-        rqClient.queryOptions('get', '/user/links')
-      )
+
+      onSuccess?.()
     } catch {
       toast('Failed to delete link', { description: 'Please try again later.' })
     }

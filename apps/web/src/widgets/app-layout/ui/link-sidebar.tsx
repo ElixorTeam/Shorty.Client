@@ -6,15 +6,11 @@ import {
   SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from '@repo/ui/sidebar'
-import { SquarePenIcon } from 'lucide-react'
-import Link from 'next/link'
-
-import { ROUTES } from '@/shared/consts/routes'
 
 import { LinkNavigation } from './link-navigation'
+import { NewLink } from './new-link'
 import { SearchLinkWrapper } from './search-link-wrapper'
 import { SidebarLogo } from './sidebar-logo'
 import { SidebarUser } from './sidebar-user'
@@ -30,12 +26,7 @@ export function LinkSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href={ROUTES.CREATE}>
-                    <SquarePenIcon className="size-4" />
-                    <span>New link</span>
-                  </Link>
-                </SidebarMenuButton>
+                <NewLink />
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SearchLinkWrapper />

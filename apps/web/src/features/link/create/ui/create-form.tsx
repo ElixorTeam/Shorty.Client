@@ -17,6 +17,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import { type ApiSchemas, rqClient } from '@/shared/api'
 import { ROUTES } from '@/shared/consts/routes'
@@ -38,6 +39,7 @@ export function CreateLinkForm() {
     defaultValues: {
       urls: [{ url: '' }],
       path: generateRandomPath(),
+      password: '',
     },
   })
 
@@ -51,7 +53,8 @@ export function CreateLinkForm() {
       title: values.urls
         .slice(0, 3)
         .map((item) => new URL(item.url).hostname)
-        .join(', '),
+        .join(', ')
+        .slice(0, 64),
       urls: values.urls.map((u) => u.url),
       path: values.path,
       domainUid: values.domain,
@@ -73,7 +76,7 @@ export function CreateLinkForm() {
       router.push(ROUTES.LINK_DETAIL(request.data.uid))
 
       queryClient.setQueryData(
-        rqClient.queryOptions('get', '/user/links').queryKey,
+        rqClient.queryOptions('get', '/user/links', {}).queryKey,
         (oldData: { data: ApiSchemas['Record'][] } | undefined) => {
           if (!oldData) return oldData
           return {
@@ -81,11 +84,8 @@ export function CreateLinkForm() {
           }
         }
       )
-      await queryClient.invalidateQueries(
-        rqClient.queryOptions('get', '/user/links')
-      )
     } catch {
-      // pass
+      toast('Failed to create link', { description: 'Please try again later.' })
     }
   })
 

@@ -2,7 +2,6 @@
 
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
-// import tailwindPlugin from 'eslint-plugin-tailwindcss'
 import { fixupPluginRules } from '@eslint/compat'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 
@@ -12,7 +11,6 @@ export default [
   jsxA11y.flatConfigs.strict,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
-  // ...tailwindPlugin.configs['flat/recommended'],
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
@@ -38,6 +36,7 @@ export default [
       '@typescript-eslint/no-misused-promises': 'off',
       'tailwindcss/migration-from-tailwind-2': 'off',
       'tailwindcss/no-custom-classname': 'off',
+      'sonarjs/prefer-read-only-props': 'off',
     },
   },
 ]
